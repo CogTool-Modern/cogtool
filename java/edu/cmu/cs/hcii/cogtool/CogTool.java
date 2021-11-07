@@ -251,10 +251,6 @@ public class CogTool
 
         try {
             if (OSUtils.MACOSX) {
-                if (!OSUtils.isIntelMac()) {
-                    System.out.println("CogTool no longer runs on PowerPC");
-                    System.exit(16);
-                }
                 // we need to create the RootController, but will never
                 // actually need to interact with it programmatically
                 rootCtl = new RootController();
