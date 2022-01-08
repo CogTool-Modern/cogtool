@@ -426,31 +426,29 @@ public class Subprocess
     {
         String lispProgName = null;
         String osName = null;
+        File clispDir = null;
 
+        List<String> cmdList = new ArrayList<String>();
+
+        
         if (OSUtils.WINDOWS) {
             lispProgName = "lisp.exe";
             osName = "win";
+            
+
+            // the executable itself
+            cmdList.add(new File(clispDir, lispProgName).getAbsolutePath());
         }
         else if (OSUtils.MACOSX) {
-            lispProgName = "lisp.run";
-            if (OSUtils.isIntelMac()) {
-                osName = "mac-intel";
-            }
-            else {
-                osName = "mac-ppc";
-                throw new IllegalStateException("CogTool no longers supports PowerPC");
-            }
+            lispProgName = "clisp";
+            osName = "mac-intel";
+
+            // Rely on the installed clisp. 
+            cmdList.add("/opt/local/bin/clisp");
         }
         else {
             throw new IllegalStateException("Unknown Operating System");
         }
-
-        File clispDir = new File("clisp-" + osName);
-
-        List<String> cmdList = new ArrayList<String>();
-
-        // the executable itself
-        cmdList.add(new File(clispDir, lispProgName).getAbsolutePath());
 
         // make it quiet
         cmdList.add("-q");
@@ -464,6 +462,7 @@ public class Subprocess
 
         // load the memory image
         cmdList.add("-M");
+        clispDir = new File("clisp-" + osName);
         cmdList.add(new File(clispDir, memoryImageName).getAbsolutePath());
 
         // load lisp files
