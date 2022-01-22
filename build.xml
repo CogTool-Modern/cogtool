@@ -202,6 +202,12 @@
 			</fileset>
 		</copy>
 
+		<copy todir="${distdir}/CogTool.app/Contents/Resources/lisp/">
+			<fileset dir="${basedir}/lisp/">
+				<include name="**" />
+			</fileset>
+		</copy>
+
 		<!-- Chmod the clisp executable. -->
 		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel/lisp.run" perm="a+x" />
 
