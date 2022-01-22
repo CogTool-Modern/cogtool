@@ -176,6 +176,16 @@ public class Subprocess
         return exec(cmd, null, null, outLines, errLines, traceCB, cancelable);
     }
 
+    public static int exec(List<String> cmd,
+                           List<String> outLines,
+                           List<String> errLines,
+                           File workingDir,
+                           ProcessTraceCallback traceCB,
+                           Cancelable cancelable)
+    {
+        return exec(cmd, null, workingDir, outLines, errLines, traceCB, cancelable);
+    }
+
     protected static boolean stillActive(Process p)
     {
         try {
@@ -443,7 +453,8 @@ public class Subprocess
             lispProgName = "clisp";
             osName = "mac-intel";
 
-            // Rely on the installed clisp. 
+            // Rely on the installed clisp.
+            // TODO I'm suspect that this is a good path for everyone.
             cmdList.add("/opt/local/bin/clisp");
         }
         else {
@@ -460,10 +471,12 @@ public class Subprocess
         cmdList.add("-E");
         cmdList.add("ISO-8859-1");
 
-        // load the memory image
-        cmdList.add("-M");
-        clispDir = new File("clisp-" + osName);
-        cmdList.add(new File(clispDir, memoryImageName).getAbsolutePath());
+        // Load ACT-R
+        cmdList.add("-i");
+        clispDir = new File("lisp");
+//        File workingDirectory = new File("/Applications/CogTool.app/Contents/Resources/lisp");
+        File workingDirectory = new File(clispDir.getAbsolutePath());
+        cmdList.add(new File(clispDir, "actr6.lisp").getAbsolutePath());
 
         // load lisp files
         if (filesToLoad != null) {
@@ -492,6 +505,6 @@ public class Subprocess
             }
         }
 
-        return exec(cmdList, outLines, errLines, traceCB, cancelable);
+        return exec(cmdList, outLines, errLines, workingDirectory, traceCB, cancelable);
     }
 }
