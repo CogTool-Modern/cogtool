@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="build">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/mac-support/edu/cmu/cs/hcii/cogtool/util/MacOSXPlatform.java" />
+    </SOURCES>
+  </library>
+</component>

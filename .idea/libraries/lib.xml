@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang-2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/draw2d.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/ecf.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jopt-simple.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/MozillaGlue.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/MozillaInterfaces.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/WindowsImageTransfer.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xercesImpl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/macintosh/swt.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/WindowsImageTransfer.jar!/" />
+    </SOURCES>
+  </library>
+</component>
