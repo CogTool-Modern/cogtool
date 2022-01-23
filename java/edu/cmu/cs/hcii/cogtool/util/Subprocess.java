@@ -440,14 +440,19 @@ public class Subprocess
 
         List<String> cmdList = new ArrayList<String>();
 
-        
+        File workingDirectory = null;
+
         if (OSUtils.WINDOWS) {
             lispProgName = "lisp.exe";
             osName = "win";
-            
 
             // the executable itself
             cmdList.add(new File(clispDir, lispProgName).getAbsolutePath());
+
+            // load the memory image
+            cmdList.add("-M");
+            clispDir = new File("clisp-" + osName);
+            cmdList.add(new File(clispDir, memoryImageName).getAbsolutePath());
         }
         else if (OSUtils.MACOSX) {
             lispProgName = "clisp";
@@ -456,6 +461,13 @@ public class Subprocess
             // Rely on the installed clisp.
             // TODO I'm suspect that this is a good path for everyone.
             cmdList.add("/opt/local/bin/clisp");
+
+            // Load ACT-R
+            cmdList.add("-i");
+            clispDir = new File("lisp");
+//          workingDirectory = new File("/Applications/CogTool.app/Contents/Resources/lisp");
+            workingDirectory = new File(clispDir.getAbsolutePath());
+            cmdList.add(new File(clispDir, "actr6.lisp").getAbsolutePath());
         }
         else {
             throw new IllegalStateException("Unknown Operating System");
@@ -470,13 +482,6 @@ public class Subprocess
         // with the default encoding remains a mystery, however.
         cmdList.add("-E");
         cmdList.add("ISO-8859-1");
-
-        // Load ACT-R
-        cmdList.add("-i");
-        clispDir = new File("lisp");
-//        File workingDirectory = new File("/Applications/CogTool.app/Contents/Resources/lisp");
-        File workingDirectory = new File(clispDir.getAbsolutePath());
-        cmdList.add(new File(clispDir, "actr6.lisp").getAbsolutePath());
 
         // load lisp files
         if (filesToLoad != null) {
@@ -493,8 +498,7 @@ public class Subprocess
         // Windows mangles command line arguments, so escape them as
         // necessary.
         if (OSUtils.WINDOWS) {
-            for (ListIterator<String> it = cmdList.listIterator(); it.hasNext();)
-            {
+            for (ListIterator<String> it = cmdList.listIterator(); it.hasNext(); ) {
                 String cmd = it.next();
 
                 if (cmd != null) {
