@@ -17,9 +17,9 @@ interfaces, and predict how much better your new designs will be.
 CogTool is free software, released under the FSF Lesser Gnu Public
 License. [See LICENSE.txt for details](https://github.com/CogTool-Modern/cogtool/blob/master/LICENSE.txt).
 
-There is a separate repository of documentation, both for end users
-and for developers: [https://github.com/cogtool/documentation.git](https://github.com/cogtool/documentation.git)
-TODO Merge this seperate repo with the in-branch, GitHub Pages-powered `docs/` folder.
+Comprehensive documentation is available on our website at [cogtool.org](http://www.cogtool.org), 
+including user guides, tutorials, developer documentation, and API references. The documentation 
+is maintained in the `docs/` folder and automatically published via GitHub Pages.
 
 ## Building
 To compile CogTool,
