@@ -29,6 +29,30 @@ Bonnie E. John, Principal Investigator
 
 <a href="https://github.com/cogtool/cogtool/releases">View older releases</a>
 
+## 📚 Documentation & Learning Resources
+
+Get started with CogTool using our comprehensive documentation:
+
+<div class="wp-block-buttons">
+  <div class="wp-block-button" style="display:grid;grid-template-columns:1fr 1fr;">
+    <a class="wp-block-button__link" href="{{site.baseurl}}/user-guide/"><button>📖 User Guide</button></a>
+    <a class="wp-block-button__link" href="{{site.baseurl}}/tutorial/"><button>🎯 Interactive Tutorial</button></a>
+  </div>
+</div>
+
+<div class="wp-block-buttons">
+  <div class="wp-block-button" style="display:grid;grid-template-columns:1fr 1fr;">
+    <a class="wp-block-button__link" href="{{site.baseurl}}/video/"><button>🎥 Video Demonstrations</button></a>
+    <a class="wp-block-button__link" href="{{site.baseurl}}/developer/"><button>⚙️ Developer Documentation</button></a>
+  </div>
+</div>
+
+**Quick Links:**
+- [Download User Guide (PDF)]({{site.baseurl}}/downloads/CogToolUserGuide_1_2.pdf) - Complete reference manual
+- [Download Tutorial (PDF)]({{site.baseurl}}/downloads/CogToolTutorial.pdf) - Step-by-step tutorial
+- [Building from Source]({{site.baseurl}}/building/) - Compilation instructions
+- [FAQs]({{site.baseurl}}/faqs/) - Common questions and answers
+
 ### ▶️ Integrating usability analysis and metrics into the development process
 
 <video controls>
