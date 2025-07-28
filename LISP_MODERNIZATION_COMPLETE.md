@@ -1,8 +1,16 @@
 # 🎯 CogTool LISP Modernization - COMPLETE
 
-## ✅ FINAL STATUS: All Issues Resolved
+## ✅ FINAL STATUS: All Issues Resolved ✅
 
 Your CogTool LISP modernization is now **COMPLETE** with full Apple Silicon support and portable LISP environments across all platforms.
+
+### 🎯 Latest Critical Fix: Architecture Compatibility
+
+**RESOLVED ERROR**: `slice is not valid mach-o file` - ECL architecture conflicts
+
+**Root Cause**: ACT-R 6 included pre-compiled `.fas` files from CLISP on Intel architecture that ECL on Apple Silicon couldn't load.
+
+**Solution**: Added automatic recompilation for ECL/SBCL to ensure all files are compiled for the correct architecture and LISP implementation.
 
 ## 🔧 Latest Fix: ACT-R 6 Path Resolution
 
@@ -51,16 +59,20 @@ ant package-mac  # or package-linux, package-windows
 # The rebuilt app will now include:
 # - Complete ACT-R 6 framework in Resources/lisp/actr6/
 # - Fixed LISP wrappers with proper path resolution
-# - No more "Cannot open actr6/load-act-r-6.lisp" errors
+# - ECL/SBCL automatic recompilation for architecture compatibility
+# - Full Apple Silicon support with portable LISP environment
 ```
 
 ### Expected Results
 - ✅ **No more hardcoded LISP paths**
 - ✅ **No more "Unknown command line option -M" errors**  
 - ✅ **No more "Cannot open actr6/load-act-r-6.lisp" errors**
+- ✅ **No more "slice is not valid mach-o file" architecture conflicts**
+- ✅ **No more "The variable *.FASL-PATHNAME* is unbound" errors**
 - ✅ **Complete ACT-R 6 cognitive modeling framework**
 - ✅ **Portable LISP environment bundled with app**
 - ✅ **Works on Apple Silicon without system LISP installation**
+- ✅ **Automatic recompilation for optimal performance**
 
 ## 🧪 Verification
 
@@ -81,6 +93,8 @@ This confirms:
 | **Apple Silicon Support** | ✅ Complete | Auto-installing ECL via Homebrew |
 | **Memory Image Handling** | ✅ Complete | Smart -M option with LISP source fallback |
 | **ACT-R 6 Framework** | ✅ Complete | Full framework bundled with path resolution |
+| **Architecture Compatibility** | ✅ Complete | Automatic recompilation for ECL/SBCL |
+| **ECL Support** | ✅ Complete | Full logical pathname and fasl support |
 | **Build System** | ✅ Complete | Includes `actr6/**/*` in all platform builds |
 | **Path Resolution** | ✅ Complete | Wrappers change to correct directory |
 | **Cross-Platform** | ✅ Complete | Mac (ARM64/Intel), Linux, Windows |
