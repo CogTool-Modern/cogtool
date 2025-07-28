@@ -10,10 +10,16 @@ case $MACHTYPE in
 	    platform=mac-intel ;;
     x86_64-apple*)
 	    platform=mac-intel ;;
+    arm64-apple*|aarch64-apple*)
+	    platform=mac-arm64 ;;
     i?86-pc*)
 	    platform=win ;;
+    x86_64-*-linux*)
+	    platform=linux ;;
     *)
-	    echo "Unknown platform" ; exit 1 ;;
+	    echo "Unknown platform: $MACHTYPE" 
+	    echo "Supported platforms: mac-intel, mac-arm64, win, linux"
+	    exit 1 ;;
 esac
 
 case $platform in

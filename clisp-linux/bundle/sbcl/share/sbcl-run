@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Wrapper script to run FASL or Lisp files quietly with Steel Bank
+# Common Lisp. It is used by binfmt-support to execute SBCL fasls
+# natively.
+#
+#  -- René van Bevern <rvb@pro-linux.de>, Sun Aug 28 15:18:41 2005
+
+if [ "$1" ]; then
+    program="$1"; shift
+    sbcl --noinform --userinit /dev/null --disable-debugger --eval\
+    "(progn (load \"$program\") (quit))" --end-toplevel-options "$@"
+
+else
+    echo "Usage: $0 sbcl-program [arguments ...]"
+fi
+
+

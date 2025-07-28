@@ -130,7 +130,7 @@ public class Subprocess
         }
     }
 
-    protected static boolean debug = false;
+    protected static boolean debug = true;
 
     private Subprocess()
     {
@@ -250,9 +250,9 @@ public class Subprocess
         }
         sb.append('\n');
         final String reportableCommand = sb.toString();
-        if (debug) {
+
             System.out.println(reportableCommand);
-        }
+
 
         try {
             final Process p =
@@ -286,10 +286,10 @@ public class Subprocess
                                                    outReader.readLine();
 
                                                if (output != null) {
-                                                   if (debug) {
+
                                                        System.out.println("[stdout] "
                                                                           + output);
-                                                   }
+
                                                    if (outLines != null) {
                                                        outLines.add(output);
                                                    }
@@ -318,6 +318,7 @@ public class Subprocess
                                        }
                                    }
                                    catch (IOException e) {
+                                       System.out.println("[error] " + e.getMessage());
                                        throw new ExecuteException
                                            ("Subprocess output reader IOException",
                                             e);
@@ -436,9 +437,12 @@ public class Subprocess
             if (OSUtils.isIntelMac()) {
                 osName = "mac-intel";
             }
+            else if (OSUtils.isAppleSiliconMac()) {
+                osName = "mac-arm64";
+            }
             else {
                 osName = "mac-ppc";
-                throw new IllegalStateException("CogTool no longers supports PowerPC");
+                throw new IllegalStateException("CogTool no longer supports PowerPC");
             }
         }
         else {
