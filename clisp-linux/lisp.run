@@ -1,14 +1,179 @@
 #!/bin/bash
-# Modern LISP wrapper for Linux
+# Enhanced LISP wrapper for Linux systems
+# Provides intelligent fallback between LISP implementations
 
-# Try to use system CLISP first, then ECL as fallback
-if command -v clisp &> /dev/null; then
-    exec clisp "$@"
-elif command -v ecl &> /dev/null; then
-    # Convert CLISP arguments to ECL format (simplified)
-    exec ecl -norc "$@"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Function to log messages
+log_message() {
+    echo "[CogTool LISP] $1" >&2
+}
+
+# Function to check if a command exists and is executable
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+# Determine which LISP implementation to use
+LISP_IMPL=""
+LISP_CMD=""
+
+# Strategy 1: Try bundled CLISP (if we have it)
+BUNDLED_CLISP="$SCRIPT_DIR/clisp"
+if [ -x "$BUNDLED_CLISP" ]; then
+    log_message "Using bundled CLISP"
+    LISP_IMPL="clisp"
+    LISP_CMD="$BUNDLED_CLISP"
+# Strategy 2: Try system CLISP
+elif command_exists clisp; then
+    log_message "Using system CLISP"
+    LISP_IMPL="clisp"
+    LISP_CMD="clisp"
+# Strategy 3: Try bundled ECL (if we have it)
+elif [ -x "$SCRIPT_DIR/ecl" ]; then
+    log_message "Using bundled ECL"
+    LISP_IMPL="ecl"
+    LISP_CMD="$SCRIPT_DIR/ecl"
+# Strategy 4: Try system ECL
+elif command_exists ecl; then
+    log_message "Using system ECL"
+    LISP_IMPL="ecl"
+    LISP_CMD="ecl"
+# Strategy 5: Try SBCL as last resort
+elif command_exists sbcl; then
+    log_message "Using system SBCL"
+    LISP_IMPL="sbcl"
+    LISP_CMD="sbcl"
 else
-    echo "Error: No compatible LISP implementation found."
-    echo "Please install CLISP or ECL using your package manager."
+    # Error with helpful message
+    log_message "ERROR: No suitable LISP implementation found!"
+    log_message ""
+    log_message "Please install a LISP implementation:"
+    log_message "  sudo apt-get install clisp    # Recommended"
+    log_message "  sudo apt-get install ecl      # Alternative"
+    log_message "  sudo apt-get install sbcl     # Alternative"
+    log_message ""
+    log_message "Or on CentOS/RHEL/Fedora:"
+    log_message "  sudo yum install clisp        # CentOS/RHEL"
+    log_message "  sudo dnf install clisp        # Fedora"
+    log_message ""
+    log_message "If you continue to have issues, please visit:"
+    log_message "  https://github.com/CogTool-Modern/cogtool/issues"
     exit 1
+fi
+
+# Parse command line arguments
+QUIET=false
+ENCODING=""
+MEMORY_IMAGE=""
+LOAD_FILES=()
+EXECUTE_CMD=""
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -q)
+            QUIET=true
+            shift
+            ;;
+        -E)
+            ENCODING="$2"
+            shift 2
+            ;;
+        -M)
+            MEMORY_IMAGE="$2"
+            shift 2
+            ;;
+        -i)
+            LOAD_FILES+=("$2")
+            shift 2
+            ;;
+        -x)
+            EXECUTE_CMD="$2"
+            shift 2
+            ;;
+        *)
+            shift
+            ;;
+    esac
+done
+
+# Build command based on LISP implementation
+if [ "$LISP_IMPL" = "clisp" ]; then
+    # CLISP command building (pass through arguments)
+    CMD="$LISP_CMD"
+    if [ "$QUIET" = true ]; then
+        CMD="$CMD -q"
+    fi
+    
+    if [ -n "$ENCODING" ]; then
+        CMD="$CMD -E $ENCODING"
+    fi
+    
+    if [ -n "$MEMORY_IMAGE" ]; then
+        CMD="$CMD -M \"$MEMORY_IMAGE\""
+    fi
+    
+    # Load files
+    for file in "${LOAD_FILES[@]}"; do
+        CMD="$CMD -i \"$file\""
+    done
+    
+    # Execute command
+    if [ -n "$EXECUTE_CMD" ]; then
+        CMD="$CMD -x \"$EXECUTE_CMD\""
+    fi
+elif [ "$LISP_IMPL" = "ecl" ]; then
+    # ECL command building
+    CMD="$LISP_CMD"
+    if [ "$QUIET" = true ]; then
+        CMD="$CMD --norc"
+    fi
+    
+    # Load files
+    for file in "${LOAD_FILES[@]}"; do
+        CMD="$CMD --load \"$file\""
+    done
+    
+    # Execute command
+    if [ -n "$EXECUTE_CMD" ]; then
+        CMD="$CMD --eval \"$EXECUTE_CMD\" --eval \"(quit)\""
+    fi
+elif [ "$LISP_IMPL" = "sbcl" ]; then
+    # SBCL command building
+    CMD="$LISP_CMD"
+    if [ "$QUIET" = true ]; then
+        CMD="$CMD --noinform"
+    fi
+    
+    # Load files
+    for file in "${LOAD_FILES[@]}"; do
+        CMD="$CMD --load \"$file\""
+    done
+    
+    # Execute command
+    if [ -n "$EXECUTE_CMD" ]; then
+        CMD="$CMD --eval \"$EXECUTE_CMD\""
+    fi
+fi
+
+# Run the command
+if [ "$LISP_IMPL" = "ecl" ]; then
+    # For ECL, we need to handle arguments more carefully
+    if [ -n "$EXECUTE_CMD" ]; then
+        exec "$LISP_CMD" --eval "$EXECUTE_CMD" --eval "(quit)"
+    else
+        exec "$LISP_CMD"
+    fi
+elif [ "$LISP_IMPL" = "clisp" ]; then
+    # For CLISP, use the original approach
+    eval "$CMD"
+elif [ "$LISP_IMPL" = "sbcl" ]; then
+    # For SBCL, handle arguments carefully
+    if [ -n "$EXECUTE_CMD" ]; then
+        exec "$LISP_CMD" --eval "$EXECUTE_CMD" --eval "(quit)"
+    else
+        exec "$LISP_CMD"
+    fi
+else
+    eval "$CMD"
 fi

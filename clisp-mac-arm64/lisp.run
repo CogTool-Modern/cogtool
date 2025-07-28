@@ -1,17 +1,64 @@
 #!/bin/bash
-# Modern LISP wrapper for Apple Silicon using ECL
-# This provides compatibility with the existing CogTool LISP interface
+# Enhanced LISP wrapper for Apple Silicon Macs
+# Provides native ARM64 performance with intelligent fallback
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+COGTOOL_ROOT="$(dirname "$SCRIPT_DIR")"
 
-# Check if ECL is available
-if ! command -v ecl &> /dev/null; then
-    echo "Error: ECL (Embeddable Common Lisp) is not installed."
-    echo "Please install ECL using: brew install ecl"
-    exit 1
+# Function to log messages
+log_message() {
+    echo "[CogTool LISP] $1" >&2
+}
+
+# Function to check if a command exists and is executable
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+# Determine which LISP implementation to use
+LISP_IMPL=""
+LISP_CMD=""
+
+# Strategy 1: Try bundled ECL (if we have it)
+BUNDLED_ECL="$SCRIPT_DIR/ecl"
+if [ -x "$BUNDLED_ECL" ]; then
+    log_message "Using bundled ECL (native Apple Silicon performance)"
+    LISP_IMPL="ecl"
+    LISP_CMD="$BUNDLED_ECL"
+# Strategy 2: Try system ECL (native Apple Silicon performance)
+elif command_exists ecl; then
+    log_message "Using system ECL (native Apple Silicon performance)"
+    LISP_IMPL="ecl"
+    LISP_CMD="ecl"
+# Strategy 3: Try system CLISP
+elif command_exists clisp; then
+    log_message "Using system CLISP"
+    LISP_IMPL="clisp"
+    LISP_CMD="clisp"
+# Strategy 4: Try bundled Intel CLISP with Rosetta 2
+else
+    INTEL_CLISP="$COGTOOL_ROOT/clisp-mac-intel/lisp.run"
+    if [ -x "$INTEL_CLISP" ]; then
+        log_message "Using bundled Intel CLISP with Rosetta 2 (may be slower)"
+        LISP_IMPL="clisp"
+        LISP_CMD="$INTEL_CLISP"
+    else
+        # Strategy 5: Error with helpful message
+        log_message "ERROR: No suitable LISP implementation found!"
+        log_message ""
+        log_message "For best performance on Apple Silicon, install ECL:"
+        log_message "  brew install ecl"
+        log_message ""
+        log_message "Alternatively, ensure Rosetta 2 is installed:"
+        log_message "  /usr/sbin/softwareupdate --install-rosetta"
+        log_message ""
+        log_message "If you continue to have issues, please visit:"
+        log_message "  https://github.com/CogTool-Modern/cogtool/issues"
+        exit 1
+    fi
 fi
 
-# Parse command line arguments to convert CLISP format to ECL format
+# Parse command line arguments
 QUIET=false
 ENCODING=""
 MEMORY_IMAGE=""
@@ -46,21 +93,58 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Build ECL command
-ECL_CMD="ecl"
-if [ "$QUIET" = true ]; then
-    ECL_CMD="$ECL_CMD -norc"
+# Build command based on LISP implementation
+if [ "$LISP_IMPL" = "ecl" ]; then
+    # ECL command building
+    CMD="$LISP_CMD"
+    if [ "$QUIET" = true ]; then
+        CMD="$CMD --norc"
+    fi
+    
+    # Load files
+    for file in "${LOAD_FILES[@]}"; do
+        CMD="$CMD --load \"$file\""
+    done
+    
+    # Execute command
+    if [ -n "$EXECUTE_CMD" ]; then
+        CMD="$CMD --eval \"$EXECUTE_CMD\" --eval \"(quit)\""
+    fi
+else
+    # CLISP command building (pass through arguments)
+    CMD="$LISP_CMD"
+    if [ "$QUIET" = true ]; then
+        CMD="$CMD -q"
+    fi
+    
+    if [ -n "$ENCODING" ]; then
+        CMD="$CMD -E $ENCODING"
+    fi
+    
+    if [ -n "$MEMORY_IMAGE" ]; then
+        CMD="$CMD -M \"$MEMORY_IMAGE\""
+    fi
+    
+    # Load files
+    for file in "${LOAD_FILES[@]}"; do
+        CMD="$CMD -i \"$file\""
+    done
+    
+    # Execute command
+    if [ -n "$EXECUTE_CMD" ]; then
+        CMD="$CMD -x \"$EXECUTE_CMD\""
+    fi
 fi
 
-# Load files
-for file in "${LOAD_FILES[@]}"; do
-    ECL_CMD="$ECL_CMD -load \"$file\""
-done
-
-# Execute command
-if [ -n "$EXECUTE_CMD" ]; then
-    ECL_CMD="$ECL_CMD -eval \"$EXECUTE_CMD\""
+# Run the command
+if [ "$LISP_IMPL" = "ecl" ]; then
+    # For ECL, we need to handle arguments more carefully
+    if [ -n "$EXECUTE_CMD" ]; then
+        exec "$LISP_CMD" --eval "$EXECUTE_CMD" --eval "(quit)"
+    else
+        exec "$LISP_CMD"
+    fi
+else
+    # For CLISP, use the original approach
+    eval "$CMD"
 fi
-
-# Run ECL
-eval $ECL_CMD

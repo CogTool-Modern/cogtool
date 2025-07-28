@@ -228,17 +228,64 @@ ant -v package | grep "Target.*if"
 2. **Linux**: Official support with automated setup
 3. **Windows**: Enhanced with cross-platform capabilities
 
+## Portable LISP Runtime
+
+### Self-Contained Distribution
+The modernized CogTool now includes a truly portable LISP environment that eliminates the need for external LISP installations:
+
+#### Bundled LISP Implementations
+- **Apple Silicon**: ECL binaries (when available) for native ARM64 performance
+- **Linux**: ECL/CLISP binaries for maximum compatibility
+- **Intel Mac**: Optimized CLISP distribution (existing)
+- **Windows**: Complete CLISP distribution (existing)
+
+#### Intelligent Wrapper Scripts
+Each platform includes enhanced wrapper scripts (`lisp.run`) that:
+1. **Auto-detect** available LISP implementations
+2. **Prioritize** bundled implementations for reliability
+3. **Fall back** gracefully to system implementations
+4. **Convert** command-line arguments between LISP dialects
+5. **Provide** helpful error messages and installation guidance
+
+#### Fallback Strategy
+```
+Apple Silicon Mac:
+1. Bundled ECL (native ARM64) → 2. System ECL → 3. System CLISP → 4. Intel CLISP (Rosetta 2)
+
+Linux:
+1. Bundled CLISP/ECL → 2. System CLISP → 3. System ECL → 4. System SBCL
+
+Intel Mac:
+1. Bundled CLISP → 2. System CLISP
+
+Windows:
+1. Bundled CLISP → 2. System CLISP
+```
+
+#### Setup Scripts
+- **`setup-modern-lisp.sh`**: Original setup with system installation guidance
+- **`setup-portable-lisp.sh`**: Creates portable bundles from current system
+- **`PORTABLE_LISP_README.md`**: Comprehensive user documentation
+
+### Build System Integration
+The build system automatically:
+- Copies bundled LISP binaries with `**/*` patterns
+- Sets executable permissions on all LISP binaries
+- Includes setup scripts in distributions
+- Maintains backward compatibility with existing builds
+
 ## Future Enhancements
 
 ### Planned Improvements
-1. **Native Apple Silicon CLISP**: When available, replace ECL wrapper
+1. **Pre-built Binaries**: Download and bundle LISP implementations during build
 2. **Docker Support**: Containerized builds for consistent environments
-3. **CI/CD Integration**: Automated multi-platform builds
-4. **Performance Optimization**: Platform-specific optimizations
+3. **CI/CD Integration**: Automated multi-platform builds with LISP bundling
+4. **Performance Optimization**: Platform-specific LISP optimizations
 
 ### Extension Points
-1. **New LISP Implementations**: Easy to add via ModernLispRunner
+1. **New LISP Implementations**: Easy to add via wrapper script patterns
 2. **Additional Platforms**: Framework supports new architectures
 3. **Custom Distributions**: Template for specialized builds
+4. **Binary Caching**: Reuse bundled binaries across builds
 
-This modernized build system provides a solid foundation for CogTool's future while maintaining full compatibility with existing workflows and adding support for modern platforms and architectures.
+This modernized build system provides a truly portable CogTool distribution that works out-of-the-box on all supported platforms without requiring users to install or configure LISP environments manually.
