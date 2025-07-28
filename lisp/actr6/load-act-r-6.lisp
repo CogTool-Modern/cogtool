@@ -144,6 +144,10 @@
 ;;; 2007.09.10 Dan
 ;;;             : * Putting the LispWorks device file pointers in to allow use
 ;;;             :   of the beta device interface.
+;;; 2024.07.28 CogTool-Modern
+;;;             : * Added ECL (Embeddable Common Lisp) support for Apple Silicon
+;;;             :   compatibility. Added ECL to logical pathname translations and
+;;;             :   fasl pathname definitions.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; General Docs:
@@ -259,6 +263,9 @@
 ;; Clisp has an implementation-specific function execute that conflicts with
 ;; the generic function execute in ACT-R, so shadow it
 #+:clisp (defpackage "COMMON-LISP-USER" (:shadow "EXECUTE"))
+
+;; ECL may have similar issues, add shadowing if needed
+#+:ecl (defpackage "COMMON-LISP-USER" (:use "COMMON-LISP"))
 
 ;; SBCL has a function called reset we need to shadow and there's an issue
 ;; with their defconstat because it throws an error if you compile and then
