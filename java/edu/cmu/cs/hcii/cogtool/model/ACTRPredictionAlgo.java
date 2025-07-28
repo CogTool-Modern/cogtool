@@ -127,6 +127,7 @@ import edu.cmu.cs.hcii.cogtool.util.ObjectSaver;
 import edu.cmu.cs.hcii.cogtool.util.ProcessTraceCallback;
 import edu.cmu.cs.hcii.cogtool.util.StringUtil;
 import edu.cmu.cs.hcii.cogtool.util.Subprocess;
+import edu.cmu.cs.hcii.cogtool.util.ModernLispRunner;
 
 // TODO the model file we write, while capable of being run standalone, still
 // contains lots of detritus from our old structure; it should be tidied up
@@ -368,15 +369,15 @@ public class ACTRPredictionAlgo extends APredictionAlgo
             files.add(file);
 
             if (!usesObsoleteWaits) {
-                // Execute clisp, loading stored memory image and temp files
+                // Execute modern LISP with cross-platform support
                 try {
-                    Subprocess.execLisp(lispMem,
-                                        files,
-                                        cmd,
-                                        traceLines,
-                                        errorLines,
-                                        progressCallback,
-                                        cancelable); // ignore return value
+                    ModernLispRunner.execModernLisp(lispMem,
+                                                  files,
+                                                  cmd,
+                                                  traceLines,
+                                                  errorLines,
+                                                  progressCallback,
+                                                  cancelable); // ignore return value
                 }
                 catch (Subprocess.ExecuteException ex) {
                     throw new ComputationException("Executing LISP failed", ex);

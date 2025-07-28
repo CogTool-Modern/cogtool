@@ -210,6 +210,23 @@ public class OSUtils
         return false;
     }
 
+    /**
+     * Checks if CogTool is running on a Mac with Apple Silicon (ARM64) processor
+     * @return true if running on a Mac with Apple Silicon processor
+     */
+    public static boolean isAppleSiliconMac()
+    {
+        if (MACOSX) {
+            String osArch = System.getProperty("os.arch");
+
+            if (osArch.toLowerCase().equals("aarch64") || osArch.toLowerCase().equals("arm64")) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static String runtimeDescription()
     {
         return (operatingSystemName +

@@ -1,0 +1,66 @@
+#!/bin/bash
+# Modern LISP wrapper for Apple Silicon using ECL
+# This provides compatibility with the existing CogTool LISP interface
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Check if ECL is available
+if ! command -v ecl &> /dev/null; then
+    echo "Error: ECL (Embeddable Common Lisp) is not installed."
+    echo "Please install ECL using: brew install ecl"
+    exit 1
+fi
+
+# Parse command line arguments to convert CLISP format to ECL format
+QUIET=false
+ENCODING=""
+MEMORY_IMAGE=""
+LOAD_FILES=()
+EXECUTE_CMD=""
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -q)
+            QUIET=true
+            shift
+            ;;
+        -E)
+            ENCODING="$2"
+            shift 2
+            ;;
+        -M)
+            MEMORY_IMAGE="$2"
+            shift 2
+            ;;
+        -i)
+            LOAD_FILES+=("$2")
+            shift 2
+            ;;
+        -x)
+            EXECUTE_CMD="$2"
+            shift 2
+            ;;
+        *)
+            shift
+            ;;
+    esac
+done
+
+# Build ECL command
+ECL_CMD="ecl"
+if [ "$QUIET" = true ]; then
+    ECL_CMD="$ECL_CMD -norc"
+fi
+
+# Load files
+for file in "${LOAD_FILES[@]}"; do
+    ECL_CMD="$ECL_CMD -load \"$file\""
+done
+
+# Execute command
+if [ -n "$EXECUTE_CMD" ]; then
+    ECL_CMD="$ECL_CMD -eval \"$EXECUTE_CMD\""
+fi
+
+# Run ECL
+eval $ECL_CMD

@@ -1,0 +1,14 @@
+#!/bin/bash
+# Modern LISP wrapper for Linux
+
+# Try to use system CLISP first, then ECL as fallback
+if command -v clisp &> /dev/null; then
+    exec clisp "$@"
+elif command -v ecl &> /dev/null; then
+    # Convert CLISP arguments to ECL format (simplified)
+    exec ecl -norc "$@"
+else
+    echo "Error: No compatible LISP implementation found."
+    echo "Please install CLISP or ECL using your package manager."
+    exit 1
+fi
