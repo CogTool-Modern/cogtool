@@ -68,6 +68,7 @@ Section -Main SEC0000
     SetOutPath $INSTDIR\lisp
     File ..\lisp\actr6-modern.lisp
     File ..\lisp\actr6.lisp
+    File /r /x .svn /x ._* ..\lisp\actr6
     SetOutPath $INSTDIR
     File ..\setup-modern-lisp.sh
     SetOutPath $INSTDIR\xul-win
