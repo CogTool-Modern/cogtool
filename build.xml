@@ -283,11 +283,18 @@
 	<target name="copy-mac-lisp-arm64" if="os.mac.arm64">
 		<copy todir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-arm64/">
 			<fileset dir="${basedir}/clisp-mac-arm64">
-				<include name="*" />
+				<include name="**/*" />
 			</fileset>
 		</copy>
 		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-mac-arm64/lisp.run" perm="a+x" />
-		<echo message="Packaged Apple Silicon Mac LISP distribution" />
+		<!-- Set executable permissions for bundled LISP binaries -->
+		<chmod perm="a+x">
+			<fileset dir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-arm64">
+				<include name="**/ecl"/>
+				<include name="**/clisp"/>
+			</fileset>
+		</chmod>
+		<echo message="Packaged Apple Silicon Mac LISP distribution with portable runtime" />
 	</target>
 
 	<!-- Target for Universal Mac build (includes both architectures) -->
@@ -344,10 +351,17 @@
 		<!-- Copy Linux LISP distribution -->
 		<copy todir="${distdir}/CogTool-Linux/clisp-linux/">
 			<fileset dir="${basedir}/clisp-linux">
-				<include name="*" />
+				<include name="**/*" />
 			</fileset>
 		</copy>
 		<chmod file="${distdir}/CogTool-Linux/clisp-linux/lisp.run" perm="a+x" />
+		<!-- Set executable permissions for bundled LISP binaries -->
+		<chmod perm="a+x">
+			<fileset dir="${distdir}/CogTool-Linux/clisp-linux">
+				<include name="**/ecl"/>
+				<include name="**/clisp"/>
+			</fileset>
+		</chmod>
 
 		<!-- Copy modern LISP infrastructure -->
 		<copy todir="${distdir}/CogTool-Linux/lisp/">
@@ -359,7 +373,9 @@
 
 		<!-- Copy setup scripts -->
 		<copy file="${basedir}/setup-modern-lisp.sh" todir="${distdir}/CogTool-Linux/" />
+		<copy file="${basedir}/setup-portable-lisp.sh" todir="${distdir}/CogTool-Linux/" />
 		<chmod file="${distdir}/CogTool-Linux/setup-modern-lisp.sh" perm="a+x" />
+		<chmod file="${distdir}/CogTool-Linux/setup-portable-lisp.sh" perm="a+x" />
 
 		<!-- Create Linux launcher script -->
 		<echo file="${distdir}/CogTool-Linux/cogtool.sh">#!/bin/bash
