@@ -150,8 +150,20 @@
 
 	<taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar" />
 
+	<!-- Pre-compile ACT-R 6 framework for optimal performance -->
+	<target name="precompile-actr6" description="Pre-compile ACT-R 6 framework for different LISP implementations">
+		<echo message="🔧 Pre-compiling ACT-R 6 framework for optimal performance..." />
+		
+		<!-- Run the pre-compilation script -->
+		<exec executable="/bin/bash" failonerror="false">
+			<arg value="${basedir}/build-scripts/precompile-actr6.sh" />
+		</exec>
+		
+		<echo message="✅ ACT-R 6 pre-compilation completed" />
+	</target>
+
 	<!-- Packages build output and resources into runable packages., -->
-	<target name="package" depends="clean,compile, help-copy, help-index" description="Packages build output and resources into runable packages.">
+	<target name="package" depends="clean,compile, help-copy, help-index, precompile-actr6" description="Packages build output and resources into runable packages.">
 
 		<tstamp>
 			<format property="buildtime" pattern="MM/dd/yyyy-hh:mm" />
@@ -240,6 +252,12 @@
 				<include name="actr6/**/*" />
 			</fileset>
 		</copy>
+
+		<!-- Pre-compile ACT-R 6 framework for faster runtime loading -->
+		<echo message="Pre-compiling ACT-R 6 framework..." />
+		<exec executable="/bin/bash" dir="${distdir}/CogTool.app/Contents/Resources" failonerror="false">
+			<arg value="${basedir}/precompile-actr6.sh" />
+		</exec>
 
 		<!-- Copy setup scripts -->
 		<copy file="${basedir}/setup-modern-lisp.sh" todir="${distdir}/CogTool.app/Contents/Resources/" />
@@ -404,6 +422,12 @@
 				<include name="actr6/**/*" />
 			</fileset>
 		</copy>
+
+		<!-- Pre-compile ACT-R 6 framework for faster runtime loading -->
+		<echo message="Pre-compiling ACT-R 6 framework for Linux..." />
+		<exec executable="/bin/bash" dir="${distdir}/CogTool-Linux" failonerror="false">
+			<arg value="${basedir}/precompile-actr6.sh" />
+		</exec>
 
 		<!-- Copy setup scripts -->
 		<copy file="${basedir}/setup-modern-lisp.sh" todir="${distdir}/CogTool-Linux/" />
