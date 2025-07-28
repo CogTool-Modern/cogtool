@@ -85,6 +85,38 @@
 		<os family="mac" />
 	</condition>
 
+	<condition property="os.linux">
+		<and>
+			<os family="unix" />
+			<not>
+				<os family="mac" />
+			</not>
+		</and>
+	</condition>
+
+	<!-- Detect Apple Silicon (ARM64) vs Intel Mac -->
+	<condition property="os.mac.arm64">
+		<and>
+			<os family="mac" />
+			<or>
+				<contains string="${os.arch}" substring="aarch64" />
+				<contains string="${os.arch}" substring="arm64" />
+			</or>
+		</and>
+	</condition>
+
+	<condition property="os.mac.intel">
+		<and>
+			<os family="mac" />
+			<not>
+				<or>
+					<contains string="${os.arch}" substring="aarch64" />
+					<contains string="${os.arch}" substring="arm64" />
+				</or>
+			</not>
+		</and>
+	</condition>
+
 	<target name="help-copy" description="Create a Help Bundle for Mac from the documentation (docs/)">
 		<!-- Build the Jekyll site in a special way that will work inside of Help Viewer app -->
 		<exec dir="${basedir}/docs" executable="/bin/sh">
@@ -195,15 +227,22 @@
 		<!-- Copy the app jar to the Mac bundle. -->
 		<copy file="${distdir}/CogTool.jar" todir="${distdir}/CogTool.app/Contents/Resources/Java/" />
 
-		<!-- Copy the clisp dist to the Mac bundle. -->
-		<copy todir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel/">
-			<fileset dir="${basedir}/clisp-mac-intel">
-				<include name="*" />
+		<!-- Copy the appropriate clisp dist to the Mac bundle based on architecture -->
+		<antcall target="copy-mac-lisp-intel" />
+		<antcall target="copy-mac-lisp-arm64" />
+		<antcall target="copy-mac-lisp-universal" />
+
+		<!-- Copy modern LISP infrastructure -->
+		<copy todir="${distdir}/CogTool.app/Contents/Resources/lisp/">
+			<fileset dir="${basedir}/lisp">
+				<include name="actr6-modern.lisp" />
+				<include name="actr6.lisp" />
 			</fileset>
 		</copy>
 
-		<!-- Chmod the clisp executable. -->
-		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel/lisp.run" perm="a+x" />
+		<!-- Copy setup scripts -->
+		<copy file="${basedir}/setup-modern-lisp.sh" todir="${distdir}/CogTool.app/Contents/Resources/" />
+		<chmod file="${distdir}/CogTool.app/Contents/Resources/setup-modern-lisp.sh" perm="a+x" />
 
 		<!-- Copy the clisp dist to the Mac bundle. -->
 		<copy todir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-arm64/">
@@ -235,7 +274,131 @@
 			<os family="windows" />
 		</condition>
 		<antcall target="package-windows" />
+		<antcall target="package-linux" />
 
+	</target>
+
+	<!-- Target for Intel Mac LISP distribution -->
+	<target name="copy-mac-lisp-intel" if="os.mac.intel">
+		<copy todir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel/">
+			<fileset dir="${basedir}/clisp-mac-intel">
+				<include name="*" />
+			</fileset>
+		</copy>
+		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel/lisp.run" perm="a+x" />
+		<echo message="Packaged Intel Mac LISP distribution" />
+	</target>
+
+	<!-- Target for Apple Silicon Mac LISP distribution -->
+	<target name="copy-mac-lisp-arm64" if="os.mac.arm64">
+		<copy todir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-arm64/">
+			<fileset dir="${basedir}/clisp-mac-arm64">
+				<include name="*" />
+			</fileset>
+		</copy>
+		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-mac-arm64/lisp.run" perm="a+x" />
+		<echo message="Packaged Apple Silicon Mac LISP distribution" />
+	</target>
+
+	<!-- Target for Universal Mac build (includes both architectures) -->
+	<target name="copy-mac-lisp-universal" unless="os.mac.intel,os.mac.arm64">
+		<condition property="build.universal">
+			<os family="mac" />
+		</condition>
+		<antcall target="copy-mac-lisp-universal-impl" />
+	</target>
+
+	<target name="copy-mac-lisp-universal-impl" if="build.universal">
+		<!-- Copy Intel Mac LISP -->
+		<copy todir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel/">
+			<fileset dir="${basedir}/clisp-mac-intel">
+				<include name="*" />
+			</fileset>
+		</copy>
+		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel/lisp.run" perm="a+x" />
+
+		<!-- Copy Apple Silicon Mac LISP -->
+		<copy todir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-arm64/">
+			<fileset dir="${basedir}/clisp-mac-arm64">
+				<include name="*" />
+			</fileset>
+		</copy>
+		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-mac-arm64/lisp.run" perm="a+x" />
+
+		<!-- Copy Linux LISP for cross-platform support -->
+		<copy todir="${distdir}/CogTool.app/Contents/Resources/clisp-linux/">
+			<fileset dir="${basedir}/clisp-linux">
+				<include name="*" />
+			</fileset>
+		</copy>
+		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-linux/lisp.run" perm="a+x" />
+
+		<echo message="Packaged Universal Mac LISP distribution (Intel + Apple Silicon + Linux)" />
+	</target>
+
+	<!-- Target for Linux distribution -->
+	<target name="package-linux" if="os.linux">
+		<!-- Create Linux distribution directory -->
+		<mkdir dir="${distdir}/CogTool-Linux" />
+
+		<!-- Copy main jar -->
+		<copy file="${distdir}/CogTool.jar" todir="${distdir}/CogTool-Linux/" />
+
+		<!-- Copy libraries -->
+		<copy todir="${distdir}/CogTool-Linux/lib/">
+			<fileset dir="${libdir}">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+
+		<!-- Copy Linux LISP distribution -->
+		<copy todir="${distdir}/CogTool-Linux/clisp-linux/">
+			<fileset dir="${basedir}/clisp-linux">
+				<include name="*" />
+			</fileset>
+		</copy>
+		<chmod file="${distdir}/CogTool-Linux/clisp-linux/lisp.run" perm="a+x" />
+
+		<!-- Copy modern LISP infrastructure -->
+		<copy todir="${distdir}/CogTool-Linux/lisp/">
+			<fileset dir="${basedir}/lisp">
+				<include name="actr6-modern.lisp" />
+				<include name="actr6.lisp" />
+			</fileset>
+		</copy>
+
+		<!-- Copy setup scripts -->
+		<copy file="${basedir}/setup-modern-lisp.sh" todir="${distdir}/CogTool-Linux/" />
+		<chmod file="${distdir}/CogTool-Linux/setup-modern-lisp.sh" perm="a+x" />
+
+		<!-- Create Linux launcher script -->
+		<echo file="${distdir}/CogTool-Linux/cogtool.sh">#!/bin/bash
+# CogTool Linux Launcher Script
+# Automatically sets up modern LISP environment
+
+SCRIPT_DIR="$$(cd "$$(dirname "$${BASH_SOURCE[0]}")" &amp;&amp; pwd)"
+cd "$$SCRIPT_DIR"
+
+# Run setup if needed
+if [ ! -f ".lisp-setup-complete" ]; then
+    echo "Setting up modern LISP environment..."
+    ./setup-modern-lisp.sh
+    touch .lisp-setup-complete
+fi
+
+# Launch CogTool
+java -jar CogTool.jar "$$@"
+</echo>
+		<chmod file="${distdir}/CogTool-Linux/cogtool.sh" perm="a+x" />
+
+		<!-- Create tarball -->
+		<tar destfile="${distdir}/CogToolLinux-${versionclean}-r${revision}.tar.gz" compression="gzip" longfile="warn">
+			<tarfileset dir="${distdir}/" mode="755">
+				<include name="CogTool-Linux/**" />
+			</tarfileset>
+		</tar>
+
+		<echo message="Packaged Linux distribution" />
 	</target>
 
 	<target name="package-windows" if="os.windows">
