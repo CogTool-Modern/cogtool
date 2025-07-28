@@ -316,6 +316,7 @@ public class ACTRPredictionAlgo extends APredictionAlgo
 
         public APredictionResult completeWork()
         {
+            System.out.println("Trace lines:" + traceLines);
             int lineCount = traceLines.size();
 
             TimePredictionResult result = null;
@@ -324,7 +325,10 @@ public class ACTRPredictionAlgo extends APredictionAlgo
                 try {
                     // Parse trace and return result with steps
                     String lastLine = traceLines.get(lineCount - 2);
+                    System.out.println("Last line: " + lastLine);
+
                     double taskTime = parseTaskTimeFromLine(lastLine);
+                    System.out.println("Task time: " + taskTime);
 
                     TraceParser<ResultStep> parser = getTraceParser();
 
