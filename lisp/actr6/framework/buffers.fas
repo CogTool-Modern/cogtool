@@ -1,0 +1,2234 @@
+(|SYSTEM|::|VERSION| '(20100806.))
+#0Y_ #0Y |CHARSET|::|UTF-8|
+#Y(#:|1 234 (EXTEND-CHUNKS BUFFER-SET-INVALID)-1-1|
+   #44Y(00 00 00 00 00 00 00 00 20 01 DA 8C 58 04 DB 8D 58 17 6B 02 DD DE DA 8D
+        58 03 DB 31 58 14 DA 8D 58 03 DB 31 58 14 2D 05 05 3E 19 01)
+   (|COMMON-LISP-USER|::|CHUNK-BUFFER-SET-INVALID-SETF|
+    |COMMON-LISP-USER|::|CHUNK-BUFFER-SET-INVALID|
+    |COMMON-LISP|::|*ERROR-OUTPUT*|
+    #Y(#:|1 234 (EXTEND-CHUNKS BUFFER-SET-INVALID)-1-1-1|
+       #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31 95
+            B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+       (|SYSTEM|::|*FORMAT-CS*| "#|Warning: " |SYSTEM|::|DO-FORMAT-INDIRECTION|
+        " |#\n")
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+    "The following ~:[~;2 ~]warning~:[~;s~] can be ignored for the main ACT-R modules provided, but may be a serious problem if seen otherwise."
+    |COMMON-LISP|::|FORMAT|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|1 234 (EXTEND-CHUNKS BUFFER-SET-INVALID)-1-2|
+   #25Y(00 00 00 00 00 00 00 00 20 01 DA 8D 58 08 6B 01 DC DD DA 2D 04 04 3E 19
+        01)
+   (|COMMON-LISP-USER|::|CHUNK-BUFFER-SET-INVALID|
+    |COMMON-LISP|::|*ERROR-OUTPUT*|
+    #Y(#:|1 234 (EXTEND-CHUNKS BUFFER-SET-INVALID)-1-2-1|
+       #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31 95
+            B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+       (|SYSTEM|::|*FORMAT-CS*| "#|Warning: " |SYSTEM|::|DO-FORMAT-INDIRECTION|
+        " |#\n")
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+    "Function ~s already exists and is being redefined."
+    |COMMON-LISP|::|FORMAT|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|1 234 (EXTEND-CHUNKS BUFFER-SET-INVALID)-1-3|
+   #25Y(00 00 00 00 00 00 00 00 20 01 DA 8D 58 08 6B 01 DC DD DA 2D 04 04 3E 19
+        01)
+   (|COMMON-LISP-USER|::|CHUNK-BUFFER-SET-INVALID-SETF|
+    |COMMON-LISP|::|*ERROR-OUTPUT*|
+    #Y(#:|1 234 (EXTEND-CHUNKS BUFFER-SET-INVALID)-1-3-1|
+       #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31 95
+            B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+       (|SYSTEM|::|*FORMAT-CS*| "#|Warning: " |SYSTEM|::|DO-FORMAT-INDIRECTION|
+        " |#\n")
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+    "Function ~s already exists and is being redefined."
+    |COMMON-LISP|::|FORMAT|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|1 234 (EXTEND-CHUNKS BUFFER-SET-INVALID)-1-4|
+   #178Y(00 00 00 00 00 00 00 00 20 01 00 2B 02 0E 00 0B 00 00 DB 6B 02 38 06
+         9A 03 02 72 77 DE DB DF 68 04 00 E0 63 E1 63 E2 63 E3 63 E4 63 E5 E6
+         2D 10 0D 0B 01 01 92 00 80 44 6B 00 32 B1 0F 00 68 01 01 0E 02 5D 0F
+         02 E6 2F 12 E6 AE 6D 13 01 32 9C EE 2F 12 EE AE 6D 15 01 32 9C E6 F0
+         32 A3 E6 F1 E6 F2 38 01 8F 9E 03 F3 2F 1A 14 2D 03 1B E6 F2 EE 32 A2
+         E6 F6 63 2D 03 1D D1 19 03 E8 AD E9 32 43 0B 01 00 AC 6B 02 38 07 32
+         69 0F 02 AC 6B 10 38 07 32 69 0F 10 AC 6B 11 38 07 32 69 0F 11 68 01
+         01 E8 AE E9 72 43 E8 AE E9 AF 32 44 16 02 1B FF 8C)
+   (|COMMON-LISP-USER|::|*CHUNK-PARAMETERS-COUNT*|
+    |COMMON-LISP-USER|::|BUFFER-SET-INVALID|
+    |COMMON-LISP-USER|::|*CHUNK-PARAMETERS-LIST*|
+    |COMMON-LISP-USER|::|ACT-R-CHUNK-PARAMETER-NAME| :|NAME| :|INDEX|
+    :|DEFAULT-VALUE| :|DEFAULT-FUNCTION| :|MERGE| :|COPY| :|COPY-FROM-CHUNK|
+    :|ACCESSOR| |COMMON-LISP-USER|::|CHUNK-BUFFER-SET-INVALID|
+    |COMMON-LISP-USER|::|MAKE-ACT-R-CHUNK-PARAMETER|
+    |COMMON-LISP-USER|::|ACT-R-CHUNK-PARAMETER| 2.
+    |COMMON-LISP-USER|::|*CHUNK-PARAMETERS-COPY-LIST*|
+    |COMMON-LISP-USER|::|*CHUNK-PARAMETERS-MERGE-LIST*|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|CHUNK-BUFFER-SET-INVALID|
+       #68Y(00 00 00 00 01 00 00 00 26 02 AD 6F 01 92 00 21 6B 06 E1 E2 B1 E3
+            2D 05 0A 19 03 DC AE DD 72 43 69 00 01 69 00 02 B2 70 05 AE AE AE
+            33 01 02 19 07 DC AD DD 72 43 69 00 01 73 01 01 AC 0E 04 22 5A 15
+            19 03)
+       (|COMMON-LISP|::|NIL| |COMMON-LISP-USER|::|GET-CHUNK|
+        |COMMON-LISP-USER|::|ACT-R-CHUNK| 8.
+        |COMMON-LISP-USER|::|*CHUNK-PARAMETER-UNDEFINED*|
+        |COMMON-LISP-USER|::|CHUNK-PARAMETER-DEFAULT|
+        |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|CHUNK-BUFFER-SET-INVALID-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Chunk ~s does not exist in attempt to access ~a."
+        |COMMON-LISP-USER|::|CHUNK-BUFFER-SET-INVALID| |COMMON-LISP|::|FORMAT|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|CHUNK-NAME|) |COMMON-LISP|::|NIL| 1)
+    |COMMON-LISP-USER|::|CHUNK-BUFFER-SET-INVALID-SETF|
+    #Y(|COMMON-LISP-USER|::|CHUNK-BUFFER-SET-INVALID-SETF|
+       #43Y(00 00 00 00 02 00 00 00 26 03 AE 6F 01 92 00 0B 6B 04 DF E0 B2 E1
+            2D 05 08 19 04 DC AD DD 72 43 69 00 01 AD AD B2 33 01 02 19 06)
+       (|COMMON-LISP|::|NIL| |COMMON-LISP-USER|::|GET-CHUNK|
+        |COMMON-LISP-USER|::|ACT-R-CHUNK| 8. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|CHUNK-BUFFER-SET-INVALID-SETF-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Chunk ~s does not exist in attempt to set ~a."
+        |COMMON-LISP-USER|::|CHUNK-BUFFER-SET-INVALID| |COMMON-LISP|::|FORMAT|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|CHUNK-NAME| |COMMON-LISP-USER|::|NEW-VALUE|)
+       |COMMON-LISP|::|NIL| 1)
+    |SYSTEM|::|DEFSTRUCT-WRITER| |COMMON-LISP|::|DEFSETF|
+    |SYSTEM|::|SETF-EXPANDER| "SETF expander" |SYSTEM|::|TEXT|
+    |SYSTEM|::|CHECK-REDEFINITION| |COMMON-LISP|::|SETF|
+    |SYSTEM|::|%SET-DOCUMENTATION|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|236 236 (DEFCONSTANT *REQUIRED-BUFFER-QUERIES* '(STATE BUFFER ERROR))-2|
+   #36Y(00 00 00 00 00 00 00 00 20 01 DA 38 01 8D 66 0D DB DA 71 55 8E 13 06 DA
+        DC DB 2D 03 03 DA DB 32 9D C5 19 01)
+   (|COMMON-LISP-USER|::|*REQUIRED-BUFFER-QUERIES*|
+    #1=(|COMMON-LISP-USER|::|STATE| |COMMON-LISP-USER|::|BUFFER|
+        |COMMON-LISP|::|ERROR|)
+    (|COMMON-LISP|::|DEFCONSTANT|
+     |COMMON-LISP-USER|::|*REQUIRED-BUFFER-QUERIES*| '#1#)
+    |SYSTEM|::|CONSTANT-WARNING|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|238 238 (DEFVAR *BUFFERS-TABLE* (MAKE-HASH-TABLE))-3|
+   #27Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 DB 8C 57 07 DB 38 09 71 6D 31 5A
+        C6 19 01)
+   ((|COMMON-LISP|::|SPECIAL| |COMMON-LISP-USER|::|*BUFFERS-TABLE*|)
+    |COMMON-LISP-USER|::|*BUFFERS-TABLE*|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|241 242 (DEFUN BUFFERS NIL ...)-4|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|BUFFERS| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|BUFFERS|
+       #16Y(00 00 00 00 00 00 00 00 26 01 6B 00 2F 01 19 01)
+       (|COMMON-LISP-USER|::|*BUFFERS-TABLE*|
+        |COMMON-LISP-USER|::|HASH-TABLE-KEYS|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|) ()
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|245 249 (DEFUN BUFFER-EXISTS (NAME) ...)-5|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|BUFFER-EXISTS| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|BUFFER-EXISTS|
+       #22Y(00 00 00 00 01 00 00 00 26 02 AD 6B 00 38 01 31 6E 42 02 15 19 03)
+       (|COMMON-LISP-USER|::|*BUFFERS-TABLE*|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+       (|COMMON-LISP-USER|::|NAME|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|251 379 (DEFUN PARSE-BUFFERS (BUFFER-LIST) ...)-6|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|PARSE-BUFFERS| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS|
+       #649Y(00 00 00 00 01 00 00 00 26 02 63 AE 63 1B 82 71 9D 1B 81 D4 6B 00
+             DB DC AF 2D 04 03 C9 19 06 6B 00 E0 E1 B0 2D 04 03 C9 19 07 6B 00
+             E4 E5 B0 2D 04 03 C9 19 07 6B 00 E8 E9 2D 03 03 C9 19 05 AC 8F 1D
+             03 87 00 00 AC 88 0D 6B EA AD EB EC ED 64 EE 38 02 72 8F 00 10 15
+             F0 B0 31 94 AF 2F 17 10 18 BA B3 31 8D 11 AF 2F 19 F4 B0 38 02 31
+             95 11 AC 81 90 00 38 05 71 89 6E 08 1B 84 02 1B 81 FF 6B 00 F6 F7
+             2D 03 03 C9 19 05 6B 00 65 1E 65 1F AF 2D 04 03 C9 19 05 6B 00 65
+             22 65 23 B7 2D 04 03 C9 19 0D A5 5C 78 72 62 65 21 90 01 32 68 A5
+             5C 5B 78 8F A8 61 A5 5C 5B 5C 78 8F 1A 59 A5 5C 5B 5B FF A5 5C 5B
+             5C 5B FE 1B 80 8D A5 5C 5B FF 1B 80 86 6B 00 65 25 65 26 B7 2D 04
+             03 C9 19 0D 6B 00 65 28 65 29 B7 2D 04 03 C9 19 0D 6B 00 65 2B 65
+             2C B7 2D 04 03 C9 19 0D 6B 00 65 2E 65 2F B7 2D 04 03 6B 00 65 30
+             65 31 2D 03 03 C9 19 0D 01 07 64 A5 5C 5B 1D 07 A5 5C 78 8E 1D FF
+             85 A5 5C 78 8E A8 FF A6 A5 5C 5B 1C FF A7 38 02 72 8F 94 09 00 10
+             15 F0 B1 31 94 B0 2F 17 10 18 B2 B4 31 8D 11 B0 2F 19 65 24 B1 38
+             02 31 95 11 16 01 AC 81 90 00 38 05 80 89 07 A5 5C 5C 5B 1D 18 A5
+             5C 5C 78 8F 1D FF 79 65 27 A6 5C 5C 78 91 00 2A FF 6E A5 5C 5C 5B
+             FD A5 5C 5C 5C 5B 1D 1B A5 5C 5C 5C 78 8F 1D FF 66 65 2A A6 5C 5C
+             5C 78 91 00 2A FF 5A A5 5C 5C 5C 5B FC B4 8D A2 0B B4 71 A2 89 2D
+             FF 56 B4 80 A2 03 B4 8D A3 80 9B B4 31 A3 26 32 11 7E 02 1B 03 7E
+             02 F9 7D 00 1B 80 89 7E 02 1B 80 84 6B 00 65 33 65 34 B7 94 0C 2D
+             05 03 C9 19 0D 6B 00 65 36 65 37 B6 2D 04 03 C9 19 0D 87 01 00 20
+             FE 2A 9D 5B 14 AC 8F 18 FE 26 AC 8E A8 FE 21 AC 72 A6 AC AD 72 62
+             72 B2 73 01 01 24 05 FE 1C AC E2 73 01 01 24 09 FE 1E 16 02 9D 20
+             FE 2D AC 8F 1D 09 AC 72 62 E6 90 01 2F FE 20 AC 8F 1D 06 94 00 88
+             0D FE 57 AC 8F 1D FE 5C AC 72 62 65 20 90 01 33 FE D8 6B 00 65 41
+             65 42 AF 2D 04 03 C9 19 05 7E 02 F9 B3 88 35 FF 86 EA 94 09 EB B3
+             EC 73 02 23 65 38 B6 EE BA 65 39 BB 65 3A BA 65 3B BB 65 3C BC ED
+             BD 65 3D 38 09 03 3E FB 03 3F FA 71 6D 65 40 63 6E 16 1B 84 0A 16
+             08 83 01 AD 8D 9F FF 5A 9F 19 05)
+       (|COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Buffer name ~s is not valid because a buffer name must be a non-keyword symbol"
+        |COMMON-LISP|::|FORMAT| :|ERROR| #\>
+        #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Buffer name ~s is not valid because a buffer name must not end with the character '>'"
+        0. #\=
+        #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Buffer name ~s is not valid because a buffer name must not start with the character '='"
+        1. |COMMON-LISP-USER|::|BUFFER-EXISTS|
+        #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Buffer name ~S already used, cannot reuse it." :|NAME| :|QUERIES|
+        #.|COMMON-LISP-USER|::|*REQUIRED-BUFFER-QUERIES*| :|COPY|
+        :|PARAMETER-NAME| |SYSTEM|::|*FORMAT-CS*| #\:
+        |SYSTEM|::|STREAM-START-S-EXPRESSION|
+        |COMMON-LISP|::|*PRINT-RIGHT-MARGIN*|
+        |SYSTEM|::|STREAM-END-S-EXPRESSION| "-activation"
+        |COMMON-LISP-USER|::|MAKE-ACT-R-BUFFER|
+        #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS-5|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Buffer name ~S already used, cannot reuse it."
+        #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS-6|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Invalid buffer specification: ~S" 6. 2.
+        #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS-7|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Invalid buffer specification: ~S" "-activation"
+        #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS-8|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Invalid buffer specification: ~S" #.#'|COMMON-LISP|::|KEYWORDP|
+        #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS-9|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Invalid buffer specification: ~S"
+        #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS-10|
+           #32Y(00 00 00 00 01 00 00 00 26 02 AD 32 18 1F 0F AD 32 A8 59 1F 09
+                AD DA 38 06 32 77 59 19 02 19 02)
+           (#.|COMMON-LISP-USER|::|*REQUIRED-BUFFER-QUERIES*|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|COMMON-LISP-USER|::|X|) |COMMON-LISP|::|NIL| 1)
+        #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS-11|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Invalid buffer specification: ~S" |COMMON-LISP-USER|::|FCTORNIL|
+        #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS-12|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Invalid buffer specification: ~S"
+        #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS-13|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "status function not valid"
+        #S(|COMMON-LISP|::|HASH-TABLE| :|TEST| |EXT|::|STABLEHASH-EQ|
+           (:|SEARCH-COPY| . 147.) (:|MULTI-COPY| . 13.) (:|SEARCH| . 5.)
+           (:|MULTI| . 1.))
+        #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS-14|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Invalid multi-buffer specification ~S for buffer ~s."
+        |COMMON-LISP-USER|::|VALID-PARAMETER-NAME|
+        #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS-15|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Buffer spread parameter ~S is already the name of a parameter."
+        :|REQUESTS| :|SPREAD| :|STATUS-PRINTING| :|MULTI| :|SEARCHABLE|
+        :|CHUNK-SET| |COMMON-LISP|::|EQ| 5. :|REQUESTED|
+        #Y(|COMMON-LISP-USER|::|PARSE-BUFFERS-16|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Invalid buffer specification: ~S")
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-LIST|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|383 395 (DEFUN INSTALL-BUFFERS (MODULE-NAME BUFFERS) ...)-7|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|INSTALL-BUFFERS| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|INSTALL-BUFFERS|
+       #128Y(00 00 00 00 02 00 00 00 26 03 AD 63 1B 80 69 D0 1B 2D 87 01 00 DA
+             AD DB 72 43 6B 02 AD AD B0 31 6F 16 02 DA AD DD B3 32 44 DE DA AE
+             DF 72 43 E0 64 E1 E2 E3 DA B4 E4 8F 43 55 DA B4 E4 32 43 14 E6 E7
+             E8 38 02 72 8F DA B9 DB 72 43 00 10 0F EA B1 38 02 31 95 B0 2F 11
+             10 12 B2 B4 31 8D 11 B0 2F 13 EE B1 38 02 31 95 11 16 01 AC 81 90
+             00 6E 0B 15 7B 01 30 16 83 01 AD 8D 9F FF 95 00 19 05)
+       (|COMMON-LISP-USER|::|ACT-R-BUFFER| 1.
+        |COMMON-LISP-USER|::|*BUFFERS-TABLE*| 3.
+        |COMMON-LISP-USER|::|BUFFER-PARAMS| 7. :|OWNER| :|VALID-TEST|
+        #.#'|COMMON-LISP|::|NUMBERP| :|DEFAULT-VALUE| 4. 0. :|WARNING|
+        "a number" :|DOCUMENTATION| |SYSTEM|::|*FORMAT-CS*|
+        "source spread for the " |SYSTEM|::|STREAM-START-S-EXPRESSION|
+        |COMMON-LISP|::|*PRINT-RIGHT-MARGIN*|
+        |SYSTEM|::|STREAM-END-S-EXPRESSION| " buffer"
+        |COMMON-LISP-USER|::|DEFINE-PARAMETER|
+        |COMMON-LISP-USER|::|INSTALL-PARAMETERS|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|MODULE-NAME| |COMMON-LISP-USER|::|BUFFERS|)
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|398 402 (DEFUN UNINSTALL-BUFFERS (BUFFERS) ...)-8|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|UNINSTALL-BUFFERS| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|UNINSTALL-BUFFERS|
+       #42Y(00 00 00 00 01 00 00 00 26 02 AD 63 1B 15 87 01 00 DA AD DB 72 43
+            6B 02 31 70 DA AD DD 72 43 2F 04 83 01 AD 8D 9F 67 00 19 04)
+       (|COMMON-LISP-USER|::|ACT-R-BUFFER| 1.
+        |COMMON-LISP-USER|::|*BUFFERS-TABLE*| 7.
+        |COMMON-LISP-USER|::|REMOVE-PARAMETER|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFERS|) "Necessary for undefining a module" 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|405 407 (DEFUN CREATE-BUFFER-PARAM-MODULE (MODEL-NAME) ...)-9|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|CREATE-BUFFER-PARAM-MODULE|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|CREATE-BUFFER-PARAM-MODULE|
+       #16Y(00 00 00 00 01 00 00 00 26 02 38 09 31 6D 19 02) ()
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+       (|COMMON-LISP-USER|::|MODEL-NAME|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|409 412 (DEFUN BUFFER-PARAMS-HANDLER (INSTANCE PARAM) ...)-10|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|BUFFER-PARAMS-HANDLER|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|BUFFER-PARAMS-HANDLER|
+       #32Y(00 00 00 00 02 00 00 00 26 03 9E 21 08 AD AF 38 01 31 6E 19 03 94
+            01 95 02 AD B1 AE 31 6F 19 05)
+       () (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|INSTANCE| |COMMON-LISP-USER|::|PARAM|)
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|415 418 (DEFINE-MODULE BUFFER-PARAMS NIL ...)-11|
+   #50Y(00 00 00 00 00 00 00 00 20 01 DA 01 02 DB DC DD DE DF E0 E1 63 E2 63 E3
+        63 E4 63 E5 E6 E7 63 E8 63 E9 63 EA 63 EB 63 EC 63 ED 63 EE 63 2D 23 15
+        19 01)
+   (|COMMON-LISP-USER|::|BUFFER-PARAMS| :|VERSION| "1.0" :|DOCUMENTATION|
+    "Module to hold and control the buffer parameters" :|CREATION|
+    |COMMON-LISP-USER|::|CREATE-BUFFER-PARAM-MODULE| :|RESET| :|QUERY|
+    :|REQUEST| :|BUFFER-MOD| :|PARAMS|
+    |COMMON-LISP-USER|::|BUFFER-PARAMS-HANDLER| :|DELETE| :|NOTIFY-ON-CLEAR|
+    :|UPDATE| :|WARNING| :|SEARCH| :|OFFSET| :|RUN-START| :|RUN-END|
+    |COMMON-LISP-USER|::|DEFINE-MODULE-FCT|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|422 423 (DEFUN BUFFER-INSTANCE (BUFFER-NAME) ...)-12|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|BUFFER-INSTANCE| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|BUFFER-INSTANCE|
+       #50Y(00 00 00 00 01 00 00 00 26 02 AD 6B 00 DB AD DC 32 43 16 01 1D 0F
+            6B 00 DB AD DC 81 43 00 DD AD DE 32 43 16 01 14 DF AD E0 81 43 00
+            38 01 31 6E 19 02)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3.
+        |COMMON-LISP-USER|::|META-PROCESS| 6. |COMMON-LISP-USER|::|ACT-R-MODEL|
+        2.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|426 442 (DEFUN STORE-M-BUFFER-CHUNK (BUFFER-NAME CHUNK) ...)-13|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|STORE-M-BUFFER-CHUNK|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|STORE-M-BUFFER-CHUNK|
+       #122Y(00 00 00 00 02 00 00 00 26 03 6B 00 DB AD DC 32 43 16 01 1D 1B 6B
+             00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 24 6B 03 E3 CF 14 2D
+             03 06 19 03 6B 03 DE CA 1B 74 6B 03 E6 D2 1B 04 6B 03 EA D6 14 A3
+             1B 21 6B 03 ED D9 1B 19 AE 6F 0B 93 00 66 E8 AD E9 8F 43 66 AE 89
+             12 6A AE 89 15 0D 6B 03 F0 03 17 14 A2 14 2D 04 06 19 04 E8 AD F2
+             72 43 AF AD 64 31 6F 16 01 9F 19 04)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|STORE-M-BUFFER-CHUNK-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "store-m-buffer-chunk called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|STORE-M-BUFFER-CHUNK-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "store-m-buffer-chunk called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|STORE-M-BUFFER-CHUNK-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "store-m-buffer-chunk called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 10.
+        #Y(|COMMON-LISP-USER|::|STORE-M-BUFFER-CHUNK-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "store-m-buffer-chunk cannot store a chunk in buffer ~s because it is not a multi-buffer"
+        |COMMON-LISP-USER|::|CHUNK-P-FCT|
+        #Y(|COMMON-LISP-USER|::|STORE-M-BUFFER-CHUNK-5|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "store-m-buffer-chunk cannot store ~s in the buffer set because it does not name a chunk"
+        |COMMON-LISP-USER|::|CHUNK-BUFFER-SET-INVALID|
+        #Y(|COMMON-LISP-USER|::|STORE-M-BUFFER-CHUNK-6|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "store-m-buffer-chunk cannot store ~s in a buffer set because it has been marked as invalid for a buffer set most likely because it has been previously cleared from a buffer"
+        12.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|CHUNK|)
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|444 458 (DEFUN REMOVE-M-BUFFER-CHUNK (BUFFER-NAME CHUNK) ...)-14|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|REMOVE-M-BUFFER-CHUNK|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|REMOVE-M-BUFFER-CHUNK|
+       #106Y(00 00 00 00 02 00 00 00 26 03 6B 00 DB AD DC 32 43 16 01 1D 1B 6B
+             00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 16 6B 03 E3 CF 14 2D
+             03 06 19 03 6B 03 DE CA 1B 74 6B 03 E6 D2 1B 10 AE 6F 0B 93 00 74
+             E8 AD E9 8E 43 08 6B 03 EA D6 14 A3 1B 09 AE 88 12 0B 6B 03 ED EE
+             A2 14 2D 04 06 19 04 AE E8 AE EF 72 43 31 70 9F 19 04)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|REMOVE-M-BUFFER-CHUNK-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "remove-m-buffer-chunk called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|REMOVE-M-BUFFER-CHUNK-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "remove-m-buffer-chunk called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|REMOVE-M-BUFFER-CHUNK-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "remove-m-buffer-chunk called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 10.
+        #Y(|COMMON-LISP-USER|::|REMOVE-M-BUFFER-CHUNK-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "remove-m-buffer-chunk cannot remove a chunk from buffer ~s because it is not a multi-buffer"
+        |COMMON-LISP-USER|::|CHUNK-P-FCT|
+        #Y(|COMMON-LISP-USER|::|REMOVE-M-BUFFER-CHUNK-5|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "remove-m-buffer-chunk cannot remove ~s from the buffer set because it does not name a chunk"
+        12.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|CHUNK|)
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|460 471 (DEFUN GET-M-BUFFER-CHUNKS (BUFFER-NAME) ...)-15|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|GET-M-BUFFER-CHUNKS|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|GET-M-BUFFER-CHUNKS|
+       #92Y(00 00 00 00 01 00 00 00 26 02 6B 00 DB AD DC 32 43 16 01 1D 1B 6B
+            00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 16 6B 03 E3 CF 14 2D
+            03 06 19 02 6B 03 DE CA 1B 74 6B 03 E6 D2 1B 10 AD 6F 0B 93 00 74
+            E8 AD E9 8E 43 0B 6B 03 EA D6 14 B1 2D 04 06 19 03 E8 AD EC 72 43
+            2F 13 19 03)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|GET-M-BUFFER-CHUNKS-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "remove-m-buffer-chunk called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|GET-M-BUFFER-CHUNKS-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "remove-m-buffer-chunk called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|GET-M-BUFFER-CHUNKS-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "get-m-buffer-chunks called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 10.
+        #Y(|COMMON-LISP-USER|::|GET-M-BUFFER-CHUNKS-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "get-m-buffer-chunks cannot return a chunk set for buffer ~s because it is not a multi-buffer"
+        12. |COMMON-LISP-USER|::|HASH-TABLE-KEYS|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|473 485 (DEFUN REMOVE-ALL-M-BUFFER-CHUNKS (BUFFER-NAME) ...)-16|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|REMOVE-ALL-M-BUFFER-CHUNKS|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|REMOVE-ALL-M-BUFFER-CHUNKS|
+       #93Y(00 00 00 00 01 00 00 00 26 02 6B 00 DB AD DC 32 43 16 01 1D 1B 6B
+            00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 16 6B 03 E3 CF 14 2D
+            03 06 19 02 6B 03 DE CA 1B 74 6B 03 E6 D2 1B 10 AD 6F 0B 93 00 74
+            E8 AD E9 8E 43 0B 6B 03 EA D6 14 B1 2D 04 06 19 03 E8 AD EC 72 43
+            31 72 02 19 03)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|REMOVE-ALL-M-BUFFER-CHUNKS-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "remove-all-m-buffer-chunks called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|REMOVE-ALL-M-BUFFER-CHUNKS-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "remove-all-m-buffer-chunks called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|REMOVE-ALL-M-BUFFER-CHUNKS-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "remove-all-m-buffer-chunks called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 10.
+        #Y(|COMMON-LISP-USER|::|REMOVE-ALL-M-BUFFER-CHUNKS-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "remove-all-m-buffer-chunks cannot remove a chunk from buffer ~s because it is not a multi-buffer"
+        12.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|487 488 (DEFMACRO BUFFER-CHUNK (&REST BUFFER-NAMES) ...)-17|
+   #23Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC DD 72 4C 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|BUFFER-CHUNK| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|BUFFER-CHUNK|
+       #21Y(00 00 00 00 02 00 00 00 26 03 95 02 DA DB AE 7B 02 61 02 19 04)
+       (|COMMON-LISP-USER|::|BUFFER-CHUNK-FCT| |COMMON-LISP|::|QUOTE|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+       (|SYSTEM|::|<MACRO-FORM>| |SYSTEM|::|<ENV-ARG>|) |COMMON-LISP|::|NIL| 1)
+    (|COMMON-LISP|::|&REST| |COMMON-LISP-USER|::|BUFFER-NAMES|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|490 516 (DEFUN BUFFER-CHUNK-FCT (BUFFER-NAMES-LIST) ...)-18|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|BUFFER-CHUNK-FCT| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|BUFFER-CHUNK-FCT|
+       #214Y(00 00 00 00 01 00 00 00 26 02 6B 00 DB AD DC 32 43 16 01 1D 1B 6B
+             00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 10 6B 03 E3 CF 14 2D
+             03 06 19 02 6B 03 DE CA 1B 74 63 92 02 02 2E 0B 14 63 1B 80 8E AC
+             7B 01 2F 18 93 06 80 52 9D 1B 80 51 E7 AD E8 72 43 E9 2F 10 42 02
+             93 00 37 E9 AE DC 8E 43 31 E9 AE E8 72 43 EB AD EC 32 43 16 01 1D
+             23 E9 AE E8 72 43 EB AD EC 81 43 00 ED EE B3 B2 93 07 03 14 2F 15
+             14 E7 B6 F0 8F 43 03 B6 2F 17 14 2D 07 06 16 02 92 06 FF A9 92 06
+             FF AE AE 9E 5D 14 7B 01 B1 AD 82 02 24 05 16 02 1B 1F 03 19 1B 10
+             87 01 00 14 6F 0C 92 00 FF 94 92 05 6F F3 00 5D 14 7B 01 B0 AD 82
+             02 24 04 16 01 16 01 83 01 AD 8D 9F 5D 9F 19 05)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|BUFFER-CHUNK-FCT-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "buffer-chunk called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|BUFFER-CHUNK-FCT-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "buffer-chunk called with no current model."
+        |COMMON-LISP-USER|::|BUFFERS| |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 2.
+        |COMMON-LISP-USER|::|PRINTING-MODULE|
+        |COMMON-LISP-USER|::|GET-MODULE-FCT| |COMMON-LISP-USER|::|ACT-R-OUTPUT|
+        1.
+        #Y(|COMMON-LISP-USER|::|BUFFER-CHUNK-FCT-3|
+           #30Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 B2 B2 B2 2D 03
+                01 FC B2 31 97 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| |SYSTEM|::|DO-FORMAT-INDIRECTION|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "~S: ~S ~@[[~s]~]~@[ {~{~s~^ ~}}~]"
+        |COMMON-LISP-USER|::|CHUNK-COPIED-FROM-FCT| 10.
+        |COMMON-LISP-USER|::|GET-M-BUFFER-CHUNKS|
+        |COMMON-LISP-USER|::|PPRINT-CHUNKS-FCT| :|ERROR|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAMES-LIST|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|519 526 (DEFUN SHOW-BUFFER-CHUNKS NIL ...)-19|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|SHOW-BUFFER-CHUNKS| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|SHOW-BUFFER-CHUNKS|
+       #143Y(00 00 00 00 00 00 00 00 26 01 2E 00 14 63 1B 80 77 DC 2F 03 42 02
+             93 00 25 DC AE DE 8E 43 1F DC AE DF 72 43 E0 AD E1 32 43 16 01 1D
+             11 DC AE DF 72 43 E0 AD E1 81 43 00 E2 E3 B2 2D 04 0A 16 02 AC 7B
+             01 2F 0B 1B 3D DC AE DF 72 43 E0 AD E1 81 43 00 E6 E7 B2 2D 04 0A
+             16 02 1B 28 87 01 00 14 6F 01 92 00 FF AB DC 2F 03 42 02 93 00 14
+             DC AE DE 8E 43 0E DC AE DF 72 43 E0 AD E1 32 43 16 01 1C 45 16 02
+             16 01 83 01 AD 8D 9F 50 00 19 03)
+       (|COMMON-LISP-USER|::|BUFFERS| |COMMON-LISP-USER|::|BUFFER-READ|
+        |COMMON-LISP-USER|::|PRINTING-MODULE|
+        |COMMON-LISP-USER|::|GET-MODULE-FCT| 3. 2.
+        |COMMON-LISP-USER|::|ACT-R-OUTPUT| 1.
+        #Y(|COMMON-LISP-USER|::|SHOW-BUFFER-CHUNKS-1|
+           #30Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 B2 B2 B2 2D 03
+                01 FC B2 31 97 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| |SYSTEM|::|DO-FORMAT-INDIRECTION|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "~S:" |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|PPRINT-CHUNKS-FCT|
+        #Y(|COMMON-LISP-USER|::|SHOW-BUFFER-CHUNKS-2|
+           #30Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 B2 B2 B2 2D 03
+                01 FC B2 31 97 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| |SYSTEM|::|DO-FORMAT-INDIRECTION|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "~S: empty")
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|) ()
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|529 530 (DEFMACRO BUFFER-STATUS (&REST BUFFER-NAMES) ...)-20|
+   #23Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC DD 72 4C 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|BUFFER-STATUS| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|BUFFER-STATUS|
+       #21Y(00 00 00 00 02 00 00 00 26 03 95 02 DA DB AE 7B 02 61 02 19 04)
+       (|COMMON-LISP-USER|::|BUFFER-STATUS-FCT| |COMMON-LISP|::|QUOTE|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+       (|SYSTEM|::|<MACRO-FORM>| |SYSTEM|::|<ENV-ARG>|) |COMMON-LISP|::|NIL| 1)
+    (|COMMON-LISP|::|&REST| |COMMON-LISP-USER|::|BUFFER-NAMES|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|532 565 (DEFUN BUFFER-STATUS-FCT (BUFFER-NAMES-LIST) ...)-21|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|BUFFER-STATUS-FCT| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|BUFFER-STATUS-FCT|
+       #524Y(00 00 00 00 01 00 00 00 26 02 6B 00 DB AD DC 32 43 16 01 1D 1B 6B
+             00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 10 6B 03 E3 CF 14 2D
+             03 06 19 02 6B 03 DE CA 1B 74 63 92 02 02 2E 0B 14 63 1B 81 C4 E7
+             2F 0E 42 02 93 00 25 E7 AE DC 8E 43 1F E7 AE E9 72 43 EA AD EB 32
+             43 16 01 1D 11 E7 AE E9 72 43 EA AD EB 81 43 00 EC ED B2 2D 04 06
+             16 02 E7 2F 0E 42 02 93 00 28 E7 AE DC 8E 43 22 E7 AE E9 72 43 EA
+             AD EB 32 43 16 01 1D 14 E7 AE E9 72 43 EA AD EB 81 43 00 EE EF B2
+             F0 70 17 2D 04 06 16 02 E7 2F 0E 42 02 93 00 28 E7 AE DC 8E 43 22
+             E7 AE E9 72 43 EA AD EB 32 43 16 01 1D 14 E7 AE E9 72 43 EA AD EB
+             81 43 00 F2 F3 B2 F4 70 17 2D 04 06 16 02 E7 2F 0E 42 02 93 00 28
+             E7 AE DC 8E 43 22 E7 AE E9 72 43 EA AD EB 32 43 16 01 1D 14 E7 AE
+             E9 72 43 EA AD EB 81 43 00 F5 F6 B2 F7 70 17 2D 04 06 16 02 E7 2F
+             0E 42 02 93 00 2B E7 AE DC 8E 43 25 E7 AE E9 72 43 EA AD EB 32 43
+             16 01 1D 17 E7 AE E9 72 43 EA AD EB 81 43 00 65 1E 65 1F B2 65 20
+             70 17 2D 04 06 16 02 E7 2F 0E 42 02 93 00 2B E7 AE DC 8E 43 25 E7
+             AE E9 72 43 EA AD EB 32 43 16 01 1D 17 E7 AE E9 72 43 EA AD EB 81
+             43 00 65 21 65 22 B2 65 23 70 17 2D 04 06 16 02 E7 2F 0E 42 02 93
+             00 2B E7 AE DC 8E 43 25 E7 AE E9 72 43 EA AD EB 32 43 16 01 1D 17
+             E7 AE E9 72 43 EA AD EB 81 43 00 65 24 65 25 B2 65 26 70 17 2D 04
+             06 16 02 E7 2F 0E 42 02 93 00 2B E7 AE DC 8E 43 25 E7 AE E9 72 43
+             EA AD EB 32 43 16 01 1D 17 E7 AE E9 72 43 EA AD EB 81 43 00 65 27
+             65 28 B2 65 29 70 17 2D 04 06 16 02 65 2A AD 65 2B 72 43 93 00 03
+             14 36 00 16 01 AF 9F 1B 0D 87 01 00 14 6F 0C 92 00 FE 4A AF 03 2C
+             14 7B 01 82 02 24 03 16 01 83 01 AD 8D 9F 64 9F 19 05)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|BUFFER-STATUS-FCT-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "buffer-status called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|BUFFER-STATUS-FCT-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "buffer-status called with no current model."
+        |COMMON-LISP-USER|::|BUFFERS| |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        |COMMON-LISP-USER|::|PRINTING-MODULE|
+        |COMMON-LISP-USER|::|GET-MODULE-FCT| 2.
+        |COMMON-LISP-USER|::|ACT-R-OUTPUT| 1.
+        #Y(|COMMON-LISP-USER|::|BUFFER-STATUS-FCT-3|
+           #30Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 B2 B2 B2 2D 03
+                01 FC B2 31 97 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| |SYSTEM|::|DO-FORMAT-INDIRECTION|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "~S:"
+        #Y(|COMMON-LISP-USER|::|BUFFER-STATUS-FCT-4|
+           #30Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 B2 B2 B2 2D 03
+                01 FC B2 31 97 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| |SYSTEM|::|DO-FORMAT-INDIRECTION|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "  buffer empty          : ~S"
+        ((|COMMON-LISP-USER|::|BUFFER| . |COMMON-LISP-USER|::|EMPTY|))
+        |COMMON-LISP-USER|::|QUERY-BUFFER|
+        #Y(|COMMON-LISP-USER|::|BUFFER-STATUS-FCT-5|
+           #30Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 B2 B2 B2 2D 03
+                01 FC B2 31 97 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| |SYSTEM|::|DO-FORMAT-INDIRECTION|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "  buffer full           : ~S"
+        ((|COMMON-LISP-USER|::|BUFFER| . |COMMON-LISP-USER|::|FULL|))
+        #Y(|COMMON-LISP-USER|::|BUFFER-STATUS-FCT-6|
+           #30Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 B2 B2 B2 2D 03
+                01 FC B2 31 97 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| |SYSTEM|::|DO-FORMAT-INDIRECTION|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "  buffer requested      : ~S"
+        ((|COMMON-LISP-USER|::|BUFFER| . |COMMON-LISP-USER|::|REQUESTED|))
+        #Y(|COMMON-LISP-USER|::|BUFFER-STATUS-FCT-7|
+           #30Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 B2 B2 B2 2D 03
+                01 FC B2 31 97 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| |SYSTEM|::|DO-FORMAT-INDIRECTION|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "  buffer unrequested    : ~S"
+        ((|COMMON-LISP-USER|::|BUFFER| . |COMMON-LISP-USER|::|UNREQUESTED|))
+        #Y(|COMMON-LISP-USER|::|BUFFER-STATUS-FCT-8|
+           #30Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 B2 B2 B2 2D 03
+                01 FC B2 31 97 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| |SYSTEM|::|DO-FORMAT-INDIRECTION|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "  state free            : ~S"
+        ((|COMMON-LISP-USER|::|STATE| . |COMMON-LISP-USER|::|FREE|))
+        #Y(|COMMON-LISP-USER|::|BUFFER-STATUS-FCT-9|
+           #30Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 B2 B2 B2 2D 03
+                01 FC B2 31 97 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| |SYSTEM|::|DO-FORMAT-INDIRECTION|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "  state busy            : ~S"
+        ((|COMMON-LISP-USER|::|STATE| . |COMMON-LISP-USER|::|BUSY|))
+        #Y(|COMMON-LISP-USER|::|BUFFER-STATUS-FCT-10|
+           #30Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 B2 B2 B2 2D 03
+                01 FC B2 31 97 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| |SYSTEM|::|DO-FORMAT-INDIRECTION|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "  state error           : ~S"
+        ((|COMMON-LISP-USER|::|STATE| . |COMMON-LISP|::|ERROR|))
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 9. :|ERROR|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAMES-LIST|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|567 575 (DEFUN BUFFER-READ (BUFFER-NAME) ...)-22|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|BUFFER-READ| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|BUFFER-READ|
+       #77Y(00 00 00 00 01 00 00 00 26 02 6B 00 DB AD DC 32 43 16 01 1D 1B 6B
+            00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 17 6B 03 E3 CF 14 2D
+            03 06 19 02 6B 03 DE CA 1B 74 E6 AD E7 32 43 19 03 AD 6F 0B 92 00
+            73 6B 03 E8 E9 B1 2D 04 06 19 03)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|BUFFER-READ-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "buffer-read called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|BUFFER-READ-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "buffer-read called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 2.
+        #Y(|COMMON-LISP-USER|::|BUFFER-READ-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Buffer-read called with an invalid buffer name ~S")
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|578 595 (DEFUN SCHEDULE-BUFFER-READ (BUFFER-NAME TIME-DELTA &KEY ...) ...)-23|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|SCHEDULE-BUFFER-READ|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|SCHEDULE-BUFFER-READ|
+       #137Y(00 00 00 00 02 00 00 00 A6 1D 03 00 00 00 3B 03 02 C8 FB 3B 02 02
+             C9 FA 3B 01 02 7E 01 6B 05 E0 AD E1 32 43 16 01 1D 1B 6B 05 E0 AD
+             E1 81 43 00 E6 AD E7 32 43 16 01 1C 1E 6B 08 E8 D4 14 2D 03 0B 19
+             06 6B 08 E3 CF 1B 74 6B 08 EB EC A6 1B 22 6B 08 ED EE A5 1B 1B B1
+             6F 10 93 00 6C B1 8F 1A 6F AF 8E 1A 13 AF 24 15 0F AF 24 16 0B 6B
+             08 F1 F2 A3 14 2D 04 0B 19 07 B1 F3 DA B3 DB B4 F4 B9 7B 01 DC B7
+             2D 0A 1B 19 07)
+       (:|MODULE| :|PRIORITY| :|OUTPUT| :|NONE| 0.
+        |COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-BUFFER-READ-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-buffer-read called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-BUFFER-READ-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-buffer-read called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-BUFFER-READ-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-buffer-read called with an invalid buffer name ~S"
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-BUFFER-READ-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-buffer-read called with a non-number time-delta: ~S" :|MAX|
+        :|MIN|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-BUFFER-READ-5|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-buffer-read called with an invalid priority ~S"
+        |COMMON-LISP-USER|::|BUFFER-READ-ACTION| :|PARAMS|
+        |COMMON-LISP-USER|::|SCHEDULE-EVENT-RELATIVE|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|TIME-DELTA|
+        |COMMON-LISP|::|&KEY| (|COMMON-LISP-USER|::|MODULE| :|NONE|)
+        (|COMMON-LISP-USER|::|PRIORITY| 0.)
+        (|COMMON-LISP-USER|::|OUTPUT| |COMMON-LISP|::|T|))
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|598 612 (DEFUN BUFFER-READ-REPORT (BUFFER-NAME &KEY #) ...)-24|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|BUFFER-READ-REPORT| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|BUFFER-READ-REPORT|
+       #101Y(00 00 00 00 01 00 00 00 A6 1C 01 00 00 00 3B 01 02 C6 F9 6B 02 DD
+             AD DE 32 43 16 01 1D 1B 6B 02 DD AD DE 81 43 00 E3 AD E4 32 43 16
+             01 1C 1A 6B 05 E5 D1 14 2D 03 08 19 03 6B 05 E0 CC 1B 74 6B 05 E8
+             E9 B2 2D 04 08 19 04 AE 6F 0D 93 00 70 EA EB DA B1 EC ED EE B6 7B
+             01 EF 64 2D 0A 16 F1 AD F2 32 43 19 04)
+       (:|MODULE| :|NONE| |COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|BUFFER-READ-REPORT-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "buffer-read-report called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|BUFFER-READ-REPORT-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "buffer-read-report called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|BUFFER-READ-REPORT-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "buffer-read-report called with an invalid buffer name ~S" 0.
+        |COMMON-LISP-USER|::|BUFFER-READ-ACTION| :|PRIORITY| :|MAX| :|PARAMS|
+        :|OUTPUT| |COMMON-LISP-USER|::|SCHEDULE-EVENT-RELATIVE|
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 2.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP|::|&KEY|
+        (|COMMON-LISP-USER|::|MODULE| :|NONE|))
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|615 616 (DEFUN BUFFER-READ-ACTION (BUFFER-NAME) ...)-25|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|BUFFER-READ-ACTION| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|BUFFER-READ-ACTION|
+       #13Y(00 00 00 00 01 00 00 00 26 02 00 19 02) () |COMMON-LISP|::|NIL|
+       (|COMMON-LISP-USER|::|BUFFER-NAME|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|619 657 (DEFUN QUERY-BUFFER (BUFFER-NAME QUERIES-LIST) ...)-26|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|QUERY-BUFFER| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|QUERY-BUFFER|
+       #380Y(00 00 00 00 02 00 00 00 26 03 6B 00 DB AD DC 32 43 16 01 1D 1C 6B
+             00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 81 16 6B 03 E3 CF 14
+             2D 03 06 19 03 6B 03 DE CA 1B 74 6B 03 E6 E7 B2 2D 04 06 19 04 6B
+             03 E9 EA B1 B3 68 05 00 EB AD EC 81 43 00 2D 06 06 19 04 9D 5B 5C
+             26 14 80 C5 68 02 00 EB AD 03 15 1B 1D 68 02 00 EB AD 03 15 1B 33
+             68 02 00 EB AD EF 32 43 16 01 1D 80 BF 68 02 00 EB AD 03 16 14 32
+             43 16 01 1D 80 B0 1B 80 E7 68 02 00 EB AD EF 32 43 16 01 1D 80 A0
+             68 02 00 EB AD 03 16 14 32 43 16 01 1D 80 CB 1B 80 8E 6B 03 F7 2E
+             1E 14 72 62 F3 73 01 32 2E 1F 14 03 20 1B 80 52 F1 AE F3 72 43 F4
+             AD F3 81 43 00 F1 AF E2 8F 43 80 4B 93 00 57 AC 0E 03 22 52 0E 1B
+             1C 4E AC 02 23 07 6B 03 6B 1C 8E 13 43 6B 03 65 21 2E 1E 14 72 62
+             F3 73 01 32 2E 1F 14 65 20 A5 5B 79 2D 06 06 AC 65 22 2E 1E 14 72
+             62 F3 73 01 32 2E 1F 14 03 20 14 A5 5B 79 2D 06 06 16 03 1B 1D 16
+             03 1B 19 F1 2F 18 42 02 93 00 0F F1 AE F3 72 43 F4 AD F3 32 43 16
+             01 1C FF 88 16 02 00 19 06 00 2B 01 AF 2F 0B 0B 00 00 1D FE EE AC
+             6D 0E 01 AF 91 00 2A FE EE 68 00 00 EB AD DC 81 43 00 AF 93 00 19
+             9D 5B 78 24 13 FE EE AD B2 9F 5B 78 A0 5B 79 2D 04 23 1D 46 83 00
+             92 00 67 02 19 06)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|QUERY-BUFFER-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "query-buffer called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|QUERY-BUFFER-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "query-buffer called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|QUERY-BUFFER-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "query-buffer called with an invalid buffer name ~S"
+        #Y(|COMMON-LISP-USER|::|QUERY-BUFFER-4|
+           #27Y(00 00 00 00 01 00 00 00 26 02 94 01 69 00 01 DB AD DC 81 43 00
+                38 03 31 C1 19 02)
+           (|COMMON-LISP|::|NIL| |COMMON-LISP-USER|::|ACT-R-BUFFER| 5.)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|COMMON-LISP-USER|::|X|) |COMMON-LISP|::|NIL| 1)
+        #Y(|COMMON-LISP-USER|::|QUERY-BUFFER-5|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Invalid query-buffer ~S.  Available queries to buffer ~S are ~S."
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 5. |COMMON-LISP-USER|::|BUFFER|
+        #S(|COMMON-LISP|::|HASH-TABLE| :|TEST| |EXT|::|STABLEHASH-EQ|
+           (|COMMON-LISP-USER|::|UNREQUESTED| . 51.)
+           (|COMMON-LISP-USER|::|REQUESTED| . 20.)
+           (|COMMON-LISP-USER|::|EMPTY| . 11.)
+           (|COMMON-LISP-USER|::|FULL| . 2.))
+        2. 8. |COMMON-LISP-USER|::|PRINTING-MODULE|
+        |COMMON-LISP-USER|::|GET-MODULE-FCT| 1.
+        |COMMON-LISP-USER|::|ACT-R-OUTPUT|
+        |COMMON-LISP-USER|::|*ONE-STREAM-HACK*|
+        |COMMON-LISP|::|*STANDARD-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|QUERY-BUFFER-6|
+           #75Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 93 05 2B DD B3 38 02 31 95 94 04 83 05 B3 31 90 DE B3 31 94
+                DF B3 38 02 31 95 B2 94 05 83 06 B2 2D 03 06 FC E1 B3 38 02 31
+                95 A1 11 19 04 DC B1 80 A8 04 1B 5F)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning" 1. " (in model " #\) ": "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        |COMMON-LISP-USER|::|MP-MODELS| |COMMON-LISP-USER|::|CURRENT-MODEL|
+        "Unknown buffer query ~S"
+        #Y(|COMMON-LISP-USER|::|QUERY-BUFFER-7|
+           #75Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 93 05 2B DD B3 38 02 31 95 94 04 83 05 B3 31 90 DE B3 31 94
+                DF B3 38 02 31 95 B2 94 05 83 06 B2 2D 03 06 FC E1 B3 38 02 31
+                95 A1 11 19 04 DC B1 80 A8 04 1B 5F)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning" 1. " (in model " #\) ": "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        #Y(|COMMON-LISP-USER|::|QUERY-BUFFER-8|
+           #75Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 93 05 2B DD B3 38 02 31 95 94 04 83 05 B3 31 90 DE B3 31 94
+                DF B3 38 02 31 95 B2 94 05 83 06 B2 2D 03 06 FC E1 B3 38 02 31
+                95 A1 11 19 04 DC B1 80 A8 04 1B 5F)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning" 1. " (in model " #\) ": "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        |COMMON-LISP-USER|::|QUERY-MODULE|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|QUERIES-LIST|)
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|660 682 (DEFUN SCHEDULE-QUERY-BUFFER (BUFFER-NAME QUERIES-LIST TIME-DELTA ...) ...)-27|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|SCHEDULE-QUERY-BUFFER|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|SCHEDULE-QUERY-BUFFER|
+       #149Y(00 00 00 00 03 00 00 00 A6 1E 03 00 00 00 3B 03 02 C8 FB 3B 02 02
+             C9 FA 3B 01 02 7E 01 6B 05 E0 AD E1 32 43 16 01 1D 1B 6B 05 E0 AD
+             E1 81 43 00 E6 AD E7 32 43 16 01 1C 1E 6B 08 E8 D4 14 2D 03 0B 19
+             07 6B 08 E3 CF 1B 74 6B 08 EB EC A7 1B 22 6B 08 ED EE A5 1B 1B B2
+             6F 10 93 00 6C B1 8F 1A 6F AF 8E 1A 13 AF 24 15 0F AF 24 16 0B 6B
+             08 F1 F2 A3 14 2D 04 0B 19 08 B1 F3 DA B3 DB B4 F4 BA BA 7B 02 F5
+             F3 72 A6 F6 BE 72 A6 73 03 13 DC B9 2D 0C 1D 19 08)
+       (:|MODULE| :|PRIORITY| :|OUTPUT| :|NONE| 0.
+        |COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-QUERY-BUFFER-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-query-buffer called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-QUERY-BUFFER-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-query-buffer called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-QUERY-BUFFER-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-query-buffer called with an invalid buffer name ~S"
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-QUERY-BUFFER-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-query-buffer called with non-nimber time-delta: ~S" :|MAX|
+        :|MIN|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-QUERY-BUFFER-5|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-query-buffer called with an invalid priority ~S"
+        |COMMON-LISP-USER|::|QUERY-BUFFER-ACTION| :|PARAMS| :|DETAILS| " "
+        |COMMON-LISP-USER|::|SCHEDULE-EVENT-RELATIVE|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|QUERIES-LIST|
+        |COMMON-LISP-USER|::|TIME-DELTA| |COMMON-LISP|::|&KEY|
+        (|COMMON-LISP-USER|::|MODULE| :|NONE|)
+        (|COMMON-LISP-USER|::|PRIORITY| 0.)
+        (|COMMON-LISP-USER|::|OUTPUT| |COMMON-LISP|::|T|))
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|685 709 (DEFUN QUERY-BUFFER-REPORT (BUFFER-NAME QUERIES-LIST &KEY ...) ...)-28|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|QUERY-BUFFER-REPORT|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|QUERY-BUFFER-REPORT|
+       #146Y(00 00 00 00 02 00 00 00 A6 1D 01 00 00 00 3B 01 02 C6 F9 6B 02 DD
+             AD DE 32 43 16 01 1D 1B 6B 02 DD AD DE 81 43 00 E3 AD E4 32 43 16
+             01 1C 2E 6B 05 E5 D1 14 2D 03 08 19 04 6B 05 E0 CC 1B 74 6B 05 E8
+             E9 B3 2D 04 08 19 05 6B 05 EB EC B2 B4 68 05 00 ED AD EE 81 43 00
+             2D 06 08 19 05 00 2B 01 B0 2F 0D 0B 00 00 1D 57 AC 6D 10 01 B0 91
+             00 2A 58 EF F0 DA B1 F1 F2 F3 B7 B7 7B 02 F4 F0 72 A6 F5 BB 72 A6
+             73 03 13 F6 64 2D 0C 1D B0 B0 30 1E 19 05)
+       (:|MODULE| :|NONE| |COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|QUERY-BUFFER-REPORT-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "query-buffer-report called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|QUERY-BUFFER-REPORT-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "query-buffer-report called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|QUERY-BUFFER-REPORT-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "query-buffer-report called with an invalid buffer name ~S"
+        #Y(|COMMON-LISP-USER|::|QUERY-BUFFER-REPORT-4|
+           #27Y(00 00 00 00 01 00 00 00 26 02 94 01 69 00 01 DB AD DC 81 43 00
+                38 03 31 C1 19 02)
+           (|COMMON-LISP|::|NIL| |COMMON-LISP-USER|::|ACT-R-BUFFER| 5.)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|COMMON-LISP-USER|::|X|) |COMMON-LISP|::|NIL| 1)
+        #Y(|COMMON-LISP-USER|::|QUERY-BUFFER-REPORT-5|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Invalid query-buffer ~S.  Available queries to buffer ~S are ~S."
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 5. 0.
+        |COMMON-LISP-USER|::|QUERY-BUFFER-ACTION| :|PRIORITY| :|MAX| :|PARAMS|
+        :|DETAILS| " " :|OUTPUT| |COMMON-LISP-USER|::|SCHEDULE-EVENT-RELATIVE|
+        |COMMON-LISP-USER|::|QUERY-BUFFER|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|QUERIES-LIST|
+        |COMMON-LISP|::|&KEY| (|COMMON-LISP-USER|::|MODULE| :|NONE|))
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|712 713 (DEFUN QUERY-BUFFER-ACTION (BUFFER-NAME QUERIES) ...)-29|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|QUERY-BUFFER-ACTION|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|QUERY-BUFFER-ACTION|
+       #13Y(00 00 00 00 02 00 00 00 26 03 00 19 03) () |COMMON-LISP|::|NIL|
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|QUERIES|)
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|716 733 (DEFUN CLEAR-BUFFER (BUFFER-NAME) ...)-30|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|CLEAR-BUFFER| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|CLEAR-BUFFER|
+       #128Y(00 00 00 00 01 00 00 00 26 02 6B 00 DB AD DC 32 43 16 01 1D 1B 6B
+             00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 1A 6B 03 E3 CF 14 2D
+             03 06 19 02 6B 03 DE CA 1B 74 6B 03 E6 E7 B1 2D 04 06 19 03 AD 6F
+             0B 93 00 70 E8 AD E9 72 43 93 00 2F E8 AE E9 63 32 44 AC 64 30 10
+             E8 AE EB 8F 43 08 AC E8 AF EC 72 43 31 70 2E 13 14 63 1B 0B 87 01
+             00 14 B2 B0 2D 03 14 83 01 AD 8D 9F 71 16 02 15 19 03)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|CLEAR-BUFFER-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "clear-buffer called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|CLEAR-BUFFER-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "clear-buffer called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|CLEAR-BUFFER-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "clear-buffer called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 2.
+        |COMMON-LISP-USER|::|CHUNK-BUFFER-SET-INVALID-SETF| 10. 12.
+        |COMMON-LISP-USER|::|NOTIFIED-MODULES|
+        |COMMON-LISP-USER|::|NOTIFY-MODULE|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|736 753 (DEFUN SCHEDULE-CLEAR-BUFFER (BUFFER-NAME TIME-DELTA &KEY ...) ...)-31|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|SCHEDULE-CLEAR-BUFFER|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|SCHEDULE-CLEAR-BUFFER|
+       #137Y(00 00 00 00 02 00 00 00 A6 1D 03 00 00 00 3B 03 02 C8 FB 3B 02 02
+             C9 FA 3B 01 02 CA F9 6B 06 E1 AD E2 32 43 16 01 1D 1B 6B 06 E1 AD
+             E2 81 43 00 E7 AD E8 32 43 16 01 1C 1E 6B 09 E9 D5 14 2D 03 0C 19
+             06 6B 09 E4 D0 1B 74 6B 09 EC ED A6 1B 22 6B 09 EE EF A5 1B 1B B1
+             6F 11 93 00 6C B1 8F 1A 6F AF 8E 1A 13 AF 24 16 0F AF 24 17 0B 6B
+             09 F2 F3 A3 14 2D 04 0C 19 07 B1 F4 DA B3 DB B4 F5 B9 7B 01 DC B7
+             2D 0A 1C 19 07)
+       (:|MODULE| :|PRIORITY| :|OUTPUT| :|NONE| 0. |COMMON-LISP-USER|::|LOW|
+        |COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-CLEAR-BUFFER-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-clear-buffer called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-CLEAR-BUFFER-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-clear-buffer called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-CLEAR-BUFFER-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-clear-buffer called with an invalid buffer name ~S"
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-CLEAR-BUFFER-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-clear-buffer called with a non-number time-delta: ~S" :|MAX|
+        :|MIN|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-CLEAR-BUFFER-5|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-clear-buffer called with an invalid priority ~S"
+        |COMMON-LISP-USER|::|CLEAR-BUFFER| :|PARAMS|
+        |COMMON-LISP-USER|::|SCHEDULE-EVENT-RELATIVE|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|TIME-DELTA|
+        |COMMON-LISP|::|&KEY| (|COMMON-LISP-USER|::|MODULE| :|NONE|)
+        (|COMMON-LISP-USER|::|PRIORITY| 0.)
+        (|COMMON-LISP-USER|::|OUTPUT| '|COMMON-LISP-USER|::|LOW|))
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|756 766 (DEFUN ERASE-BUFFER (BUFFER-NAME) ...)-32|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|ERASE-BUFFER| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|ERASE-BUFFER|
+       #84Y(00 00 00 00 01 00 00 00 26 02 6B 00 DB AD DC 32 43 16 01 1D 1B 6B
+            00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 1A 6B 03 E3 CF 14 2D
+            03 06 19 02 6B 03 DE CA 1B 74 6B 03 E6 E7 B1 2D 04 06 19 03 AD 6F
+            0B 93 00 70 E8 AD E9 72 43 E8 AE E9 63 32 44 15 19 03)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|ERASE-BUFFER-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "erase-buffer called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|ERASE-BUFFER-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "erase-buffer called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|ERASE-BUFFER-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "erase-buffer called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 2.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|768 791 (DEFUN SET-BUFFER-CHUNK (BUFFER-NAME CHUNK-NAME &KEY ...) ...)-33|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|SET-BUFFER-CHUNK| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|SET-BUFFER-CHUNK|
+       #189Y(00 00 00 00 02 00 00 00 A6 1D 01 00 00 00 3B 01 02 7E 01 6B 01 DC
+             AD DD 32 43 16 01 1D 1B 6B 01 DC AD DD 81 43 00 E2 AD E3 32 43 16
+             01 1C 17 6B 04 E4 D0 14 2D 03 07 19 04 6B 04 DF CB 1B 74 6B 04 E7
+             E8 A4 1B 0F AF 6F 0C 93 00 73 AF 88 0F 10 6B 04 EA EB A3 14 2D 04
+             07 19 05 AF 2F 19 1B 25 EC AD ED 8F 43 03 B0 2F 14 EC AD EF B1 32
+             44 EC AD F0 8E 43 66 AF 88 17 62 AF EC AE F2 72 43 38 01 8D 6E 57
+             A0 14 2E 1A 1D 2B AC A2 22 27 F5 F6 F7 64 65 1E 65 1F 65 20 65 21
+             65 22 65 23 BB 71 51 65 24 BC 71 51 65 25 BA 71 51 73 06 13 65 26
+             65 27 2D 0C 28 EC AE ED AF 32 44 19 06)
+       (:|REQUESTED| |COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|SET-BUFFER-CHUNK-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "set-buffer-chunk called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|SET-BUFFER-CHUNK-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "set-buffer-chunk called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|SET-BUFFER-CHUNK-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "set-buffer-chunk called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|GET-CHUNK|
+        #Y(|COMMON-LISP-USER|::|SET-BUFFER-CHUNK-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "set-buffer-chunk called with an invalid chunk name ~S"
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 2.
+        |COMMON-LISP-USER|::|CLEAR-BUFFER| 8. 13.
+        |COMMON-LISP-USER|::|CHUNK-BUFFER-SET-INVALID| 12.
+        |COMMON-LISP-USER|::|COPY-CHUNK-FCT|
+        |COMMON-LISP-USER|::|SHOW-COPY-BUFFER-TRACE| 0.
+        |COMMON-LISP-USER|::|SHOW-BUFFER-COPY| :|MAINTENANCE| :|MODULE|
+        |COMMON-LISP-USER|::|BUFFER| :|PRIORITY| :|MAX| :|DETAILS| "Buffer "
+        " copied chunk " " to " :|OUTPUT| |COMMON-LISP-USER|::|MEDIUM|
+        |COMMON-LISP-USER|::|SCHEDULE-EVENT-RELATIVE|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|CHUNK-NAME|
+        |COMMON-LISP|::|&KEY|
+        (|COMMON-LISP-USER|::|REQUESTED| |COMMON-LISP|::|T|))
+       "Forces a copy unless it's a multi-buffer and this chunk is in the set"
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|794 795 (DEFUN SHOW-BUFFER-COPY NIL)-34|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|SHOW-BUFFER-COPY| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|SHOW-BUFFER-COPY|
+       #13Y(00 00 00 00 00 00 00 00 26 01 00 19 01) () |COMMON-LISP|::|NIL| ()
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|797 818 (DEFUN SCHEDULE-SET-BUFFER-CHUNK (BUFFER-NAME CHUNK-NAME TIME-DELTA ...) ...)-35|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|SCHEDULE-SET-BUFFER-CHUNK|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|SCHEDULE-SET-BUFFER-CHUNK|
+       #168Y(00 00 00 00 03 00 00 00 A6 1E 04 00 00 00 3B 04 02 C9 FC 3B 03 02
+             CA FB 3B 02 02 CB FA 3B 01 02 7E 01 6B 07 E2 AD E3 32 43 16 01 1D
+             1B 6B 07 E2 AD E3 81 43 00 E8 AD E9 32 43 16 01 1C 25 6B 0A EA D6
+             14 2D 03 0D 19 08 6B 0A E5 D1 1B 74 6B 0A ED EE A8 1B 2D 6B 0A F0
+             F1 A7 1B 26 6B 0A F2 F3 A6 1B 1F B3 6F 12 93 00 65 B3 89 15 68 B2
+             8F 1A 6B B0 8E 1A 19 B0 24 1A 15 B0 24 1B 11 6B 0A F6 F7 A4 14 2D
+             04 0D 19 09 BB BB 61 02 1B 12 B2 65 1E DA B4 DB B5 65 1F 92 09 6E
+             BB BB DD B8 61 04 14 DC B8 2D 0A 20 19 09)
+       (:|MODULE| :|PRIORITY| :|OUTPUT| :|REQUESTED| :|NONE| 0.
+        |COMMON-LISP-USER|::|LOW| |COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-SET-BUFFER-CHUNK-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "set-buffer-chunk called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-SET-BUFFER-CHUNK-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "set-buffer-chunk called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-SET-BUFFER-CHUNK-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-set-buffer-chunk called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|GET-CHUNK|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-SET-BUFFER-CHUNK-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-set-buffer-chunk called with an invalid chunk name ~S"
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-SET-BUFFER-CHUNK-5|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-set-buffer-chunk called with time-delta that is not a number: ~S"
+        :|MAX| :|MIN|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-SET-BUFFER-CHUNK-6|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-set-buffer-chunk called with an invalid priority ~S"
+        |COMMON-LISP-USER|::|SET-BUFFER-CHUNK| :|PARAMS|
+        |COMMON-LISP-USER|::|SCHEDULE-EVENT-RELATIVE|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|CHUNK-NAME|
+        |COMMON-LISP-USER|::|TIME-DELTA| |COMMON-LISP|::|&KEY|
+        (|COMMON-LISP-USER|::|MODULE| :|NONE|)
+        (|COMMON-LISP-USER|::|PRIORITY| 0.)
+        (|COMMON-LISP-USER|::|OUTPUT| '|COMMON-LISP-USER|::|LOW|)
+        (|COMMON-LISP-USER|::|REQUESTED| |COMMON-LISP|::|T|))
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|821 842 (DEFUN OVERWRITE-BUFFER-CHUNK (BUFFER-NAME CHUNK-NAME &KEY ...) ...)-36|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|OVERWRITE-BUFFER-CHUNK|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|OVERWRITE-BUFFER-CHUNK|
+       #176Y(00 00 00 00 02 00 00 00 A6 1D 01 00 00 00 3D 01 6B 01 DC AD DD 32
+             43 16 01 1D 1B 6B 01 DC AD DD 81 43 00 E2 AD E3 32 43 16 01 1C 17
+             6B 04 E4 D0 14 2D 03 07 19 04 6B 04 DF CB 1B 74 6B 04 E7 E8 A4 1B
+             0F AF 6F 0C 93 00 73 AF 88 0F 10 6B 04 EA EB A3 14 2D 04 07 19 05
+             AF 2F 17 1B 1C EC AD ED B1 32 44 EC AD EE 8E 43 6F AF 88 15 6B AF
+             EC AE F0 72 43 38 01 8D 6E 60 A0 14 2E 18 1D 29 AC A2 22 25 F3 F4
+             F5 64 F6 F7 65 1E 65 1F 65 20 65 21 BB 71 51 65 22 BC 71 51 65 23
+             BA 71 51 73 06 13 65 24 65 25 2D 0C 26 EC AE 65 27 AF 32 44 19 06)
+       (:|REQUESTED| |COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|OVERWRITE-BUFFER-CHUNK-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "overwrite-buffer-chunk called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|OVERWRITE-BUFFER-CHUNK-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "overwrite-buffer-chunk called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|OVERWRITE-BUFFER-CHUNK-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "overwrite-buffer-chunk called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|GET-CHUNK|
+        #Y(|COMMON-LISP-USER|::|OVERWRITE-BUFFER-CHUNK-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "overwrite-buffer-chunk called with an invalid chunk name ~S"
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 8. 13.
+        |COMMON-LISP-USER|::|CHUNK-BUFFER-SET-INVALID| 12.
+        |COMMON-LISP-USER|::|COPY-CHUNK-FCT|
+        |COMMON-LISP-USER|::|SHOW-COPY-BUFFER-TRACE| 0.
+        |COMMON-LISP-USER|::|SHOW-BUFFER-COPY| :|MAINTENANCE| :|MODULE|
+        |COMMON-LISP-USER|::|BUFFER| :|PRIORITY| :|MAX| :|DETAILS| "Buffer "
+        " copied chunk " " to " :|OUTPUT| |COMMON-LISP-USER|::|MEDIUM|
+        |COMMON-LISP-USER|::|SCHEDULE-EVENT-RELATIVE| 2.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|CHUNK-NAME|
+        |COMMON-LISP|::|&KEY|
+        (|COMMON-LISP-USER|::|REQUESTED| |COMMON-LISP|::|NIL|))
+       "Also forces a copy of the chunk unless it's in the set of a multi-buffer"
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|845 866 (DEFUN SCHEDULE-OVERWRITE-BUFFER-CHUNK (BUFFER-NAME CHUNK-NAME TIME-DELTA ...) ...)-37|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|SCHEDULE-OVERWRITE-BUFFER-CHUNK|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|SCHEDULE-OVERWRITE-BUFFER-CHUNK|
+       #165Y(00 00 00 00 03 00 00 00 A6 1E 04 00 00 00 3B 04 02 C9 FC 3B 03 02
+             CA FB 3B 02 02 CB FA 3D 01 6B 07 E2 AD E3 32 43 16 01 1D 1B 6B 07
+             E2 AD E3 81 43 00 E8 AD E9 32 43 16 01 1C 25 6B 0A EA D6 14 2D 03
+             0D 19 08 6B 0A E5 D1 1B 74 6B 0A ED EE A8 1B 2D 6B 0A F0 F1 A7 1B
+             26 6B 0A F2 F3 A6 1B 1F B3 6F 12 93 00 65 B3 89 15 68 B2 8F 1A 6B
+             B0 8E 1A 19 B0 24 1A 15 B0 24 1B 11 6B 0A F6 F7 A4 14 2D 04 0D 19
+             09 BB BB 61 02 1B 12 B2 65 1E DA B4 DB B5 65 1F 92 09 6E BB BB DD
+             B8 61 04 14 DC B8 2D 0A 20 19 09)
+       (:|MODULE| :|PRIORITY| :|OUTPUT| :|REQUESTED| :|NONE| 0.
+        |COMMON-LISP-USER|::|LOW| |COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-OVERWRITE-BUFFER-CHUNK-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "overwrite-buffer-chunk called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-OVERWRITE-BUFFER-CHUNK-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "overwrite-buffer-chunk called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-OVERWRITE-BUFFER-CHUNK-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-overwrite-buffer-chunk called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|GET-CHUNK|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-OVERWRITE-BUFFER-CHUNK-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-overwrite-buffer-chunk called with an invalid chunk name ~S"
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-OVERWRITE-BUFFER-CHUNK-5|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-overwrite-buffer-chunk called with a non-number time-delta: ~S"
+        :|MAX| :|MIN|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-OVERWRITE-BUFFER-CHUNK-6|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-overwrite-buffer-chunk called with an invalid priority ~S"
+        |COMMON-LISP-USER|::|OVERWRITE-BUFFER-CHUNK| :|PARAMS|
+        |COMMON-LISP-USER|::|SCHEDULE-EVENT-RELATIVE|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|CHUNK-NAME|
+        |COMMON-LISP-USER|::|TIME-DELTA| |COMMON-LISP|::|&KEY|
+        (|COMMON-LISP-USER|::|MODULE| :|NONE|)
+        (|COMMON-LISP-USER|::|PRIORITY| 0.)
+        (|COMMON-LISP-USER|::|OUTPUT| '|COMMON-LISP-USER|::|LOW|)
+        (|COMMON-LISP-USER|::|REQUESTED| |COMMON-LISP|::|NIL|))
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|869 880 (DEFUN MODULE-WARNING (BUFFER-NAME CHUNK-TYPE) ...)-38|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|MODULE-WARNING| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|MODULE-WARNING|
+       #94Y(00 00 00 00 02 00 00 00 26 03 6B 00 DB AD DC 32 43 16 01 1D 1B 6B
+            00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 17 6B 03 E3 CF 14 2D
+            03 06 19 03 6B 03 DE CA 1B 74 6B 03 E6 E7 A3 1B 0F AE 6F 0B 93 00
+            73 AE 88 0E 0B 6B 03 E9 EA A2 14 2D 04 06 19 04 EB AD DC 72 43 B0
+            B0 2D 03 12 19 04)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|MODULE-WARNING-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "module-warning called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|MODULE-WARNING-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "module-warning called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|MODULE-WARNING-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "module-warning called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|CHUNK-TYPE-P-FCT|
+        #Y(|COMMON-LISP-USER|::|MODULE-WARNING-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "module-warning called with an invalid chunk-type ~S"
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| |COMMON-LISP-USER|::|WARN-MODULE|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|CHUNK-TYPE|)
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|883 892 (DEFUN REQUIRE-MODULE-WARNING? (BUFFER-NAME) ...)-39|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|REQUIRE-MODULE-WARNING?|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|REQUIRE-MODULE-WARNING?|
+       #79Y(00 00 00 00 01 00 00 00 26 02 6B 00 DB AD DC 32 43 16 01 1D 1B 6B
+            00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 1A 6B 03 E3 CF 14 2D
+            03 06 19 02 6B 03 DE CA 1B 74 6B 03 E6 E7 B1 2D 04 06 19 03 AD 6F
+            0B 93 00 70 E8 AD DC 72 43 2F 0F 19 03)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|REQUIRE-MODULE-WARNING?-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "require-module-warning? called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|REQUIRE-MODULE-WARNING?-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "require-module-warning? called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|REQUIRE-MODULE-WARNING?-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "require-module-warning? called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| |COMMON-LISP-USER|::|WARN-MODULE?|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|895 906 (DEFUN MODULE-REQUEST (BUFFER-NAME CHUNK-SPEC) ...)-40|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|MODULE-REQUEST| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|MODULE-REQUEST|
+       #95Y(00 00 00 00 02 00 00 00 26 03 6B 00 DB AD DC 32 43 16 01 1D 1B 6B
+            00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 17 6B 03 E3 CF 14 2D
+            03 06 19 03 6B 03 DE CA 1B 74 6B 03 E6 E7 A3 1B 10 AE 6F 0B 93 00
+            73 E8 AF 8E 47 0B 6B 03 E9 EA A2 14 2D 04 06 19 04 EB AD DC 72 43
+            B0 B0 2D 03 12 19 04)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|MODULE-REQUEST-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "module-request called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|MODULE-REQUEST-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "module-request called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|MODULE-REQUEST-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "module-request called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|ACT-R-CHUNK-SPEC|
+        #Y(|COMMON-LISP-USER|::|MODULE-REQUEST-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "module-request called with an invalid chunk-spec ~S"
+        |COMMON-LISP-USER|::|ACT-R-BUFFER|
+        |COMMON-LISP-USER|::|REQUEST-MODULE|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|CHUNK-SPEC|)
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|909 932 (DEFUN SCHEDULE-MODULE-REQUEST (BUFFER-NAME CHUNK-SPEC TIME-DELTA ...) ...)-41|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|SCHEDULE-MODULE-REQUEST|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|SCHEDULE-MODULE-REQUEST|
+       #175Y(00 00 00 00 03 00 00 00 A6 1E 04 00 00 00 3B 04 02 C9 FC 3B 03 02
+             CA FB 3B 02 02 CB FA 3D 01 6B 07 E2 AD E3 32 43 16 01 1D 1B 6B 07
+             E2 AD E3 81 43 00 E8 AD E9 32 43 16 01 1C 25 6B 0A EA D6 14 2D 03
+             0D 19 08 6B 0A E5 D1 1B 74 6B 0A ED EE A8 1B 2E 6B 0A F0 F1 A7 1B
+             27 6B 0A F2 F3 A6 1B 20 B3 6F 12 93 00 65 EF B4 8F 47 67 B2 8F 1A
+             6A B0 8E 1A 16 B0 24 1A 12 B0 24 1B 0E 6B 0A F6 F7 A4 14 2D 04 0D
+             19 09 A8 1B 1E B2 65 1E DA B4 DB B5 65 1F BB BB 7B 02 DD B7 8E 19
+             6B 65 1E 72 A6 65 20 BF 72 A6 33 03 13 14 DC BA 2D 0C 21 19 09)
+       (:|MODULE| :|PRIORITY| :|OUTPUT| :|DETAILS| :|NONE| 0.
+        |COMMON-LISP-USER|::|MEDIUM| |COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MODULE-REQUEST-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-module-request called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MODULE-REQUEST-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-module-request called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MODULE-REQUEST-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-module-request called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|ACT-R-CHUNK-SPEC|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MODULE-REQUEST-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-module-request called with an invalid chunk-spec ~S"
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MODULE-REQUEST-5|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-module-request called with a non-number time-delta: ~S"
+        :|MAX| :|MIN|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MODULE-REQUEST-6|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-module-request called with an invalid priority ~S"
+        |COMMON-LISP-USER|::|MODULE-REQUEST| :|PARAMS| " "
+        |COMMON-LISP-USER|::|SCHEDULE-EVENT-RELATIVE|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|CHUNK-SPEC|
+        |COMMON-LISP-USER|::|TIME-DELTA| |COMMON-LISP|::|&KEY|
+        (|COMMON-LISP-USER|::|MODULE| :|NONE|)
+        (|COMMON-LISP-USER|::|PRIORITY| 0.)
+        (|COMMON-LISP-USER|::|OUTPUT| '|COMMON-LISP-USER|::|MEDIUM|)
+        (|COMMON-LISP-USER|::|DETAILS| |COMMON-LISP|::|NIL|))
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|934 948 (DEFUN MODULE-MOD-REQUEST (BUFFER-NAME MODIFICATION &OPTIONAL ...) ...)-42|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|MODULE-MOD-REQUEST| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|MODULE-MOD-REQUEST|
+       #120Y(00 00 00 00 02 00 01 00 26 09 3B 01 02 7E 01 6B 00 DB AD DC 32 43
+             16 01 1D 1B 6B 00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 16 6B
+             03 E3 CF 14 2D 03 06 19 04 6B 03 DE CA 1B 74 6B 03 E6 D2 1B 10 AF
+             6F 0B 93 00 74 E8 AD E9 8E 43 08 6B 03 EA D6 14 A4 1B 11 93 02 14
+             E8 AD E9 72 43 B0 8A 12 0B 6B 03 ED EE A3 14 2D 04 06 19 05 E8 AD
+             DC 72 43 B1 B1 2D 03 15 19 05)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|MODULE-MOD-REQUEST-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "module-mod-request called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|MODULE-MOD-REQUEST-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "module-mod-request called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|MODULE-MOD-REQUEST-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "module-mod-request called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 2.
+        #Y(|COMMON-LISP-USER|::|MODULE-MOD-REQUEST-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "module-mod-request called with no chunk in buffer ~s"
+        |COMMON-LISP-USER|::|VALID-CHUNK-MODIFICATION|
+        #Y(|COMMON-LISP-USER|::|MODULE-MOD-REQUEST-5|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "module-mod-request called with an invalid modification ~S"
+        |COMMON-LISP-USER|::|BUFFER-MOD-MODULE|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|MODIFICATION|
+        |COMMON-LISP|::|&OPTIONAL|
+        (|COMMON-LISP-USER|::|VERIFY| |COMMON-LISP|::|T|))
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|950 974 (DEFUN SCHEDULE-MODULE-MOD-REQUEST (BUFFER-NAME MODIFICATION TIME-DELTA ...) ...)-43|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|SCHEDULE-MODULE-MOD-REQUEST|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|SCHEDULE-MODULE-MOD-REQUEST|
+       #200Y(00 00 00 00 03 00 00 00 A6 1E 04 00 00 00 3B 04 02 C9 FC 3B 03 02
+             CA FB 3B 02 02 CB FA 3B 01 02 7E 01 6B 07 E2 AD E3 32 43 16 01 1D
+             1B 6B 07 E2 AD E3 81 43 00 E8 AD E9 32 43 16 01 1C 16 6B 0A EA D6
+             14 2D 03 0D 19 08 6B 0A E5 D1 1B 74 6B 0A ED D9 1B 11 B3 6F 12 93
+             00 74 EF AD F0 8E 43 1C 6B 0A F1 03 18 14 A8 1B 36 6B 0A F4 F5 A7
+             1B 2F 6B 0A F6 F7 65 1E B6 2D 05 0D 19 09 93 02 09 EF AD F0 72 43
+             B4 8B 19 61 B2 8F 1A 64 B0 8E 1A 15 B0 24 1F 11 B0 24 20 0D 6B 0A
+             65 21 65 22 A4 14 2D 04 0D 19 09 B2 65 23 DA B4 DB B5 65 24 BB BB
+             B7 7B 03 65 25 65 23 72 A6 65 26 BF 72 A6 73 03 13 DC BA 2D 0C 27
+             19 09)
+       (:|MODULE| :|PRIORITY| :|OUTPUT| :|VERIFY| :|NONE| 0.
+        |COMMON-LISP-USER|::|MEDIUM| |COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MODULE-MOD-REQUEST-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-module-mod-request called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MODULE-MOD-REQUEST-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-module-mod-request called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MODULE-MOD-REQUEST-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-module-mod-request called with invalid buffer name ~S"
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 2.
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MODULE-MOD-REQUEST-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-module-mod-request called with no chunk in buffer ~s"
+        |COMMON-LISP-USER|::|VALID-CHUNK-MODIFICATION|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MODULE-MOD-REQUEST-5|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-module-mod-request called with an invalid modification ~S"
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MODULE-MOD-REQUEST-6|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "~s called with a non-number time-delta: ~S"
+        |COMMON-LISP-USER|::|SCHEDULE-MODULE-MOD-REQUEST| :|MAX| :|MIN|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MODULE-MOD-REQUEST-7|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-module-mod-request called with an invalid priority ~S"
+        |COMMON-LISP-USER|::|MODULE-MOD-REQUEST| :|PARAMS| :|DETAILS| " "
+        |COMMON-LISP-USER|::|SCHEDULE-EVENT-RELATIVE|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|MODIFICATION|
+        |COMMON-LISP-USER|::|TIME-DELTA| |COMMON-LISP|::|&KEY|
+        (|COMMON-LISP-USER|::|MODULE| :|NONE|)
+        (|COMMON-LISP-USER|::|PRIORITY| 0.)
+        (|COMMON-LISP-USER|::|OUTPUT| '|COMMON-LISP-USER|::|MEDIUM|)
+        (|COMMON-LISP-USER|::|VERIFY| |COMMON-LISP|::|T|))
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|977 990 (DEFUN MOD-BUFFER-CHUNK (BUFFER-NAME MODIFICATIONS) ...)-44|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|MOD-BUFFER-CHUNK| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|MOD-BUFFER-CHUNK|
+       #110Y(00 00 00 00 02 00 00 00 26 03 6B 00 DB AD DC 32 43 16 01 1D 1B 6B
+             00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 16 6B 03 E3 CF 14 2D
+             03 06 19 03 6B 03 DE CA 1B 74 6B 03 E6 D2 1B 10 AE 6F 0B 93 00 74
+             E8 AD E9 8E 43 08 6B 03 EA D6 14 A3 1B 0E E8 AD E9 72 43 AF 8A 12
+             0B 6B 03 ED EE A2 14 2D 04 06 19 04 E8 AD E9 72 43 AF 30 15 19 04)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|MOD-BUFFER-CHUNK-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "mod-buffer-chunk called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|MOD-BUFFER-CHUNK-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "mod-buffer-chunk called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|MOD-BUFFER-CHUNK-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "mod-buffer-chunk called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 2.
+        #Y(|COMMON-LISP-USER|::|MOD-BUFFER-CHUNK-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "mod-buffer-chunk called with no chunk in buffer ~s"
+        |COMMON-LISP-USER|::|VALID-CHUNK-MODIFICATION|
+        #Y(|COMMON-LISP-USER|::|MOD-BUFFER-CHUNK-5|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "mod-buffer-chunk called with an invalid modification ~S"
+        |COMMON-LISP-USER|::|FAST-MOD-CHUNK-FCT|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|MODIFICATIONS|)
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|993 1016 (DEFUN SCHEDULE-MOD-BUFFER-CHUNK (BUFFER-NAME MODIFICATIONS TIME-DELTA ...) ...)-45|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|SCHEDULE-MOD-BUFFER-CHUNK|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|SCHEDULE-MOD-BUFFER-CHUNK|
+       #186Y(00 00 00 00 03 00 00 00 A6 1E 03 00 00 00 3B 03 02 C8 FB 3B 02 02
+             C9 FA 3B 01 02 CA F9 6B 06 E1 AD E2 32 43 16 01 1D 1B 6B 06 E1 AD
+             E2 81 43 00 E7 AD E8 32 43 16 01 1C 16 6B 09 E9 D5 14 2D 03 0C 19
+             07 6B 09 E4 D0 1B 74 6B 09 EC D8 1B 11 B2 6F 11 93 00 74 EE AD EF
+             8E 43 17 6B 09 F0 03 17 14 A7 1B 2E 6B 09 F3 F4 A6 1B 27 6B 09 F5
+             F6 A5 1B 20 EE AD EF 72 43 B3 8B 18 69 B1 8F 1A 6C AF 8E 1A 15 AF
+             24 1D 11 AF 24 1E 0D 6B 09 65 1F 65 20 A3 14 2D 04 0C 19 08 B1 65
+             21 DA B3 DB B4 65 22 BA BA 7B 02 65 23 65 21 72 A6 65 24 BE 72 A6
+             73 03 13 DC B9 2D 0C 25 19 08)
+       (:|MODULE| :|PRIORITY| :|OUTPUT| :|NONE| 0. |COMMON-LISP-USER|::|LOW|
+        |COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MOD-BUFFER-CHUNK-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-mod-buffer-chunk called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MOD-BUFFER-CHUNK-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-mod-buffer-chunk called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MOD-BUFFER-CHUNK-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-mod-buffer-chunk called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|ACT-R-BUFFER| 2.
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MOD-BUFFER-CHUNK-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-mod-buffer-chunk called with no chunk in buffer ~s"
+        |COMMON-LISP-USER|::|VALID-CHUNK-MODIFICATION|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MOD-BUFFER-CHUNK-5|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-mod-buffer-chunk called with an invalid modification ~S"
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MOD-BUFFER-CHUNK-6|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-mod-buffer-chunk called with non-number time-delta: ~S"
+        :|MAX| :|MIN|
+        #Y(|COMMON-LISP-USER|::|SCHEDULE-MOD-BUFFER-CHUNK-7|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "schedule-mod-buffer-chunk called with an invalid priority ~S"
+        |COMMON-LISP-USER|::|MOD-BUFFER-CHUNK| :|PARAMS| :|DETAILS| " "
+        |COMMON-LISP-USER|::|SCHEDULE-EVENT-RELATIVE|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME| |COMMON-LISP-USER|::|MODIFICATIONS|
+        |COMMON-LISP-USER|::|TIME-DELTA| |COMMON-LISP|::|&KEY|
+        (|COMMON-LISP-USER|::|MODULE| :|NONE|)
+        (|COMMON-LISP-USER|::|PRIORITY| 0.)
+        (|COMMON-LISP-USER|::|OUTPUT| '|COMMON-LISP-USER|::|LOW|))
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|1019 1033 (DEFUN VALID-CHUNK-MODIFICATION (CHUNK-NAME MODIFICATIONS) ...)-46|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|VALID-CHUNK-MODIFICATION|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|VALID-CHUNK-MODIFICATION|
+       #88Y(00 00 00 00 02 00 00 00 26 03 00 2B 01 AF 2F 00 0B 00 00 1F 80 40
+            AE 72 62 8E AF 35 01 02 B0 93 00 14 94 00 84 02 94 00 9E 5C 78 7B
+            02 84 01 9D 5C 5C F8 92 00 6C 16 01 AE 6D 01 01 AE 33 00 2A 1F 12
+            AD 72 62 AE 38 06 72 6F 72 62 33 01 2F 19 06 00 19 04 19 06 19 04)
+       (|COMMON-LISP-USER|::|GET-CHUNK|
+        #Y(|COMMON-LISP-USER|::|VALID-CHUNK-MODIFICATION-1|
+           #24Y(00 00 00 00 01 00 00 00 26 02 AD 69 00 01 DB AD DC 81 43 00 30
+                03 19 02)
+           (|COMMON-LISP|::|NIL| |COMMON-LISP-USER|::|ACT-R-CHUNK| 4.
+            |COMMON-LISP-USER|::|VALID-SLOT-NAME|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|COMMON-LISP-USER|::|SLOT|) |COMMON-LISP|::|NIL| 1))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|CHUNK-NAME| |COMMON-LISP-USER|::|MODIFICATIONS|)
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|1036 1045 (DEFUN BUFFER-SPREAD (BUFFER-NAME) ...)-47|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|BUFFER-SPREAD| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|BUFFER-SPREAD|
+       #122Y(03 00 01 00 01 00 00 00 26 02 6B 00 DB AD DC 32 43 16 01 1D 1B 6B
+             00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 1A 6B 03 E3 CF 14 2D
+             03 06 19 02 6B 03 DE CA 1B 74 6B 03 E6 E7 B1 2D 04 06 19 03 AD 6F
+             0B 93 00 70 E8 2F 0F 42 02 93 00 27 E8 AE DC 72 43 E8 AF DC 64 32
+             44 53 0B EA B2 EB 72 43 7B 01 2F 12 3F 54 E8 67 00 00 02 DC 67 00
+             00 00 32 44 55 16 01 16 02 5B 19 03)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|BUFFER-SPREAD-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "buffer-spread called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|BUFFER-SPREAD-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "buffer-spread called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|BUFFER-SPREAD-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "buffer-spread called with an invalid buffer name ~S"
+        |COMMON-LISP-USER|::|PRINTING-MODULE|
+        |COMMON-LISP-USER|::|GET-MODULE-FCT| |COMMON-LISP-USER|::|ACT-R-BUFFER|
+        7. |COMMON-LISP-USER|::|SGP-FCT|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|1048 1060 (DEFUN BUFFERS-MODULE-NAME (BUFFER-NAME) ...)-48|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|BUFFERS-MODULE-NAME|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|BUFFERS-MODULE-NAME|
+       #90Y(00 00 00 00 01 00 00 00 26 02 6B 00 DB AD DC 32 43 16 01 1D 1B 6B
+            00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 24 6B 03 E3 CF 14 2D
+            03 06 19 02 6B 03 DE CA 1B 74 6B 03 E6 E7 B1 2D 04 06 19 03 6B 03
+            E9 EA B2 2D 04 06 19 04 AD 6F 0B 93 00 66 E8 AD DC 72 43 93 00 68
+            19 04)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|BUFFERS-MODULE-NAME-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "buffers-module-name called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|BUFFERS-MODULE-NAME-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "buffers-module-name called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|BUFFERS-MODULE-NAME-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "invalid buffer name ~S" |COMMON-LISP-USER|::|ACT-R-BUFFER|
+        #Y(|COMMON-LISP-USER|::|BUFFERS-MODULE-NAME-4|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "Could not find a module for buffer ~S")
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|1062 1071 (DEFUN SEARCHABLE-BUFFER (BUFFER-NAME) ...)-49|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|SEARCHABLE-BUFFER| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|SEARCHABLE-BUFFER|
+       #77Y(00 00 00 00 01 00 00 00 26 02 6B 00 DB AD DC 32 43 16 01 1D 1B 6B
+            00 DB AD DC 81 43 00 E1 AD E2 32 43 16 01 1C 1A 6B 03 E3 CF 14 2D
+            03 06 19 02 6B 03 DE CA 1B 74 6B 03 E6 E7 B1 2D 04 06 19 03 AD 6F
+            0B 93 00 70 E8 AD E9 32 43 19 03)
+       (|COMMON-LISP-USER|::|*META-PROCESSES*|
+        |COMMON-LISP-USER|::|META-PROCESSES| 3. |COMMON-LISP|::|*ERROR-OUTPUT*|
+        #Y(|COMMON-LISP-USER|::|SEARCHABLE-BUFFER-1|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "searchable-buffer called with no current meta-process."
+        |COMMON-LISP|::|FORMAT| |COMMON-LISP-USER|::|META-PROCESS| 6.
+        #Y(|COMMON-LISP-USER|::|SEARCHABLE-BUFFER-2|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "searchable-buffer called with no current model."
+        |COMMON-LISP-USER|::|BUFFER-INSTANCE|
+        #Y(|COMMON-LISP-USER|::|SEARCHABLE-BUFFER-3|
+           #39Y(00 00 00 00 02 00 00 00 21 18 00 10 00 B2 31 98 DB B3 38 02 31
+                95 B2 B2 B2 2D 03 02 FC DD B3 38 02 31 95 A1 11 19 04)
+           (|SYSTEM|::|*FORMAT-CS*| "#|Warning: "
+            |SYSTEM|::|DO-FORMAT-INDIRECTION| " |#\n")
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        "invalid buffer name ~S" |COMMON-LISP-USER|::|ACT-R-BUFFER| 11.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER-NAME|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))

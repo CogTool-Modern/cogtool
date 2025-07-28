@@ -102,6 +102,7 @@ fi
 # Parse command line arguments
 QUIET=false
 ENCODING=""
+MEMORY_IMAGE=""
 LOAD_FILES=()
 EXECUTE_CMD=""
 
@@ -113,6 +114,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         -E|--encoding)
             ENCODING="$2"
+            shift 2
+            ;;
+        -M|--memory-image)
+            MEMORY_IMAGE="$2"
             shift 2
             ;;
         -i|--load)
@@ -140,6 +145,33 @@ if [ "$LISP_IMPL" = "clisp" ]; then
     if [ -n "$ENCODING" ]; then
         CMD="$CMD -E $ENCODING"
     fi
+    if [ -n "$MEMORY_IMAGE" ]; then
+        # Use platform-appropriate memory image or fallback to LISP source
+        MEMORY_BASENAME=$(basename "$MEMORY_IMAGE")
+        PLATFORM_MEMORY_IMAGE="$SCRIPT_DIR/$MEMORY_BASENAME"
+        
+        if [ -f "$PLATFORM_MEMORY_IMAGE" ]; then
+            log_message "Using platform-specific memory image: $PLATFORM_MEMORY_IMAGE"
+            CMD="$CMD -M '$PLATFORM_MEMORY_IMAGE'"
+        else
+            # Fallback to loading equivalent LISP source file
+            LISP_FILE="${MEMORY_IMAGE%.mem}.lisp"
+            # Also check in common locations
+            if [ ! -f "$LISP_FILE" ]; then
+                LISP_FILE="$SCRIPT_DIR/../lisp/$(basename "${MEMORY_IMAGE%.mem}").lisp"
+            fi
+            if [ ! -f "$LISP_FILE" ]; then
+                LISP_FILE="$SCRIPT_DIR/../../lisp/$(basename "${MEMORY_IMAGE%.mem}").lisp"
+            fi
+            
+            if [ -f "$LISP_FILE" ]; then
+                log_message "Memory image not available, loading LISP source instead: $LISP_FILE"
+                CMD="$CMD -i '$LISP_FILE'"
+            else
+                log_message "Warning: Neither memory image nor LISP source found for: $MEMORY_IMAGE"
+            fi
+        fi
+    fi
     for file in "${LOAD_FILES[@]}"; do
         CMD="$CMD -i '$file'"
     done
@@ -147,10 +179,29 @@ if [ "$LISP_IMPL" = "clisp" ]; then
         CMD="$CMD -x '$EXECUTE_CMD'"
     fi
 elif [ "$LISP_IMPL" = "ecl" ]; then
-    # ECL syntax
+    # ECL syntax - memory images not supported, load equivalent LISP file instead
     CMD="$LISP_CMD"
     if [ "$QUIET" = true ]; then
         CMD="$CMD -q"
+    fi
+    # Handle memory image by loading equivalent LISP file
+    if [ -n "$MEMORY_IMAGE" ]; then
+        # ECL doesn't support memory images, load equivalent LISP source
+        LISP_FILE="${MEMORY_IMAGE%.mem}.lisp"
+        # Also check in common locations
+        if [ ! -f "$LISP_FILE" ]; then
+            LISP_FILE="$SCRIPT_DIR/../lisp/$(basename "${MEMORY_IMAGE%.mem}").lisp"
+        fi
+        if [ ! -f "$LISP_FILE" ]; then
+            LISP_FILE="$SCRIPT_DIR/../../lisp/$(basename "${MEMORY_IMAGE%.mem}").lisp"
+        fi
+        
+        if [ -f "$LISP_FILE" ]; then
+            log_message "Loading LISP source instead of memory image: $LISP_FILE"
+            CMD="$CMD --load '$LISP_FILE'"
+        else
+            log_message "Warning: Memory image not supported in ECL, and equivalent LISP file not found: $MEMORY_IMAGE"
+        fi
     fi
     for file in "${LOAD_FILES[@]}"; do
         CMD="$CMD --load '$file'"
@@ -161,10 +212,29 @@ elif [ "$LISP_IMPL" = "ecl" ]; then
     # ECL needs explicit quit
     CMD="$CMD --eval '(quit)'"
 elif [ "$LISP_IMPL" = "sbcl" ]; then
-    # SBCL syntax
+    # SBCL syntax - memory images not directly supported, load equivalent LISP file
     CMD="$LISP_CMD"
     if [ "$QUIET" = true ]; then
         CMD="$CMD --noinform"
+    fi
+    # Handle memory image by loading equivalent LISP file
+    if [ -n "$MEMORY_IMAGE" ]; then
+        # SBCL doesn't support CLISP memory images, load equivalent LISP source
+        LISP_FILE="${MEMORY_IMAGE%.mem}.lisp"
+        # Also check in common locations
+        if [ ! -f "$LISP_FILE" ]; then
+            LISP_FILE="$SCRIPT_DIR/../lisp/$(basename "${MEMORY_IMAGE%.mem}").lisp"
+        fi
+        if [ ! -f "$LISP_FILE" ]; then
+            LISP_FILE="$SCRIPT_DIR/../../lisp/$(basename "${MEMORY_IMAGE%.mem}").lisp"
+        fi
+        
+        if [ -f "$LISP_FILE" ]; then
+            log_message "Loading LISP source instead of memory image: $LISP_FILE"
+            CMD="$CMD --load '$LISP_FILE'"
+        else
+            log_message "Warning: Memory image not supported in SBCL, and equivalent LISP file not found: $MEMORY_IMAGE"
+        fi
     fi
     for file in "${LOAD_FILES[@]}"; do
         CMD="$CMD --load '$file'"

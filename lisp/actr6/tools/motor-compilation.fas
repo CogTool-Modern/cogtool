@@ -1,0 +1,91 @@
+(|SYSTEM|::|VERSION| '(20100806.))
+#0Y_ #0Y |CHARSET|::|UTF-8|
+#Y(#:|1 82 (DEFUN COMPOSE-MOTOR-BUFFER (P1 P1-S P2 ...) ...)-1|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|COMPOSE-MOTOR-BUFFER|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|COMPOSE-MOTOR-BUFFER|
+       #150Y(00 00 00 00 05 00 00 00 26 06 AD 72 A6 DA 73 02 13 38 01 71 E1 DB
+             AD 72 A6 73 02 13 38 01 71 E1 DC AE 72 A6 73 02 13 38 01 71 E1 AC
+             94 08 38 06 C8 FA 72 77 71 AE AD 94 07 38 06 C8 FA 72 77 71 AE AF
+             A7 5C 78 38 06 C8 FA 72 77 71 AE B0 A6 5C 78 38 06 C8 FA 72 77 71
+             AE B4 DE BA DF 72 43 38 03 31 C8 79 92 00 01 CB 16 01 26 07 26 93
+             02 0B 1B 06 00 1B 12 93 03 03 14 61 01 14 93 01 0F 1B 0A 93 03 03
+             14 61 01 14 93 02 03 14 61 01 14 61 02 19 0D 00 19 0D)
+       (">" "+" "?" #.#'|COMMON-LISP|::|CAR| |COMMON-LISP-USER|::|PRODUCTION|
+        15. 0.
+        #S(|COMMON-LISP|::|HASH-TABLE| :|TEST| |EXT|::|STABLEHASH-EQ|
+           (20. . 21.) (16. . 9.) (4. . 6.) (0. . 1.)))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|P1| |COMMON-LISP-USER|::|P1-S|
+        |COMMON-LISP-USER|::|P2| |COMMON-LISP-USER|::|P2-S|
+        |COMMON-LISP-USER|::|BUFFER|)
+       |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|84 96 (DEFUN M-B-C1 (BUFFER P1 P2) ...)-2|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|M-B-C1| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|M-B-C1|
+       #43Y(00 00 00 00 03 00 00 00 26 04 00 2B 01 7F 04 00 00 DA AD 6D 01 01
+            DC B1 DD 72 43 38 05 72 6B 71 AE 73 00 1A DE AD 33 00 2A 19 06)
+       (#.#'|COMMON-LISP|::|THIRD|
+        #Y(|COMMON-LISP-USER|::|M-B-C1-1|
+           #21Y(00 00 00 00 01 00 00 00 26 02 94 01 DB 07 00 01 7A 32 14 19 02)
+           (|COMMON-LISP|::|NIL| #\?)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+           (|COMMON-LISP-USER|::|X|) |COMMON-LISP|::|NIL| 1)
+        |COMMON-LISP-USER|::|PRODUCTION| 8.
+        #Y(|COMMON-LISP-USER|::|M-B-C1-2|
+           #33Y(00 00 00 00 01 00 00 00 26 02 94 01 C5 5A 1F 0F 9E 5C 78 C6 5A
+                1F 08 9E 5C 5C 78 C7 5A 19 02 19 02)
+           (|COMMON-LISP|::|=| |COMMON-LISP-USER|::|STATE|
+            |COMMON-LISP-USER|::|BUSY|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+           (|COMMON-LISP-USER|::|X|) |COMMON-LISP|::|NIL| 1))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER| |COMMON-LISP-USER|::|P1|
+        |COMMON-LISP-USER|::|P2|)
+       "Compilation check for queries such that p2 only uses 'state busy' \n
+  since buffer empty is meaningless for motor style buffers"
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|99 116 (DEFUN M-B-C2 (BUFFER P1 P2) ...)-3|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|COMMON-LISP-USER|::|M-B-C2| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|COMMON-LISP-USER|::|M-B-C2|
+       #91Y(00 00 00 00 03 00 00 00 26 04 00 2B 01 7F 04 00 00 DA AD 6D 01 01
+            DC B2 DD 72 43 38 05 72 6B 71 AE 73 00 1A 38 06 C9 F9 72 6F DA AE
+            6D 05 01 DC B2 DD 72 43 38 05 72 6B 71 AE 73 00 1A 38 06 C9 F9 72
+            6F AD 72 62 AD 72 62 AF AF 73 02 23 38 06 C9 F9 72 6F 72 62 33 02
+            2F 19 07)
+       (#.#'|COMMON-LISP|::|THIRD|
+        #Y(|COMMON-LISP-USER|::|M-B-C2-1|
+           #21Y(00 00 00 00 01 00 00 00 26 02 94 01 DB 07 00 01 7A 32 14 19 02)
+           (|COMMON-LISP|::|NIL| #\?)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+           (|COMMON-LISP-USER|::|X|) |COMMON-LISP|::|NIL| 1)
+        |COMMON-LISP-USER|::|PRODUCTION| 8. #.#'|COMMON-LISP|::|EQUAL|
+        #Y(|COMMON-LISP-USER|::|M-B-C2-2|
+           #21Y(00 00 00 00 01 00 00 00 26 02 94 01 DB 07 00 01 7A 32 14 19 02)
+           (|COMMON-LISP|::|NIL| #\?)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+           (|COMMON-LISP-USER|::|X|) |COMMON-LISP|::|NIL| 1))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP-USER|::|BUFFER| |COMMON-LISP-USER|::|P1|
+        |COMMON-LISP-USER|::|P2|)
+       "queries in p1 and p2 must be the same\n
+   NOTE: this doesn't take into account any variables at this time"
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|118 130 (DEFINE-COMPILATION-TYPE MOTOR (# # # ...) ...)-4|
+   #22Y(00 00 00 00 00 00 00 00 20 01 DA DB DC 63 DD 01 03 2D 08 04 19 01)
+   (|COMMON-LISP-USER|::|MOTOR|
+    ((20. 16. |COMMON-LISP-USER|::|M-B-C1|) (20. 0. |COMMON-LISP|::|T|)
+     (16. 20. |COMMON-LISP-USER|::|M-B-C2|)
+     (16. 16. |COMMON-LISP-USER|::|M-B-C2|) (16. 4. |COMMON-LISP|::|T|)
+     (16. 0. |COMMON-LISP|::|T|) (4. 16. |COMMON-LISP-USER|::|M-B-C1|)
+     (4. 0. |COMMON-LISP|::|T|) (0. 20. |COMMON-LISP|::|T|)
+     (0. 16. |COMMON-LISP|::|T|) (0. 4. |COMMON-LISP|::|T|))
+    :|DEFAULT| |COMMON-LISP-USER|::|COMPOSE-MOTOR-BUFFER|
+    |COMMON-LISP-USER|::|DEFINE-COMPILATION-TYPE-FCT|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))

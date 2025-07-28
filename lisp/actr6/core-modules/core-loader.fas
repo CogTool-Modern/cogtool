@@ -1,0 +1,9 @@
+(|SYSTEM|::|VERSION| '(20100806.))
+#0Y_ #0Y |CHARSET|::|UTF-8|
+#Y(#:|1 76 (DEFPARAMETER *FILE-LIST '("declarative-memory" "goal" "procedural" ...))-1|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 DB DC 31 5A C6 19 01)
+   ((|COMMON-LISP|::|SPECIAL| |COMMON-LISP-USER|::|*FILE-LIST|)
+    |COMMON-LISP-USER|::|*FILE-LIST|
+    ("declarative-memory" "goal" "procedural" "vision" "motor" "audio" "speech"
+     "imaginal"))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
