@@ -1055,7 +1055,7 @@ public class FrameEditorUI extends ZoomableUI
     {
         public WidgetTitleEditor()
         {
-            super(view.getEditor().getSWTEditorSubstrate(), LEFT_JUSTIFY);
+            super(FrameEditorUI.this.view.getEditor().getSWTEditorSubstrate(), LEFT_JUSTIFY);
         }
 
         @Override

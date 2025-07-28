@@ -155,13 +155,17 @@ public class FramePropertiesPane extends Composite
     private TreeItemUpdater<FrameElementGroup, FrameElement> eltGroupUpdater;
     private TreeItemUpdater<SimpleWidgetGroup, IWidget> implicitGroupUpdater;
 
+    protected View view;
+
     public FramePropertiesPane(Composite parent, int style, View view)
     {
         super(parent, style);
 
         setLayout(new FormLayout());
 
-        createWidgets(view);
+        this.view = view;
+
+        createWidgets();
         layOutWidgets();
     }
 
@@ -234,7 +238,7 @@ public class FramePropertiesPane extends Composite
         }
     }
 
-    protected void createWidgets(final View view)
+    protected void createWidgets()
     {
         ListenerIdentifierMap lidMap = view.getLIDMap();
 
@@ -249,7 +253,7 @@ public class FramePropertiesPane extends Composite
                 {
                     super.onFocus();
 
-                    view.getTransmuter().setLIDEnabledState();
+                    FramePropertiesPane.this.view.getTransmuter().setLIDEnabledState();
                 }
 
                 @Override
@@ -259,7 +263,7 @@ public class FramePropertiesPane extends Composite
                     DesignEditorUI.FrameRenameParameters evt =
                         new DesignEditorUI.FrameRenameParameters(frame, getText());
                     boolean changed =
-                        view.performAction(DesignEditorLID.RenameFrame,
+                        FramePropertiesPane.this.view.performAction(DesignEditorLID.RenameFrame,
                                            evt,
                                            true);
 

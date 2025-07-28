@@ -164,7 +164,7 @@ public class WidgetPropertiesPane extends Composite
          * If no widgets are selected, suppresses the event.
          *
          * IE: raise an LID event.
-         * @param e
+         * @param focusRule
          */
         @Override
         public boolean confirm(int focusRule)
@@ -563,9 +563,9 @@ public class WidgetPropertiesPane extends Composite
 
                     FrameEditorUI.SetRemoteLabelTypeParms setTypeParms =
                         new FrameEditorUI.SetRemoteLabelTypeParms(widgetTypeChoices[selectedType],
-                                                    view.selection.getSelectedIWidgets()[0]);
+                                WidgetPropertiesPane.this.view.selection.getSelectedIWidgets()[0]);
 
-                    return view.performAction(FrameEditorLID.SetRemoteLabelType,
+                    return WidgetPropertiesPane.this.view.performAction(FrameEditorLID.SetRemoteLabelType,
                                               setTypeParms,
                                               true);
                 }
