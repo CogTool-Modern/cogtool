@@ -63,6 +63,14 @@ Section -Main SEC0000
     File ..\dist\CogTool.exe
     SetOutPath $INSTDIR\clisp-win
     File ..\clisp-win\*
+    SetOutPath $INSTDIR\clisp-linux
+    File ..\clisp-linux\*
+    SetOutPath $INSTDIR\lisp
+    File ..\lisp\actr6-modern.lisp
+    File ..\lisp\actr6.lisp
+    File /r /x .svn /x ._* ..\lisp\actr6
+    SetOutPath $INSTDIR
+    File ..\setup-modern-lisp.sh
     SetOutPath $INSTDIR\xul-win
     File /r /x .svn /x ._* ..\xul-win\*
     SetOutPath $INSTDIR\lib

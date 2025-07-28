@@ -144,6 +144,10 @@
 ;;; 2007.09.10 Dan
 ;;;             : * Putting the LispWorks device file pointers in to allow use
 ;;;             :   of the beta device interface.
+;;; 2024.07.28 CogTool-Modern
+;;;             : * Added ECL (Embeddable Common Lisp) support for Apple Silicon
+;;;             :   compatibility. Added ECL to logical pathname translations and
+;;;             :   fasl pathname definitions.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; General Docs:
@@ -260,6 +264,9 @@
 ;; the generic function execute in ACT-R, so shadow it
 #+:clisp (defpackage "COMMON-LISP-USER" (:shadow "EXECUTE"))
 
+;; ECL may have similar issues, add shadowing if needed
+#+:ecl (defpackage "COMMON-LISP-USER" (:use "COMMON-LISP"))
+
 ;; SBCL has a function called reset we need to shadow and there's an issue
 ;; with their defconstat because it throws an error if you compile and then
 ;; load a file (it's fine with the compiled file later, but that first time
@@ -334,7 +341,7 @@
                                                 *load-truename*))) 
                              "**/*.*"))))
 
-#+(or :clisp :sbcl) (setf (logical-pathname-translations "ACT-R6")
+#+(or :clisp :sbcl :ecl) (setf (logical-pathname-translations "ACT-R6")
                       `(("**;*.*" ,(namestring (merge-pathnames "**/*.*" *load-truename*)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -350,6 +357,7 @@
     #+:allegro (make-pathname :type "fasl")
     #+:sbcl (make-pathname :type "fasl")
     #+:clisp (make-pathname  :type "fas")
+    #+:ecl (make-pathname :type "fas")
     #+(and :linux :cmu) (make-pathname :type "x86f")
     #+(and :ppc :cmu) (make-pathname :type "ppcf")
     #+(and :lispworks :win32 (not :lispworks5)) (make-pathname :type "fsl")
@@ -358,6 +366,42 @@
     #+(and :lispworks :macosx (not :x86)) (make-pathname :type "nfasl")
     #+(and :lispworks :macosx :x86) (make-pathname :type "xfasl")))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Enhanced compilation tracking for LISP implementation changes
+
+(defun get-current-lisp-implementation ()
+  "Return a string identifying the current LISP implementation and version"
+  #+:allegro "allegro"
+  #+:sbcl "sbcl"
+  #+:clisp "clisp"
+  #+:ecl "ecl"
+  #+:cmu "cmu"
+  #+:lispworks "lispworks"
+  #+:digitool "digitool"
+  #+:openmcl "openmcl"
+  #-(or :allegro :sbcl :clisp :ecl :cmu :lispworks :digitool :openmcl) "unknown")
+
+(defun get-implementation-marker-file (directory)
+  "Get the path to the file that tracks which LISP implementation compiled the files"
+  (merge-pathnames ".actr6-lisp-implementation" directory))
+
+(defun check-implementation-changed (directory)
+  "Check if the LISP implementation has changed since last compilation"
+  (let ((marker-file (get-implementation-marker-file directory))
+        (current-impl (get-current-lisp-implementation)))
+    (if (probe-file marker-file)
+        (with-open-file (stream marker-file :direction :input :if-does-not-exist nil)
+          (let ((stored-impl (read-line stream nil nil)))
+            (not (string-equal stored-impl current-impl))))
+        t))) ; No marker file means we need to compile
+
+(defun update-implementation-marker (directory)
+  "Update the marker file with the current LISP implementation"
+  (let ((marker-file (get-implementation-marker-file directory))
+        (current-impl (get-current-lisp-implementation)))
+    (with-open-file (stream marker-file :direction :output :if-exists :supersede)
+      (write-line current-impl stream))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Define some functions for compiling and loading files
@@ -391,13 +435,24 @@
       (error "To compile a file it must have a .lisp extension")))
   
   (let* ((srcpath (merge-pathnames pathname *.lisp-pathname*))
-         (binpath (merge-pathnames pathname *.fasl-pathname*)))
+         (binpath (merge-pathnames pathname *.fasl-pathname*))
+         (actr6-dir (directory-namestring *load-truename*))
+         (impl-changed (check-implementation-changed actr6-dir)))
     (unless (probe-file srcpath)
       (error "File ~S does not exist" srcpath))
-    (when (or (member :actr-recompile *features*)
-              (not (probe-file binpath))
-              (> (file-write-date srcpath) (file-write-date binpath)))
-      (compile-file srcpath :output-file binpath :external-format :unix))
+    (cond
+      ((or (member :actr-recompile *features*)
+           (not (probe-file binpath))
+           (> (file-write-date srcpath) (file-write-date binpath))
+           impl-changed)
+       (when impl-changed
+         (format t "~&[ACT-R 6] LISP implementation changed to ~A - recompiling~%" 
+                 (get-current-lisp-implementation)))
+       (compile-file srcpath :output-file binpath :external-format :unix)
+       (when impl-changed
+         (update-implementation-marker actr6-dir)))
+      (t
+       (format t "~&[ACT-R 6] Using pre-compiled ~A~%" (pathname-name binpath))))
     (load binpath)))
   
 #-(and :ccl-4.3.5 :ccl-5.0) 
@@ -412,13 +467,24 @@
       (error "To compile a file it must have a .lisp extension")))
   
   (let* ((srcpath (merge-pathnames pathname *.lisp-pathname*))
-         (binpath (merge-pathnames pathname *.fasl-pathname*)))
+         (binpath (merge-pathnames pathname *.fasl-pathname*))
+         (actr6-dir (directory-namestring *load-truename*))
+         (impl-changed (check-implementation-changed actr6-dir)))
     (unless (probe-file srcpath)
       (error "File ~S does not exist" srcpath))
-    (when (or (member :actr-recompile *features*)
-              (not (probe-file binpath))
-              (> (file-write-date srcpath) (file-write-date binpath)))
-      (compile-file srcpath :output-file binpath))
+    (cond
+      ((or (member :actr-recompile *features*)
+           (not (probe-file binpath))
+           (> (file-write-date srcpath) (file-write-date binpath))
+           impl-changed)
+       (when impl-changed
+         (format t "~&[ACT-R 6] LISP implementation changed to ~A - recompiling~%" 
+                 (get-current-lisp-implementation)))
+       (compile-file srcpath :output-file binpath)
+       (when impl-changed
+         (update-implementation-marker actr6-dir)))
+      (t
+       (format t "~&[ACT-R 6] Using pre-compiled ~A~%" (pathname-name binpath))))
     (load binpath)))
   
 
@@ -484,6 +550,80 @@
                   "WARNING: you are using a case sensitive Lisp.  ACT-R may not load or run correctly.  Continue anyway?")
                (break)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Smart recompilation detection: Only recompile when necessary
+
+(defun check-compilation-needed ()
+  "Check if recompilation is needed based on LISP implementation and architecture"
+  (let ((recompile-needed nil)
+        (reason ""))
+    
+    ;; Check if we're using a different LISP implementation than what compiled the files
+    (let ((marker-file (merge-pathnames "compilation-info.lisp" 
+                                       (translate-logical-pathname "ACT-R6:"))))
+      (if (probe-file marker-file)
+          (handler-case
+              (let ((info (with-open-file (stream marker-file :direction :input)
+                           (read stream))))
+                (unless (and (eq (getf info :lisp-implementation) 
+                                #+:clisp :clisp #+:ecl :ecl #+:sbcl :sbcl #+:allegro :allegro)
+                            (string= (getf info :machine-type) (machine-type)))
+                  (setf recompile-needed t
+                        reason (format nil "LISP implementation or architecture changed from ~A/~A to ~A/~A"
+                                     (getf info :lisp-implementation) (getf info :machine-type)
+                                     #+:clisp :clisp #+:ecl :ecl #+:sbcl :sbcl #+:allegro :allegro
+                                     (machine-type)))))
+            (error (e)
+              (setf recompile-needed t
+                    reason (format nil "Could not read compilation info: ~A" e))))
+          (setf recompile-needed t
+                reason "No compilation info found - first time compilation")))
+    
+    (when recompile-needed
+      (format t "~%[ACT-R 6] Recompilation needed: ~A~%" reason)
+      (pushnew :actr-recompile *features*))
+    
+    recompile-needed))
+
+;; Check for pre-compiled files and set up paths
+(defun setup-precompiled-paths ()
+  "Set up paths to use pre-compiled files if available"
+  (let* ((base-dir (translate-logical-pathname "ACT-R6:"))
+         (lisp-impl #+:clisp "clisp" #+:ecl "ecl" #+:sbcl "sbcl" #+:allegro "allegro")
+         (compiled-dir (merge-pathnames (format nil "compiled/~A/" lisp-impl) base-dir)))
+    
+    (when (and compiled-dir (probe-file compiled-dir))
+      (format t "~%[ACT-R 6] Found pre-compiled files for ~A, using optimized loading~%" 
+              (string-upcase lisp-impl))
+      
+      ;; Update logical pathnames to point to compiled directory
+      #+(or :clisp :sbcl :ecl) 
+      (setf (logical-pathname-translations "ACT-R6-COMPILED")
+            `(("**;*.*" ,(namestring (merge-pathnames "**/*.*" compiled-dir)))))
+      
+      ;; Check if compilation info matches
+      (let ((info-file (merge-pathnames "compilation-info.lisp" compiled-dir)))
+        (when (probe-file info-file)
+          (handler-case
+              (let ((info (with-open-file (stream info-file :direction :input)
+                           (read stream))))
+                (when (and (eq (getf info :lisp-implementation) 
+                              #+:clisp :clisp #+:ecl :ecl #+:sbcl :sbcl #+:allegro :allegro)
+                          (string= (getf info :machine-type) (machine-type)))
+                  (format t "[ACT-R 6] Pre-compiled files match current environment - skipping compilation~%")
+                  (pushnew :actr-use-precompiled *features*)
+                  (return-from setup-precompiled-paths t)))
+            (error (e)
+              (format t "[ACT-R 6] Warning: Could not verify pre-compiled files: ~A~%" e)))))
+      
+      (format t "[ACT-R 6] Pre-compiled files found but don't match environment~%")))
+  
+  ;; Fall back to runtime compilation check
+  (unless (member :actr-use-precompiled *features*)
+    (check-compilation-needed)))
+
+;; Set up pre-compiled paths or check compilation needs
+(setup-precompiled-paths)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Load the framework's loader file (it is order dependent)
@@ -567,6 +707,26 @@
 
 (format t "~%##################################~%")
 (mp-print-versions )
+
+;; Write compilation info for future smart recompilation checks
+(defun write-compilation-info ()
+  "Write compilation information to track LISP implementation and architecture"
+  (let ((marker-file (merge-pathnames "compilation-info.lisp" 
+                                     (translate-logical-pathname "ACT-R6:"))))
+    (handler-case
+        (with-open-file (stream marker-file :direction :output :if-exists :supersede)
+          (format stream ";;; ACT-R 6 Compilation Information~%")
+          (format stream ";;; Generated: ~A~%" (get-universal-time))
+          (print (list :lisp-implementation #+:clisp :clisp #+:ecl :ecl #+:sbcl :sbcl #+:allegro :allegro
+                      :machine-type (machine-type)
+                      :lisp-implementation-type (lisp-implementation-type)
+                      :lisp-implementation-version (lisp-implementation-version)
+                      :compiled-at (get-universal-time)) stream))
+      (error (e)
+        (format t "~%[ACT-R 6] Warning: Could not write compilation info: ~A~%" e)))))
+
+(write-compilation-info)
+
 (format t "~%######### Loading of ACT-R 6 is complete #########~%")
 
 
