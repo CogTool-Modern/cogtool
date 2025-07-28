@@ -89,7 +89,7 @@
 		<!-- Build the Jekyll site in a special way that will work inside of Help Viewer app -->
 		<exec dir="${basedir}/docs" executable="/bin/sh">
 			<arg value="-c" />
-			<arg value="jekyll build --config _config.yml,_config_helpbundle.yml" />
+			<arg value="bundle exec jekyll build --config _config.yml,_config_helpbundle.yml" />
 		</exec>
 		<!-- Copy the Mac Help Bundle files -->
 		<copy todir="${resdir}/CogTool.tmp/Contents/Resources/CogTool.help/Contents/Resources/en.lproj/" overwrite="true">
