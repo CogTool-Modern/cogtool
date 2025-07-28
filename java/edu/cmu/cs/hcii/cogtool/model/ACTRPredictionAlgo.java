@@ -323,7 +323,7 @@ public class ACTRPredictionAlgo extends APredictionAlgo
             if (lineCount > 0) {
                 try {
                     // Parse trace and return result with steps
-                    String lastLine = traceLines.get(lineCount - 1);
+                    String lastLine = traceLines.get(lineCount - 2);
                     double taskTime = parseTaskTimeFromLine(lastLine);
 
                     TraceParser<ResultStep> parser = getTraceParser();
