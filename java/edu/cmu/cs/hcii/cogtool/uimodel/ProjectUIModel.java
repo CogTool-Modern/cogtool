@@ -124,6 +124,7 @@ import edu.cmu.cs.hcii.cogtool.util.NameChangeAlert;
 import edu.cmu.cs.hcii.cogtool.util.SWTStringUtil;
 import edu.cmu.cs.hcii.cogtool.util.StringUtil;
 import edu.cmu.cs.hcii.cogtool.util.WindowUtil;
+import edu.cmu.cs.hcii.cogtool.util.OSUtils;
 
 public class ProjectUIModel extends DefaultUIModel
 {
@@ -160,20 +161,16 @@ public class ProjectUIModel extends DefaultUIModel
         }
     }
 
-    protected static Color selectedTextColor =
-        WindowUtil.GLOBAL_DISPLAY.getSystemColor(SWT.COLOR_LIST_SELECTION_TEXT);
+    protected static Color selectedTextColor = null;
 
-    protected static Color unselectedTextColor =
-        WindowUtil.GLOBAL_DISPLAY.getSystemColor(SWT.COLOR_LIST_FOREGROUND);
+    protected static Color unselectedTextColor = null;
 
     protected static Color selectedBackgroundColor =
         WindowUtil.GLOBAL_DISPLAY.getSystemColor(SWT.COLOR_LIST_SELECTION);
 
-    public static Color unselectedTaskBackgroundColor =
-        WindowUtil.GLOBAL_DISPLAY.getSystemColor(SWT.COLOR_LIST_BACKGROUND);
+    public static Color unselectedTaskBackgroundColor = null;
 
-    protected static Color unselectedGroupBackgroundColor =
-        new Color(WindowUtil.GLOBAL_DISPLAY, 255, 255, 204);
+    protected static Color unselectedGroupBackgroundColor = new Color(null, 80, 80, 15);
 
     protected Tree tree;
     protected TreeRowHook rowHook = null;
@@ -283,10 +280,9 @@ public class ProjectUIModel extends DefaultUIModel
             }
         };
 
-    public static final Color SELECTED_CELL_COLOR =
-        new Color(WindowUtil.GLOBAL_DISPLAY, 135, 180, 235);
-
-    public static final RGB SELECTED_CELL_RGB = new RGB(20, 120, 200);
+    public static final Color SELECTED_CELL_COLOR = OSUtils.getPlatform().isSystemDarkAppearance() ? new Color(null, 50, 79, 108): new Color(null, 20, 120, 200);
+    
+    public static final RGB SELECTED_CELL_RGB = OSUtils.getPlatform().isSystemDarkAppearance() ? new RGB(50, 79, 108) : new RGB(20, 120, 200);
 
     public static final ImageData SELECTED_CELL_IMAGEDATA =
         new ImageData(1, 1, 1,

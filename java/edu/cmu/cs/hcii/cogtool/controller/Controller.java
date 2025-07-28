@@ -115,6 +115,9 @@ import edu.cmu.cs.hcii.cogtool.util.RcvrIOTempException;
 import edu.cmu.cs.hcii.cogtool.util.RcvrImageException;
 import edu.cmu.cs.hcii.cogtool.util.RcvrUIException;
 import edu.cmu.cs.hcii.cogtool.util.UndoManager;
+import edu.cmu.cs.hcii.cogtool.util.OSUtils;
+
+import org.eclipse.swt.program.Program;
 
 /**
  * For CogTool, this Controller class provides default implementations for
@@ -280,6 +283,21 @@ public abstract class Controller
                                  return true;
                              }
                          });
+
+            ui.setAction(CogToolLID.Help, new AListenerAction() {
+
+                public boolean performAction(Object prms)
+                {
+                    if (OSUtils.MACOSX) {
+                        // Open the Help bundle on macOS
+                        Program.launch("../Resources/CogTool.help");
+                    }
+                    
+                    
+
+                    return true;
+                }
+            });
         }
     }
 

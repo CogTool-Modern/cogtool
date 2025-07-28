@@ -80,11 +80,46 @@
 		</copy>
 		
 	</target>
+	
+	<condition property="os.mac">
+		<os family="mac" />
+	</condition>
+
+	<target name="help-copy" description="Create a Help Bundle for Mac from the documentation (docs/)">
+		<!-- Build the Jekyll site in a special way that will work inside of Help Viewer app -->
+		<exec dir="${basedir}/docs" executable="/bin/sh">
+			<arg value="-c" />
+			<arg value="bundle exec jekyll build --config _config.yml,_config_helpbundle.yml" />
+		</exec>
+		<!-- Copy the Mac Help Bundle files -->
+		<copy todir="${resdir}/CogTool.tmp/Contents/Resources/CogTool.help/Contents/Resources/en.lproj/" overwrite="true">
+			<fileset dir="docs/_site/help"/>
+		</copy>
+	</target>
+
+	<target if="os.mac" name="help-index" description="Builds the index for Help Bundles and Spotlight">
+		<!-- Create a helpindex file for macOS's Spotlight, for searching through Help topics. hituil is macOS only. -->
+		<exec dir="${resdir}/CogTool.tmp/Contents/Resources/CogTool.help/Contents/Resources/en.lproj/" executable="/bin/sh">
+			<arg value="-c" />
+			<arg value="hiutil -I corespotlight -Caf help.cshelpindex . -v -v" />
+		</exec>
+
+		<!-- Help Menu Search -->
+		<exec dir="${resdir}/CogTool.tmp/Contents/Resources/CogTool.help/Contents/Resources/en.lproj/" executable="/bin/sh">
+			<arg value="-c" />
+			<arg value="hiutil -I lsm -Caf help.helpindex . -v -v" />
+		</exec>
+
+		<!-- Clear the help cache -->
+		<exec dir="${resdir}/CogTool.tmp/Contents/Resources/CogTool.help/Contents/Resources/en.lproj/" executable="hiutil">
+			<arg value="-P" />
+		</exec>
+	</target>
 
 	<taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar" />
 
 	<!-- Packages build output and resources into runable packages., -->
-	<target name="package" depends="clean,compile" description="Packages build output and resources into runable packages.">
+	<target name="package" depends="clean,compile, help-copy, help-index" description="Packages build output and resources into runable packages.">
 
 		<tstamp>
 			<format property="buildtime" pattern="MM/dd/yyyy-hh:mm" />

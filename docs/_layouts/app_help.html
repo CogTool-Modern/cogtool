@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>{{ page.title }} </title>
+        <meta name="robots" content="index, anchors" />
+        <meta name="description" content="{{ page.title }}" />
+        <meta name="keywords" content="{{ page.keywords }}" />
+        <link href="{{ site.helpbundledevbaseurl }}machelp.css" rel="stylesheet">
+        <link href="{{ site.helpbundledevbaseurl }}style.css" rel="stylesheet">        
+    </head>
+    <body>
+
+        <!--top navigation area-->
+        <div id="navbox" class="gradient">
+            <div id="navleftbox">
+                <a class="navlink_left" href="{{ site.helpbundledevbaseurl }}index.html">Home</a>
+            </div>
+            <div id="navrightbox">
+                <a class="navlink_right" href="{{ site.helpbundledevbaseurl }}index.html">Index</a>
+            </div>
+        </div><!--closes top navigation area-->
+
+        <!--page head-->
+        <div id="headerbox">
+            <div id="iconbox">
+                <img id="iconimg" src="{{ site.helpbundledevbaseurl }}appicon.png" alt="CogTool" height="32" width="32" />
+            </div>
+            <div id="pagetitle">
+                <a name="{{ page.title }}"></a>
+                <h1>{{ page.title }}</h1>
+            </div>
+        </div><!--closes page header-->
+
+        {{ content }}
+
+    </body>
+</html>

@@ -1,0 +1,15 @@
+---
+title: CogTool Help
+date: 2012-05-23T03:04:25+00:00
+layout: app_help
+---
+{% assign help_pages = site.pages | where_exp: "item", "item.url contains '/help/' and item.url != '/help/'" %}
+<div id="introbox">
+    <div class="introprimtext">
+        {% for page in help_pages %}        
+        <p>
+            <a href="{{ page.name | replace: '.md', '.html' }}">{{ page.title }}</a>
+        </p>
+        {% endfor %}
+    </div><!--closes introprimtext-->
+</div> <!--closes introbox -->

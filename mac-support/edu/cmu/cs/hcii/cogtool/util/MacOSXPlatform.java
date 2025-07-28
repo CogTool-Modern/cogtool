@@ -107,6 +107,9 @@ import org.eclipse.swt.widgets.ToolItem;
 
 import org.eclipse.swt.*;
 import org.eclipse.swt.widgets.*;
+import org.eclipse.swt.internal.cocoa.OS;
+
+import java.lang.reflect.Method;
 //import org.eclipse.wb.swt.SWTResourceManager;
 
 // Note that this file will only compile against the Macintosh
@@ -117,11 +120,31 @@ import org.eclipse.swt.widgets.*;
 public class MacOSXPlatform extends PlatformAdapter
 {
     
+    public void setTheme(Display display) {
+        try {
+			// changing the appearance works only after the shell has been created
+			OS.setTheme(isSystemDarkAppearance());
+			// workaround for a bug in SWT: colors need to be reinited after changing the appearance
+			Method initColor = display.getClass().getDeclaredMethod("initColors");
+			initColor.setAccessible(true);
+			initColor.invoke(display);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public boolean isSystemDarkAppearance() {
+		return OS.isSystemDarkAppearance();
+	}
+
     @Override
     public void initPlatformMenu(Display display,
                                  final PlatformMenuActions actions)
-    {
-    	String appName = "CogTool";
+    {        
+        setTheme(display);
+        String appName = "CogTool";
     	
     	 Menu systemMenu = Display.getDefault().getSystemMenu();
 

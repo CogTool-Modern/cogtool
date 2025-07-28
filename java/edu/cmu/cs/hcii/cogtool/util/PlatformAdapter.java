@@ -96,6 +96,11 @@ import org.eclipse.swt.widgets.Display;
 
 public abstract class PlatformAdapter implements Platform
 {
+    public void setTheme(Display d)
+    {
+        // do nothing unless overriden
+    }
+
     public void initPlatformMenu(Display d, PlatformMenuActions a)
     {
         // do nothing unless overriden
@@ -104,5 +109,10 @@ public abstract class PlatformAdapter implements Platform
     public void initTransferData(TransferData td)
     {
         // do nothing unless overriden
+    }
+
+    public boolean isSystemDarkAppearance() {
+        // Most OS do not have a dark mode at the time of this writing.
+        return false;
     }
 }

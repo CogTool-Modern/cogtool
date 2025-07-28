@@ -33,5 +33,11 @@
 	</dict>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.3</string>
+	<key>CFBundleHelpBookFolder</key>
+	<string>CogTool.help</string>
+	<key>CFBundleHelpBookName</key>
+	<string>CogTool Help</string>
+	
+
 </dict>
 </plist>

@@ -120,6 +120,11 @@ public interface Platform
         public void doExitApplication();
     }
 
+
+    public void setTheme(Display d);
+
+    public boolean isSystemDarkAppearance();
+
     /**
      * Bind the above callbacks to the Application Menu; only relevant
      * for Macintosh, other platforms should ignore this.

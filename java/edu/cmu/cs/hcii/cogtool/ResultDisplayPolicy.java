@@ -259,7 +259,7 @@ public class ResultDisplayPolicy
 
         if (resultState == APredictionResult.COMPUTE_FAILED) {
             // Has a result for this algo, but it failed
-            return "COMPUTE FAILED" /* "##" */ + demoState;
+            return "COMPUTE FAILED" + "\n" + demoState + "\n" + r.getErrorLines();
         }
 
         if (resultState == APredictionResult.COMPUTATION_IN_PROGRESS) {

@@ -1086,6 +1086,7 @@ public class ProjectInteraction extends DefaultInteraction
             super(parentWin,
                   L10N.get("CGTL.StartUp", "CogTool Start-up"),
                   OSUtils.MACOSX ? SWT.MODELESS : SWT.PRIMARY_MODAL);
+            OSUtils.getPlatform().setTheme(WindowUtil.GLOBAL_DISPLAY);
         }
 
         /**

@@ -1984,6 +1984,9 @@ public class ProjectUI extends DefaultUI
         setEnabled(CogToolLID.ExportResultsToCSV,
                    ListenerIdentifierMap.ALL,
                    MenuUtil.ENABLED);
+        setEnabled(CogToolLID.Help,
+                   ListenerIdentifierMap.ALL,
+                   MenuUtil.ENABLED);
    }
 
 

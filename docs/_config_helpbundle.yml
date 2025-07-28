@@ -1,0 +1,3 @@
+helpbundledevbaseurl: ''
+# Helps to have all pages in one directory with their resources (CSS) instead of folders. (This because abs URLs are weird within Help Viewer app)
+permalink: none

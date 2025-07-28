@@ -108,6 +108,7 @@ import edu.cmu.cs.hcii.cogtool.util.KeyDisplayUtil;
 import edu.cmu.cs.hcii.cogtool.util.SWTStringUtil;
 import edu.cmu.cs.hcii.cogtool.util.StringUtil;
 import edu.cmu.cs.hcii.cogtool.view.SWTListMultiColumn;
+import edu.cmu.cs.hcii.cogtool.util.OSUtils;
 
 public class DefaultScriptUIModel extends DefaultUIModel
 {
@@ -142,11 +143,16 @@ public class DefaultScriptUIModel extends DefaultUIModel
     protected static final Color autoInsertedScriptStepColor =
         new Color(null, 229, 229, 229);
 
+    protected static final Color autoInsertedScriptStepDarkColor =
+        new Color(null, 57, 57, 57); // Dark Gray
+
     /**
      * This does not need to be disposed since it's a static.
      */
     protected static final Color generatedScriptStepColor =
         new Color(null, 255, 255, 204);
+    protected static final Color generatedScriptStepDarkColor =
+        new Color(null, 80, 80, 15); // Dark tan
 
     /**
      * Do not dispose since it is a static.
@@ -155,6 +161,8 @@ public class DefaultScriptUIModel extends DefaultUIModel
      */
     protected static final Color obsoletingScriptStepColor =
         new Color(null, 153, 204, 255);
+    protected static final Color obsoletingScriptStepDarkColor =
+        new Color(null, 50, 79, 108); // Dark powder blue
 
     /**
      * This color does not need to be disposed since it's static.
@@ -164,6 +172,8 @@ public class DefaultScriptUIModel extends DefaultUIModel
      */
     protected static final Color invalidScriptStepColor =
         new Color(null, 255, 102, 0);
+    protected static final Color invalidScriptStepDarkColor =
+        new Color(null, 115, 47, 1);
 
     public static class RenderScriptTable extends SWTListMultiColumn
     {
@@ -283,31 +293,44 @@ public class DefaultScriptUIModel extends DefaultUIModel
 
             Color c = null;
 
+            Color invalidColor = invalidScriptStepColor;
+            Color obsoletingColor = obsoletingScriptStepColor;
+            Color autoInsertedColor = autoInsertedScriptStepColor;
+            Color generatedColor = generatedScriptStepColor;
+
+            // Assign Dark Mode color variants. a11y ✅
+            if (OSUtils.getPlatform().isSystemDarkAppearance()) {
+                invalidColor = invalidScriptStepDarkColor;
+                obsoletingColor = obsoletingScriptStepDarkColor;
+                autoInsertedColor = autoInsertedScriptStepDarkColor;
+                generatedColor = generatedScriptStepDarkColor;
+            }
+
             if (itemData instanceof DefaultModelGeneratorState) {
                 AScriptStep ss =
                     ((DefaultModelGeneratorState) itemData).getScriptStep();
                 AScriptStep owner = ss.getOwner();
 
                 if (isInvalid || owner.isInvalid()) {
-                    return invalidScriptStepColor;
+                    return invalidColor;
                 }
 
                 if (isObsoleting || owner.isObsolete()) {
-                    return obsoletingScriptStepColor;
+                    return obsoletingColor;
                 }
 
                 if (! ss.isInsertedByUser()) {
                     if (ss.isDemonstrated()) {
-                        return autoInsertedScriptStepColor;
+                        return autoInsertedColor;
                     }
 
-                    return generatedScriptStepColor;
+                    return generatedColor;
                 }
             }
             else if (itemData instanceof Frame) {
                 return isInvalid
-                           ? invalidScriptStepColor
-                           : (isObsoleting ? obsoletingScriptStepColor
+                           ? invalidColor
+                           : (isObsoleting ? obsoletingColor
                                                 : null);
             }
 
