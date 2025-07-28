@@ -1,0 +1,12 @@
+(|SYSTEM|::|VERSION| '(20100806.))
+#0Y_ #0Y |CHARSET|::|UTF-8|
+#Y(#:|1 104 (DEFPARAMETER *FILE-LIST '("version-string" "internal-structures" "internal-macros" ...))-1|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 DB DC 31 5A C6 19 01)
+   ((|COMMON-LISP|::|SPECIAL| |COMMON-LISP-USER|::|*FILE-LIST|)
+    |COMMON-LISP-USER|::|*FILE-LIST|
+    ("version-string" "internal-structures" "internal-macros" "misc-utils"
+     "system-parameters" "meta-process" "chunk-types" "chunks" "modules"
+     "parameters" "buffers" "model" "events" "scheduling" "chunk-spec"
+     "top-level" "device-interface" "generic-interface" "vision-categorization"
+     "random" "printing" "naming-module"))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))

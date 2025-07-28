@@ -1,0 +1,23 @@
+#0Y_ #0Y |CHARSET|::|UTF-8|
+(|SYSTEM|::|C-DEFUN| '|COMMON-LISP-USER|::|ACT-R-EVENT-BREAK-ACTION|
+ (|SYSTEM|::|LAMBDA-LIST-TO-SIGNATURE| '(|COMMON-LISP-USER|::|MP|)))
+(|SYSTEM|::|C-DEFUN| '|COMMON-LISP-USER|::|FORMAT-EVENT|
+ #(1. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+   |COMMON-LISP|::|NIL|)
+ |COMMON-LISP|::|NIL| '|CLOS|::|DEFMETHOD|)
+(|SYSTEM|::|C-PROCLAIM-CONSTANT|
+ '|COMMON-LISP-USER|::|+FORMAT-EVENT-EVENT-STRING+|
+ '(|COMMON-LISP|::|FORMATTER|
+   "~:[~*~*~;~6d.~3,'0d~] ~:[~*~;~a ~] ~:[~2*~;~va ~] ~va ~:[~*~a~{ ~a~}~;~a~*~*~] ~:[~@[Waiting for: ~A~]~;Dynamically adjusted for: ~A~]"))
+(|SYSTEM|::|C-DEFUN| '|COMMON-LISP-USER|::|FORMAT-EVENT|
+ #(1. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+   |COMMON-LISP|::|NIL|)
+ |COMMON-LISP|::|NIL| '|CLOS|::|DEFMETHOD|)
+(|SYSTEM|::|C-PROCLAIM-CONSTANT|
+ '|COMMON-LISP-USER|::|+FORMAT-EVENT-BREAK-EVENT-STRING+|
+ '(|COMMON-LISP|::|FORMATTER|
+   "~:[~*~*~;~6d.~3,'0d~] ~:[~*~;~a ~] ~:[~2*~;~va ~] ~va BREAK-EVENT ~@[~a ~]~:[~@[Waiting for: ~A~]~;Dynamically adjusted for: ~A~]"))
+(|SYSTEM|::|C-DEFUN| '|COMMON-LISP-USER|::|FORMAT-EVENT|
+ #(1. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+   |COMMON-LISP|::|NIL|)
+ |COMMON-LISP|::|NIL| '|CLOS|::|DEFMETHOD|)
