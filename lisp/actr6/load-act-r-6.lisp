@@ -334,7 +334,7 @@
                                                 *load-truename*))) 
                              "**/*.*"))))
 
-#+(or :clisp :sbcl) (setf (logical-pathname-translations "ACT-R6")
+#+(or :clisp :sbcl :ecl) (setf (logical-pathname-translations "ACT-R6")
                       `(("**;*.*" ,(namestring (merge-pathnames "**/*.*" *load-truename*)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -350,6 +350,7 @@
     #+:allegro (make-pathname :type "fasl")
     #+:sbcl (make-pathname :type "fasl")
     #+:clisp (make-pathname  :type "fas")
+    #+:ecl (make-pathname :type "fas")
     #+(and :linux :cmu) (make-pathname :type "x86f")
     #+(and :ppc :cmu) (make-pathname :type "ppcf")
     #+(and :lispworks :win32 (not :lispworks5)) (make-pathname :type "fsl")
