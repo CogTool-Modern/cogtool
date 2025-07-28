@@ -1,13 +1,24 @@
 ---
-id: 90
 title: Videos
 date: 2014-03-27T16:09:00+00:00
 author: Bonnie John
 layout: page
-guid: http://cogtool.local/?page_id=90
 ---
-\*— DRAFT — DRAFT — DRAFT — DRAFT — DRAFT — DRAFT — DRAFT — DRAFT — \*  
-_The demonstrations on this page are DRAFTs and have not yet been released to the public. Please help us make them as useful as possible by sending comments and corrections to bej@cs.cmu.edu. Thanks, Bonnie._
+
+### Integrating usability analysis and metrics into the development process
+
+<video controls>
+  <source src="https://researcher.watson.ibm.com/researcher/files/us-rachel/CogTool&DesignProcessFinal.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+### UXPA-MN: CogTool Webinar with Dr. Bonnie John
+
+<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Aj5oaNy4dCw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="wp-block-embed__wrapper">
+</div>
+</figure>
 
 ### Demonstrations
 
@@ -36,7 +47,3 @@ Here’s a list of links to existing demonstrations:
 
 These demonstrations were created in [Wink](http://www.debugmode.com/wink/) , a free presentation and tutorial tool for the PC.
 
-### Webinars<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio">
-
-<div class="wp-block-embed__wrapper">
-</div></figure>

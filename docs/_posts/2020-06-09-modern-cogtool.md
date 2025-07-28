@@ -6,7 +6,7 @@ author: Justin Geeslin
 layout: post
 guid: http://cogtool.local/?p=55
 categories:
-  - Uncategorized
+  - status-updates
 ---
 Hello World!
 
