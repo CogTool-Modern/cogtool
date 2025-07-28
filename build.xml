@@ -272,11 +272,19 @@
 	<target name="copy-mac-lisp-intel" if="os.mac.intel">
 		<copy todir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel/">
 			<fileset dir="${basedir}/clisp-mac-intel">
-				<include name="*" />
+				<include name="**/*" />
 			</fileset>
 		</copy>
 		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel/lisp.run" perm="a+x" />
-		<echo message="Packaged Intel Mac LISP distribution" />
+		<!-- Set executable permissions for bundled LISP binaries -->
+		<chmod perm="a+x">
+			<fileset dir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel">
+				<include name="**/ecl"/>
+				<include name="**/clisp"/>
+				<include name="**/sbcl"/>
+			</fileset>
+		</chmod>
+		<echo message="Packaged Intel Mac LISP distribution with portable runtime" />
 	</target>
 
 	<!-- Target for Apple Silicon Mac LISP distribution -->
@@ -309,26 +317,50 @@
 		<!-- Copy Intel Mac LISP -->
 		<copy todir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel/">
 			<fileset dir="${basedir}/clisp-mac-intel">
-				<include name="*" />
+				<include name="**/*" />
 			</fileset>
 		</copy>
 		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel/lisp.run" perm="a+x" />
+		<!-- Set executable permissions for bundled LISP binaries -->
+		<chmod perm="a+x">
+			<fileset dir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel">
+				<include name="**/ecl"/>
+				<include name="**/clisp"/>
+				<include name="**/sbcl"/>
+			</fileset>
+		</chmod>
 
 		<!-- Copy Apple Silicon Mac LISP -->
 		<copy todir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-arm64/">
 			<fileset dir="${basedir}/clisp-mac-arm64">
-				<include name="*" />
+				<include name="**/*" />
 			</fileset>
 		</copy>
 		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-mac-arm64/lisp.run" perm="a+x" />
+		<!-- Set executable permissions for bundled LISP binaries -->
+		<chmod perm="a+x">
+			<fileset dir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-arm64">
+				<include name="**/ecl"/>
+				<include name="**/clisp"/>
+				<include name="**/sbcl"/>
+			</fileset>
+		</chmod>
 
 		<!-- Copy Linux LISP for cross-platform support -->
 		<copy todir="${distdir}/CogTool.app/Contents/Resources/clisp-linux/">
 			<fileset dir="${basedir}/clisp-linux">
-				<include name="*" />
+				<include name="**/*" />
 			</fileset>
 		</copy>
 		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-linux/lisp.run" perm="a+x" />
+		<!-- Set executable permissions for bundled LISP binaries -->
+		<chmod perm="a+x">
+			<fileset dir="${distdir}/CogTool.app/Contents/Resources/clisp-linux">
+				<include name="**/ecl"/>
+				<include name="**/clisp"/>
+				<include name="**/sbcl"/>
+			</fileset>
+		</chmod>
 
 		<echo message="Packaged Universal Mac LISP distribution (Intel + Apple Silicon + Linux)" />
 	</target>
