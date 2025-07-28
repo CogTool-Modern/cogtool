@@ -124,7 +124,8 @@ if [ "$LISP_IMPL" = "clisp" ]; then
                 log_message "Memory image not available, loading LISP source instead: $LISP_FILE"
                 # Change to the directory containing the LISP file for proper relative path resolution
                 LISP_DIR=$(dirname "$LISP_FILE")
-                CMD="cd '$LISP_DIR' && $CMD -i '$(basename "$LISP_FILE")'"
+                LISP_BASENAME=$(basename "$LISP_FILE")
+                CMD="cd '$LISP_DIR' && $CMD -i '$LISP_BASENAME'"
             else
                 log_message "Warning: Neither memory image nor LISP source found for: $MEMORY_IMAGE"
             fi
@@ -156,7 +157,10 @@ elif [ "$LISP_IMPL" = "ecl" ]; then
         
         if [ -f "$LISP_FILE" ]; then
             log_message "Loading LISP source instead of memory image: $LISP_FILE"
-            CMD="$CMD --load '$LISP_FILE'"
+            # Change to the directory containing the LISP file for proper relative path resolution
+            LISP_DIR=$(dirname "$LISP_FILE")
+            LISP_BASENAME=$(basename "$LISP_FILE")
+            CMD="cd '$LISP_DIR' && $CMD --load '$LISP_BASENAME'"
         else
             log_message "Warning: Memory image not supported in ECL, and equivalent LISP file not found: $MEMORY_IMAGE"
         fi
@@ -189,7 +193,10 @@ elif [ "$LISP_IMPL" = "sbcl" ]; then
         
         if [ -f "$LISP_FILE" ]; then
             log_message "Loading LISP source instead of memory image: $LISP_FILE"
-            CMD="$CMD --load '$LISP_FILE'"
+            # Change to the directory containing the LISP file for proper relative path resolution
+            LISP_DIR=$(dirname "$LISP_FILE")
+            LISP_BASENAME=$(basename "$LISP_FILE")
+            CMD="cd '$LISP_DIR' && $CMD --load '$LISP_BASENAME'"
         else
             log_message "Warning: Memory image not supported in SBCL, and equivalent LISP file not found: $MEMORY_IMAGE"
         fi
