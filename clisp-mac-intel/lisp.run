@@ -104,7 +104,7 @@ elif [ "$LISP_IMPL" = "ecl" ]; then
         CMD="$CMD --load \"$file\""
     done
     if [ -n "$EXECUTE_CMD" ]; then
-        CMD="$CMD --eval \"$EXECUTE_CMD\""
+        CMD="$CMD --eval '$EXECUTE_CMD'"
     fi
     # ECL needs explicit quit
     CMD="$CMD --eval '(quit)'"
@@ -118,7 +118,7 @@ elif [ "$LISP_IMPL" = "sbcl" ]; then
         CMD="$CMD --load \"$file\""
     done
     if [ -n "$EXECUTE_CMD" ]; then
-        CMD="$CMD --eval \"$EXECUTE_CMD\""
+        CMD="$CMD --eval '$EXECUTE_CMD'"
     fi
     # SBCL needs explicit quit
     CMD="$CMD --eval '(quit)'"
@@ -130,4 +130,4 @@ if [[ $# -gt 0 ]]; then
 fi
 
 # Run the command
-exec $CMD
+exec bash -c "$CMD"
