@@ -273,14 +273,6 @@
 		<!-- Chmod the clisp executable. -->
 		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-mac-arm64/lisp.run" perm="a+x" />
 
-		<!-- Copy the Mac XUL implementation into the bundle. -->
-		<copy todir="${distdir}/CogTool.app/Contents/Resources/XUL-mac/">
-		        <fileset dir="${basedir}/XUL-mac"/>
-		</copy>
-
-		<!-- Chmod the XUL stuff. -->
-		<chmod dir="${distdir}/CogTool.app/Contents/Resources/XUL-mac" includes="XUL,xulrunner*,*.*lib,*.sh" perm="a+x"/>
-
 		<!-- Prepare .tgz for Mac OS X download. -->
 		<tar destfile="${distdir}/CogToolMac-${versionclean}-r${revision}.tgz" compression="gzip" longfile="warn">
 			<tarfileset dir="${distdir}/" mode="755">
