@@ -485,6 +485,13 @@
                   "WARNING: you are using a case sensitive Lisp.  ACT-R may not load or run correctly.  Continue anyway?")
                (break)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ECL/SBCL-specific setup: Force recompilation to avoid architecture/implementation conflicts
+
+#+(or :ecl :sbcl) (progn
+                    (format t "~%[ACT-R 6] ~A detected - forcing recompilation of all files to avoid architecture conflicts~%" 
+                            #+:ecl "ECL" #+:sbcl "SBCL")
+                    (pushnew :actr-recompile *features*))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Load the framework's loader file (it is order dependent)
