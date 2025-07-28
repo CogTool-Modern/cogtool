@@ -258,6 +258,44 @@ public class ACTRPredictionAlgo extends APredictionAlgo
         return ((Integer) r.getAttribute(TRACE_VERSION_ATTR)).intValue();
     }
 
+    /**
+     * Parse the task time from the last line of ACT-R trace output.
+     * Handles both old format (just a number) and new format with "Stopped because no events left to process"
+     */
+    private static double parseTaskTimeFromLine(String line) throws NumberFormatException {
+        if (line == null || line.trim().isEmpty()) {
+            throw new NumberFormatException("Empty or null trace line");
+        }
+        
+        String trimmedLine = line.trim();
+        
+        // Try parsing as a simple number first (old format)
+        try {
+            return Double.parseDouble(trimmedLine);
+        } catch (NumberFormatException e) {
+            // If that fails, try to extract time from the new format
+            // Format: "      1.300   ------                 Stopped because no events left to process"
+            
+            // Look for the pattern: whitespace, number, whitespace, dashes, "Stopped because no events left to process"
+            if (trimmedLine.contains("Stopped because no events left to process") || 
+                trimmedLine.contains("------")) {
+                
+                // Extract the first number from the line
+                String[] parts = trimmedLine.split("\\s+");
+                for (String part : parts) {
+                    try {
+                        return Double.parseDouble(part);
+                    } catch (NumberFormatException ignored) {
+                        // Continue to next part
+                    }
+                }
+            }
+            
+            // If we can't parse it, re-throw the original exception
+            throw new NumberFormatException("Could not parse task time from line: " + line);
+        }
+    }
+
     protected class ACTRAnalysisOutput implements IAnalysisOutput
     {
         protected Script script;
@@ -286,7 +324,7 @@ public class ACTRPredictionAlgo extends APredictionAlgo
                 try {
                     // Parse trace and return result with steps
                     String lastLine = traceLines.get(lineCount - 1);
-                    double taskTime = Double.parseDouble(lastLine);
+                    double taskTime = parseTaskTimeFromLine(lastLine);
 
                     TraceParser<ResultStep> parser = getTraceParser();
 
