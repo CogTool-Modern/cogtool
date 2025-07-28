@@ -237,6 +237,7 @@
 			<fileset dir="${basedir}/lisp">
 				<include name="actr6-modern.lisp" />
 				<include name="actr6.lisp" />
+				<include name="actr6/**/*" />
 			</fileset>
 		</copy>
 
@@ -400,6 +401,7 @@
 			<fileset dir="${basedir}/lisp">
 				<include name="actr6-modern.lisp" />
 				<include name="actr6.lisp" />
+				<include name="actr6/**/*" />
 			</fileset>
 		</copy>
 
