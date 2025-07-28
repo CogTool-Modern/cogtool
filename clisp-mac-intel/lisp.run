@@ -1,53 +1,105 @@
 #!/bin/bash
 
-# CogTool Intel Mac LISP Wrapper Script
-# Provides intelligent LISP implementation selection with fallback strategies
-# Supports both bundled and system LISP implementations
+# CogTool Enhanced Mac LISP Wrapper
+# Handles automatic installation and provides comprehensive fallback strategies
 
 # Get script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Helper functions
-command_exists() {
-    command -v "$1" >/dev/null 2>&1
-}
-
 log_message() {
     echo "[CogTool LISP] $1" >&2
 }
 
-# Initialize variables
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+# Auto-install function
+auto_install_lisp() {
+    log_message "No LISP implementation found. Attempting automatic installation..."
+    
+    if command_exists brew; then
+        log_message "Installing ECL via Homebrew..."
+        if brew install ecl; then
+            log_message "ECL installed successfully!"
+            return 0
+        else
+            log_message "Homebrew installation failed, trying alternative methods..."
+        fi
+    fi
+    
+    # If Homebrew fails or isn't available, provide manual instructions
+    log_message ""
+    log_message "Automatic installation failed. Please install a LISP implementation manually:"
+    log_message ""
+    log_message "Option 1 - Install Homebrew and ECL (Recommended):"
+    log_message "  1. Install Homebrew: /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+    log_message "  2. Install ECL: brew install ecl"
+    log_message ""
+    log_message "Option 2 - Install CLISP:"
+    log_message "  • Homebrew: brew install clisp"
+    log_message "  • MacPorts: sudo port install clisp"
+    log_message "  • Download: https://clisp.sourceforge.io/"
+    log_message ""
+    log_message "Option 3 - Install SBCL:"
+    log_message "  • Homebrew: brew install sbcl"
+    log_message "  • Download: https://www.sbcl.org/"
+    log_message ""
+    return 1
+}
+
+# Try to find LISP implementation
 LISP_IMPL=""
 LISP_CMD=""
 
-# Try to find the best LISP implementation
-# Priority: 1. System CLISP, 2. System ECL, 3. System SBCL
-if command_exists clisp; then
-    log_message "Using system CLISP"
+# Check bundled implementations first
+if [ -x "$SCRIPT_DIR/bundle/ecl/bin/ecl" ]; then
+    log_message "Using bundled ECL"
+    LISP_IMPL="ecl"
+    LISP_CMD="$SCRIPT_DIR/bundle/ecl/bin/ecl"
+elif [ -x "$SCRIPT_DIR/bundle/clisp/bin/clisp" ]; then
+    log_message "Using bundled CLISP"
     LISP_IMPL="clisp"
-    LISP_CMD="clisp"
+    LISP_CMD="$SCRIPT_DIR/bundle/clisp/bin/clisp"
+# Check system implementations
 elif command_exists ecl; then
     log_message "Using system ECL"
     LISP_IMPL="ecl"
     LISP_CMD="ecl"
+elif command_exists clisp; then
+    log_message "Using system CLISP"
+    LISP_IMPL="clisp"
+    LISP_CMD="clisp"
 elif command_exists sbcl; then
     log_message "Using system SBCL"
     LISP_IMPL="sbcl"
     LISP_CMD="sbcl"
 else
-    log_message "ERROR: No LISP implementation found!"
-    log_message ""
-    log_message "Please install a LISP implementation using one of these methods:"
-    log_message "  • Homebrew: brew install clisp  (or ecl, or sbcl)"
-    log_message "  • MacPorts: sudo port install clisp  (or ecl, or sbcl)"
-    log_message "  • Download CLISP from: https://clisp.sourceforge.io/"
-    log_message "  • Download ECL from: https://ecl.common-lisp.dev/"
-    log_message "  • Download SBCL from: https://www.sbcl.org/"
-    log_message ""
-    exit 1
+    # Try auto-installation
+    if auto_install_lisp; then
+        # Retry detection after installation
+        if command_exists ecl; then
+            log_message "Using newly installed ECL"
+            LISP_IMPL="ecl"
+            LISP_CMD="ecl"
+        elif command_exists clisp; then
+            log_message "Using newly installed CLISP"
+            LISP_IMPL="clisp"
+            LISP_CMD="clisp"
+        elif command_exists sbcl; then
+            log_message "Using newly installed SBCL"
+            LISP_IMPL="sbcl"
+            LISP_CMD="sbcl"
+        else
+            exit 1
+        fi
+    else
+        exit 1
+    fi
 fi
 
-# Parse command line arguments and convert between LISP implementations
+# Parse command line arguments
 QUIET=false
 ENCODING=""
 LOAD_FILES=()
@@ -89,10 +141,10 @@ if [ "$LISP_IMPL" = "clisp" ]; then
         CMD="$CMD -E $ENCODING"
     fi
     for file in "${LOAD_FILES[@]}"; do
-        CMD="$CMD -i \"$file\""
+        CMD="$CMD -i '$file'"
     done
     if [ -n "$EXECUTE_CMD" ]; then
-        CMD="$CMD -x \"$EXECUTE_CMD\""
+        CMD="$CMD -x '$EXECUTE_CMD'"
     fi
 elif [ "$LISP_IMPL" = "ecl" ]; then
     # ECL syntax
@@ -101,7 +153,7 @@ elif [ "$LISP_IMPL" = "ecl" ]; then
         CMD="$CMD -q"
     fi
     for file in "${LOAD_FILES[@]}"; do
-        CMD="$CMD --load \"$file\""
+        CMD="$CMD --load '$file'"
     done
     if [ -n "$EXECUTE_CMD" ]; then
         CMD="$CMD --eval '$EXECUTE_CMD'"
@@ -115,7 +167,7 @@ elif [ "$LISP_IMPL" = "sbcl" ]; then
         CMD="$CMD --noinform"
     fi
     for file in "${LOAD_FILES[@]}"; do
-        CMD="$CMD --load \"$file\""
+        CMD="$CMD --load '$file'"
     done
     if [ -n "$EXECUTE_CMD" ]; then
         CMD="$CMD --eval '$EXECUTE_CMD'"

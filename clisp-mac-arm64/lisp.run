@@ -1,59 +1,100 @@
 #!/bin/bash
-# Enhanced LISP wrapper for Apple Silicon Macs
-# Provides native ARM64 performance with intelligent fallback
 
+# CogTool Enhanced Mac LISP Wrapper
+# Handles automatic installation and provides comprehensive fallback strategies
+
+# Get script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-COGTOOL_ROOT="$(dirname "$SCRIPT_DIR")"
 
-# Function to log messages
+# Helper functions
 log_message() {
     echo "[CogTool LISP] $1" >&2
 }
 
-# Function to check if a command exists and is executable
 command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
-# Determine which LISP implementation to use
+# Auto-install function
+auto_install_lisp() {
+    log_message "No LISP implementation found. Attempting automatic installation..."
+    
+    if command_exists brew; then
+        log_message "Installing ECL via Homebrew..."
+        if brew install ecl; then
+            log_message "ECL installed successfully!"
+            return 0
+        else
+            log_message "Homebrew installation failed, trying alternative methods..."
+        fi
+    fi
+    
+    # If Homebrew fails or isn't available, provide manual instructions
+    log_message ""
+    log_message "Automatic installation failed. Please install a LISP implementation manually:"
+    log_message ""
+    log_message "Option 1 - Install Homebrew and ECL (Recommended):"
+    log_message "  1. Install Homebrew: /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+    log_message "  2. Install ECL: brew install ecl"
+    log_message ""
+    log_message "Option 2 - Install CLISP:"
+    log_message "  • Homebrew: brew install clisp"
+    log_message "  • MacPorts: sudo port install clisp"
+    log_message "  • Download: https://clisp.sourceforge.io/"
+    log_message ""
+    log_message "Option 3 - Install SBCL:"
+    log_message "  • Homebrew: brew install sbcl"
+    log_message "  • Download: https://www.sbcl.org/"
+    log_message ""
+    return 1
+}
+
+# Try to find LISP implementation
 LISP_IMPL=""
 LISP_CMD=""
 
-# Strategy 1: Try bundled ECL (if we have it)
-BUNDLED_ECL="$SCRIPT_DIR/ecl"
-if [ -x "$BUNDLED_ECL" ]; then
-    log_message "Using bundled ECL (native Apple Silicon performance)"
+# Check bundled implementations first
+if [ -x "$SCRIPT_DIR/bundle/ecl/bin/ecl" ]; then
+    log_message "Using bundled ECL"
     LISP_IMPL="ecl"
-    LISP_CMD="$BUNDLED_ECL"
-# Strategy 2: Try system ECL (native Apple Silicon performance)
+    LISP_CMD="$SCRIPT_DIR/bundle/ecl/bin/ecl"
+elif [ -x "$SCRIPT_DIR/bundle/clisp/bin/clisp" ]; then
+    log_message "Using bundled CLISP"
+    LISP_IMPL="clisp"
+    LISP_CMD="$SCRIPT_DIR/bundle/clisp/bin/clisp"
+# Check system implementations
 elif command_exists ecl; then
-    log_message "Using system ECL (native Apple Silicon performance)"
+    log_message "Using system ECL"
     LISP_IMPL="ecl"
     LISP_CMD="ecl"
-# Strategy 3: Try system CLISP
 elif command_exists clisp; then
     log_message "Using system CLISP"
     LISP_IMPL="clisp"
     LISP_CMD="clisp"
-# Strategy 4: Try bundled Intel CLISP with Rosetta 2
+elif command_exists sbcl; then
+    log_message "Using system SBCL"
+    LISP_IMPL="sbcl"
+    LISP_CMD="sbcl"
 else
-    INTEL_CLISP="$COGTOOL_ROOT/clisp-mac-intel/lisp.run"
-    if [ -x "$INTEL_CLISP" ]; then
-        log_message "Using bundled Intel CLISP with Rosetta 2 (may be slower)"
-        LISP_IMPL="clisp"
-        LISP_CMD="$INTEL_CLISP"
+    # Try auto-installation
+    if auto_install_lisp; then
+        # Retry detection after installation
+        if command_exists ecl; then
+            log_message "Using newly installed ECL"
+            LISP_IMPL="ecl"
+            LISP_CMD="ecl"
+        elif command_exists clisp; then
+            log_message "Using newly installed CLISP"
+            LISP_IMPL="clisp"
+            LISP_CMD="clisp"
+        elif command_exists sbcl; then
+            log_message "Using newly installed SBCL"
+            LISP_IMPL="sbcl"
+            LISP_CMD="sbcl"
+        else
+            exit 1
+        fi
     else
-        # Strategy 5: Error with helpful message
-        log_message "ERROR: No suitable LISP implementation found!"
-        log_message ""
-        log_message "For best performance on Apple Silicon, install ECL:"
-        log_message "  brew install ecl"
-        log_message ""
-        log_message "Alternatively, ensure Rosetta 2 is installed:"
-        log_message "  /usr/sbin/softwareupdate --install-rosetta"
-        log_message ""
-        log_message "If you continue to have issues, please visit:"
-        log_message "  https://github.com/CogTool-Modern/cogtool/issues"
         exit 1
     fi
 fi
@@ -61,90 +102,84 @@ fi
 # Parse command line arguments
 QUIET=false
 ENCODING=""
-MEMORY_IMAGE=""
 LOAD_FILES=()
 EXECUTE_CMD=""
 
 while [[ $# -gt 0 ]]; do
     case $1 in
-        -q)
+        -q|--quiet)
             QUIET=true
             shift
             ;;
-        -E)
+        -E|--encoding)
             ENCODING="$2"
             shift 2
             ;;
-        -M)
-            MEMORY_IMAGE="$2"
-            shift 2
-            ;;
-        -i)
+        -i|--load)
             LOAD_FILES+=("$2")
             shift 2
             ;;
-        -x)
+        -x|--execute)
             EXECUTE_CMD="$2"
             shift 2
             ;;
         *)
-            shift
+            # Pass through unknown arguments
+            break
             ;;
     esac
 done
 
 # Build command based on LISP implementation
-if [ "$LISP_IMPL" = "ecl" ]; then
-    # ECL command building
-    CMD="$LISP_CMD"
-    if [ "$QUIET" = true ]; then
-        CMD="$CMD --norc"
-    fi
-    
-    # Load files
-    for file in "${LOAD_FILES[@]}"; do
-        CMD="$CMD --load \"$file\""
-    done
-    
-    # Execute command
-    if [ -n "$EXECUTE_CMD" ]; then
-        CMD="$CMD --eval \"$EXECUTE_CMD\" --eval \"(quit)\""
-    fi
-else
-    # CLISP command building (pass through arguments)
+if [ "$LISP_IMPL" = "clisp" ]; then
+    # CLISP syntax
     CMD="$LISP_CMD"
     if [ "$QUIET" = true ]; then
         CMD="$CMD -q"
     fi
-    
     if [ -n "$ENCODING" ]; then
         CMD="$CMD -E $ENCODING"
     fi
-    
-    if [ -n "$MEMORY_IMAGE" ]; then
-        CMD="$CMD -M \"$MEMORY_IMAGE\""
-    fi
-    
-    # Load files
     for file in "${LOAD_FILES[@]}"; do
-        CMD="$CMD -i \"$file\""
+        CMD="$CMD -i '$file'"
     done
-    
-    # Execute command
     if [ -n "$EXECUTE_CMD" ]; then
-        CMD="$CMD -x \"$EXECUTE_CMD\""
+        CMD="$CMD -x '$EXECUTE_CMD'"
     fi
+elif [ "$LISP_IMPL" = "ecl" ]; then
+    # ECL syntax
+    CMD="$LISP_CMD"
+    if [ "$QUIET" = true ]; then
+        CMD="$CMD -q"
+    fi
+    for file in "${LOAD_FILES[@]}"; do
+        CMD="$CMD --load '$file'"
+    done
+    if [ -n "$EXECUTE_CMD" ]; then
+        CMD="$CMD --eval '$EXECUTE_CMD'"
+    fi
+    # ECL needs explicit quit
+    CMD="$CMD --eval '(quit)'"
+elif [ "$LISP_IMPL" = "sbcl" ]; then
+    # SBCL syntax
+    CMD="$LISP_CMD"
+    if [ "$QUIET" = true ]; then
+        CMD="$CMD --noinform"
+    fi
+    for file in "${LOAD_FILES[@]}"; do
+        CMD="$CMD --load '$file'"
+    done
+    if [ -n "$EXECUTE_CMD" ]; then
+        CMD="$CMD --eval '$EXECUTE_CMD'"
+    fi
+    # SBCL needs explicit quit
+    CMD="$CMD --eval '(quit)'"
+fi
+
+# Add any remaining arguments
+if [[ $# -gt 0 ]]; then
+    CMD="$CMD $*"
 fi
 
 # Run the command
-if [ "$LISP_IMPL" = "ecl" ]; then
-    # For ECL, we need to handle arguments more carefully
-    if [ -n "$EXECUTE_CMD" ]; then
-        exec "$LISP_CMD" --eval "$EXECUTE_CMD" --eval "(quit)"
-    else
-        exec "$LISP_CMD"
-    fi
-else
-    # For CLISP, use the original approach
-    eval "$CMD"
-fi
+exec bash -c "$CMD"
