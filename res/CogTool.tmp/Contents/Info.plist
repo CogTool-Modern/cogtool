@@ -22,6 +22,21 @@
 	<string>CgTl</string>
 	<key>CFBundleVersion</key>
 	<string>VERSTRING</string>
+		<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>cgt</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>CogTool Project</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>CogTool.Document</string>
+		</dict>
+	</array>
 	<key>LSEnvironment</key>
 	<dict>
 		<key>BLDREV</key>
