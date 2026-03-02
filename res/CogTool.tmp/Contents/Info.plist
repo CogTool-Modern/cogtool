@@ -37,7 +37,41 @@
 	<string>CogTool.help</string>
 	<key>CFBundleHelpBookName</key>
 	<string>CogTool Help</string>
-	
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>CogTool Project</string>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>cgt</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+		</dict>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>org.cogtool.project</string>
+			<key>UTTypeDescription</key>
+			<string>CogTool Project</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cgt</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 
 </dict>
 </plist>
