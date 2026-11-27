@@ -29,6 +29,29 @@ To compile CogTool,
 
 Running the `ant` command begins the build process specified in `build.xml`. 
 
+For a Mac package using the help files already in the repository, run
+`ant package-without-help`. The regular `ant` target also rebuilds the help
+bundle and requires the documentation's Jekyll dependencies. Both targets
+produce `dist/CogTool.app` and a `.tgz` archive.
+
+On Apple Silicon, the Mac app requires an ARM64 Java 17 or newer runtime.
+The launcher uses `JAVA_HOME` when set, otherwise it looks for a registered
+ARM64 Java 17+ installation with `/usr/libexec/java_home`, followed by the
+standard Apple Silicon Homebrew OpenJDK location. The app does not bundle
+Java. The older Intel SWT remains available when launched with an
+Intel Java runtime. The included CLISP executable is Intel 64-bit and needs
+Rosetta on Apple Silicon. Web-page import is unavailable on Apple Silicon:
+its Mozilla XPCOM implementation needs to be rewritten for a supported
+browser engine. Other functionality has not yet been fully validated for
+redistribution on modern macOS.
+
+On macOS, the build ad-hoc signs the app for local use. A public release still
+needs Developer ID signing and notarization for Gatekeeper on other Macs.
+
+The ARM64 SWT library is Eclipse SWT 3.128.0, distributed under EPL-2.0;
+its license is included in the app. Its source and exact artifact coordinates
+are documented in `lib/macintosh/README.md`.
+
 <details markdown="1">
 <summary>Building on Windows</summary>
 

@@ -46,7 +46,7 @@
 			<include name="*.jar" />
 		</fileset>
 		<fileset dir="${macswtdir}">
-			<include name="*.jar" />
+			<include name="swt.jar" />
 		</fileset>
 		<pathelement path="${builddir}" />
 	</path>
@@ -119,7 +119,12 @@
 	<taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar" />
 
 	<!-- Packages build output and resources into runable packages., -->
-	<target name="package" depends="clean,compile, help-copy, help-index" description="Packages build output and resources into runable packages.">
+	<target name="package" depends="clean,compile,help-copy,help-index,package-artifacts" description="Packages build output and resources into runable packages." />
+
+	<!-- Reuse the help files already in the bundle template when Jekyll is unavailable. -->
+	<target name="package-without-help" depends="clean,compile,package-artifacts" description="Packages using the existing help bundle." />
+
+	<target name="package-artifacts">
 
 		<tstamp>
 			<format property="buildtime" pattern="MM/dd/yyyy-hh:mm" />
@@ -150,12 +155,13 @@
 			<fileset dir="${resdir}/CogTool.tmp"/>
 		</copy>
 
-		<!-- Copy the local cogtoolstart and swt jars to the Mac bundle. -->
-        <copy file="${libdir}/macintosh/cogtoolstart" tofile="${distdir}/CogTool.app/Contents/MacOS/cogtoolstart" />
-        <chmod perm="a+x" file="${distdir}/CogTool.app/Contents/MacOS/cogtoolstart" />
+		<!-- Launch Services requires a native entry point; the shell script is a resource. -->
+        <copy file="${libdir}/macintosh/cogtool-launcher" tofile="${distdir}/CogTool.app/Contents/MacOS/cogtool-launcher" />
+        <chmod perm="a+x" file="${distdir}/CogTool.app/Contents/MacOS/cogtool-launcher" />
+        <copy file="${libdir}/macintosh/cogtoolstart" tofile="${distdir}/CogTool.app/Contents/Resources/cogtoolstart" />
 
-        <copy file="${libdir}/macintosh/export-csv-kludge" tofile="${distdir}/CogTool.app/Contents/MacOS/export-csv-kludge" />
-        <chmod perm="a+x" file="${distdir}/CogTool.app/Contents/MacOS/export-csv-kludge" />
+        <copy file="${libdir}/macintosh/export-csv-kludge" tofile="${distdir}/CogTool.app/Contents/Resources/export-csv-kludge" />
+        <chmod perm="a+x" file="${distdir}/CogTool.app/Contents/Resources/export-csv-kludge" />
 
 		<copy todir="${distdir}/CogTool.app/Contents/Resources/Java/dll/">
 			<fileset dir="${macswtdir}">
@@ -167,6 +173,12 @@
 				<include name="*.jar" />
 			</fileset>
 		</copy>
+		<!-- Keep the ARM64 native libraries in the bundle so SWT need not
+		     extract them into the user's home directory at startup. -->
+		<unzip src="${macswtdir}/swt-arm64.jar" dest="${distdir}/CogTool.app/Contents/Resources/Java/dll/arm64">
+			<patternset><include name="*.jnilib" /></patternset>
+		</unzip>
+		<copy file="${macswtdir}/EPL-2.0.txt" todir="${distdir}/CogTool.app/Contents/Resources/Java/" />
 
 		<!-- Copy the rest of the libdir to the Mac bundle. -->
 		<copy todir="${distdir}/CogTool.app/Contents/Resources/Java/">
@@ -213,6 +225,9 @@
 		<!-- Chmod the XUL stuff. -->
 		<chmod dir="${distdir}/CogTool.app/Contents/Resources/XUL-mac" includes="XUL,xulrunner*,*.*lib,*.sh" perm="a+x"/>
 
+		<!-- Sign only after all bundle contents and metadata have been written. -->
+		<antcall target="sign-mac-bundle" />
+
 		<!-- Prepare .tgz for Mac OS X download. -->
 		<tar destfile="${distdir}/CogToolMac-${versionclean}-r${revision}.tgz" compression="gzip" longfile="warn">
 			<tarfileset dir="${distdir}/" mode="755">
@@ -226,6 +241,15 @@
 		</condition>
 		<antcall target="package-windows" />
 
+	</target>
+
+	<target name="sign-mac-bundle" if="os.mac">
+		<exec executable="/usr/bin/codesign" failonerror="true">
+			<arg value="--force" />
+			<arg value="--sign" />
+			<arg value="-" />
+			<arg file="${distdir}/CogTool.app" />
+		</exec>
 	</target>
 
 	<target name="package-windows" if="os.windows">

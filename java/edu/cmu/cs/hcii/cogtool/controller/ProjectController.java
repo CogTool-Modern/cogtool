@@ -5914,6 +5914,13 @@ public class ProjectController extends DefaultController
 
         	public boolean performAction(Object prms)
             {
+                String javaArch = System.getProperty("os.arch", "");
+                if (OSUtils.MACOSX && ("aarch64".equals(javaArch) || "arm64".equals(javaArch))) {
+                    interaction.reportProblem(ImportWebCrawlThread.IMPORT_WEB_CRAWL,
+                        "Web import is not available on Apple Silicon. " +
+                        "It depends on an obsolete Mozilla browser interface.");
+                    return false;
+                }
                 DesignSelectionState selection = (DesignSelectionState) prms;
 
                 ProjectInteraction.IWebCrawlImport importParms =

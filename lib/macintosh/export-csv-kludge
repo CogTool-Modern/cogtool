@@ -12,7 +12,7 @@ if $JAVACMD -help | grep -e '-d32' >/dev/null ; then
 D32ARG='-d32' ;
 fi
 
-RESDIR="`dirname \"$0\"`/../Resources"
+RESDIR="$(cd "$(dirname "$0")" && pwd)"
 JAVAROOT="$RESDIR/Java"
 
 cd "$RESDIR"
