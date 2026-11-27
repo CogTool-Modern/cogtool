@@ -6,19 +6,19 @@ if [[ -n "$JAVA_HOME" && -x "$JAVA_HOME/bin/java" ]]; then
     JAVACMD="$JAVA_HOME/bin/java"
 else
     if [[ "$(uname -m)" == "arm64" ]]; then
-        # java_home can fall back to an older plug-in runtime even with -v.
+        # java_home can fall back to an older plug-in runtime even with -v,
+        # and does not always discover standalone JRE installations.
         JAVA17_HOME=$(/usr/libexec/java_home -v '17+' -a arm64 2>/dev/null)
-        if [[ -x "$JAVA17_HOME/bin/java" ]]; then
-            JAVA17_SETTINGS=$("$JAVA17_HOME/bin/java" -XshowSettings:properties -version 2>&1)
+        for JAVA_CANDIDATE in "$JAVA17_HOME/bin/java" /Library/Java/JavaVirtualMachines/*/Contents/Home/bin/java /opt/homebrew/opt/openjdk/bin/java "$(command -v java)"; do
+            [[ -x "$JAVA_CANDIDATE" ]] || continue
+            JAVA17_SETTINGS=$("$JAVA_CANDIDATE" -XshowSettings:properties -version 2>&1) || continue
             JAVA17_VERSION=$(printf '%s\n' "$JAVA17_SETTINGS" | sed -n 's/^[[:space:]]*java.specification.version = //p' | head -1)
             JAVA17_ARCH=$(printf '%s\n' "$JAVA17_SETTINGS" | sed -n 's/^[[:space:]]*os.arch = //p' | head -1)
             if [[ "$JAVA17_VERSION" =~ ^[0-9]+$ ]] && (( JAVA17_VERSION >= 17 )) && [[ "$JAVA17_ARCH" == "aarch64" || "$JAVA17_ARCH" == "arm64" ]]; then
-                JAVACMD="$JAVA17_HOME/bin/java"
+                JAVACMD="$JAVA_CANDIDATE"
+                break
             fi
-        fi
-        if [[ -z "$JAVACMD" && -x /opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home/bin/java ]]; then
-            JAVACMD="/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home/bin/java"
-        fi
+        done
     fi
     JAVACMD="${JAVACMD:-$(command -v java)}"
 fi

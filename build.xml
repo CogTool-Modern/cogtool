@@ -207,6 +207,16 @@
 		<!-- Copy the app jar to the Mac bundle. -->
 		<copy file="${distdir}/CogTool.jar" todir="${distdir}/CogTool.app/Contents/Resources/Java/" />
 
+		<!-- Compile the prediction helpers at build time so running them needs only Java. -->
+		<mkdir dir="${builddir}/prediction-tests" />
+		<javac srcdir="${basedir}/tests" destdir="${builddir}/prediction-tests" debug="on" fork="true" source="${jlevel}" target="${jlevel}" includeantruntime="false">
+			<classpath refid="mac-classpath" />
+			<include name="ProjectPredictions.java" />
+			<include name="PredictionSmoke.java" />
+		</javac>
+		<jar destfile="${distdir}/CogTool.app/Contents/Resources/cogtool-prediction-tests.jar" basedir="${builddir}/prediction-tests" />
+		<delete dir="${builddir}/prediction-tests" />
+
 		<!-- Copy the clisp dist to the Mac bundle. -->
 		<copy todir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel/">
 			<fileset dir="${basedir}/clisp-mac-intel">

@@ -6,12 +6,43 @@ import csv
 import math
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import sys
-import tempfile
 
 ROOT = Path(__file__).resolve().parent.parent
 PREFIX = "COGTOOL_PREDICTION "
+
+
+def find_java(java_home):
+    if java_home:
+        candidates = [Path(java_home) / "bin/java"]
+    else:
+        candidates = []
+        try:
+            home = subprocess.run(["/usr/libexec/java_home", "-v", "17+", "-a", "arm64"],
+                                  capture_output=True, text=True, check=True).stdout.strip()
+            if home:
+                candidates.append(Path(home) / "bin/java")
+        except (OSError, subprocess.CalledProcessError):
+            pass
+        candidates.extend(Path("/Library/Java/JavaVirtualMachines").glob("*/Contents/Home/bin/java"))
+        candidates.append(Path("/opt/homebrew/opt/openjdk/bin/java"))
+        path_java = shutil.which("java")
+        if path_java:
+            candidates.append(Path(path_java))
+    for java in candidates:
+        try:
+            result = subprocess.run([str(java), "-XshowSettings:properties", "-version"],
+                                    capture_output=True, text=True, check=True)
+        except (OSError, subprocess.CalledProcessError):
+            continue
+        properties = dict((key.strip(), value.strip()) for line in result.stderr.splitlines()
+                          for key, sep, value in [line.partition(" = ")] if sep)
+        version = properties.get("java.specification.version", "")
+        if version.isdigit() and int(version) >= 17 and properties.get("os.arch") in {"aarch64", "arm64"}:
+            return java
+    raise ValueError("ARM64 Java 17 or newer runtime not found; set JAVA_HOME or pass --java-home")
 
 
 def number(value, label, line):
@@ -55,7 +86,7 @@ def main():
     parser.add_argument("directory", type=Path, help="directory containing .cgt projects (searched recursively)")
     parser.add_argument("--expectations", type=Path, help="CSV file (default: DIRECTORY/expected-times.csv)")
     parser.add_argument("--app", type=Path, default=ROOT / "dist/CogTool.app", help="built macOS app")
-    parser.add_argument("--java-home", type=Path, default=os.environ.get("JAVA_HOME"), help="JDK 17+ directory (or set JAVA_HOME)")
+    parser.add_argument("--java-home", type=Path, default=os.environ.get("JAVA_HOME"), help="ARM64 Java 17+ runtime directory (or set JAVA_HOME)")
     parser.add_argument("--timeout", type=float, default=180, help="maximum seconds per project (default: 180)")
     args = parser.parse_args()
     try:
@@ -76,60 +107,57 @@ def main():
         java_root = app / "Contents/Resources/Java"
         if not (java_root / "CogTool.jar").is_file() or not (java_root / "swt-arm64.jar").is_file():
             raise ValueError(f"built Apple Silicon CogTool app not found at {app}; run ant package-without-help")
-        java_home = Path(args.java_home) if args.java_home else Path("/opt/homebrew/opt/openjdk")
-        java = java_home / "bin/java"
-        javac = java_home / "bin/javac"
-        if not java.is_file() or not javac.is_file():
-            raise ValueError("JDK not found; set JAVA_HOME or pass --java-home with a JDK 17 or newer")
-        with tempfile.TemporaryDirectory(prefix="cogtool-project-times-") as tmp:
-            jars = [java_root / "swt-arm64.jar"] + sorted(p for p in java_root.glob("*.jar") if p.name not in {"swt.jar", "swt-arm64.jar"})
-            classpath = os.pathsep.join([tmp] + [str(p) for p in jars])
-            subprocess.run([str(javac), "-cp", classpath, "-d", tmp, str(ROOT / "tests/ProjectPredictions.java")], check=True)
-            failures = 0
-            observed = set()
-            for project in projects:
-                relative = project.relative_to(directory).as_posix()
-                print(f"Computing {relative}...", flush=True)
-                command = [str(java), "-XstartOnFirstThread", f"-Djava.library.path={java_root / 'dll/arm64'}", "-cp", classpath, "ProjectPredictions", str(project.resolve())]
-                try:
-                    run = subprocess.run(command, cwd=app / "Contents/Resources", text=True, capture_output=True, timeout=args.timeout)
-                except subprocess.TimeoutExpired:
-                    print(f"FAIL {relative}: timed out after {args.timeout:g} seconds", file=sys.stderr)
-                    failures += 1
-                    continue
-                if run.returncode:
-                    print(f"FAIL {relative}: prediction process exited {run.returncode}\n{run.stdout}{run.stderr}", file=sys.stderr)
-                    failures += 1
-                    continue
-                for line in run.stdout.splitlines():
-                    if not line.startswith(PREFIX):
-                        continue
-                    task, design, value = line[len(PREFIX):].split(" ")
-                    task = base64.b64decode(task, validate=True).decode("utf-8")
-                    design = base64.b64decode(design, validate=True).decode("utf-8")
-                    actual = number(value, "computed seconds", 0)
-                    key = (relative, task, design)
-                    if key in observed:
-                        raise ValueError(f"duplicate computed result: {key}")
-                    observed.add(key)
-                    if key not in expectations:
-                        print(f"UNEXPECTED prediction: {relative} / {task} / {design}: {actual:g}", file=sys.stderr)
-                        failures += 1
-                        continue
-                    expected, tolerance = expectations[key]
-                    if abs(actual - expected) > tolerance:
-                        print(f"FAIL {relative} / {task} / {design}: expected {expected:g} ± {tolerance:g} s, got {actual:g} s", file=sys.stderr)
-                        failures += 1
-                    else:
-                        print(f"PASS {relative} / {task} / {design}: {actual:g} s (expected {expected:g} ± {tolerance:g})")
-            for project, task, design in sorted(set(expectations) - observed):
-                print(f"MISSING prediction: {project} / {task} / {design}", file=sys.stderr)
+        helper = app / "Contents/Resources/cogtool-prediction-tests.jar"
+        if not helper.is_file():
+            raise ValueError("prediction helpers not found in app; rebuild with ant package-without-help")
+        java = find_java(args.java_home)
+        jars = [java_root / "swt-arm64.jar"] + sorted(p for p in java_root.glob("*.jar") if p.name not in {"swt.jar", "swt-arm64.jar"})
+        classpath = os.pathsep.join([str(helper)] + [str(p) for p in jars])
+        failures = 0
+        observed = set()
+        for project in projects:
+            relative = project.relative_to(directory).as_posix()
+            print(f"Computing {relative}...", flush=True)
+            command = [str(java), "-XstartOnFirstThread", f"-Djava.library.path={java_root / 'dll/arm64'}", "-cp", classpath, "ProjectPredictions", str(project.resolve())]
+            try:
+                run = subprocess.run(command, cwd=app / "Contents/Resources", text=True, capture_output=True, timeout=args.timeout)
+            except subprocess.TimeoutExpired:
+                print(f"FAIL {relative}: timed out after {args.timeout:g} seconds", file=sys.stderr)
                 failures += 1
-            if failures:
-                print(f"{failures} failure(s)", file=sys.stderr)
-                return 1
-            print(f"All {len(observed)} predictions passed in {len(projects)} project(s).")
-            return 0
+                continue
+            if run.returncode:
+                print(f"FAIL {relative}: prediction process exited {run.returncode}\n{run.stdout}{run.stderr}", file=sys.stderr)
+                failures += 1
+                continue
+            for line in run.stdout.splitlines():
+                if not line.startswith(PREFIX):
+                    continue
+                task, design, value = line[len(PREFIX):].split(" ")
+                task = base64.b64decode(task, validate=True).decode("utf-8")
+                design = base64.b64decode(design, validate=True).decode("utf-8")
+                actual = number(value, "computed seconds", 0)
+                key = (relative, task, design)
+                if key in observed:
+                    raise ValueError(f"duplicate computed result: {key}")
+                observed.add(key)
+                if key not in expectations:
+                    print(f"UNEXPECTED prediction: {relative} / {task} / {design}: {actual:g}", file=sys.stderr)
+                    failures += 1
+                    continue
+                expected, tolerance = expectations[key]
+                if abs(actual - expected) > tolerance:
+                    print(f"FAIL {relative} / {task} / {design}: expected {expected:g} ± {tolerance:g} s, got {actual:g} s", file=sys.stderr)
+                    failures += 1
+                else:
+                    print(f"PASS {relative} / {task} / {design}: {actual:g} s (expected {expected:g} ± {tolerance:g})")
+        for project, task, design in sorted(set(expectations) - observed):
+            print(f"MISSING prediction: {project} / {task} / {design}", file=sys.stderr)
+            failures += 1
+        if failures:
+            print(f"{failures} failure(s)", file=sys.stderr)
+            return 1
+        print(f"All {len(observed)} predictions passed in {len(projects)} project(s).")
+        return 0
     except (OSError, ValueError, subprocess.CalledProcessError) as error:
         print(f"Error: {error}", file=sys.stderr)
         return 2

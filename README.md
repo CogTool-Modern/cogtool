@@ -22,7 +22,7 @@ and for developers: [https://github.com/cogtool/documentation.git](https://githu
 TODO Merge this seperate repo with the in-branch, GitHub Pages-powered `docs/` folder.
 
 ## Building
-To compile CogTool,
+To compile CogTool, install a JDK (17 or newer is recommended) and:
 1. Download the source code from [GitHub](https://github.com/CogTool-Modern/cogtool).
 2. Install [Apache Ant](https://ant.apache.org/bindownload.cgi)
 3. From within the project directory, run `ant` 
@@ -36,10 +36,13 @@ produce `dist/CogTool.app` and a `.tgz` archive.
 
 On Apple Silicon, the Mac app requires an ARM64 Java 17 or newer runtime.
 The launcher uses `JAVA_HOME` when set, otherwise it looks for a registered
-ARM64 Java 17+ installation with `/usr/libexec/java_home`, followed by the
-standard Apple Silicon Homebrew OpenJDK location. The app does not bundle
-Java. The older Intel SWT remains available when launched with an
-Intel Java runtime. Predictions on Apple Silicon use a native CLISP runtime
+ARM64 Java 17+ installation using `/usr/libexec/java_home`, standard Java
+installation locations, or `java` on `PATH`. A JRE is sufficient to run the
+built app; a JDK is needed only to compile it. The app does not bundle Java.
+If a runtime is not discovered automatically, launch the app from a terminal
+with `JAVA_HOME=/path/to/runtime /path/to/CogTool.app/Contents/MacOS/cogtool-launcher`.
+The older Intel SWT remains available when launched with an Intel Java runtime.
+Predictions on Apple Silicon use a native CLISP runtime
 and require macOS 15 or later; see `clisp-mac-arm64/README.md` for its source
 and license information. Web-page import is unavailable on Apple Silicon:
 its Mozilla XPCOM implementation needs to be rewritten for a supported
@@ -70,7 +73,8 @@ The prediction test loads `.cgt` files from a directory, recomputes each
 individual task script with its active prediction algorithm, and compares the
 resulting times with an expectations CSV. It uses the prediction engine
 directly; it does not exercise the graphical interface or command-file export.
-The current runner requires a built Apple Silicon macOS app, JDK 17 or newer,
+The current runner requires a built Apple Silicon macOS app, an ARM64 Java 17
+or newer runtime (a JRE is sufficient),
 Python 3.9 or newer, and a macOS graphical session. Build the app with
 `ant package-without-help` first. As with other predictions on Apple Silicon,
 macOS 15 or newer is required.
@@ -95,7 +99,7 @@ covered by this runner.
 Run it with:
 
 ```sh
-JAVA_HOME=/path/to/jdk tests/check-project-times.py /path/to/project-directory
+JAVA_HOME=/path/to/java-runtime tests/check-project-times.py /path/to/project-directory
 ```
 
 Use `--app /path/to/CogTool.app` for a different build, `--expectations`
