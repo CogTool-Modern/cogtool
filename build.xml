@@ -171,6 +171,8 @@
         <copy file="${libdir}/macintosh/cogtool-launcher" tofile="${distdir}/CogTool.app/Contents/MacOS/cogtool-launcher" />
         <chmod perm="a+x" file="${distdir}/CogTool.app/Contents/MacOS/cogtool-launcher" />
         <copy file="${libdir}/macintosh/cogtoolstart" tofile="${distdir}/CogTool.app/Contents/Resources/cogtoolstart" />
+        <!-- The launcher needs these links before Java is available. -->
+        <copy file="${srcroot}/${java_runtime_res}/release.properties" tofile="${distdir}/CogTool.app/Contents/Resources/release.properties" />
 
         <copy file="${libdir}/macintosh/export-csv-kludge" tofile="${distdir}/CogTool.app/Contents/Resources/export-csv-kludge" />
         <chmod perm="a+x" file="${distdir}/CogTool.app/Contents/Resources/export-csv-kludge" />

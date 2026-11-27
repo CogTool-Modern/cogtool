@@ -29,8 +29,8 @@ To compile CogTool, install a JDK (17 or newer is recommended) and:
 
 Running the `ant` command begins the build process specified in `build.xml`. 
 
-To set the release version and the About screen's documentation and software
-updates links, edit `java/edu/cmu/cs/hcii/cogtool/resources/release.properties`
+To set the release version, the About screen's documentation and software
+updates links, and the Mac Java installer links, edit `java/edu/cmu/cs/hcii/cogtool/resources/release.properties`
 before building. The version must have one to four numeric components (for
 example, `1.4` or `1.4.1`); the build derives the Windows and archive versions
 from it. The file is included in the application when it is built.
