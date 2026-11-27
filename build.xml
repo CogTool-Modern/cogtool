@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="CogTool" default="package">
+<project name="CogTool" default="package-all">
 
         <defaultexcludes echo="true"/>
 
+	<!-- Local paths can be configured without changing the shared build. -->
+	<property environment="env" />
+	<property file="${basedir}/build.local.properties" />
+	<condition property="windows.tools.path" value="${windows.msitools.bin}${path.separator}${env.PATH}" else="${env.PATH}">
+		<isset property="windows.msitools.bin" />
+	</condition>
 	<!-- This file is also packaged as a runtime resource. -->
 	<property file="${basedir}/java/edu/cmu/cs/hcii/cogtool/resources/release.properties" />
 	<!-- A build may supply -Drevision=...; otherwise no revision is displayed. -->
@@ -28,7 +34,7 @@
 	<property name="libdir" value="${basedir}/lib" />
 	<!-- Select one Windows SWT at build time; the matching Java runtime must
 	     have the same architecture. -->
-	<property name="windows.swt.arch" value="x86_64" />
+	<property name="windows.swt.arch" value="arm64" />
 	<condition property="swtdir" value="${libdir}/windows/arm64" else="${libdir}/windows">
 		<equals arg1="${windows.swt.arch}" arg2="arm64" />
 	</condition>
@@ -142,7 +148,24 @@
 
 	<taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar" />
 
-	<!-- Packages build output and resources into runable packages., -->
+	<!-- Check the required runtime before the default build removes old output. -->
+	<target name="validate-package-all" depends="validate-windows-swt">
+		<fail unless="windows.jre.dir" message="Set windows.jre.dir in build.local.properties or with -Dwindows.jre.dir=/path/to/windows-jre." />
+		<available file="${windows.jre.dir}/bin/javaw.exe" property="windows.runtime.has.javaw" />
+		<available file="${windows.jre.dir}/release" property="windows.runtime.has.release" />
+		<fail unless="windows.runtime.has.javaw" message="windows.jre.dir must contain bin/javaw.exe." />
+		<fail unless="windows.runtime.has.release" message="windows.jre.dir must contain a release file." />
+		<exec executable="python3" failonerror="true">
+			<env key="PATH" path="${windows.tools.path}" />
+			<arg value="-c" />
+			<arg value="import shutil, sys; missing = [name for name in ('wixl', 'msibuild', 'msiinfo') if not shutil.which(name)]; missing and sys.exit('Missing installer tools: ' + ', '.join(missing))" />
+		</exec>
+		<property name="skip.legacy.windows" value="true" />
+	</target>
+
+	<target name="package-all" depends="validate-package-all,package-without-help,windows-msi" description="Builds the Mac package and Windows MSI." />
+
+	<!-- Packages build output and resources into runnable packages. -->
 	<target name="package" depends="clean,compile,help-copy,help-index,package-artifacts" description="Packages build output and resources into runable packages." />
 
 	<!-- Reuse the help files already in the bundle template when Jekyll is unavailable. -->
@@ -204,6 +227,7 @@
 	<target name="windows-msi" depends="windows-stage" description="Builds a Windows MSI using wixl and a supplied Windows JRE.">
 		<fail unless="windows.jre.dir" message="Set windows.jre.dir to a Windows Java runtime matching windows.swt.arch." />
 		<exec executable="python3" failonerror="true">
+			<env key="PATH" path="${windows.tools.path}" />
 			<arg file="${basedir}/tools/build-windows-msi.py" />
 			<arg value="--stage" /><arg file="${windows.stage}" />
 			<arg value="--arch" /><arg value="${windows.swt.arch}" />
@@ -367,7 +391,7 @@
 		</exec>
 	</target>
 
-	<target name="package-windows" if="os.windows">
+	<target name="package-windows" if="os.windows" unless="skip.legacy.windows">
 		<!-- Insert Build Date, etc. -->
 		<replace file="${basedir}/res/launch4j.cfg.xml" token="VERSION" value="${version}" />
 		<replace file="${basedir}/res/launch4j.cfg.xml" token="REVISION" value="${revision}" />

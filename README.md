@@ -22,12 +22,25 @@ and for developers: [https://github.com/cogtool/documentation.git](https://githu
 TODO Merge this seperate repo with the in-branch, GitHub Pages-powered `docs/` folder.
 
 ## Building
-To compile CogTool, install a JDK (17 or newer is recommended) and:
+To build the macOS package and Windows ARM64 MSI together on macOS, install a
+JDK (17 or newer), Apache Ant, Python 3, and
+[msitools](https://wiki.gnome.org/msitools) (`wixl`, `msibuild`, and
+`msiinfo` must be on `PATH`). Then:
 1. Download the source code from [GitHub](https://github.com/CogTool-Modern/cogtool).
-2. Install [Apache Ant](https://ant.apache.org/bindownload.cgi)
-3. From within the project directory, run `ant` 
+2. Obtain an extracted Windows ARM64 Java 17+ runtime suitable for redistribution.
+3. Create `build.local.properties` in the project directory, containing
+   `windows.jre.dir=/absolute/path/to/windows-arm64-jre`.
+4. From within the project directory, run `ant`.
 
-Running the `ant` command begins the build process specified in `build.xml`. 
+The default build produces `dist/CogTool.app`, a macOS `.tgz` archive, and a
+Windows ARM64 MSI. It reuses the help files in the repository. The runtime
+path can instead be supplied with `-Dwindows.jre.dir=/path/to/windows-jre`;
+command-line properties override `build.local.properties`. To build an x86-64
+Windows MSI instead, also set `-Dwindows.swt.arch=x86_64` and supply a matching
+Windows runtime. The default build clears existing files in `build/` and
+`dist/` before building, so save any artifacts you want to keep first.
+If the installer tools are not on `PATH`, add
+`windows.msitools.bin=/absolute/path/to/msitools/bin` to `build.local.properties`.
 
 To set the release version, the About screen's documentation and software
 updates links, and the Mac Java installer links, edit `java/edu/cmu/cs/hcii/cogtool/resources/release.properties`
@@ -35,10 +48,10 @@ before building. The version must have one to four numeric components (for
 example, `1.4` or `1.4.1`); the build derives the Windows and archive versions
 from it. The file is included in the application when it is built.
 
-For a Mac package using the help files already in the repository, run
-`ant package-without-help`. The regular `ant` target also rebuilds the help
-bundle and requires the documentation's Jekyll dependencies. Both targets
-produce `dist/CogTool.app` and a `.tgz` archive.
+For only a Mac package using the help files already in the repository, run
+`ant package-without-help`. To rebuild the help bundle as well, run
+`ant package`; this requires the documentation's Jekyll dependencies. Both
+targets produce `dist/CogTool.app` and a `.tgz` archive.
 
 On Apple Silicon, the Mac app requires an ARM64 Java 17 or newer runtime.
 The launcher uses `JAVA_HOME` when set, otherwise it looks for a registered
@@ -69,8 +82,8 @@ With a JDK and Ant installed, build a portable Windows ZIP on macOS, Linux,
 or Windows, without NSIS:
 
 ```sh
-ant windows-zip                              # x86-64 Windows Java
-ant -Dwindows.swt.arch=arm64 windows-zip      # ARM64 Windows Java
+ant windows-zip                               # ARM64 Windows Java
+ant -Dwindows.swt.arch=x86_64 windows-zip      # x86-64 Windows Java
 ```
 
 The ZIP is written to `dist/CogTool-Windows-<architecture>-<version>.zip`.
@@ -112,14 +125,13 @@ The older NSIS installer is built only on Windows by the regular package
 targets. That build assumes [NSIS](https://nsis.sourceforge.io/Main_Page) is
 installed at `C:\Program Files (x86)\NSIS\makensis.exe`.
 
-The default Windows SWT library is for x86-64 Java. To select the Windows
-ARM64 SWT library for compilation and the legacy installer, use a JDK 17 or newer
+The default Windows SWT library is for ARM64 Java. To select the Windows
+ARM64 SWT library explicitly for compilation and the legacy installer, use a JDK 17 or newer
 and run `ant -Dwindows.swt.arch=arm64 package-without-help`. The installer
 must also contain a compatible ARM64 Java runtime in `jre/`; the checked-in
-`jre/` is incomplete. Windows ARM64 packaging and runtime behavior have not
-yet been tested. Web-page import is unavailable with ARM64 Java because it
-depends on an obsolete Mozilla interface. Predictions still use the bundled
-x86 CLISP executable and need validation under Windows on ARM. See
+`jre/` is incomplete. Web-page import is unavailable with ARM64 Java because it
+depends on an obsolete Mozilla interface. Predictions use the bundled x86
+CLISP executable under Windows on ARM. See
 `lib/windows/README.md` for the SWT artifacts and licensing.
 
 </details>
