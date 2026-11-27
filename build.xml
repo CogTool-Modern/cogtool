@@ -4,9 +4,21 @@
 
         <defaultexcludes echo="true"/>
 
-	<property name="exeversion" value="1.4.0.0" />
-	<property name="version" value="1.4" />
-	<property name="versionclean" value="1_4" />
+	<!-- This file is also packaged as a runtime resource. -->
+	<property file="${basedir}/java/edu/cmu/cs/hcii/cogtool/resources/release.properties" />
+	<!-- A build may supply -Drevision=...; otherwise no revision is displayed. -->
+	<property name="revision" value="unspecified" />
+	<condition property="revision.suffix" value="-r${revision}" else="">
+		<not><equals arg1="${revision}" arg2="unspecified" /></not>
+	</condition>
+	<loadresource property="exeversion">
+		<string value="${version}.0.0.0" />
+		<filterchain><tokenfilter><replaceregex pattern="^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+).*$" replace="\1" /></tokenfilter></filterchain>
+	</loadresource>
+	<loadresource property="versionclean">
+		<string value="${version}" />
+		<filterchain><tokenfilter><replaceregex pattern="\." replace="_" flags="g" /></tokenfilter></filterchain>
+	</loadresource>
 
 	<property name="jlevel" value="1.8" />
     <property name="build.compiler" value="javac${jlevel}" />
@@ -245,7 +257,7 @@
 		<antcall target="sign-mac-bundle" />
 
 		<!-- Prepare .tgz for Mac OS X download. -->
-		<tar destfile="${distdir}/CogToolMac-${versionclean}-r${revision}.tgz" compression="gzip" longfile="warn">
+		<tar destfile="${distdir}/CogToolMac-${versionclean}${revision.suffix}.tgz" compression="gzip" longfile="warn">
 			<tarfileset dir="${distdir}/" mode="755">
 				<include name="CogTool.app/**" />
 			</tarfileset>

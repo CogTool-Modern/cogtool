@@ -545,12 +545,12 @@ public class CogTool
         StringBuilder result = new StringBuilder();
 
         // Build number
-        if (VERSION != null) {
-            result.append(VERSION);
-        }
+        result.append((VERSION == null || VERSION.length() == 0)
+                      ? ReleaseConfig.VERSION : VERSION);
 
         // revision number
-        if (revision != null) {
+        if (revision != null && revision.length() > 0 &&
+            ! "unspecified".equals(revision) && ! "${revision}".equals(revision)) {
             if (result.length() > 0) {
                 result.append(" ");
             }
@@ -560,7 +560,7 @@ public class CogTool
         }
 
         // build time
-        if (BUILD_TIME != null) {
+        if (BUILD_TIME != null && BUILD_TIME.length() > 0) {
             if (result.length() > 0) {
                 result.append(" ");
             }

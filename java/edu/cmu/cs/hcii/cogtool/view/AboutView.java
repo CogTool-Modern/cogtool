@@ -102,9 +102,10 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 
 import edu.cmu.cs.hcii.cogtool.CogTool;
+import edu.cmu.cs.hcii.cogtool.CogToolPref;
+import edu.cmu.cs.hcii.cogtool.ReleaseConfig;
 import edu.cmu.cs.hcii.cogtool.util.AListenerAction;
 import edu.cmu.cs.hcii.cogtool.util.GraphicsUtil;
 import edu.cmu.cs.hcii.cogtool.util.L10N;
@@ -197,7 +198,7 @@ public class AboutView extends WindowUtil.SimpleDialog
         logo.setLayoutData(imgLayout);
 
         // Current version, centered
-        Text version = new Text(dialog, SWT.CENTER | SWT.READ_ONLY);
+        Label version = new Label(dialog, SWT.CENTER);
 
         GridData versionLayout =
             new GridData(GridData.HORIZONTAL_ALIGN_CENTER);
@@ -216,28 +217,26 @@ public class AboutView extends WindowUtil.SimpleDialog
         copyright.setText(L10N.get("CT.Copyright",
                                    "\u00A9 2012 CogTool@Carnegie Mellon University"));
 
-        // Be careful if you modify the following: the SWT Link object seems
-        // to behave most bizarrely if you combine a tilde in the middle of
-        // a URL with a trailing slash at its end.
-        addLink("Download updates from",
-                L10N.get("CT.MainURL", "https://github.com/cogtool/cogtool/releases/latest"));
-        addLink("Documentation",
-                L10N.get("CT.UserGuideURL",
-                         "https://github.com/cogtool/cogtool/releases/download/1.2.2/CogToolUserGuide_1_2.pdf"));
+        addLink(L10N.get("CT.SoftwareUpdates", "Software Updates"),
+                ReleaseConfig.UPDATES_URL);
+        addLink(L10N.get("CT.Documentation", "Documentation"),
+                ReleaseConfig.DOCUMENTATION_URL);
 
-        Label memory = new Label(dialog, SWT.NONE);
-        GridData memoryLayout =
-            new GridData(GridData.HORIZONTAL_ALIGN_CENTER);
-        memoryLayout.horizontalSpan = 4;
-        memory.setLayoutData(memoryLayout);
-        memory.setText(CogTool.getMemoryUsage());
+        if (CogToolPref.RESEARCH.getBoolean()) {
+            Label memory = new Label(dialog, SWT.NONE);
+            GridData memoryLayout =
+                new GridData(GridData.HORIZONTAL_ALIGN_CENTER);
+            memoryLayout.horizontalSpan = 4;
+            memory.setLayoutData(memoryLayout);
+            memory.setText(CogTool.getMemoryUsage());
 
-        Label props = new Label(dialog, SWT.NONE);
-        GridData propsLayout =
-            new GridData(GridData.HORIZONTAL_ALIGN_CENTER);
-        propsLayout.horizontalSpan = 4;
-        props.setLayoutData(propsLayout);
-        props.setText(CogTool.getConfigurationProperties());
+            Label props = new Label(dialog, SWT.NONE);
+            GridData propsLayout =
+                new GridData(GridData.HORIZONTAL_ALIGN_CENTER);
+            propsLayout.horizontalSpan = 4;
+            props.setLayoutData(propsLayout);
+            props.setText(CogTool.getConfigurationProperties());
+        }
 
         addButtons();
     } // buildDialog
@@ -250,7 +249,7 @@ public class AboutView extends WindowUtil.SimpleDialog
 
         linkLayout.horizontalSpan = 4;
         link.setLayoutData(linkLayout);
-        link.setText(label + ": <a href=\"" + url + "\">" + url + "</a>");
+        link.setText("<a>" + label + "</a>");
         link.addListener(SWT.Selection,
                          new Listener() {
                              public void handleEvent(Event evt)
