@@ -1,0 +1,5 @@
+project,task,design,seconds,tolerance
+N&P93.cgt,Look up one number,Pop-Up,2.645,0.05
+N&P93.cgt,Look up one number,Dialog Box,13.099,0.05
+N&P93.cgt,Look up two numbers,Pop-Up,4.912,0.05
+N&P93.cgt,Look up two numbers,Dialog Box,20.943,0.05

@@ -64,3 +64,47 @@ The step in the build process for building Windows installers will only happen w
 - [CogTool - 32-bit build instructions](https://github.com/cogtool/documentation/blob/master/Processes/configuring-development-machines.txt)
 - [Download Apache Ant](https://ant.apache.org/bindownload.cgi)
 
+## Checking project prediction times
+
+The prediction test loads `.cgt` files from a directory, recomputes each
+individual task script with its active prediction algorithm, and compares the
+resulting times with an expectations CSV. It uses the prediction engine
+directly; it does not exercise the graphical interface or command-file export.
+The current runner requires a built Apple Silicon macOS app, JDK 17 or newer,
+Python 3.9 or newer, and a macOS graphical session. Build the app with
+`ant package-without-help` first. As with other predictions on Apple Silicon,
+macOS 15 or newer is required.
+
+Put an `expected-times.csv` in the project directory, with one row per
+prediction and times and tolerances in seconds:
+
+```csv
+project,task,design,seconds,tolerance
+Example.cgt,Look up one number,Pop-Up,2.645,0.05
+```
+
+`project` is the path to the `.cgt` file relative to the supplied directory;
+subdirectories are searched recursively. Task and design names must match the
+project exactly. The test checks individual task scripts in every project and reports
+missing or unexpected projects or predictions, failed computations, and times
+outside the stated absolute tolerance. Tasks in groups are traversed; duplicate
+task/design names or multiple scripts for the same task/design are ambiguous
+and cause a failure. Group-level and CogTool Explorer predictions are not
+covered by this runner.
+
+Run it with:
+
+```sh
+JAVA_HOME=/path/to/jdk tests/check-project-times.py /path/to/project-directory
+```
+
+Use `--app /path/to/CogTool.app` for a different build, `--expectations`
+to specify a CSV elsewhere, and `--timeout SECONDS`
+to adjust the per-project timeout. The command exits zero only if all checks
+pass. For a working example using the included phone-number project and its
+four expected predictions:
+
+```sh
+tests/check-project-times.py docs/examples/phone-number-lookup \
+  --expectations tests/fixtures/phone-number-expected-times.csv
+```
