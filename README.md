@@ -39,8 +39,9 @@ The launcher uses `JAVA_HOME` when set, otherwise it looks for a registered
 ARM64 Java 17+ installation with `/usr/libexec/java_home`, followed by the
 standard Apple Silicon Homebrew OpenJDK location. The app does not bundle
 Java. The older Intel SWT remains available when launched with an
-Intel Java runtime. The included CLISP executable is Intel 64-bit and needs
-Rosetta on Apple Silicon. Web-page import is unavailable on Apple Silicon:
+Intel Java runtime. Predictions on Apple Silicon use a native CLISP runtime
+and require macOS 15 or later; see `clisp-mac-arm64/README.md` for its source
+and license information. Web-page import is unavailable on Apple Silicon:
 its Mozilla XPCOM implementation needs to be rewritten for a supported
 browser engine. Other functionality has not yet been fully validated for
 redistribution on modern macOS.

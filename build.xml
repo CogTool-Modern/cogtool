@@ -217,6 +217,12 @@
 		<!-- Chmod the clisp executable. -->
 		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel/lisp.run" perm="a+x" />
 
+		<!-- Apple Silicon uses its own CLISP executable and compatible ACT-R image. -->
+		<copy todir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-arm64/">
+			<fileset dir="${basedir}/clisp-mac-arm64" />
+		</copy>
+		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-mac-arm64/lisp.run" perm="a+x" />
+
 		<!-- Copy the Mac XUL implementation into the bundle. -->
 		<copy todir="${distdir}/CogTool.app/Contents/Resources/XUL-mac/">
 		        <fileset dir="${basedir}/XUL-mac"/>
