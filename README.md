@@ -22,22 +22,31 @@ and for developers: [https://github.com/cogtool/documentation.git](https://githu
 TODO Merge this seperate repo with the in-branch, GitHub Pages-powered `docs/` folder.
 
 ## Building
-To build the macOS package and Windows ARM64 MSI together on macOS, install a
+To build the macOS package and both Windows MSIs together on macOS, install a
 JDK (17 or newer), Apache Ant, Python 3, and
 [msitools](https://wiki.gnome.org/msitools) (`wixl`, `msibuild`, and
 `msiinfo` must be on `PATH`). Then:
 1. Download the source code from [GitHub](https://github.com/CogTool-Modern/cogtool).
-2. Obtain an extracted Windows ARM64 Java 17+ runtime suitable for redistribution.
-3. Create `build.local.properties` in the project directory, containing
-   `windows.jre.dir=/absolute/path/to/windows-arm64-jre`.
+2. Obtain extracted Windows ARM64 and x86-64 Java 17+ runtimes suitable for
+   redistribution.
+3. Create `build.local.properties` in the project directory, containing:
+
+   ```properties
+   windows.jre.arm64.dir=/absolute/path/to/windows-arm64-jre
+   windows.jre.x86_64.dir=/absolute/path/to/windows-x86-64-jre
+   ```
+
+   An existing `windows.jre.dir` setting also works as the ARM64 runtime for
+   the default build; `windows.jre.arm64.dir` takes precedence if both are set.
 4. From within the project directory, run `ant`.
 
 The default build produces `dist/CogTool.app`, a macOS `.tgz` archive, and a
-Windows ARM64 MSI. It reuses the help files in the repository. The runtime
-path can instead be supplied with `-Dwindows.jre.dir=/path/to/windows-jre`;
-command-line properties override `build.local.properties`. To build an x86-64
-Windows MSI instead, also set `-Dwindows.swt.arch=x86_64` and supply a matching
-Windows runtime. The default build clears existing files in `build/` and
+Windows ARM64 MSI, and a Windows x86-64 MSI. It reuses the help files in the
+repository. Runtime paths can instead be supplied with
+`-Dwindows.jre.arm64.dir=...` and `-Dwindows.jre.x86_64.dir=...`; command-line
+properties override `build.local.properties`. For an individual Windows target,
+use `windows.swt.arch` and `windows.jre.dir` to select its architecture and
+runtime. The default build clears existing files in `build/` and
 `dist/` before building, so save any artifacts you want to keep first.
 If the installer tools are not on `PATH`, add
 `windows.msitools.bin=/absolute/path/to/msitools/bin` to `build.local.properties`.
@@ -47,6 +56,10 @@ updates links, and the Mac Java installer links, edit `java/edu/cmu/cs/hcii/cogt
 before building. The version must have one to four numeric components (for
 example, `1.4` or `1.4.1`); the build derives the Windows and archive versions
 from it. The file is included in the application when it is built.
+The Windows MSI product version comes from this file as well. A build fails
+if `version` is overridden with a different value, so change
+`release.properties` to set a new version. Windows Installer uses three numeric
+components: for example, release version `1.4` becomes MSI version `1.4.0`.
 
 For only a Mac package using the help files already in the repository, run
 `ant package-without-help`. To rebuild the help bundle as well, run
@@ -110,7 +123,7 @@ Windows Java 17+ runtime, so users do not need to install Java separately:
 ant -Dwindows.swt.arch=arm64 -Dwindows.jre.dir=/path/to/windows-arm64-jre windows-msi
 ```
 
-The runtime must contain `bin/javaw.exe` and a `release` file, and its
+The runtime must contain `bin/java.exe`, `bin/javaw.exe`, and a `release` file, and its
 architecture must match `windows.swt.arch`. The output is
 `dist/CogTool-Windows-<architecture>-<version>.msi`. The installer is per
 user, adds a Start menu shortcut, and registers `.cgt` projects for the current
@@ -142,15 +155,90 @@ CLISP executable under Windows on ARM. See
 - [CogTool - 32-bit build instructions](https://github.com/cogtool/documentation/blob/master/Processes/configuring-development-machines.txt)
 - [Download Apache Ant](https://ant.apache.org/bindownload.cgi)
 
+## Platform test suite
+
+The platform suite exercises an extracted, runnable package on the target OS.
+It loads the included phone-number project, recomputes its four predictions
+against the checked-in expected times, launches CogTool to save a copy and
+export results, verifies the export, and recomputes the saved project's
+predictions. It checks the Java architecture and, on Windows, the SWT
+architecture. The suite requires Python 3.9+, a graphical desktop session and
+a complete source checkout for the test fixture. Close any unrelated CogTool
+windows before running it. It uses a temporary directory for output.
+
+On Windows x86-64, run this from the project directory in a graphical desktop
+session, with a JDK, Apache Ant, and Python 3.9+ installed and on `PATH`:
+
+```powershell
+ant test
+```
+
+This compiles and stages an x86-64 portable package in
+`build/windows-x86_64/`, replacing any previous staged build there, then runs
+the suite. It uses the staged `jre/`, if one was supplied via
+`windows.jre.dir`, otherwise `JAVA_HOME` or `PATH`. The selected Java runtime
+must be x86-64. If `build.local.properties` specifies a Windows runtime, make
+sure it is x86-64, or override it with `-Dwindows.jre.dir=C:\path\to\jre`.
+To test an existing extracted portable package instead of staging a build, run:
+
+```powershell
+ant "-Dtest.app=C:\path\to\CogTool" test
+```
+
+Set `-Dtest.python=...` if the Python 3 executable is not named `python`.
+The suite also needs `javac` on `PATH` to compile its test helper. For 32-bit
+x86, pass `-Dtest.platform=windows-x86` and `-Dtest.app=...` once a compatible
+package exists; the current build cannot create one.
+
+On Apple Silicon with macOS 15 or newer, build the app first (the build target
+clears `build/` and `dist/`), then run:
+
+```sh
+ant package-without-help
+ant test
+```
+
+The app needs ARM64 Java 17 or newer. Set `JAVA_HOME` or pass `--java-home` if
+it is not automatically discovered. The suite must have access to the macOS
+graphical session; a restricted or headless environment may fail in SWT.
+
+On Windows x86-64, build the portable ZIP with
+`ant -Dwindows.swt.arch=x86_64 windows-zip`, extract it on Windows, and run in
+PowerShell from the source checkout:
+
+```powershell
+python tests/platform-suite.py --platform windows-amd64 --app 'C:\path\to\CogTool'
+```
+
+Use the extracted `CogTool` directory containing `CogTool.bat`, `CogTool.jar`,
+and `lib/`. The package's `jre/`, if present, takes precedence over `JAVA_HOME`
+and must be x86-64; otherwise select a matching Java runtime with `JAVA_HOME`
+or `--java-home`. Compiling the Windows test helper also requires a JDK with
+`javac` on `PATH`, or `--javac C:\path\to\javac.exe`. A JDK 17+ is recommended.
+If `build.local.properties` supplies a runtime during packaging, ensure it is
+an x86-64 Windows runtime; override it with `-Dwindows.jre.dir=...` if needed.
+
+`--platform windows-x86` targets 32-bit Windows Java, but the current build
+only packages Windows x86-64 and ARM64 SWT. The suite rejects the wrong SWT;
+32-bit x86 cannot pass until a compatible 32-bit package is provided. Windows
+checks need to be run on Windows; cross-building a ZIP does not validate it.
+The suite does not test MSI installation, interactive editing, accessibility,
+or every import/export feature. Web-page import is unavailable on Apple
+Silicon and Windows ARM64. Increase the per-process limit with `--timeout`
+if a machine needs more than 180 seconds.
+
+Runner checks that do not require CogTool or a graphical session can be run
+with `python -m unittest discover -s tests -p 'test_*.py'`.
+
 ## Checking project prediction times
 
 The prediction test loads `.cgt` files from a directory, recomputes each
 individual task script with its active prediction algorithm, and compares the
 resulting times with an expectations CSV. It uses the prediction engine
 directly; it does not exercise the graphical interface or command-file export.
-The current runner requires a built Apple Silicon macOS app, an ARM64 Java 17
-or newer runtime (a JRE is sufficient),
-Python 3.9 or newer, and a macOS graphical session. Build the app with
+The default runner requires a built Apple Silicon macOS app, an ARM64 Java 17
+or newer runtime (a JRE is sufficient), Python 3.9 or newer, and a macOS
+graphical session. Build the app with
 `ant package-without-help` first. As with other predictions on Apple Silicon,
 macOS 15 or newer is required.
 

@@ -29,12 +29,12 @@ def guid(value):
     return "{%s}" % str(uuid.uuid5(NAMESPACE, value)).upper()
 
 
-def check_runtime(stage, arch):
-    runtime = stage / "jre"
+def check_runtime(runtime, arch):
     javaw = runtime / "bin" / "javaw.exe"
+    java = runtime / "bin" / "java.exe"
     release = runtime / "release"
-    if not javaw.is_file() or not release.is_file():
-        raise ValueError("The Windows runtime must contain bin/javaw.exe and a release file")
+    if not javaw.is_file() or not java.is_file() or not release.is_file():
+        raise ValueError("The Windows runtime must contain bin/java.exe, bin/javaw.exe, and a release file")
     with javaw.open("rb") as f:
         if f.read(2) != b"MZ":
             raise ValueError("The supplied javaw.exe is not a Windows executable")
@@ -189,13 +189,19 @@ def make_source(args, source):
 
 def main():
     parser = argparse.ArgumentParser()
-    for name in ("stage", "icon", "output"):
-        parser.add_argument("--" + name, type=lambda p: Path(p).resolve(), required=True)
+    for name in ("stage", "icon", "output", "check-runtime"):
+        parser.add_argument("--" + name, type=lambda p: Path(p).resolve())
     parser.add_argument("--arch", choices=("arm64", "x86_64"), required=True)
     for name in ("version", "revision", "buildtime"):
-        parser.add_argument("--" + name, required=True)
+        parser.add_argument("--" + name)
     args = parser.parse_args()
-    check_runtime(args.stage, args.arch)
+    if args.check_runtime:
+        check_runtime(args.check_runtime, args.arch)
+        return
+    for name in ("stage", "icon", "output", "version", "revision", "buildtime"):
+        if getattr(args, name) is None:
+            parser.error("--" + name + " is required when building an MSI")
+    check_runtime(args.stage / "jre", args.arch)
     source = args.stage.parent / "cogtool-msi.wxs"
     make_source(args, source)
     temporary = args.stage.parent / "cogtool-build.msi"

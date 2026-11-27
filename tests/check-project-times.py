@@ -9,13 +9,17 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
 PREFIX = "COGTOOL_PREDICTION "
 
 
-def find_java(java_home):
-    if java_home:
+def find_java(java_home, platform="macos-arm64"):
+    if platform.startswith("windows-"):
+        executable = Path(java_home) / "bin/java.exe" if java_home else shutil.which("java")
+        candidates = [Path(executable)] if executable else []
+    elif java_home:
         candidates = [Path(java_home) / "bin/java"]
     else:
         candidates = []
@@ -40,9 +44,12 @@ def find_java(java_home):
         properties = dict((key.strip(), value.strip()) for line in result.stderr.splitlines()
                           for key, sep, value in [line.partition(" = ")] if sep)
         version = properties.get("java.specification.version", "")
-        if version.isdigit() and int(version) >= 17 and properties.get("os.arch") in {"aarch64", "arm64"}:
+        major = int(version[2:]) if version.startswith("1.") and version[2:].isdigit() else int(version) if version.isdigit() else 0
+        arch = properties.get("os.arch", "").lower()
+        valid_arches = {"macos-arm64": {"aarch64", "arm64"}, "windows-amd64": {"amd64", "x86_64"}, "windows-x86": {"x86", "i386", "i486", "i586", "i686"}}
+        if major >= (17 if platform == "macos-arm64" else 8) and arch in valid_arches[platform]:
             return java
-    raise ValueError("ARM64 Java 17 or newer runtime not found; set JAVA_HOME or pass --java-home")
+    raise ValueError(f"Compatible Java runtime not found for {platform}; set JAVA_HOME or pass --java-home")
 
 
 def number(value, label, line):
@@ -85,9 +92,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("directory", type=Path, help="directory containing .cgt projects (searched recursively)")
     parser.add_argument("--expectations", type=Path, help="CSV file (default: DIRECTORY/expected-times.csv)")
-    parser.add_argument("--app", type=Path, default=ROOT / "dist/CogTool.app", help="built macOS app")
-    parser.add_argument("--java-home", type=Path, default=os.environ.get("JAVA_HOME"), help="ARM64 Java 17+ runtime directory (or set JAVA_HOME)")
+    parser.add_argument("--app", type=Path, default=ROOT / "dist/CogTool.app", help="built macOS app or extracted Windows portable directory")
+    parser.add_argument("--platform", choices=("macos-arm64", "windows-amd64", "windows-x86"), default="macos-arm64", help="target platform (default: macos-arm64)")
+    parser.add_argument("--java-home", type=Path, default=os.environ.get("JAVA_HOME"), help="Java runtime directory (or set JAVA_HOME)")
     parser.add_argument("--timeout", type=float, default=180, help="maximum seconds per project (default: 180)")
+    parser.add_argument("--helper", type=Path, help="directory containing compiled ProjectPredictions.class (Windows)")
     args = parser.parse_args()
     try:
         directory = args.directory.resolve(strict=True)
@@ -104,23 +113,46 @@ def main():
             for name in sorted(actual_paths - expected_paths): print(f"UNEXPECTED project: {name}", file=sys.stderr)
             return 1
         app = args.app.resolve()
-        java_root = app / "Contents/Resources/Java"
-        if not (java_root / "CogTool.jar").is_file() or not (java_root / "swt-arm64.jar").is_file():
-            raise ValueError(f"built Apple Silicon CogTool app not found at {app}; run ant package-without-help")
-        helper = app / "Contents/Resources/cogtool-prediction-tests.jar"
-        if not helper.is_file():
-            raise ValueError("prediction helpers not found in app; rebuild with ant package-without-help")
-        java = find_java(args.java_home)
-        jars = [java_root / "swt-arm64.jar"] + sorted(p for p in java_root.glob("*.jar") if p.name not in {"swt.jar", "swt-arm64.jar"})
+        if args.platform == "macos-arm64":
+            if sys.platform != "darwin":
+                raise ValueError("macos-arm64 checks must run on macOS")
+            java_root = app / "Contents/Resources/Java"
+            workdir = app / "Contents/Resources"
+            helper = workdir / "cogtool-prediction-tests.jar"
+            if not (java_root / "CogTool.jar").is_file() or not (java_root / "swt-arm64.jar").is_file() or not helper.is_file():
+                raise ValueError(f"built Apple Silicon app or prediction helper not found at {app}; run ant package-without-help")
+            jars = [java_root / "swt-arm64.jar"] + sorted(p for p in java_root.glob("*.jar") if p.name not in {"swt.jar", "swt-arm64.jar"})
+            native_args = ["-XstartOnFirstThread", f"-Djava.library.path={java_root / 'dll/arm64'}"]
+            java_home = args.java_home
+        else:
+            if sys.platform != "win32":
+                raise ValueError("Windows checks must run on Windows")
+            java_root = app / "lib"
+            workdir = app
+            swt = java_root / "swt.jar"
+            if not (app / "CogTool.jar").is_file() or not swt.is_file():
+                raise ValueError(f"extracted Windows portable package not found at {app}")
+            with zipfile.ZipFile(swt) as jar:
+                manifest = jar.read("META-INF/MANIFEST.MF").decode("utf-8", errors="replace").replace("\r\n ", "").replace("\n ", "")
+            expected_arch = "x86" if args.platform == "windows-x86" else "x86_64"
+            if f"SWT-Arch: {expected_arch}\n" not in manifest.replace("\r\n", "\n"):
+                raise ValueError(f"Windows package does not contain {expected_arch} SWT; the current build supports x86_64 and arm64, not 32-bit x86")
+            helper = args.helper
+            if not helper or not (helper / "ProjectPredictions.class").is_file():
+                raise ValueError("Windows requires --helper pointing to a compiled ProjectPredictions helper directory")
+            jars = [app / "CogTool.jar"] + sorted(java_root.glob("*.jar"))
+            native_args = [f"-Djava.library.path={java_root}"]
+            java_home = app / "jre" if (app / "jre/bin/java.exe").is_file() else args.java_home
+        java = find_java(java_home, args.platform)
         classpath = os.pathsep.join([str(helper)] + [str(p) for p in jars])
         failures = 0
         observed = set()
         for project in projects:
             relative = project.relative_to(directory).as_posix()
             print(f"Computing {relative}...", flush=True)
-            command = [str(java), "-XstartOnFirstThread", f"-Djava.library.path={java_root / 'dll/arm64'}", "-cp", classpath, "ProjectPredictions", str(project.resolve())]
+            command = [str(java)] + native_args + ["-cp", classpath, "ProjectPredictions", str(project.resolve())]
             try:
-                run = subprocess.run(command, cwd=app / "Contents/Resources", text=True, capture_output=True, timeout=args.timeout)
+                run = subprocess.run(command, cwd=workdir, text=True, capture_output=True, timeout=args.timeout)
             except subprocess.TimeoutExpired:
                 print(f"FAIL {relative}: timed out after {args.timeout:g} seconds", file=sys.stderr)
                 failures += 1
@@ -158,7 +190,7 @@ def main():
             return 1
         print(f"All {len(observed)} predictions passed in {len(projects)} project(s).")
         return 0
-    except (OSError, ValueError, subprocess.CalledProcessError) as error:
+    except (OSError, ValueError, KeyError, zipfile.BadZipFile, subprocess.CalledProcessError) as error:
         print(f"Error: {error}", file=sys.stderr)
         return 2
 
