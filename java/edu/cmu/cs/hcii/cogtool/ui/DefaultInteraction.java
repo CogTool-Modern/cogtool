@@ -1480,7 +1480,10 @@ public class DefaultInteraction implements Interaction
             formData.left = new FormAttachment(0, 0);
             devicesLabel.setLayoutData(formData);
 
-            inputDeviceComposite = new Composite(newDesignUI, SWT.BORDER);
+            // On macOS, a bordered Composite can report a negative client-area
+            // origin, placing the first checkbox above its visible area.
+            int deviceCompositeStyle = OSUtils.MACOSX ? SWT.NONE : SWT.BORDER;
+            inputDeviceComposite = new Composite(newDesignUI, deviceCompositeStyle);
             inputDeviceComposite.setLayout(new GridLayout());
 
             formData = new FormData();
@@ -1500,7 +1503,7 @@ public class DefaultInteraction implements Interaction
             formData.left = new FormAttachment(0, 0);
             devicesLabel.setLayoutData(formData);
 
-            outputDeviceComposite = new Composite(newDesignUI, SWT.BORDER);
+            outputDeviceComposite = new Composite(newDesignUI, deviceCompositeStyle);
             outputDeviceComposite.setLayout(new GridLayout());
 
             formData = new FormData();
