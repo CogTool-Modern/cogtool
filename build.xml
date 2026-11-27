@@ -209,6 +209,7 @@
 		<copy todir="${windows.stage}/clisp-win"><fileset dir="${basedir}/clisp-win" /></copy>
 		<copy todir="${windows.stage}/XUL-win"><fileset dir="${basedir}/XUL-win" /></copy>
 		<copy file="${basedir}/LICENSE.txt" todir="${windows.stage}" />
+		<copy file="${resdir}/CogTool.ico" todir="${windows.stage}" />
 		<tstamp><format property="windows.buildtime" pattern="MM/dd/yyyy-hh:mm" /></tstamp>
 		<copy file="${resdir}/windows-portable/CogTool.bat" todir="${windows.stage}">
 			<filterset><filter token="VERSION" value="${version}" /><filter token="REVISION" value="${revision}" /><filter token="BUILDTIME" value="${windows.buildtime}" /></filterset>

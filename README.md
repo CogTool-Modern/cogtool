@@ -113,7 +113,9 @@ ant -Dwindows.swt.arch=arm64 -Dwindows.jre.dir=/path/to/windows-arm64-jre window
 The runtime must contain `bin/javaw.exe` and a `release` file, and its
 architecture must match `windows.swt.arch`. The output is
 `dist/CogTool-Windows-<architecture>-<version>.msi`. The installer is per
-user, adds a Start menu shortcut, and does not add file associations. An MSI
+user, adds a Start menu shortcut, and registers `.cgt` projects for the current
+user. Windows may ask you to choose CogTool under **Open with** or **Settings →
+Apps → Default apps** if another default has already been selected. An MSI
 release version must have at most three components, or a zero fourth component
 (Windows Installer limits the first three to 255.255.65535). ARM64 MSI
 generation uses wixl's 64-bit file and registry components and sets the ARM64

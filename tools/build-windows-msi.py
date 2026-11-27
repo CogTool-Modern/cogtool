@@ -148,6 +148,42 @@ def make_source(args, source):
             Type="integer", Value="1", KeyPath="yes")
     element(shortcut, "RemoveFolder", Id="RemoveCogToolMenu", On="uninstall")
     element(feature, "ComponentRef", Id="MenuShortcut")
+
+    # Explorer starts file associations with an arbitrary working directory.
+    # Use absolute resource paths so opening a project also permits predictions.
+    prog_id = "CogTool.Project." + args.arch
+    classes = "Software\\Classes\\"
+    capabilities = "Software\\CogTool\\" + args.arch + "\\Capabilities"
+    association = element(install, "Component", Id="ProjectAssociation",
+                          Guid=guid(args.arch + ":project-association"), Win64="yes")
+    def registry(key, value, name=None, key_path=False):
+        attributes = dict(Root="HKCU", Key=key, Type="string", Value=value)
+        if name is not None:
+            attributes["Name"] = name
+        if key_path:
+            attributes["KeyPath"] = "yes"
+        element(association, "RegistryValue", **attributes)
+
+    registry(classes + ".cgt", prog_id)
+    registry(classes + ".cgt\\OpenWithProgids", "", prog_id)
+    registry(classes + prog_id, "CogTool Project", key_path=True)
+    icon = '"[#%s]",0' % identifier("f", "CogTool.ico")
+    registry(classes + prog_id + "\\DefaultIcon", icon)
+    registry(classes + prog_id + "\\Application", name, "ApplicationName")
+    registry(classes + prog_id + "\\Application", icon, "ApplicationIcon")
+    registry(classes + prog_id + "\\Application", "Open CogTool project files", "ApplicationDescription")
+    command = ('"[#%s]" -Xmx400000000 "-Djava.library.path=[INSTALLDIR]lib" '
+               '"-Dcogtool.home=[INSTALLDIR]." "-Dcogtool.version=%s" '
+               '"-Dcogtool.revision=%s" "-Dcogtool.build=%s" '
+               '-jar "[INSTALLDIR]CogTool.jar" "%%1"') % (
+                   identifier("f", "jre/bin/javaw.exe"), args.version, args.revision, args.buildtime)
+    registry(classes + prog_id + "\\shell\\open\\command", command)
+    registry(capabilities, name, "ApplicationName")
+    registry(capabilities, icon, "ApplicationIcon")
+    registry(capabilities, "Open CogTool project files", "ApplicationDescription")
+    registry(capabilities + "\\FileAssociations", prog_id, ".cgt")
+    registry("Software\\RegisteredApplications", capabilities, name)
+    element(feature, "ComponentRef", Id="ProjectAssociation")
     ET.ElementTree(root).write(source, encoding="utf-8", xml_declaration=True)
 
 

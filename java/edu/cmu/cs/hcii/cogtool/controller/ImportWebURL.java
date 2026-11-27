@@ -350,7 +350,7 @@ public class ImportWebURL implements ImportWebCrawler.IImportURL
     	}
     	else {
     		System.setProperty(XULRUNNER_PATH,
-    		                   (new File("XUL-win")).getAbsolutePath());
+                               (new File(System.getProperty("cogtool.home", "."), "XUL-win")).getAbsolutePath());
     	}
 
         importImages = importImg;
