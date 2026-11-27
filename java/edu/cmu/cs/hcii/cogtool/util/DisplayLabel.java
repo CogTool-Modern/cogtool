@@ -92,7 +92,6 @@
 package edu.cmu.cs.hcii.cogtool.util;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -103,7 +102,6 @@ import org.eclipse.swt.widgets.Label;
 public class DisplayLabel extends Label
 {
     protected static Font displayFont = null;
-    protected static Color displayColor = null;
 
     public DisplayLabel(Composite parent, int style)
     {
@@ -111,11 +109,9 @@ public class DisplayLabel extends Label
 
         if (displayFont == null) {
             displayFont = FontUtils.getAdjustedFont(parent.getFont(), SWT.BOLD);
-            displayColor = new Color(null, 0, 51, 102);
         }
 
         setFont(displayFont);
-        setForeground(displayColor);
     }
 
     @Override

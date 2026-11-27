@@ -15,11 +15,9 @@ How to actually run CogTool from the command line varies by platform:
 ### For Macintosh:
 If the app is at `/Applications/CogTool.app`, type, at the command line
 ```
-/Applications/CogTool.app/Contents/MacOS/cogtoolstart -f /path/to/command/file
+/Applications/CogTool.app/Contents/MacOS/cogtool-launcher -f /path/to/command/file
 ```
 Where `/path/to/command/file` is wherever you have put the command file you write, described below. While it doesn't necessarily have to be an absolute pathname, if relative what it is relative to is not very helpful, so it will almost certainly be best to use an absolute pathname. Note that the shell will expand things like `~/mycommands.txt` to an absolute pathname for you.
-
-Also, the the pathname to the app must be absolute, as shown above; something like `./CogTool.app` will not work because of some pathname surgery going on inside cogtoolstart (which really isn't designed for this purpose, it's just being press-ganged into it).
 
 ### For Windows:
 If the app is in it's usual place, type, at the command line

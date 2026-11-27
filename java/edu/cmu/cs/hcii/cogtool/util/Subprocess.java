@@ -433,12 +433,26 @@ public class Subprocess
         }
         else if (OSUtils.MACOSX) {
             lispProgName = "lisp.run";
-            if (OSUtils.isIntelMac()) {
+            String arch = System.getProperty("os.arch", "");
+            if ("aarch64".equalsIgnoreCase(arch) || "arm64".equalsIgnoreCase(arch)) {
+                String macVersion = System.getProperty("os.version", "");
+                try {
+                    int majorVersion = Integer.parseInt(macVersion.split("\\.")[0]);
+                    if (majorVersion < 15) {
+                        throw new IllegalStateException(
+                            "The bundled Apple Silicon prediction engine requires macOS 15 or later (found " + macVersion + ").");
+                    }
+                }
+                catch (NumberFormatException ex) {
+                    throw new IllegalStateException("Cannot determine the macOS version: " + macVersion, ex);
+                }
+                osName = "mac-arm64";
+            }
+            else if (OSUtils.isIntelMac()) {
                 osName = "mac-intel";
             }
             else {
-                osName = "mac-ppc";
-                throw new IllegalStateException("CogTool no longers supports PowerPC");
+                throw new IllegalStateException("Unsupported Mac architecture: " + arch);
             }
         }
         else {

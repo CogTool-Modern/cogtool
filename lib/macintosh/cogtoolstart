@@ -1,14 +1,57 @@
 #!/bin/bash
 
-JAVACMD="/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java"
-
-if [[ ! -a $JAVACMD ]] ; then
-JAVACMD="java" ;
+# SWT has architecture-specific native libraries. Use the architecture of
+# the selected JVM, which can differ from the hardware when using Rosetta.
+if [[ -n "$JAVA_HOME" && -x "$JAVA_HOME/bin/java" ]]; then
+    JAVACMD="$JAVA_HOME/bin/java"
+else
+    if [[ "$(uname -m)" == "arm64" ]]; then
+        # java_home can fall back to an older plug-in runtime even with -v,
+        # and does not always discover standalone JRE installations.
+        JAVA17_HOME=$(/usr/libexec/java_home -v '17+' -a arm64 2>/dev/null)
+        for JAVA_CANDIDATE in "$JAVA17_HOME/bin/java" /Library/Java/JavaVirtualMachines/*/Contents/Home/bin/java /opt/homebrew/opt/openjdk/bin/java "$(command -v java)"; do
+            [[ -x "$JAVA_CANDIDATE" ]] || continue
+            JAVA17_SETTINGS=$("$JAVA_CANDIDATE" -XshowSettings:properties -version 2>&1) || continue
+            JAVA17_VERSION=$(printf '%s\n' "$JAVA17_SETTINGS" | sed -n 's/^[[:space:]]*java.specification.version = //p' | head -1)
+            JAVA17_ARCH=$(printf '%s\n' "$JAVA17_SETTINGS" | sed -n 's/^[[:space:]]*os.arch = //p' | head -1)
+            if [[ "$JAVA17_VERSION" =~ ^[0-9]+$ ]] && (( JAVA17_VERSION >= 17 )) && [[ "$JAVA17_ARCH" == "aarch64" || "$JAVA17_ARCH" == "arm64" ]]; then
+                JAVACMD="$JAVA_CANDIDATE"
+                break
+            fi
+        done
+    fi
+    JAVACMD="${JAVACMD:-$(command -v java)}"
 fi
 
-RESDIR="`dirname \"$0\"`/../Resources"
+if [[ -z "$JAVACMD" ]]; then
+    echo "CogTool requires Java. Install an ARM64 Java 17 or newer runtime on Apple Silicon." >&2
+    exit 1
+fi
+
+JAVA_SETTINGS=$("$JAVACMD" -XshowSettings:properties -version 2>&1)
+JAVA_ARCH=$(printf '%s\n' "$JAVA_SETTINGS" | sed -n 's/^[[:space:]]*os.arch = //p' | head -1)
+JAVA_VERSION=$(printf '%s\n' "$JAVA_SETTINGS" | sed -n 's/^[[:space:]]*java.specification.version = //p' | head -1)
+
+RESDIR="$(cd "$(dirname "$0")" && pwd)"
 JAVAROOT="$RESDIR/Java"
+SWTJAR="$JAVAROOT/swt.jar"
+NATIVEPATH="$JAVAROOT/dll"
 
-cd "$RESDIR"
+case "$JAVA_ARCH" in
+    aarch64|arm64)
+        if [[ ! "$JAVA_VERSION" =~ ^[0-9]+$ ]] || (( JAVA_VERSION < 17 )); then
+            echo "CogTool on Apple Silicon requires an ARM64 Java 17 or newer runtime (found Java $JAVA_VERSION)." >&2
+            exit 1
+        fi
+        SWTJAR="$JAVAROOT/swt-arm64.jar"
+        NATIVEPATH="$NATIVEPATH/arm64"
+        ;;
+    x86_64|amd64) ;;
+    *)
+        echo "Unsupported Java architecture: $JAVA_ARCH" >&2
+        exit 1
+        ;;
+esac
 
-exec $JAVACMD -XstartOnFirstThread -classpath "$JAVAROOT/CogTool.jar:$JAVAROOT/MacSupport.jar:$JAVAROOT/WindowsImageTransfer.jar:$JAVAROOT/commons-collections-3.1.jar:$JAVAROOT/commons-lang-2.1.jar:$JAVAROOT/ecf.jar:$JAVAROOT/js.jar:$JAVAROOT/draw2d.jar:$JAVAROOT/swt.jar:$JAVAROOT/xercesImpl.jar:$JAVAROOT/xml-apis.jar:$JAVAROOT/MozillaGlue.jar:$JAVAROOT/MozillaInterfaces.jar:$JAVAROOT/jopt-simple.jar:$BASEDIR" -Djava.library.path="$JAVAROOT/dll" -Dcogtool.version="$BLDVER" -Dcogtool.revision="$BLDREV" -Dcogtool.build="$BLDTIM" -Xmx400000000 edu.cmu.cs.hcii.cogtool.CogTool $*
+cd "$RESDIR" || exit 1
+exec "$JAVACMD" -XstartOnFirstThread -classpath "$JAVAROOT/CogTool.jar:$JAVAROOT/MacSupport.jar:$JAVAROOT/WindowsImageTransfer.jar:$JAVAROOT/commons-collections-3.1.jar:$JAVAROOT/commons-lang-2.1.jar:$JAVAROOT/ecf.jar:$JAVAROOT/js.jar:$JAVAROOT/draw2d.jar:$SWTJAR:$JAVAROOT/xercesImpl.jar:$JAVAROOT/xml-apis.jar:$JAVAROOT/MozillaGlue.jar:$JAVAROOT/MozillaInterfaces.jar:$JAVAROOT/jopt-simple.jar" -Djava.library.path="$NATIVEPATH" -Dcogtool.version="$BLDVER" -Dcogtool.revision="$BLDREV" -Dcogtool.build="$BLDTIM" -Xmx400000000 edu.cmu.cs.hcii.cogtool.CogTool "$@"

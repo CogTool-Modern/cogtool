@@ -22,12 +22,39 @@ and for developers: [https://github.com/cogtool/documentation.git](https://githu
 TODO Merge this seperate repo with the in-branch, GitHub Pages-powered `docs/` folder.
 
 ## Building
-To compile CogTool,
+To compile CogTool, install a JDK (17 or newer is recommended) and:
 1. Download the source code from [GitHub](https://github.com/CogTool-Modern/cogtool).
 2. Install [Apache Ant](https://ant.apache.org/bindownload.cgi)
 3. From within the project directory, run `ant` 
 
 Running the `ant` command begins the build process specified in `build.xml`. 
+
+For a Mac package using the help files already in the repository, run
+`ant package-without-help`. The regular `ant` target also rebuilds the help
+bundle and requires the documentation's Jekyll dependencies. Both targets
+produce `dist/CogTool.app` and a `.tgz` archive.
+
+On Apple Silicon, the Mac app requires an ARM64 Java 17 or newer runtime.
+The launcher uses `JAVA_HOME` when set, otherwise it looks for a registered
+ARM64 Java 17+ installation using `/usr/libexec/java_home`, standard Java
+installation locations, or `java` on `PATH`. A JRE is sufficient to run the
+built app; a JDK is needed only to compile it. The app does not bundle Java.
+If a runtime is not discovered automatically, launch the app from a terminal
+with `JAVA_HOME=/path/to/runtime /path/to/CogTool.app/Contents/MacOS/cogtool-launcher`.
+The older Intel SWT remains available when launched with an Intel Java runtime.
+Predictions on Apple Silicon use a native CLISP runtime
+and require macOS 15 or later; see `clisp-mac-arm64/README.md` for its source
+and license information. Web-page import is unavailable on Apple Silicon:
+its Mozilla XPCOM implementation needs to be rewritten for a supported
+browser engine. Other functionality has not yet been fully validated for
+redistribution on modern macOS.
+
+On macOS, the build ad-hoc signs the app for local use. A public release still
+needs Developer ID signing and notarization for Gatekeeper on other Macs.
+
+The ARM64 SWT library is Eclipse SWT 3.128.0, distributed under EPL-2.0;
+its license is included in the app. Its source and exact artifact coordinates
+are documented in `lib/macintosh/README.md`.
 
 <details markdown="1">
 <summary>Building on Windows</summary>
@@ -40,3 +67,48 @@ The step in the build process for building Windows installers will only happen w
 - [CogTool - 32-bit build instructions](https://github.com/cogtool/documentation/blob/master/Processes/configuring-development-machines.txt)
 - [Download Apache Ant](https://ant.apache.org/bindownload.cgi)
 
+## Checking project prediction times
+
+The prediction test loads `.cgt` files from a directory, recomputes each
+individual task script with its active prediction algorithm, and compares the
+resulting times with an expectations CSV. It uses the prediction engine
+directly; it does not exercise the graphical interface or command-file export.
+The current runner requires a built Apple Silicon macOS app, an ARM64 Java 17
+or newer runtime (a JRE is sufficient),
+Python 3.9 or newer, and a macOS graphical session. Build the app with
+`ant package-without-help` first. As with other predictions on Apple Silicon,
+macOS 15 or newer is required.
+
+Put an `expected-times.csv` in the project directory, with one row per
+prediction and times and tolerances in seconds:
+
+```csv
+project,task,design,seconds,tolerance
+Example.cgt,Look up one number,Pop-Up,2.645,0.05
+```
+
+`project` is the path to the `.cgt` file relative to the supplied directory;
+subdirectories are searched recursively. Task and design names must match the
+project exactly. The test checks individual task scripts in every project and reports
+missing or unexpected projects or predictions, failed computations, and times
+outside the stated absolute tolerance. Tasks in groups are traversed; duplicate
+task/design names or multiple scripts for the same task/design are ambiguous
+and cause a failure. Group-level and CogTool Explorer predictions are not
+covered by this runner.
+
+Run it with:
+
+```sh
+JAVA_HOME=/path/to/java-runtime tests/check-project-times.py /path/to/project-directory
+```
+
+Use `--app /path/to/CogTool.app` for a different build, `--expectations`
+to specify a CSV elsewhere, and `--timeout SECONDS`
+to adjust the per-project timeout. The command exits zero only if all checks
+pass. For a working example using the included phone-number project and its
+four expected predictions:
+
+```sh
+tests/check-project-times.py docs/examples/phone-number-lookup \
+  --expectations tests/fixtures/phone-number-expected-times.csv
+```
