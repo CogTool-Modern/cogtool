@@ -97,26 +97,26 @@ public class KeyDisplayUtil
     public static final char SHIFT_SYMBOL_CHAR =
         OSUtils.MACOSX ? '\u21E7' : '\u21E7';
     public static final char CTRL_SYMBOL_CHAR =
-        OSUtils.MACOSX ? '\u2020' : '\u21A5';
+        OSUtils.MACOSX ? '\u2303' : '\u21A5';
     public static final char ALT_SYMBOL_CHAR =
-        OSUtils.MACOSX ? '\u2513' : '\u02E5';
+        OSUtils.MACOSX ? '\u2325' : '\u02E5';
     public static final char COMMAND_SYMBOL_CHAR =
-        OSUtils.MACOSX ? '\u5727' : '\u229E';
+        OSUtils.MACOSX ? '\u2318' : '\u229E';
     public static final char FUNCTION_SYMBOL_CHAR =
-        OSUtils.MACOSX ? '\u222B' : '\u2231';
+        OSUtils.MACOSX ? '\u0192' : '\u2231';
 
     public static final char RETURN_SYMBOL_CHAR =
-        OSUtils.MACOSX ? '\u00B6' : '\u240D';
+        OSUtils.MACOSX ? '\u21A9' : '\u240D';
     public static final char ESCAPE_SYMBOL_CHAR =
-        OSUtils.MACOSX ? '\u2642' : '\u241B';
+        OSUtils.MACOSX ? '\u238B' : '\u241B';
     public static final char TAB_SYMBOL_CHAR =
-        OSUtils.MACOSX ? '\u21D2' : '\u21E5';
+        OSUtils.MACOSX ? '\u21E5' : '\u21E5';
     public static final char BACKSPACE_SYMBOL_CHAR =
-        OSUtils.MACOSX ? '\u21E6' : '\u2408';
+        OSUtils.MACOSX ? '\u232B' : '\u2408';
     public static final char DELETE_SYMBOL_CHAR =
-        OSUtils.MACOSX ? '\u3004' : '\u2421';
+        OSUtils.MACOSX ? '\u2326' : '\u2421';
     public static final char CAPSLOCK_SYMBOL_CHAR =
-        OSUtils.MACOSX ? '\u4EDD' : '\u21EA';
+        OSUtils.MACOSX ? '\u21EA' : '\u21EA';
 
     public static final char UPARROW_SYMBOL_CHAR =
         OSUtils.MACOSX ? '\u2191' : '\u2191';
