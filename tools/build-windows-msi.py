@@ -68,6 +68,36 @@ def product_version(version):
     return ".".join(map(str, numbers))
 
 
+def upgrade_with_rollback(msi):
+    """Place old-version removal inside the Windows Installer transaction."""
+    def sequence():
+        output = subprocess.check_output(
+            ["msiinfo", "export", str(msi), "InstallExecuteSequence"], text=True
+        )
+        result = {}
+        for line in output.splitlines()[3:]:
+            fields = line.split("\t")
+            if len(fields) >= 3 and fields[2]:
+                result[fields[0]] = int(fields[2])
+        return result
+
+    actions = sequence()
+    required = ("InstallValidate", "InstallInitialize", "RemoveExistingProducts", "ProcessComponents")
+    if any(action not in actions for action in required):
+        raise ValueError("Installer is missing an action needed for a safe upgrade")
+    initialize = actions["InstallInitialize"]
+    new_position = initialize + 1
+    if not (actions["InstallValidate"] < initialize < new_position < actions["ProcessComponents"]):
+        raise ValueError("Cannot safely schedule removal of the previous installation")
+    if any(value == new_position and name != "RemoveExistingProducts" for name, value in actions.items()):
+        raise ValueError("The installer upgrade sequence position is already occupied")
+    query = ("UPDATE `InstallExecuteSequence` SET `Sequence` = %d "
+             "WHERE `Action` = 'RemoveExistingProducts'" % new_position)
+    subprocess.run(["msibuild", str(msi), "-q", query], check=True)
+    if sequence().get("RemoveExistingProducts") != new_position:
+        raise ValueError("Could not verify the installer upgrade sequence")
+
+
 def make_source(args, source):
     root = ET.Element("{%s}Wix" % WIX)
     label = "ARM64" if args.arch == "arm64" else "x64"
@@ -139,6 +169,10 @@ def main():
         print(result.stderr, file=sys.stderr, end="")
     if "CRITICAL" in result.stderr:
         raise ValueError("wixl reported an unsupported installer element")
+    # wixl 0.106 cannot set MajorUpgrade/@Schedule. Its default removes the
+    # existing product before InstallInitialize, leaving nothing to roll back
+    # if the new install fails. Move removal inside the transaction instead.
+    upgrade_with_rollback(temporary)
     if args.arch == "arm64":
         # wixl 0.106 has no ARM64 switch. The package contains only 64-bit
         # file/registry components and standard actions, so its architecture

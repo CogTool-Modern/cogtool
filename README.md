@@ -88,8 +88,8 @@ redistribution. The checked-in `jre/` is incomplete and is not bundled by
 the portable build.
 
 An MSI with a Start menu shortcut can also be built on macOS or Linux using
-Python 3 and [msitools](https://wiki.gnome.org/msitools) (`wixl` and
-`msibuild` on `PATH`). On Windows, run the build in a Linux environment such
+Python 3 and [msitools](https://wiki.gnome.org/msitools) (`wixl`, `msibuild`,
+and `msiinfo` on `PATH`). On Windows, run the build in a Linux environment such
 as WSL, or use the portable ZIP target above. The MSI includes a supplied
 Windows Java 17+ runtime, so users do not need to install Java separately:
 
@@ -104,9 +104,9 @@ user, adds a Start menu shortcut, and does not add file associations. An MSI
 release version must have at most three components, or a zero fourth component
 (Windows Installer limits the first three to 255.255.65535). ARM64 MSI
 generation uses wixl's 64-bit file and registry components and sets the ARM64
-package metadata with `msibuild`;
-wixl 0.106 does not offer a direct ARM64 option. The MSI must be tested on
-Windows before release.
+package metadata with `msibuild`; wixl 0.106 does not offer a direct ARM64
+option. The build also moves removal of the prior version inside the installer's
+rollback transaction. The MSI must be tested on Windows before release.
 
 The older NSIS installer is built only on Windows by the regular package
 targets. That build assumes [NSIS](https://nsis.sourceforge.io/Main_Page) is
