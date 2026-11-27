@@ -254,6 +254,16 @@ public class CogTool
                 // we need to create the RootController, but will never
                 // actually need to interact with it programmatically
                 rootCtl = new RootController();
+                WindowUtil.GLOBAL_DISPLAY.addListener(SWT.OpenDocument,
+                    new Listener() {
+                        public void handleEvent(Event event)
+                        {
+                            if (event.text != null && ! event.text.isEmpty()) {
+                                rootCtl.performAction(CogToolLID.OpenProjectFile,
+                                                      event.text);
+                            }
+                        }
+                    });
             }
 
             // TODO temporary kludge until we update the preference dialog to supply
@@ -331,7 +341,14 @@ public class CogTool
                 }
             }
             
-            if (openedProject == null) {
+            if (OSUtils.MACOSX) {
+                // Dispatch any document-open events delivered at launch before
+                // deciding whether to show the startup dialog.
+                while (WindowUtil.GLOBAL_DISPLAY.readAndDispatch()) { }
+            }
+
+            if (openedProject == null &&
+                ControllerRegistry.ONLY.openControllerCount() == 0) {
                 // no project was opened successfully, or none were specified,
                 // so create a fresh project and use its Interaction to
                 // report load errors

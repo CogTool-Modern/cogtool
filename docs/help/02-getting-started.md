@@ -66,12 +66,10 @@ Figure 2-1: The first window you see when you launch CogTool.
 </figcaption>
 </figure>
 
-<ul><li class="icon bug">Double-clicking on a saved project file (.cgt file) to open it is notrecommended. In Mac OS X, it does nothing, in Windows it
-opens a new instance of CogTool even if one is already running.
-Instead, first launch CogTool. then click the **Open** button and
-navigate to the saved CogTool file. If you have been working with the
-project recently, it will show up in the **Open Recent** pulldown
-list.</li></ul>
+<ul><li class="icon fyi">On macOS, double-click a saved CogTool project
+(.cgt) to open it. On Windows, double-clicking may open a new instance
+of CogTool even if one is already running. You can also use the **Open**
+button or the **Open Recent** list to open a project.</li></ul>
 <ul><li class="icon remember">
 With Mac OS X, you can launch the CogTool application from any location to which you save it.</li></ul>
 
