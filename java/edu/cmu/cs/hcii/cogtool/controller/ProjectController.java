@@ -5921,6 +5921,12 @@ public class ProjectController extends DefaultController
                         "It depends on an obsolete Mozilla browser interface.");
                     return false;
                 }
+                if (OSUtils.WINDOWS && ("aarch64".equalsIgnoreCase(javaArch) || "arm64".equalsIgnoreCase(javaArch))) {
+                    interaction.reportProblem(ImportWebCrawlThread.IMPORT_WEB_CRAWL,
+                        "Web import is not available on Windows ARM64. " +
+                        "It depends on an obsolete Mozilla browser interface.");
+                    return false;
+                }
                 DesignSelectionState selection = (DesignSelectionState) prms;
 
                 ProjectInteraction.IWebCrawlImport importParms =

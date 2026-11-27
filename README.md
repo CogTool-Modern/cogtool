@@ -63,9 +63,64 @@ its license is included in the app. Its source and exact artifact coordinates
 are documented in `lib/macintosh/README.md`.
 
 <details markdown="1">
-<summary>Building on Windows</summary>
+<summary>Building for Windows</summary>
 
-The step in the build process for building Windows installers will only happen when building CogTool on Windows. This steps assumes that you have installed [NSIS](https://nsis.sourceforge.io/Main_Page) and the executable is available at `C:\Program Files (x86)\NSIS\makensis.exe`
+With a JDK and Ant installed, build a portable Windows ZIP on macOS, Linux,
+or Windows, without NSIS:
+
+```sh
+ant windows-zip                              # x86-64 Windows Java
+ant -Dwindows.swt.arch=arm64 windows-zip      # ARM64 Windows Java
+```
+
+The ZIP is written to `dist/CogTool-Windows-<architecture>-<version>.zip`.
+Extract it on Windows and run `CogTool.bat`. This opens a command window for
+diagnostics while the app runs. The portable package does not install file
+associations or Start menu shortcuts. It uses a Java runtime in the package's
+`jre/` directory if present, then `JAVA_HOME`, then `PATH`. The runtime must
+be a Windows build matching the selected SWT architecture; ARM64 SWT requires
+Java 17 or newer. A JDK is required to build, but a JRE suffices to run.
+
+To bundle a Windows runtime, pass its directory at build time, for example
+`ant -Dwindows.swt.arch=arm64 -Dwindows.jre.dir=/path/to/windows-jre windows-zip`.
+The supplied directory must contain `bin/java.exe` and be suitable for
+redistribution. The checked-in `jre/` is incomplete and is not bundled by
+the portable build.
+
+An MSI with a Start menu shortcut can also be built on macOS or Linux using
+Python 3 and [msitools](https://wiki.gnome.org/msitools) (`wixl` and
+`msibuild` on `PATH`). On Windows, run the build in a Linux environment such
+as WSL, or use the portable ZIP target above. The MSI includes a supplied
+Windows Java 17+ runtime, so users do not need to install Java separately:
+
+```sh
+ant -Dwindows.swt.arch=arm64 -Dwindows.jre.dir=/path/to/windows-arm64-jre windows-msi
+```
+
+The runtime must contain `bin/javaw.exe` and a `release` file, and its
+architecture must match `windows.swt.arch`. The output is
+`dist/CogTool-Windows-<architecture>-<version>.msi`. The installer is per
+user, adds a Start menu shortcut, and does not add file associations. An MSI
+release version must have at most three components, or a zero fourth component
+(Windows Installer limits the first three to 255.255.65535). ARM64 MSI
+generation uses wixl's 64-bit file and registry components and sets the ARM64
+package metadata with `msibuild`;
+wixl 0.106 does not offer a direct ARM64 option. The MSI must be tested on
+Windows before release.
+
+The older NSIS installer is built only on Windows by the regular package
+targets. That build assumes [NSIS](https://nsis.sourceforge.io/Main_Page) is
+installed at `C:\Program Files (x86)\NSIS\makensis.exe`.
+
+The default Windows SWT library is for x86-64 Java. To select the Windows
+ARM64 SWT library for compilation and the legacy installer, use a JDK 17 or newer
+and run `ant -Dwindows.swt.arch=arm64 package-without-help`. The installer
+must also contain a compatible ARM64 Java runtime in `jre/`; the checked-in
+`jre/` is incomplete. Windows ARM64 packaging and runtime behavior have not
+yet been tested. Web-page import is unavailable with ARM64 Java because it
+depends on an obsolete Mozilla interface. Predictions still use the bundled
+x86 CLISP executable and need validation under Windows on ARM. See
+`lib/windows/README.md` for the SWT artifacts and licensing.
 
 </details>
 

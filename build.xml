@@ -26,7 +26,12 @@
 	<property name="srcroot" value="${basedir}/java" />
 	<property name="macsrcroot" value="${basedir}/mac-support" />
 	<property name="libdir" value="${basedir}/lib" />
-	<property name="swtdir" value="${libdir}/windows" />
+	<!-- Select one Windows SWT at build time; the matching Java runtime must
+	     have the same architecture. -->
+	<property name="windows.swt.arch" value="x86_64" />
+	<condition property="swtdir" value="${libdir}/windows/arm64" else="${libdir}/windows">
+		<equals arg1="${windows.swt.arch}" arg2="arm64" />
+	</condition>
 	<property name="macswtdir" value="${libdir}/macintosh" />
 	<property name="resdir" value="${basedir}/res" />
 	<property name="distdir" value="${basedir}/dist" />
@@ -45,7 +50,7 @@
 			<include name="*.jar" />
 		</fileset>
 		<fileset dir="${swtdir}">
-			<include name="*.jar" />
+			<include name="swt.jar" />
 		</fileset>
 		<pathelement path="${builddir}" />
 	</path>
@@ -74,7 +79,14 @@
 	</target>
 
 	<!-- Compiles java source with javac. -->
-	<target name="compile" description="Compiles java source with javac.">
+	<target name="validate-windows-swt">
+		<condition property="windows.swt.arch.valid">
+			<or><equals arg1="${windows.swt.arch}" arg2="x86_64" /><equals arg1="${windows.swt.arch}" arg2="arm64" /></or>
+		</condition>
+		<fail unless="windows.swt.arch.valid" message="windows.swt.arch must be x86_64 or arm64" />
+	</target>
+
+	<target name="compile" depends="validate-windows-swt" description="Compiles java source with javac.">
 		<javac srcdir="${srcroot}" destdir="${builddir}" debug="on" fork="true" source="${jlevel}" target="${jlevel}">
 			<classpath refid="classpath" />
 			<include name="**/*.java" />
@@ -135,6 +147,79 @@
 
 	<!-- Reuse the help files already in the bundle template when Jekyll is unavailable. -->
 	<target name="package-without-help" depends="clean,compile,package-artifacts" description="Packages using the existing help bundle." />
+
+	<!-- A portable Windows ZIP can be assembled on any host with a JDK and Ant. -->
+	<target name="windows-stage" depends="validate-windows-swt">
+		<property name="windows.workdir" location="${builddir}/windows-${windows.swt.arch}" />
+		<property name="windows.classes" location="${windows.workdir}/classes" />
+		<property name="windows.stage" location="${windows.workdir}/stage/CogTool" />
+		<delete dir="${windows.workdir}" />
+		<mkdir dir="${windows.classes}" />
+		<mkdir dir="${windows.stage}/lib" />
+		<mkdir dir="${distdir}" />
+		<javac srcdir="${srcroot}" destdir="${windows.classes}" debug="on" fork="true" source="${jlevel}" target="${jlevel}" includeantruntime="false">
+			<classpath>
+				<fileset dir="${libdir}" includes="*.jar" />
+				<fileset dir="${libdir}/build-only" includes="*.jar" />
+				<fileset dir="${swtdir}" includes="swt.jar" />
+				<pathelement location="${windows.classes}" />
+			</classpath>
+		</javac>
+		<copy todir="${windows.classes}/${java_runtime_res}"><fileset dir="${srcroot}/${java_runtime_res}" /></copy>
+
+		<path id="windows.runtime.classpath">
+			<fileset dir="${libdir}" includes="*.jar" />
+			<fileset dir="${swtdir}" includes="swt.jar" />
+		</path>
+		<pathconvert property="windows.manifest.classpath" pathsep=" " refid="windows.runtime.classpath">
+			<mapper><chainedmapper><flattenmapper /><globmapper from="*" to="lib/*" /></chainedmapper></mapper>
+		</pathconvert>
+		<jar destfile="${windows.stage}/CogTool.jar" basedir="${windows.classes}">
+			<manifest>
+				<attribute name="Main-Class" value="edu.cmu.cs.hcii.cogtool.CogTool" />
+				<attribute name="Class-Path" value="${windows.manifest.classpath}" />
+			</manifest>
+		</jar>
+		<copy todir="${windows.stage}/lib"><fileset dir="${libdir}" includes="*.jar" /></copy>
+		<copy file="${swtdir}/swt.jar" todir="${windows.stage}/lib" />
+		<copy file="${macswtdir}/EPL-2.0.txt" tofile="${windows.stage}/lib/SWT-EPL-2.0.txt" />
+		<copy todir="${windows.stage}/clisp-win"><fileset dir="${basedir}/clisp-win" /></copy>
+		<copy todir="${windows.stage}/XUL-win"><fileset dir="${basedir}/XUL-win" /></copy>
+		<copy file="${basedir}/LICENSE.txt" todir="${windows.stage}" />
+		<tstamp><format property="windows.buildtime" pattern="MM/dd/yyyy-hh:mm" /></tstamp>
+		<copy file="${resdir}/windows-portable/CogTool.bat" todir="${windows.stage}">
+			<filterset><filter token="VERSION" value="${version}" /><filter token="REVISION" value="${revision}" /><filter token="BUILDTIME" value="${windows.buildtime}" /></filterset>
+		</copy>
+		<copy file="${resdir}/windows-portable/README.txt" todir="${windows.stage}">
+			<filterset><filter token="ARCH" value="${windows.swt.arch}" /></filterset>
+		</copy>
+		<fixcrlf srcdir="${windows.stage}" includes="CogTool.bat,README.txt" eol="crlf" />
+		<antcall target="windows-copy-runtime" />
+	</target>
+
+	<target name="windows-zip" depends="windows-stage" description="Builds a portable Windows ZIP without NSIS.">
+		<zip destfile="${distdir}/CogTool-Windows-${windows.swt.arch}-${versionclean}${revision.suffix}.zip" basedir="${windows.workdir}/stage" />
+	</target>
+
+	<target name="windows-msi" depends="windows-stage" description="Builds a Windows MSI using wixl and a supplied Windows JRE.">
+		<fail unless="windows.jre.dir" message="Set windows.jre.dir to a Windows Java runtime matching windows.swt.arch." />
+		<exec executable="python3" failonerror="true">
+			<arg file="${basedir}/tools/build-windows-msi.py" />
+			<arg value="--stage" /><arg file="${windows.stage}" />
+			<arg value="--arch" /><arg value="${windows.swt.arch}" />
+			<arg value="--version" /><arg value="${version}" />
+			<arg value="--revision" /><arg value="${revision}" />
+			<arg value="--buildtime" /><arg value="${windows.buildtime}" />
+			<arg value="--icon" /><arg file="${resdir}/CogTool.ico" />
+			<arg value="--output" /><arg file="${distdir}/CogTool-Windows-${windows.swt.arch}-${versionclean}${revision.suffix}.msi" />
+		</exec>
+	</target>
+
+	<target name="windows-copy-runtime" if="windows.jre.dir">
+		<available file="${windows.jre.dir}/bin/java.exe" property="windows.runtime.has.java" />
+		<fail unless="windows.runtime.has.java" message="windows.jre.dir must point to a Windows Java runtime containing bin/java.exe" />
+		<copy todir="${windows.stage}/jre"><fileset dir="${windows.jre.dir}" /></copy>
+	</target>
 
 	<target name="package-artifacts">
 
@@ -299,6 +384,7 @@
 		<!-- Build a Windows installer .exe w/ jar & clisp. -->
 		<exec executable="C:\Program Files (x86)\NSIS\makensis.exe" vmlauncher="false" resolveexecutable="true">
 			<arg value="/XSetCompressor /FINAL /SOLID lzma" />
+			<arg value="/DCOGTOOL_SWT_JAR=${swtdir}/swt.jar" />
 			<arg file="${basedir}/res/cogtool.nsi" />
 		</exec>
 
