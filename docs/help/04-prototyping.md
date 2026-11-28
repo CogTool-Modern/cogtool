@@ -1534,6 +1534,14 @@ To clear the Frame Template so your new Frames can be created empty,
 
 -   From the Modify menu, choose Clear Frame Template.
 
+To model a widget as a screen-edge mouse target, select it and check
+**Infinite Fitts width** in Widget Properties. The setting is saved with that
+widget and is off by default. It applies the minimum ACT-R Fitts movement time
+to mouse movements aimed at that widget; touch movements are unaffected.
+CogTool does not infer this setting from the widget's position, so enable it
+only when the screen edge actually constrains the pointer. Changing it marks
+related predictions for recomputation.
+
 #### 4.3.4 Simple Widgets: Links, Graffiti®, and Non-Interactive
 
 ![](/assets/user-guide/media/image66.png)

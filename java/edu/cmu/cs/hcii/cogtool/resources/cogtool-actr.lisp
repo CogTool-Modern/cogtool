@@ -719,6 +719,44 @@
 ;;;;;;;;;;;;;;;;;     27jun07 - that's what I am going to go off an do, rather than trying to get this to work.
 
 
+;; The movement is prepared now but executed later, so associate the edge
+;; flag with the movement itself instead of consulting the current frame when
+;; it eventually executes.  Preserve the real target width for cursor noise.
+(defvar *preparing-magic-edge-move* nil)
+(defvar *magic-edge-movements* (make-hash-table :test #'eq))
+
+(defmethod move-cursor :around ((mtr-mod motor-module) &key loc object (device 'mouse))
+  (declare (ignore device))
+  (let* ((vision (get-module :vision))
+         (object-feature (and object (chunk-p-fct object)
+                              (chunk-visicon-entry object)
+                              (gethash (chunk-visicon-entry object) (visicon vision))))
+         (location (if (and object (chunk-p-fct object)
+                            (chunk-slot-value-fct object 'screen-pos))
+                       (chunk-slot-value-fct object 'screen-pos)
+                       loc))
+         (feature (or object-feature
+                      (and location (chunk-p-fct location)
+                           (or (and (chunk-visicon-entry location)
+                                    (gethash (chunk-visicon-entry location) (visicon vision)))
+                               location))))
+         (*preparing-magic-edge-move*
+           (and feature (not (get-cogtool-plist :use-finger *use-finger-default-value*))
+                (chunk-slot-value-fct feature 'magic-edge))))
+    (call-next-method)))
+
+(defmethod prepare-movement :before ((module motor-module) (mvmt cursor-ply))
+  (when *preparing-magic-edge-move*
+    (setf (gethash mvmt *magic-edge-movements*) t)))
+
+(defmethod compute-exec-time :around ((module motor-module) (mvmt cursor-ply))
+  (if (gethash mvmt *magic-edge-movements*)
+      (progn
+        (remhash mvmt *magic-edge-movements*)
+        ;; As width tends to infinity, the Fitts term reaches ACT-R's minimum.
+        (+ (init-time module) (rand-time (min-fitts-time module))))
+      (call-next-method)))
+
 ;;; DRAG-CURSOR      [Method]
 ;;; Date        : 07.06.22
 ;;; Description : A drag-cursor is a composite of press-mouse-button
@@ -850,6 +888,7 @@
    (y :accessor y :initarg :y :initform 0)
    (width :accessor width :initarg :width :initform 0)
    (height :accessor height :initarg :height :initform 0)
+   (magic-edge :accessor magic-edge-p :initarg :magic-edge :initform nil)
    (wtype :accessor wtype :initarg :wtype :initform "cogtool-button")
    (textual-cue :accessor textual-cue :initarg :textual-cue :initform nil)
    (has-remote-label :accessor has-remote-label :initarg :has-remote-label :initform nil)
@@ -942,6 +981,7 @@
       screen-y ,(+ (y thing) (floor (height thing) 2))
       height ,(height thing)
       width ,(width thing)
+      magic-edge ,(magic-edge-p thing)
       kind ,(wtype thing)
       is-back-button ,(back-button-p thing)
       textual-cue ,(textual-cue thing)
@@ -1181,7 +1221,7 @@
      (print *features*)
      (sgp))
        (chunk-type (cogtool-visual-location (:include visual-location))
-           widget-name display-label textual-cue remote-label-of has-remote-label member-of-group is-back-button)
+           widget-name display-label textual-cue remote-label-of has-remote-label member-of-group is-back-button magic-edge)
        (chunk-type (cogtool-button (:include visual-object)) ())
        (chunk-type (cogtool-link (:include visual-object)) ())
        (chunk-type (cogtool-context-menu (:include visual-object)) ())

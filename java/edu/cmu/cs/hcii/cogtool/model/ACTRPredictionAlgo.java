@@ -904,6 +904,10 @@ public class ACTRPredictionAlgo extends APredictionAlgo
         }
 
         DoubleRectangle bounds = new DoubleRectangle(fe.getEltBounds());
+        if (fe instanceof IWidget && Boolean.TRUE.equals(
+                fe.getAttribute(WidgetAttributes.INFINITE_FITTS_WIDTH_ATTR))) {
+            out.println("                                :magic-edge t");
+        }
         if (frameElementPositions != null) {
             while (isExisitingPosition(bounds)) {
                 bounds.x += 10;

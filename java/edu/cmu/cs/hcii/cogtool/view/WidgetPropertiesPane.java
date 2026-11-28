@@ -430,6 +430,8 @@ public class WidgetPropertiesPane extends Composite
     protected Label imagePath;
     protected Text imagePathText;
 
+    protected Button infiniteFittsWidth;
+
     // for buttons
     protected Button isToggleable;
     protected Button isButtonSelected;
@@ -525,6 +527,18 @@ public class WidgetPropertiesPane extends Composite
         widgetMode = new DisplayLabel(this, SWT.NONE);
         widgetMode.setText(L10N.get("FE.WidgetModeCaption", "Mode") + ":");
         widgetModeValue = new Label(this, SWT.NONE);
+
+        infiniteFittsWidth = new Button(this, SWT.CHECK);
+        infiniteFittsWidth.setText(L10N.get("FE.InfiniteFittsWidth", "Infinite Fitts width"));
+        infiniteFittsWidth.setToolTipText(L10N.get("FE.InfiniteFittsWidthHelp",
+            "Model this widget as a screen-edge mouse target with infinite Fitts width. Touch movements are unaffected."));
+        infiniteFittsWidth.addSelectionListener(
+            new WidgetAttributeListener(WidgetAttributes.INFINITE_FITTS_WIDTH_ATTR) {
+                @Override
+                public Object getValue() {
+                    return Boolean.valueOf(infiniteFittsWidth.getSelection());
+                }
+            });
 
         widgetRender = new Button(this, SWT.CHECK);
         widgetRender.setText(L10N.get("FE.WidgetRenderedCaption",
@@ -913,6 +927,11 @@ public class WidgetPropertiesPane extends Composite
         data = new FormData();
         data.top = new FormAttachment(widgetModeValue, 5);
         data.left = new FormAttachment(widgetName, 0, SWT.LEFT);
+        infiniteFittsWidth.setLayoutData(data);
+
+        data = new FormData();
+        data.top = new FormAttachment(infiniteFittsWidth, 5);
+        data.left = new FormAttachment(widgetName, 0, SWT.LEFT);
         widgetRender.setLayoutData(data);
 
         data = new FormData();
@@ -1226,6 +1245,7 @@ public class WidgetPropertiesPane extends Composite
         widgetMode.setEnabled(enable);
         widgetModeValue.setEnabled(enable);
         widgetRender.setEnabled(enable);
+        infiniteFittsWidth.setEnabled(enable);
         remoteLabel.setEnabled(enable);
         remoteLabelFind.setEnabled(enable);
         remoteLabelText.setEnabled(enable);
@@ -1256,6 +1276,8 @@ public class WidgetPropertiesPane extends Composite
         widgetMode.setEnabled(false);
         widgetModeValue.setEnabled(false);
         widgetRender.setEnabled(false);
+        infiniteFittsWidth.setEnabled(false);
+        infiniteFittsWidth.setSelection(false);
         remoteLabel.setEnabled(false);
         remoteLabelFind.setEnabled(false);
         remoteLabelText.setEnabled(false);
@@ -1323,6 +1345,8 @@ public class WidgetPropertiesPane extends Composite
     public void showAttributeWidgets(IWidget widget)
     {
         WidgetType type = widget.getWidgetType();
+        infiniteFittsWidth.setSelection(Boolean.TRUE.equals(
+            widget.getAttribute(WidgetAttributes.INFINITE_FITTS_WIDTH_ATTR)));
 
         widgetTitle.setText(DISPLAYED_LABEL);
 

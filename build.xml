@@ -436,6 +436,7 @@
 			<include name="ProjectPredictions.java" />
 			<include name="PredictionSmoke.java" />
 			<include name="AutomaticPredictionSmoke.java" />
+			<include name="MagicEdgesSmoke.java" />
 		</javac>
 		<jar destfile="${distdir}/CogTool.app/Contents/Resources/cogtool-prediction-tests.jar" basedir="${builddir}/prediction-tests" />
 		<delete dir="${builddir}/prediction-tests" />

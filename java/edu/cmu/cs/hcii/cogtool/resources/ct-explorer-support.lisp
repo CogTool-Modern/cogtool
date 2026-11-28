@@ -26,6 +26,7 @@
       screen-y ,(+ (y thing) (floor (height thing) 2))
       height ,(height thing)
       width ,(width thing)
+      magic-edge ,(magic-edge-p thing)
       kind ,(wtype thing)
       is-back-button ,(back-button-p thing)
       textual-cue ,(textual-cue thing)

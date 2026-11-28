@@ -116,6 +116,9 @@ public class WidgetAttributes
         return obsoletingAttributeRegistry.contains(attrName);
     }
 
+    /** Explicitly model a mouse target as having infinite Fitts width. */
+    public static final String INFINITE_FITTS_WIDTH_ATTR = "WidgetType.infiniteFittsWidth";
+
     // Selected is three-valued
     public static final Boolean IS_SELECTED = Boolean.TRUE;
     public static final Boolean NOT_SELECTED = Boolean.FALSE;
@@ -400,6 +403,10 @@ public class WidgetAttributes
      */
     public static void registerAttributes()
     {
+        IAttributed.AttributeRegistry.ONLY.defineAttribute(INFINITE_FITTS_WIDTH_ATTR,
+                                                           Boolean.class,
+                                                           Boolean.FALSE);
+        obsoletingAttributeRegistry.add(INFINITE_FITTS_WIDTH_ATTR);
         IAttributed.AttributeRegistry.ONLY.defineAttribute(IS_SELECTED_ATTR,
                                                            Boolean.class,
                                                            NOT_SELECTED);
