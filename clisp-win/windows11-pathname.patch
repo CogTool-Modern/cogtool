@@ -1,0 +1,15 @@
+--- a/src/pathname.d
++++ b/src/pathname.d
+@@ -6869,9 +6869,10 @@ local void directory_search_1subdir (object namestring, gcv_object_t *subdir)
+     fileattr = GetFileAttributes(resolved);
+     end_system_call();
+     if (fileattr == 0xFFFFFFFF) {
+-      /* you get ERROR_INVALID_NAME on GetFileAttributes("foo/")
++      /* Windows may return ERROR_INVALID_NAME or ERROR_DIRECTORY for "foo/"
+          when file "foo" exists */
+-      if (!(WIN32_ERROR_NOT_FOUND || GetLastError() == ERROR_INVALID_NAME))
++      if (!(WIN32_ERROR_NOT_FOUND || GetLastError() == ERROR_INVALID_NAME ||
++            GetLastError() == ERROR_DIRECTORY))
+         OS_file_error(STACK_0);
+     } else {                                   /* file exists. */
+       if (fileattr & FILE_ATTRIBUTE_DIRECTORY) /* is it a directory? */

@@ -459,7 +459,8 @@ public class Subprocess
             throw new IllegalStateException("Unknown Operating System");
         }
 
-        File clispDir = new File("clisp-" + osName);
+        File clispDir = new File(System.getProperty("cogtool.home", "."),
+                                 "clisp-" + osName);
 
         List<String> cmdList = new ArrayList<String>();
 
