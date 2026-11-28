@@ -18,3 +18,5 @@ done
 cd "$APP/Contents/Resources"
 "$JAVA" -XstartOnFirstThread -Djava.library.path="$JAVAROOT/dll/arm64" \
     -cp "$CP" PredictionSmoke "$ROOT/docs/examples/phone-number-lookup/N&P93.cgt"
+"$JAVA" -XstartOnFirstThread -Djava.library.path="$JAVAROOT/dll/arm64" \
+    -cp "$CP" AutomaticPredictionSmoke "$ROOT/docs/examples/phone-number-lookup/N&P93.cgt"

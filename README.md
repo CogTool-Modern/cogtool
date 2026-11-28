@@ -167,6 +167,11 @@ CLISP executable under Windows on ARM. See
 
 ## Platform test suite
 
+When a design edit makes a previously computed script obsolete, CogTool
+regenerates the script and updates its prediction automatically. Edits that
+invalidate a demonstration, such as removing a transition it uses, must be
+fixed before that task can be recomputed.
+
 The platform suite exercises an extracted, runnable package on the target OS.
 It loads the included phone-number project, recomputes its four predictions
 against the checked-in expected times, launches CogTool to save a copy and
@@ -211,6 +216,8 @@ ant test
 The app needs ARM64 Java 17 or newer. Set `JAVA_HOME` or pass `--java-home` if
 it is not automatically discovered. The suite must have access to the macOS
 graphical session; a restricted or headless environment may fail in SWT.
+After building, `tests/smoke-arm64-predictions.sh dist/CogTool.app` also checks
+automatic recomputation after design edits and rejects stale background results.
 
 On Windows x86-64, build the portable ZIP with
 `ant -Dwindows.swt.arch=x86_64 windows-zip`, extract it on Windows, and run in

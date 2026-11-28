@@ -508,11 +508,29 @@ public class DemoScriptCmd
             TaskApplication ta = designTAs.next();
             Demonstration demo = ta.getDemonstration();
 
-            if (demo.isObsolete() && demo.isEditable() /*&& ! demo.isInvalid()*/) {
+            if (demo.isObsolete() && demo.isEditable() && ! demo.isInvalid()) {
+                IPredictionAlgo algorithm = ta.determineActiveAlgorithm(project);
+                List<Script> toRecompute = new ArrayList<Script>();
+                if (algorithm.allowsComputation() && demo.isStartFrameChosen()) {
+                    Iterator<CognitiveModelGenerator> generators = ta.getModelGenerators();
+                    while (generators.hasNext()) {
+                        CognitiveModelGenerator generator = generators.next();
+                        APredictionResult result = ta.getResult(generator, algorithm);
+                        Script script = ta.getScript(generator);
+                        if (script != null && result != null && result.canBeRecomputed()) {
+                            toRecompute.add(script);
+                        }
+                    }
+                }
                 demoStateMgr.restoreConformance(demo);
 
                // Collection of ScriptUndoRedo instances
                regenerateScripts(demo, 0, demo.getStepAt(0), interaction);
+
+               for (Script script : toRecompute) {
+                   ComputePredictionCmd.scheduleAutomaticPrediction(project, script,
+                                                                    algorithm, interaction);
+               }
 
                // Variables are ignored; undo/redo will simply re-invoke
                // this method again!
