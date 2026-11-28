@@ -1,3 +1,4 @@
 helpbundledevbaseurl: ''
 # Helps to have all pages in one directory with their resources (CSS) instead of folders. (This because abs URLs are weird within Help Viewer app)
 permalink: none
+exclude: [README.markdown, Gemfile, Gemfile.lock, package.json, grunt.js, Gruntfile.js, Gruntfile.coffee, node_modules]

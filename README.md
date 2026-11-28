@@ -23,7 +23,7 @@ TODO Merge this seperate repo with the in-branch, GitHub Pages-powered `docs/` f
 
 ## Building
 To build the macOS package and both Windows MSIs together on macOS, install a
-JDK (17 or newer), Apache Ant, Python 3, and
+JDK (17 or newer), Apache Ant, Python 3, Ruby 3.2 or newer, Bundler, and
 [msitools](https://wiki.gnome.org/msitools) (`wixl`, `msibuild`, and
 `msiinfo` must be on `PATH`). Then:
 1. Download the source code from [GitHub](https://github.com/CogTool-Modern/cogtool).
@@ -38,11 +38,13 @@ JDK (17 or newer), Apache Ant, Python 3, and
 
    An existing `windows.jre.dir` setting also works as the ARM64 runtime for
    the default build; `windows.jre.arm64.dir` takes precedence if both are set.
-4. From within the project directory, run `ant`.
+4. Install the documentation dependencies with `cd docs && bundle install`,
+   then return to the project directory and run `ant`.
 
 The default build produces `dist/CogTool.app`, a macOS `.tgz` archive, and a
-Windows ARM64 MSI, and a Windows x86-64 MSI. It reuses the help files in the
-repository. Runtime paths can instead be supplied with
+Windows ARM64 MSI, and a Windows x86-64 MSI. It builds and indexes the macOS
+Help Book from `docs/` using Jekyll and macOS `hiutil`. Runtime paths can
+instead be supplied with
 `-Dwindows.jre.arm64.dir=...` and `-Dwindows.jre.x86_64.dir=...`; command-line
 properties override `build.local.properties`. For an individual Windows target,
 use `windows.swt.arch` and `windows.jre.dir` to select its architecture and
@@ -63,8 +65,16 @@ components: for example, release version `1.4` becomes MSI version `1.4.0`.
 
 For only a Mac package using the help files already in the repository, run
 `ant package-without-help`. To rebuild the help bundle as well, run
-`ant package`; this requires the documentation's Jekyll dependencies. Both
-targets produce `dist/CogTool.app` and a `.tgz` archive.
+`ant package`; install the documentation's dependencies with `bundle install`
+in `docs/` first. The generated Help Book is staged under `build/help/` without
+changing the checked-in bundle. Both targets produce `dist/CogTool.app` and a
+`.tgz` archive. Windows packages do not currently include a Help Book or CHM,
+and the in-app Help command has no Windows implementation.
+
+Ant uses `.local/ruby/bin/bundle` when present, or `bundle` on `PATH` otherwise.
+To select a different Ruby installation, install the gems with its `bundle`
+executable in `docs/` and pass `-Dhelp.bundle.executable=/path/to/bundle` to
+Ant. This ensures the dependency check and Jekyll build use the same Ruby.
 
 On Apple Silicon, the Mac app requires an ARM64 Java 17 or newer runtime.
 The launcher uses `JAVA_HOME` when set, otherwise it looks for a registered

@@ -117,7 +117,6 @@ import edu.cmu.cs.hcii.cogtool.util.RcvrUIException;
 import edu.cmu.cs.hcii.cogtool.util.UndoManager;
 import edu.cmu.cs.hcii.cogtool.util.OSUtils;
 
-import org.eclipse.swt.program.Program;
 
 /**
  * For CogTool, this Controller class provides default implementations for
@@ -289,12 +288,8 @@ public abstract class Controller
                 public boolean performAction(Object prms)
                 {
                     if (OSUtils.MACOSX) {
-                        // Open the Help bundle on macOS
-                        Program.launch("../Resources/CogTool.help");
+                        return OSUtils.getPlatform().showHelp();
                     }
-                    
-                    
-
                     return true;
                 }
             });

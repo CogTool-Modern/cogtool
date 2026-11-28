@@ -3,7 +3,7 @@ title: CogTool Help
 date: 2012-05-23T03:04:25+00:00
 layout: app_help
 ---
-{% assign help_pages = site.pages | where_exp: "item", "item.url contains '/help/' and item.url != '/help/'" %}
+{% assign help_pages = site.pages | where_exp: "item", "item.url contains '/help/' and item.name contains '.md'" %}
 <div id="introbox">
     <div class="introprimtext">
         {% for page in help_pages %}        

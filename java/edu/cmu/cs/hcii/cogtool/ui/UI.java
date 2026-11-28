@@ -291,7 +291,7 @@ public abstract class UI implements ListenerIdentifier.ILIDTransmuter
      * Sets the "always-enabled" widgets;
      * call this at the end of the subclass constructor!
      * <p>
-     * All windows support: NewProject, OpenProject, ExitApplication, About
+     * All windows support: NewProject, OpenProject, Help, ExitApplication, About
      *
      * @author mlh
      * @param forConstruction set to true if called during UI construction,
@@ -304,6 +304,9 @@ public abstract class UI implements ListenerIdentifier.ILIDTransmuter
                    ListenerIdentifierMap.ALL,
                    MenuUtil.ENABLED);
         setEnabled(CogToolLID.OpenProject,
+                   ListenerIdentifierMap.ALL,
+                   MenuUtil.ENABLED);
+        setEnabled(CogToolLID.Help,
                    ListenerIdentifierMap.ALL,
                    MenuUtil.ENABLED);
         if (! OSUtils.MACOSX) {

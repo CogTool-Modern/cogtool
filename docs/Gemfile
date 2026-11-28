@@ -1,0 +1,7 @@
+source "https://rubygems.org"
+
+# Keep the help build on the Jekyll 4.3 series.
+gem "jekyll", "~> 4.3.4"
+# These standard libraries became bundled gems in newer Ruby releases.
+gem "base64"
+gem "csv"

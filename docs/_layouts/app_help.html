@@ -7,6 +7,7 @@
         <meta name="robots" content="index, anchors" />
         <meta name="description" content="{{ page.title }}" />
         <meta name="keywords" content="{{ page.keywords }}" />
+        {% if page.url == '/help/index.html' or page.url == '/help/' %}<meta name="AppleTitle" content="CogTool Help" />{% endif %}
         <link href="{{ site.helpbundledevbaseurl }}machelp.css" rel="stylesheet">
         <link href="{{ site.helpbundledevbaseurl }}style.css" rel="stylesheet">        
     </head>

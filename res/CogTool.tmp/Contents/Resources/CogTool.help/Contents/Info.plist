@@ -19,7 +19,7 @@
 	<key>HPDBookAccessPath</key>
 	<string>index.html</string>
 	<key>HPDBookIconPath</key>
-	<string>images/chip3_32x32.ico</string>
+	<string>appicon.png</string>
 	<key>HPDBookIndexPath</key>
 	<string>help.helpindex</string>
 	<key>HPDBookCSIndexPath</key>

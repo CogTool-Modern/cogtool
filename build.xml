@@ -156,34 +156,50 @@
 		<os family="mac" />
 	</condition>
 
-	<target name="help-copy" description="Create a Help Bundle for Mac from the documentation (docs/)">
-		<!-- Build the Jekyll site in a special way that will work inside of Help Viewer app -->
-		<exec dir="${basedir}/docs" executable="/bin/sh">
-			<arg value="-c" />
-			<arg value="bundle exec jekyll build --config _config.yml,_config_helpbundle.yml" />
+	<property name="help.bundle" location="${builddir}/help/CogTool.help" />
+	<property name="help.pages" location="${help.bundle}/Contents/Resources/en.lproj" />
+	<!-- Prefer an optional project-local Ruby; callers can override this property. -->
+	<condition property="help.bundle.executable" value="${basedir}/.local/ruby/bin/bundle" else="bundle">
+		<available file="${basedir}/.local/ruby/bin/bundle" />
+	</condition>
+	<dirname property="help.bundle.dir" file="${help.bundle.executable}" />
+	<condition property="help.tools.path" value="${help.bundle.dir}${path.separator}${env.PATH}" else="${env.PATH}">
+		<available file="${help.bundle.executable}" type="file" />
+	</condition>
+
+	<target name="help-check">
+		<fail unless="os.mac" message="Building the indexed macOS Help Book requires macOS and hiutil." />
+		<exec dir="${basedir}/docs" executable="${help.bundle.executable}" resultproperty="help.bundle.check.result" failifexecutionfails="false">
+			<env key="PATH" path="${help.tools.path}" />
+			<arg value="check" />
 		</exec>
-		<!-- Copy the Mac Help Bundle files -->
-		<copy todir="${resdir}/CogTool.tmp/Contents/Resources/CogTool.help/Contents/Resources/en.lproj/" overwrite="true">
-			<fileset dir="docs/_site/help"/>
-		</copy>
+		<condition property="help.bundle.check.ok"><equals arg1="${help.bundle.check.result}" arg2="0" /></condition>
+		<fail unless="help.bundle.check.ok" message="Jekyll dependencies are unavailable to ${help.bundle.executable}. Install Ruby 3.2+ and Bundler, then run bundle install in docs/. Use -Dhelp.bundle.executable=/path/to/bundle if needed." />
 	</target>
 
-	<target if="os.mac" name="help-index" description="Builds the index for Help Bundles and Spotlight">
-		<!-- Create a helpindex file for macOS's Spotlight, for searching through Help topics. hituil is macOS only. -->
-		<exec dir="${resdir}/CogTool.tmp/Contents/Resources/CogTool.help/Contents/Resources/en.lproj/" executable="/bin/sh">
-			<arg value="-c" />
-			<arg value="hiutil -I corespotlight -Caf help.cshelpindex . -v -v" />
+	<target name="help-copy" depends="help-check" description="Build the Help Book from the Jekyll documentation.">
+		<delete dir="${builddir}/help" />
+		<exec dir="${basedir}/docs" executable="${help.bundle.executable}" failonerror="true">
+			<env key="PATH" path="${help.tools.path}" />
+			<arg value="exec" /><arg value="jekyll" /><arg value="build" />
+			<arg value="--config" /><arg value="_config.yml,_config_helpbundle.yml" />
+			<arg value="--destination" /><arg file="${builddir}/help/site" />
 		</exec>
+		<copy todir="${help.bundle}">
+			<fileset dir="${resdir}/CogTool.tmp/Contents/Resources/CogTool.help" includes="Contents/Info.plist,Contents/Resources/en.lproj/InfoPlist.strings" />
+		</copy>
+		<copy todir="${help.pages}"><fileset dir="${builddir}/help/site/help" /></copy>
+		<copy todir="${help.pages}/assets/user-guide/media"><fileset dir="${basedir}/docs/assets/user-guide/media" /></copy>
+		<!-- The website uses root-relative image URLs; a Help Book is loaded from disk. -->
+		<replace dir="${help.pages}" includes="**/*.html" token="/assets/user-guide/media/" value="assets/user-guide/media/" />
+	</target>
 
-		<!-- Help Menu Search -->
-		<exec dir="${resdir}/CogTool.tmp/Contents/Resources/CogTool.help/Contents/Resources/en.lproj/" executable="/bin/sh">
-			<arg value="-c" />
-			<arg value="hiutil -I lsm -Caf help.helpindex . -v -v" />
+	<target name="help-index" depends="help-copy" description="Index the generated macOS Help Book.">
+		<exec dir="${help.pages}" executable="hiutil" failonerror="true">
+			<arg value="-I" /><arg value="corespotlight" /><arg value="-Caf" /><arg value="help.cshelpindex" /><arg value="." />
 		</exec>
-
-		<!-- Clear the help cache -->
-		<exec dir="${resdir}/CogTool.tmp/Contents/Resources/CogTool.help/Contents/Resources/en.lproj/" executable="hiutil">
-			<arg value="-P" />
+		<exec dir="${help.pages}" executable="hiutil" failonerror="true">
+			<arg value="-I" /><arg value="lsm" /><arg value="-Caf" /><arg value="help.helpindex" /><arg value="." />
 		</exec>
 	</target>
 
@@ -235,13 +251,13 @@
 		</sequential>
 	</macrodef>
 
-	<target name="package-all" depends="validate-package-all,package-without-help" description="Builds the Mac package and both Windows MSIs.">
+	<target name="package-all" depends="validate-package-all,package" description="Builds the Mac package and both Windows MSIs.">
 		<package-windows-msi arch="arm64" runtime="${windows.jre.arm64.dir}" />
 		<package-windows-msi arch="x86_64" runtime="${windows.jre.x86_64.dir}" />
 	</target>
 
 	<!-- Packages build output and resources into runnable packages. -->
-	<target name="package" depends="validate-release-version,clean,compile,help-copy,help-index,package-artifacts" description="Packages build output and resources into runable packages." />
+	<target name="package" depends="validate-release-version,help-check,clean,compile,help-index,package-artifacts" description="Packages build output and resources into runnable packages." />
 
 	<!-- Reuse the help files already in the bundle template when Jekyll is unavailable. -->
 	<target name="package-without-help" depends="validate-release-version,clean,compile,package-artifacts" description="Packages using the existing help bundle." />
@@ -322,6 +338,9 @@
 	</target>
 
 	<target name="package-artifacts">
+		<condition property="help.template.exclude" value="Contents/Resources/CogTool.help/**" else="__no_help_exclusion__">
+			<available file="${help.bundle}" type="dir" />
+		</condition>
 
 		<tstamp>
 			<format property="buildtime" pattern="MM/dd/yyyy-hh:mm" />
@@ -349,7 +368,10 @@
 
 		<!-- Create a Mac "app" bundle by copying the tmp bundle. -->
 		<copy todir="${distdir}/CogTool.app" overwrite="true">
-			<fileset dir="${resdir}/CogTool.tmp"/>
+			<fileset dir="${resdir}/CogTool.tmp" excludes="${help.template.exclude}" />
+		</copy>
+		<copy todir="${distdir}/CogTool.app/Contents/Resources/CogTool.help">
+			<fileset dir="${help.bundle}" erroronmissingdir="false" />
 		</copy>
 
 		<!-- Launch Services requires a native entry point; the shell script is a resource. -->

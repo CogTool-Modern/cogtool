@@ -108,7 +108,11 @@ import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.*;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.internal.cocoa.OS;
+import org.eclipse.swt.internal.cocoa.NSBundle;
+import org.eclipse.swt.internal.cocoa.NSString;
+import org.eclipse.swt.internal.cocoa.id;
 
+import java.io.File;
 import java.lang.reflect.Method;
 //import org.eclipse.wb.swt.SWTResourceManager;
 
@@ -138,6 +142,50 @@ public class MacOSXPlatform extends PlatformAdapter
 	public boolean isSystemDarkAppearance() {
 		return OS.isSystemDarkAppearance();
 	}
+
+    @Override
+    public boolean showHelp()
+    {
+        String appPath = System.getProperty("cogtool.app.bundle");
+        if (appPath == null) {
+            return false;
+        }
+
+        NSBundle appBundle = NSBundle.bundleWithPath(NSString.stringWith(appPath));
+        if (appBundle == null) {
+            return false;
+        }
+        id bookFolder = appBundle.objectForInfoDictionaryKey(NSString.stringWith("CFBundleHelpBookFolder"));
+        if (bookFolder == null) {
+            return false;
+        }
+        File bookPath = new File(new File(appPath, "Contents/Resources"),
+                                 new NSString(bookFolder).getString());
+        NSBundle bookBundle = NSBundle.bundleWithPath(NSString.stringWith(bookPath.getPath()));
+        if (bookBundle == null) {
+            return false;
+        }
+        NSString identifier = bookBundle.bundleIdentifier();
+        if (identifier == null) {
+            return false;
+        }
+        String bookIdentifier = identifier.getString();
+
+        long helpManager = OS.objc_msgSend(OS.objc_getClass("NSHelpManager"),
+                                           OS.sel_registerName("sharedHelpManager"));
+        long registered = OS.objc_msgSend(helpManager,
+                                          OS.sel_registerName("registerBooksInBundle:"),
+                                          appBundle.id);
+        if ((registered & 0xff) == 0) {
+            return false;
+        }
+        // The identifier selects this book even when another book has the same title.
+        OS.objc_msgSend(helpManager,
+                        OS.sel_registerName("openHelpAnchor:inBook:"),
+                        NSString.stringWith("CogTool Help").id,
+                        NSString.stringWith(bookIdentifier).id);
+        return true;
+    }
 
     @Override
     public void initPlatformMenu(Display display,

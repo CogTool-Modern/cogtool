@@ -125,6 +125,9 @@ public interface Platform
 
     public boolean isSystemDarkAppearance();
 
+    /** Open the application's native help, if supported. */
+    public boolean showHelp();
+
     /**
      * Bind the above callbacks to the Application Menu; only relevant
      * for Macintosh, other platforms should ignore this.

@@ -115,4 +115,9 @@ public abstract class PlatformAdapter implements Platform
         // Most OS do not have a dark mode at the time of this writing.
         return false;
     }
+
+    public boolean showHelp()
+    {
+        return false;
+    }
 }

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 RESDIR="$(cd "$(dirname "$0")" && pwd)"
+APPDIR="$(cd "$RESDIR/../.." && pwd)"
 MAC_ARCH="$(uname -m)"
 
 java_required() {
@@ -87,4 +88,4 @@ case "$JAVA_ARCH" in
 esac
 
 cd "$RESDIR" || exit 1
-exec "$JAVACMD" -XstartOnFirstThread -classpath "$JAVAROOT/CogTool.jar:$JAVAROOT/MacSupport.jar:$JAVAROOT/WindowsImageTransfer.jar:$JAVAROOT/commons-collections-3.1.jar:$JAVAROOT/commons-lang-2.1.jar:$JAVAROOT/ecf.jar:$JAVAROOT/js.jar:$JAVAROOT/draw2d.jar:$SWTJAR:$JAVAROOT/xercesImpl.jar:$JAVAROOT/xml-apis.jar:$JAVAROOT/MozillaGlue.jar:$JAVAROOT/MozillaInterfaces.jar:$JAVAROOT/jopt-simple.jar" -Djava.library.path="$NATIVEPATH" -Dcogtool.version="$BLDVER" -Dcogtool.revision="$BLDREV" -Dcogtool.build="$BLDTIM" -Xmx400000000 edu.cmu.cs.hcii.cogtool.CogTool "$@"
+exec "$JAVACMD" -XstartOnFirstThread -classpath "$JAVAROOT/CogTool.jar:$JAVAROOT/MacSupport.jar:$JAVAROOT/WindowsImageTransfer.jar:$JAVAROOT/commons-collections-3.1.jar:$JAVAROOT/commons-lang-2.1.jar:$JAVAROOT/ecf.jar:$JAVAROOT/js.jar:$JAVAROOT/draw2d.jar:$SWTJAR:$JAVAROOT/xercesImpl.jar:$JAVAROOT/xml-apis.jar:$JAVAROOT/MozillaGlue.jar:$JAVAROOT/MozillaInterfaces.jar:$JAVAROOT/jopt-simple.jar" -Djava.library.path="$NATIVEPATH" -Dcogtool.app.bundle="$APPDIR" -Dcogtool.version="$BLDVER" -Dcogtool.revision="$BLDREV" -Dcogtool.build="$BLDTIM" -Xmx400000000 edu.cmu.cs.hcii.cogtool.CogTool "$@"
