@@ -363,7 +363,8 @@
 				<attribute name="Class-Path" value="${manifest.classpath}" />
 				<attribute name="Main-Class" value="edu.cmu.cs.hcii.cogtool.CogTool" />
 			</manifest>
-			<fileset dir="${builddir}" />
+			<!-- Help is packaged separately; the staging tree also contains the full website. -->
+			<fileset dir="${builddir}" excludes="help/**" />
 		</jar>
 
 		<!-- Create a Mac "app" bundle by copying the tmp bundle. -->
