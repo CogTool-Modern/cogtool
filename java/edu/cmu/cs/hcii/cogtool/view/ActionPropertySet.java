@@ -1169,7 +1169,7 @@ public class ActionPropertySet extends ActionSet
                 {
                     super.onFocus();
 
-                    view.getTransmuter().setLIDEnabledState();
+                    ActionPropertySet.this.view.getTransmuter().setLIDEnabledState();
                 }
 
                 @Override
@@ -1182,7 +1182,7 @@ public class ActionPropertySet extends ActionSet
                         labelSelection = null;
                     }
 
-                    if (view.performAction(DesignEditorLID.ChangeDelay)) {
+                    if (ActionPropertySet.this.view.performAction(DesignEditorLID.ChangeDelay)) {
                         if (labelSelection != null) {
                             setSelection(labelSelection);
                         }
@@ -1208,7 +1208,7 @@ public class ActionPropertySet extends ActionSet
                 {
                     super.onFocus();
 
-                    view.getTransmuter().setLIDEnabledState();
+                    ActionPropertySet.this.view.getTransmuter().setLIDEnabledState();
                 }
 
                 @Override
@@ -1229,7 +1229,7 @@ public class ActionPropertySet extends ActionSet
                         delaySelection = null;
                     }
 
-                    if (view.performAction(DesignEditorLID.ChangeDelay)) {
+                    if (ActionPropertySet.this.view.performAction(DesignEditorLID.ChangeDelay)) {
                         if (delaySelection != null) {
                             setSelection(delaySelection);
                         }
@@ -1340,7 +1340,7 @@ public class ActionPropertySet extends ActionSet
                 {
                     super.onFocus();
 
-                    view.getTransmuter().setLIDEnabledState();
+                    ActionPropertySet.this.view.getTransmuter().setLIDEnabledState();
                 }
 
                 @Override
@@ -1351,7 +1351,7 @@ public class ActionPropertySet extends ActionSet
                     DesignEditorUI.DesignRenameParameters parms =
                         new DesignEditorUI.DesignRenameParameters(design, designName.getText());
 
-                    boolean changed = view.performAction(ProjectLID.RenameDesign,
+                    boolean changed = ActionPropertySet.this.view.performAction(ProjectLID.RenameDesign,
                                                          parms,
                                                          true);
 

@@ -674,7 +674,6 @@ public abstract class UI implements ListenerIdentifier.ILIDTransmuter
      * @param newLabel if not null, the new label to use for the user interface
      *                 widgets associated with the given id that support labels
      * @author mlh
-     * @see ListenerIdentifierMap.getWidgets
      */
 
     public void setEnabled(CogToolLID id,
@@ -703,7 +702,6 @@ public abstract class UI implements ListenerIdentifier.ILIDTransmuter
      *                 widgets associated with the given id that support labels
      * @param selected for all associated widgets that are MenuItems set
      *                 their selection state to this
-     * @see ListenerIdentifierMap.getWidgets
      */
     public void setEnabled(CogToolLID id,
                            Boolean availability,
@@ -1253,8 +1251,6 @@ public abstract class UI implements ListenerIdentifier.ILIDTransmuter
      * from the appropriate IUndoableEdit from the given undo manager.
      *
      * @param lid the CogTool command being queried
-     * @param undoMgr the window's undo manager in case the given LID is
-     *                CogToolLID.Undo or CogToolLID.Redo
      * @return whether the given LID is a CogToolLID that
      *         can cause selection
      */

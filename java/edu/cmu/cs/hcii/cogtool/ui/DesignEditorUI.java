@@ -168,7 +168,7 @@ public class DesignEditorUI extends ZoomableUI
     {
         public FrameNameEditor()
         {
-            super(view.getEditor().getSWTEditorSubstrate(), CENTER_TEXT);
+            super(DesignEditorUI.this.view.getEditor().getSWTEditorSubstrate(), CENTER_TEXT);
         }
 
         @Override

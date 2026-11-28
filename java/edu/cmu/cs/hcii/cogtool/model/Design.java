@@ -666,7 +666,7 @@ public class Design extends GlobalAttributed implements NamedObject
          * Initialize the semantic change representing an add or a remove.
          *
          * @param design    the design that was modified
-         * @param frames    the frames added or removed
+         * @param frameChg    the frames added or removed
          * @param add       a flag indicating whether the change is an add
          *                  or a remove
          * @author mlh
