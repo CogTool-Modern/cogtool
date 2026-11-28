@@ -267,11 +267,9 @@ public class FrameEditorUI extends ZoomableUI
 
     public class ResizeHandles implements IUIFigure
     {
-        /**
-         * Top left will not be shown if the selection contains
-         * an MenuItem, which anchors any resizing to the top-left
-         */
+        // Child groups resize from the edge opposite their parent.
         protected boolean anchorTopLeft = false;
+        protected boolean anchorBottomLeft = false;
 
         /**
          * Resize thumb for Top Left
@@ -303,6 +301,11 @@ public class FrameEditorUI extends ZoomableUI
             return anchorTopLeft;
         }
 
+        public boolean isBottomLeftAnchored()
+        {
+            return anchorBottomLeft;
+        }
+
         /**
          * Get the complete area used by currently selected widgets, unzoomed.
          *
@@ -312,6 +315,7 @@ public class FrameEditorUI extends ZoomableUI
         protected Rectangle getSelectedElementFigureArea()
         {
             boolean anchored = false;
+            boolean anchoredAtBottom = false;
 
             // Use figures since they may be sized differently during dynamics
             // accumulate as unzoomed.
@@ -330,7 +334,17 @@ public class FrameEditorUI extends ZoomableUI
 
                     if (wg != null) {
                         r = unionBounds(r, getGroupFigureBounds(wg));
-                        anchored = anchored || (w instanceof ChildWidget);
+                        if (w instanceof ChildWidget) {
+                            AParentWidget parent = ((ChildWidget) w).getParent();
+                            if (parent instanceof MenuHeader &&
+                                parent.getChildrenLocation() == AParentWidget.CHILDREN_ABOVE)
+                            {
+                                anchoredAtBottom = true;
+                            }
+                            else {
+                                anchored = true;
+                            }
+                        }
                     }
                     else {
                         r = unionBounds(r, gw.getBounds());
@@ -356,6 +370,7 @@ public class FrameEditorUI extends ZoomableUI
             }
 
             setTopLeftAnchored(anchored);
+            anchorBottomLeft = anchoredAtBottom && ! anchored;
 
             return r;
         }
@@ -395,13 +410,10 @@ public class FrameEditorUI extends ZoomableUI
                 bottomRightResize.setVisible(true);
             }
 
-            // this.anchorTopLeft gets set during getSelectedElementFigureArea()
+            // Determine which edge of a child group remains fixed.
             Rectangle r = getSelectedElementFigureArea();
-
-            // Top left will not be shown if the selection contains
-            // an MenuItem, which anchors any resizing to the top-left;
-            // computed by getSelectedWidgetFigureArea
             topLeftResize.setVisible(! anchorTopLeft);
+            bottomLeftResize.setVisible(! anchorBottomLeft);
 
             update(r);
         }
@@ -435,8 +447,10 @@ public class FrameEditorUI extends ZoomableUI
                     topLeftResize.repaint();
                 }
 
-                bottomLeftResize.centerAt(x, y + height);
-                bottomLeftResize.repaint();
+                if (bottomLeftResize.isVisible()) {
+                    bottomLeftResize.centerAt(x, y + height);
+                    bottomLeftResize.repaint();
+                }
 
                 topRightResize.centerAt(x + width, y);
                 topRightResize.repaint();
@@ -608,6 +622,26 @@ public class FrameEditorUI extends ZoomableUI
                         }
                     }
 
+                    IWidget owner = potentialFigureOwner.getModel();
+                    AParentWidget menuParent = null;
+                    if (owner instanceof MenuHeader) {
+                        menuParent = (MenuHeader) owner;
+                    }
+                    else if (owner instanceof MenuItem) {
+                        menuParent = ((MenuItem) owner).getParent();
+                    }
+                    if (menuParent instanceof MenuHeader &&
+                        menuParent.getChildrenLocation() == AParentWidget.CHILDREN_ABOVE)
+                    {
+                        double top = menuParent.hasChildren()
+                            ? menuParent.getItem(0).getEltBounds().y
+                            : menuParent.getEltBounds().y;
+                        bds.y = PrecisionUtilities.round(top) - bds.height;
+                    }
+                    if (owner instanceof MenuHeader && ! menuParent.hasChildren()) {
+                        bds.x += ((Integer) owner.getAttribute(WidgetAttributes.MENU_OFFSET_X_ATTR)).intValue();
+                        bds.y += ((Integer) owner.getAttribute(WidgetAttributes.MENU_OFFSET_Y_ATTR)).intValue();
+                    }
                     bottomPotentialFigure.resetBounds(bds);
                 }
             }
@@ -1147,7 +1181,15 @@ public class FrameEditorUI extends ZoomableUI
                                 (GraphicalTraversableWidget<?>) figure;
                             IFigure toSelect = travFigure.selectUp();
 
-                            // Nowhere to go if null returned; simply stay!
+                            if (toSelect == null &&
+                                travFigure.getModel() instanceof MenuItem &&
+                                ((MenuItem) travFigure.getModel()).getParent().getChildrenLocation() == AParentWidget.CHILDREN_ABOVE)
+                            {
+                                setUpUISupport(travFigure);
+                                if (bottomPotentialFigure.isVisible()) {
+                                    toSelect = bottomPotentialFigure;
+                                }
+                            }
                             if ((toSelect != null) && (toSelect != travFigure))
                             {
                                 selection.deselectSelnFig(travFigure);

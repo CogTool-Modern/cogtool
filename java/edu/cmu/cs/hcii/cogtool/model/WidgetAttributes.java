@@ -287,6 +287,11 @@ public class WidgetAttributes
      */
     public static final String IS_SEPARATOR_ATTR = "WidgetType.isSeparator";
 
+    /** Whether a standard menu opens above its header. */
+    public static final String MENU_OPENS_UP_ATTR = "WidgetType.menuOpensUp";
+    public static final String MENU_OFFSET_X_ATTR = "WidgetType.menuOffsetX";
+    public static final String MENU_OFFSET_Y_ATTR = "WidgetType.menuOffsetY";
+
     // Appended text to a TextBox may be empty
     public static final String EMPTY_TEXT = "";
 
@@ -435,6 +440,19 @@ public class WidgetAttributes
                                                            Boolean.class,
                                                            NON_SEPARATOR);
         obsoletingAttributeRegistry.add(IS_SEPARATOR_ATTR);
+
+        IAttributed.AttributeRegistry.ONLY.defineAttribute(MENU_OPENS_UP_ATTR,
+                                                           Boolean.class,
+                                                           Boolean.FALSE);
+        obsoletingAttributeRegistry.add(MENU_OPENS_UP_ATTR);
+        IAttributed.AttributeRegistry.ONLY.defineAttribute(MENU_OFFSET_X_ATTR,
+                                                           Integer.class,
+                                                           Integer.valueOf(0));
+        IAttributed.AttributeRegistry.ONLY.defineAttribute(MENU_OFFSET_Y_ATTR,
+                                                           Integer.class,
+                                                           Integer.valueOf(0));
+        obsoletingAttributeRegistry.add(MENU_OFFSET_X_ATTR);
+        obsoletingAttributeRegistry.add(MENU_OFFSET_Y_ATTR);
 
         IAttributed.AttributeRegistry.ONLY.defineAttribute(APPENDED_TEXT_ATTR,
                                                            String.class,

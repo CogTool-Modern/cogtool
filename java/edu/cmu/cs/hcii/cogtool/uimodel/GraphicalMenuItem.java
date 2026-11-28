@@ -94,6 +94,7 @@ package edu.cmu.cs.hcii.cogtool.uimodel;
 import edu.cmu.cs.hcii.cogtool.model.ChildWidget;
 import edu.cmu.cs.hcii.cogtool.model.ContextMenu;
 import edu.cmu.cs.hcii.cogtool.model.MenuItem;
+import edu.cmu.cs.hcii.cogtool.model.MenuHeader;
 import edu.cmu.cs.hcii.cogtool.model.AMenuWidget;
 import edu.cmu.cs.hcii.cogtool.model.AParentWidget;
 import edu.cmu.cs.hcii.cogtool.model.WidgetAttributes;
@@ -121,6 +122,9 @@ public class GraphicalMenuItem extends AbstractGraphicalMenuWidget<MenuItem>
         if (up == null) {
             AParentWidget parent = (model).getParent();
 
+            if (opensUpward()) {
+                return null;
+            }
             if (parent != null) {
                 if (parent instanceof ChildWidget) {
                     return figureSpt.getLastInGroup(this);
@@ -136,8 +140,12 @@ public class GraphicalMenuItem extends AbstractGraphicalMenuWidget<MenuItem>
 
     public GraphicalWidget<?> selectDown()
     {
-        // Do not rotate to top item, but rather PotentialFigure
-        return figureSpt.getNextInGroup(this);
+        GraphicalWidget<?> down = figureSpt.getNextInGroup(this);
+        if (down == null && opensUpward()) {
+            return figureSpt.getWidgetFigure(model.getParent());
+        }
+        // For downward menus, the potential figure follows the last item.
+        return down;
     }
 
 
@@ -187,6 +195,13 @@ public class GraphicalMenuItem extends AbstractGraphicalMenuWidget<MenuItem>
     }
 
 
+    private boolean opensUpward()
+    {
+        AParentWidget parent = model.getParent();
+        return parent instanceof MenuHeader &&
+               parent.getChildrenLocation() == AParentWidget.CHILDREN_ABOVE;
+    }
+
     public int getPotentialFigures()
     {
         int result = NONE;
@@ -194,7 +209,8 @@ public class GraphicalMenuItem extends AbstractGraphicalMenuWidget<MenuItem>
             result = result | RIGHT;
         }
 
-        if (selectDown() == null) {
+        if (opensUpward() ? model.getParent().indexOf(model) == 0
+                          : selectDown() == null) {
             result = result | DOWN;
         }
 

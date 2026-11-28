@@ -2080,6 +2080,18 @@ entire menu system a simple matter of typing in the menu headers,
 submenus, and menu items. You can create menus that are always
 visible, like the ones at the top of the screen in a Mac or at the top
 of windows in Windows, or context menus that pop-up at your cursor.
+To make a menu open above its header, select the standard Menu Header and
+check **Open menu upward** in the Widget properties pane. Place the header
+low enough in the Frame to leave room for its items. The items remain in
+top-to-bottom order and can be edited and rearranged as usual. Select the
+topmost item to add another item above it. To change the height of the
+items, drag a top resize handle; the edge next to the header stays fixed.
+Each menu header has its own setting. To shift the menu items relative to
+the header, change **Menu horizontal offset** or **Menu vertical offset** in
+the same properties pane. Positive values move items right or down, and
+negative values move them left or up. Offsets are measured in frame pixels
+and apply whether the menu opens upward or downward.
+
 4.3.9.1.1 Creating Menus that are Always Visible
 ![](/assets/user-guide/media/image101.png)
  Menu Header Widget tool

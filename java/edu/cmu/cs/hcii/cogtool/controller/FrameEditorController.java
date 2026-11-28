@@ -2494,6 +2494,13 @@ public class FrameEditorController extends ZoomableController
                             widget = new MenuItem((AMenuWidget) nwp.parent,
                                                   nwp.bounds,
                                                   nwp.widgetTitle);
+                            if (nwp.parent instanceof MenuHeader &&
+                                nwp.parent.getChildrenLocation() == AParentWidget.CHILDREN_ABOVE)
+                            {
+                                ChildWidget item = (ChildWidget) widget;
+                                nwp.parent.removeItem(item);
+                                nwp.parent.addItem(0, item);
+                            }
                         }
                         else if (nwp.type == WidgetType.PullDownItem) {
                             widget =
@@ -3989,6 +3996,12 @@ public class FrameEditorController extends ZoomableController
 
         // Add the new widget to the undo system and to the model
         seq.addEdit(addWidget(w));
+        if (w instanceof ChildWidget) {
+            AParentWidget parent = ((ChildWidget) w).getParent();
+            if (parent.getChildrenLocation() == AParentWidget.CHILDREN_ABOVE) {
+                DesignEditorCmd.repositionChildren(parent);
+            }
+        }
 
         return true;
     }
@@ -4137,6 +4150,12 @@ public class FrameEditorController extends ZoomableController
             }
 
             model.addWidget(widget);
+            if (widget instanceof ChildWidget) {
+                AParentWidget parent = ((ChildWidget) widget).getParent();
+                if (parent.getChildrenLocation() == AParentWidget.CHILDREN_ABOVE) {
+                    DesignEditorCmd.repositionChildren(parent);
+                }
+            }
 
             stateMgr.noteWidgetEdit(widget, this);
         }
@@ -4430,6 +4449,9 @@ public class FrameEditorController extends ZoomableController
                 ChildWidget child = (ChildWidget) w;
                 AParentWidget itemParent = child.getParent();
                 itemParent.removeItem(child);
+                if (moveSiblings && itemParent.getChildrenLocation() == AParentWidget.CHILDREN_ABOVE) {
+                    DesignEditorCmd.repositionChildren(itemParent);
+                }
             }
             else {
                 parentGroup.remove(w);
@@ -4495,6 +4517,9 @@ public class FrameEditorController extends ZoomableController
                        public void redoHelper()
                        {
                            itemParent.removeItem((ChildWidget) widget);
+                           if (itemParent.getChildrenLocation() == AParentWidget.CHILDREN_ABOVE) {
+                               DesignEditorCmd.repositionChildren(itemParent);
+                           }
                        }
 
                        @Override
