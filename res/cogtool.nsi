@@ -5,6 +5,9 @@ Name "CogTool"
 !define VERSION VERSTRING
 !define COMPANY "Carnegie Mellon University, HCI Institute"
 !define URL http://www.cogtool.org/
+!ifndef COGTOOL_SWT_JAR
+!define COGTOOL_SWT_JAR "..\lib\windows\swt.jar"
+!endif
 
 # MUI defines
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\orange-install.ico"
@@ -67,7 +70,8 @@ Section -Main SEC0000
     File /r /x .svn /x ._* ..\xul-win\*
     SetOutPath $INSTDIR\lib
     File ..\lib\*.jar
-    File "..\lib\windows\*"
+    File /oname=swt.jar "${COGTOOL_SWT_JAR}"
+    File /oname=SWT-EPL-2.0.txt "..\lib\macintosh\EPL-2.0.txt"
     SetOutPath $INSTDIR\jre
     File /r /x .svn /x ._* ..\jre\*
     

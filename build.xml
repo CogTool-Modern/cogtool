@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="CogTool" default="package">
+<project name="CogTool" default="package-all">
 
         <defaultexcludes echo="true"/>
 
-	<property name="exeversion" value="1.4.0.0" />
-	<property name="version" value="1.4" />
-	<property name="versionclean" value="1_4" />
+	<!-- Local paths can be configured without changing the shared build. -->
+	<property environment="env" />
+	<property file="${basedir}/build.local.properties" />
+	<condition property="windows.tools.path" value="${windows.msitools.bin}${path.separator}${env.PATH}" else="${env.PATH}">
+		<isset property="windows.msitools.bin" />
+	</condition>
+	<!-- This file is also packaged as a runtime resource. -->
+	<property prefix="release" file="${basedir}/java/edu/cmu/cs/hcii/cogtool/resources/release.properties" />
+	<property file="${basedir}/java/edu/cmu/cs/hcii/cogtool/resources/release.properties" />
+	<!-- A build may supply -Drevision=...; otherwise no revision is displayed. -->
+	<property name="revision" value="unspecified" />
+	<condition property="revision.suffix" value="-r${revision}" else="">
+		<not><equals arg1="${revision}" arg2="unspecified" /></not>
+	</condition>
+	<loadresource property="exeversion">
+		<string value="${version}.0.0.0" />
+		<filterchain><tokenfilter><replaceregex pattern="^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+).*$" replace="\1" /></tokenfilter></filterchain>
+	</loadresource>
+	<loadresource property="versionclean">
+		<string value="${version}" />
+		<filterchain><tokenfilter><replaceregex pattern="\." replace="_" flags="g" /></tokenfilter></filterchain>
+	</loadresource>
 
 	<property name="jlevel" value="1.8" />
     <property name="build.compiler" value="javac${jlevel}" />
@@ -14,7 +33,12 @@
 	<property name="srcroot" value="${basedir}/java" />
 	<property name="macsrcroot" value="${basedir}/mac-support" />
 	<property name="libdir" value="${basedir}/lib" />
-	<property name="swtdir" value="${libdir}/windows" />
+	<!-- Select one Windows SWT at build time; the matching Java runtime must
+	     have the same architecture. -->
+	<property name="windows.swt.arch" value="arm64" />
+	<condition property="swtdir" value="${libdir}/windows/arm64" else="${libdir}/windows">
+		<equals arg1="${windows.swt.arch}" arg2="arm64" />
+	</condition>
 	<property name="macswtdir" value="${libdir}/macintosh" />
 	<property name="resdir" value="${basedir}/res" />
 	<property name="distdir" value="${basedir}/dist" />
@@ -33,7 +57,7 @@
 			<include name="*.jar" />
 		</fileset>
 		<fileset dir="${swtdir}">
-			<include name="*.jar" />
+			<include name="swt.jar" />
 		</fileset>
 		<pathelement path="${builddir}" />
 	</path>
@@ -46,10 +70,44 @@
 			<include name="*.jar" />
 		</fileset>
 		<fileset dir="${macswtdir}">
-			<include name="*.jar" />
+			<include name="swt.jar" />
 		</fileset>
 		<pathelement path="${builddir}" />
 	</path>
+
+	<!-- Run packaged-application checks on the host's graphical desktop. -->
+	<target name="test-setup">
+		<condition property="test.host.windows"><os family="windows" /></condition>
+		<condition property="test.host.mac"><os family="mac" /></condition>
+		<condition property="test.host.supported"><or><isset property="test.host.windows" /><isset property="test.host.mac" /></or></condition>
+		<fail unless="test.host.supported" message="Platform tests must run on Windows or Apple Silicon macOS with a graphical desktop." />
+		<condition property="test.platform" value="windows-amd64" else="macos-arm64"><isset property="test.host.windows" /></condition>
+		<condition property="test.platform.valid"><or>
+			<and><isset property="test.host.windows" /><or><equals arg1="${test.platform}" arg2="windows-amd64" /><equals arg1="${test.platform}" arg2="windows-x86" /></or></and>
+			<and><isset property="test.host.mac" /><equals arg1="${test.platform}" arg2="macos-arm64" /></and>
+		</or></condition>
+		<fail unless="test.platform.valid" message="test.platform must match the host OS: windows-amd64, windows-x86, or macos-arm64." />
+		<condition property="test.app.provided"><isset property="test.app" /></condition>
+		<condition property="test.build.windows"><and><isset property="test.host.windows" /><not><isset property="test.app.provided" /></not></and></condition>
+		<condition property="test.missing.x86.package"><and><isset property="test.build.windows" /><equals arg1="${test.platform}" arg2="windows-x86" /></and></condition>
+		<fail if="test.missing.x86.package" message="The build has no 32-bit x86 SWT package. Set test.app to a compatible extracted package when one is available." />
+		<condition property="test.app" value="${builddir}/windows-x86_64/stage/CogTool" else="${distdir}/CogTool.app"><isset property="test.host.windows" /></condition>
+		<condition property="test.python" value="python" else="python3"><isset property="test.host.windows" /></condition>
+	</target>
+
+	<target name="test-stage-windows" depends="test-setup" if="test.build.windows">
+		<ant antfile="${basedir}/build.xml" target="windows-stage" inheritAll="false">
+			<property name="windows.swt.arch" value="x86_64" />
+		</ant>
+	</target>
+
+	<target name="test" depends="test-stage-windows" description="Run the packaged platform suite on Windows or Apple Silicon macOS.">
+		<exec executable="${test.python}" failonerror="true">
+			<arg file="${basedir}/tests/platform-suite.py" />
+			<arg value="--platform" /><arg value="${test.platform}" />
+			<arg value="--app" /><arg file="${test.app}" />
+		</exec>
+	</target>
 
 	<!-- Deletes all generated output for a clean rebuild. -->
 	<target name="clean" description="Deletes all generated output for a clean rebuild.">
@@ -62,7 +120,20 @@
 	</target>
 
 	<!-- Compiles java source with javac. -->
-	<target name="compile" description="Compiles java source with javac.">
+	<target name="validate-windows-swt">
+		<condition property="windows.swt.arch.valid">
+			<or><equals arg1="${windows.swt.arch}" arg2="x86_64" /><equals arg1="${windows.swt.arch}" arg2="arm64" /></or>
+		</condition>
+		<fail unless="windows.swt.arch.valid" message="windows.swt.arch must be x86_64 or arm64" />
+	</target>
+
+	<target name="validate-release-version">
+		<fail unless="release.version" message="release.properties must define a version." />
+		<condition property="release.version.matches"><equals arg1="${version}" arg2="${release.version}" /></condition>
+		<fail unless="release.version.matches" message="The build version must match release.properties (${release.version}); edit that file instead of overriding version." />
+	</target>
+
+	<target name="compile" depends="validate-release-version,validate-windows-swt" description="Compiles java source with javac.">
 		<javac srcdir="${srcroot}" destdir="${builddir}" debug="on" fork="true" source="${jlevel}" target="${jlevel}">
 			<classpath refid="classpath" />
 			<include name="**/*.java" />
@@ -118,8 +189,139 @@
 
 	<taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar" />
 
-	<!-- Packages build output and resources into runable packages., -->
-	<target name="package" depends="clean,compile, help-copy, help-index" description="Packages build output and resources into runable packages.">
+	<!-- Preserve the existing ARM64 local configuration for combined builds. -->
+	<condition property="windows.jre.arm64.dir" value="${windows.jre.dir}">
+		<isset property="windows.jre.dir" />
+	</condition>
+
+	<!-- Check both runtimes before the default build removes old output. -->
+	<target name="validate-package-all" depends="validate-release-version,validate-windows-swt">
+		<fail unless="windows.jre.arm64.dir" message="Set windows.jre.arm64.dir to an ARM64 Windows Java runtime in build.local.properties." />
+		<fail unless="windows.jre.x86_64.dir" message="Set windows.jre.x86_64.dir to an x86-64 Windows Java runtime in build.local.properties." />
+		<exec executable="python3" failonerror="true">
+			<env key="PATH" path="${windows.tools.path}" />
+			<arg value="-c" />
+			<arg value="import shutil, sys; missing = [name for name in ('wixl', 'msibuild', 'msiinfo') if not shutil.which(name)]; missing and sys.exit('Missing installer tools: ' + ', '.join(missing))" />
+		</exec>
+		<exec executable="python3" failonerror="true">
+			<arg file="${basedir}/tools/build-windows-msi.py" />
+			<arg value="--check-runtime" /><arg file="${windows.jre.arm64.dir}" />
+			<arg value="--arch" /><arg value="arm64" />
+		</exec>
+		<exec executable="python3" failonerror="true">
+			<arg file="${basedir}/tools/build-windows-msi.py" />
+			<arg value="--check-runtime" /><arg file="${windows.jre.x86_64.dir}" />
+			<arg value="--arch" /><arg value="x86_64" />
+		</exec>
+		<property name="skip.legacy.windows" value="true" />
+	</target>
+
+	<!-- Fork Ant to isolate architecture-specific immutable properties. -->
+	<macrodef name="package-windows-msi">
+		<attribute name="arch" />
+		<attribute name="runtime" />
+		<sequential>
+			<java classname="org.apache.tools.ant.launch.Launcher" fork="true" failonerror="true" dir="${basedir}">
+				<classpath><pathelement location="${ant.home}/lib/ant-launcher.jar" /></classpath>
+				<arg value="-f" /><arg file="${basedir}/build.xml" />
+				<arg value="-Dwindows.swt.arch=@{arch}" />
+				<arg value="-Dwindows.jre.dir=@{runtime}" />
+				<arg value="-Dwindows.tools.path=${windows.tools.path}" />
+				<arg value="-Dbuilddir=${builddir}" /><arg value="-Ddistdir=${distdir}" />
+				<arg value="-Dversion=${version}" /><arg value="-Drevision=${revision}" />
+				<arg value="-Djlevel=${jlevel}" />
+				<arg value="windows-msi" />
+			</java>
+		</sequential>
+	</macrodef>
+
+	<target name="package-all" depends="validate-package-all,package-without-help" description="Builds the Mac package and both Windows MSIs.">
+		<package-windows-msi arch="arm64" runtime="${windows.jre.arm64.dir}" />
+		<package-windows-msi arch="x86_64" runtime="${windows.jre.x86_64.dir}" />
+	</target>
+
+	<!-- Packages build output and resources into runnable packages. -->
+	<target name="package" depends="validate-release-version,clean,compile,help-copy,help-index,package-artifacts" description="Packages build output and resources into runable packages." />
+
+	<!-- Reuse the help files already in the bundle template when Jekyll is unavailable. -->
+	<target name="package-without-help" depends="validate-release-version,clean,compile,package-artifacts" description="Packages using the existing help bundle." />
+
+	<!-- A portable Windows ZIP can be assembled on any host with a JDK and Ant. -->
+	<target name="windows-stage" depends="validate-release-version,validate-windows-swt">
+		<property name="windows.workdir" location="${builddir}/windows-${windows.swt.arch}" />
+		<property name="windows.classes" location="${windows.workdir}/classes" />
+		<property name="windows.stage" location="${windows.workdir}/stage/CogTool" />
+		<delete dir="${windows.workdir}" />
+		<mkdir dir="${windows.classes}" />
+		<mkdir dir="${windows.stage}/lib" />
+		<mkdir dir="${distdir}" />
+		<javac srcdir="${srcroot}" destdir="${windows.classes}" debug="on" fork="true" source="${jlevel}" target="${jlevel}" includeantruntime="false">
+			<classpath>
+				<fileset dir="${libdir}" includes="*.jar" />
+				<fileset dir="${libdir}/build-only" includes="*.jar" />
+				<fileset dir="${swtdir}" includes="swt.jar" />
+				<pathelement location="${windows.classes}" />
+			</classpath>
+		</javac>
+		<copy todir="${windows.classes}/${java_runtime_res}"><fileset dir="${srcroot}/${java_runtime_res}" /></copy>
+
+		<path id="windows.runtime.classpath">
+			<fileset dir="${libdir}" includes="*.jar" />
+			<fileset dir="${swtdir}" includes="swt.jar" />
+		</path>
+		<pathconvert property="windows.manifest.classpath" pathsep=" " refid="windows.runtime.classpath">
+			<mapper><chainedmapper><flattenmapper /><globmapper from="*" to="lib/*" /></chainedmapper></mapper>
+		</pathconvert>
+		<jar destfile="${windows.stage}/CogTool.jar" basedir="${windows.classes}">
+			<manifest>
+				<attribute name="Main-Class" value="edu.cmu.cs.hcii.cogtool.CogTool" />
+				<attribute name="Class-Path" value="${windows.manifest.classpath}" />
+			</manifest>
+		</jar>
+		<copy todir="${windows.stage}/lib"><fileset dir="${libdir}" includes="*.jar" /></copy>
+		<copy file="${swtdir}/swt.jar" todir="${windows.stage}/lib" />
+		<copy file="${macswtdir}/EPL-2.0.txt" tofile="${windows.stage}/lib/SWT-EPL-2.0.txt" />
+		<copy todir="${windows.stage}/clisp-win"><fileset dir="${basedir}/clisp-win" /></copy>
+		<copy todir="${windows.stage}/XUL-win"><fileset dir="${basedir}/XUL-win" /></copy>
+		<copy file="${basedir}/LICENSE.txt" todir="${windows.stage}" />
+		<copy file="${resdir}/CogTool.ico" todir="${windows.stage}" />
+		<tstamp><format property="windows.buildtime" pattern="MM/dd/yyyy-hh:mm" /></tstamp>
+		<copy file="${resdir}/windows-portable/CogTool.bat" todir="${windows.stage}">
+			<filterset><filter token="VERSION" value="${version}" /><filter token="REVISION" value="${revision}" /><filter token="BUILDTIME" value="${windows.buildtime}" /></filterset>
+		</copy>
+		<copy file="${resdir}/windows-portable/README.txt" todir="${windows.stage}">
+			<filterset><filter token="ARCH" value="${windows.swt.arch}" /></filterset>
+		</copy>
+		<fixcrlf srcdir="${windows.stage}" includes="CogTool.bat,README.txt" eol="crlf" />
+		<antcall target="windows-copy-runtime" />
+	</target>
+
+	<target name="windows-zip" depends="windows-stage" description="Builds a portable Windows ZIP without NSIS.">
+		<zip destfile="${distdir}/CogTool-Windows-${windows.swt.arch}-${versionclean}${revision.suffix}.zip" basedir="${windows.workdir}/stage" />
+	</target>
+
+	<target name="windows-msi" depends="windows-stage" description="Builds a Windows MSI using wixl and a supplied Windows JRE.">
+		<fail unless="windows.jre.dir" message="Set windows.jre.dir to a Windows Java runtime matching windows.swt.arch." />
+		<exec executable="python3" failonerror="true">
+			<env key="PATH" path="${windows.tools.path}" />
+			<arg file="${basedir}/tools/build-windows-msi.py" />
+			<arg value="--stage" /><arg file="${windows.stage}" />
+			<arg value="--arch" /><arg value="${windows.swt.arch}" />
+			<arg value="--version" /><arg value="${version}" />
+			<arg value="--revision" /><arg value="${revision}" />
+			<arg value="--buildtime" /><arg value="${windows.buildtime}" />
+			<arg value="--icon" /><arg file="${resdir}/CogTool.ico" />
+			<arg value="--output" /><arg file="${distdir}/CogTool-Windows-${windows.swt.arch}-${versionclean}${revision.suffix}.msi" />
+		</exec>
+	</target>
+
+	<target name="windows-copy-runtime" if="windows.jre.dir">
+		<available file="${windows.jre.dir}/bin/java.exe" property="windows.runtime.has.java" />
+		<fail unless="windows.runtime.has.java" message="windows.jre.dir must point to a Windows Java runtime containing bin/java.exe" />
+		<copy todir="${windows.stage}/jre"><fileset dir="${windows.jre.dir}" /></copy>
+	</target>
+
+	<target name="package-artifacts">
 
 		<tstamp>
 			<format property="buildtime" pattern="MM/dd/yyyy-hh:mm" />
@@ -150,12 +352,15 @@
 			<fileset dir="${resdir}/CogTool.tmp"/>
 		</copy>
 
-		<!-- Copy the local cogtoolstart and swt jars to the Mac bundle. -->
-        <copy file="${libdir}/macintosh/cogtoolstart" tofile="${distdir}/CogTool.app/Contents/MacOS/cogtoolstart" />
-        <chmod perm="a+x" file="${distdir}/CogTool.app/Contents/MacOS/cogtoolstart" />
+		<!-- Launch Services requires a native entry point; the shell script is a resource. -->
+        <copy file="${libdir}/macintosh/cogtool-launcher" tofile="${distdir}/CogTool.app/Contents/MacOS/cogtool-launcher" />
+        <chmod perm="a+x" file="${distdir}/CogTool.app/Contents/MacOS/cogtool-launcher" />
+        <copy file="${libdir}/macintosh/cogtoolstart" tofile="${distdir}/CogTool.app/Contents/Resources/cogtoolstart" />
+        <!-- The launcher needs these links before Java is available. -->
+        <copy file="${srcroot}/${java_runtime_res}/release.properties" tofile="${distdir}/CogTool.app/Contents/Resources/release.properties" />
 
-        <copy file="${libdir}/macintosh/export-csv-kludge" tofile="${distdir}/CogTool.app/Contents/MacOS/export-csv-kludge" />
-        <chmod perm="a+x" file="${distdir}/CogTool.app/Contents/MacOS/export-csv-kludge" />
+        <copy file="${libdir}/macintosh/export-csv-kludge" tofile="${distdir}/CogTool.app/Contents/Resources/export-csv-kludge" />
+        <chmod perm="a+x" file="${distdir}/CogTool.app/Contents/Resources/export-csv-kludge" />
 
 		<copy todir="${distdir}/CogTool.app/Contents/Resources/Java/dll/">
 			<fileset dir="${macswtdir}">
@@ -167,6 +372,12 @@
 				<include name="*.jar" />
 			</fileset>
 		</copy>
+		<!-- Keep the ARM64 native libraries in the bundle so SWT need not
+		     extract them into the user's home directory at startup. -->
+		<unzip src="${macswtdir}/swt-arm64.jar" dest="${distdir}/CogTool.app/Contents/Resources/Java/dll/arm64">
+			<patternset><include name="*.jnilib" /></patternset>
+		</unzip>
+		<copy file="${macswtdir}/EPL-2.0.txt" todir="${distdir}/CogTool.app/Contents/Resources/Java/" />
 
 		<!-- Copy the rest of the libdir to the Mac bundle. -->
 		<copy todir="${distdir}/CogTool.app/Contents/Resources/Java/">
@@ -195,6 +406,16 @@
 		<!-- Copy the app jar to the Mac bundle. -->
 		<copy file="${distdir}/CogTool.jar" todir="${distdir}/CogTool.app/Contents/Resources/Java/" />
 
+		<!-- Compile the prediction helpers at build time so running them needs only Java. -->
+		<mkdir dir="${builddir}/prediction-tests" />
+		<javac srcdir="${basedir}/tests" destdir="${builddir}/prediction-tests" debug="on" fork="true" source="${jlevel}" target="${jlevel}" includeantruntime="false">
+			<classpath refid="mac-classpath" />
+			<include name="ProjectPredictions.java" />
+			<include name="PredictionSmoke.java" />
+		</javac>
+		<jar destfile="${distdir}/CogTool.app/Contents/Resources/cogtool-prediction-tests.jar" basedir="${builddir}/prediction-tests" />
+		<delete dir="${builddir}/prediction-tests" />
+
 		<!-- Copy the clisp dist to the Mac bundle. -->
 		<copy todir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel/">
 			<fileset dir="${basedir}/clisp-mac-intel">
@@ -205,6 +426,12 @@
 		<!-- Chmod the clisp executable. -->
 		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-mac-intel/lisp.run" perm="a+x" />
 
+		<!-- Apple Silicon uses its own CLISP executable and compatible ACT-R image. -->
+		<copy todir="${distdir}/CogTool.app/Contents/Resources/clisp-mac-arm64/">
+			<fileset dir="${basedir}/clisp-mac-arm64" />
+		</copy>
+		<chmod file="${distdir}/CogTool.app/Contents/Resources/clisp-mac-arm64/lisp.run" perm="a+x" />
+
 		<!-- Copy the Mac XUL implementation into the bundle. -->
 		<copy todir="${distdir}/CogTool.app/Contents/Resources/XUL-mac/">
 		        <fileset dir="${basedir}/XUL-mac"/>
@@ -213,8 +440,11 @@
 		<!-- Chmod the XUL stuff. -->
 		<chmod dir="${distdir}/CogTool.app/Contents/Resources/XUL-mac" includes="XUL,xulrunner*,*.*lib,*.sh" perm="a+x"/>
 
+		<!-- Sign only after all bundle contents and metadata have been written. -->
+		<antcall target="sign-mac-bundle" />
+
 		<!-- Prepare .tgz for Mac OS X download. -->
-		<tar destfile="${distdir}/CogToolMac-${versionclean}-r${revision}.tgz" compression="gzip" longfile="warn">
+		<tar destfile="${distdir}/CogToolMac-${versionclean}${revision.suffix}.tgz" compression="gzip" longfile="warn">
 			<tarfileset dir="${distdir}/" mode="755">
 				<include name="CogTool.app/**" />
 			</tarfileset>
@@ -228,7 +458,16 @@
 
 	</target>
 
-	<target name="package-windows" if="os.windows">
+	<target name="sign-mac-bundle" if="os.mac">
+		<exec executable="/usr/bin/codesign" failonerror="true">
+			<arg value="--force" />
+			<arg value="--sign" />
+			<arg value="-" />
+			<arg file="${distdir}/CogTool.app" />
+		</exec>
+	</target>
+
+	<target name="package-windows" if="os.windows" unless="skip.legacy.windows">
 		<!-- Insert Build Date, etc. -->
 		<replace file="${basedir}/res/launch4j.cfg.xml" token="VERSION" value="${version}" />
 		<replace file="${basedir}/res/launch4j.cfg.xml" token="REVISION" value="${revision}" />
@@ -245,6 +484,7 @@
 		<!-- Build a Windows installer .exe w/ jar & clisp. -->
 		<exec executable="C:\Program Files (x86)\NSIS\makensis.exe" vmlauncher="false" resolveexecutable="true">
 			<arg value="/XSetCompressor /FINAL /SOLID lzma" />
+			<arg value="/DCOGTOOL_SWT_JAR=${swtdir}/swt.jar" />
 			<arg file="${basedir}/res/cogtool.nsi" />
 		</exec>
 

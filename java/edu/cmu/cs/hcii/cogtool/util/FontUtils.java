@@ -94,6 +94,7 @@ package edu.cmu.cs.hcii.cogtool.util;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.widgets.Display;
 
 /**
  * A utility class for handling fonts.
@@ -120,7 +121,7 @@ public class FontUtils
      */
     public static Font SYMBOL_FONT =
         OSUtils.MACOSX
-            ? new Font(null, "Osaka", 11, SWT.NORMAL)
+            ? getAdjustedFont(Display.getDefault().getSystemFont(), 11, SWT.NORMAL)
             : new Font(null, "Lucida Sans Unicode", 10, SWT.NORMAL);
 
     private FontUtils() { } // prevent instantiation

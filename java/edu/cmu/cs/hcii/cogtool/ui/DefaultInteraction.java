@@ -1480,7 +1480,10 @@ public class DefaultInteraction implements Interaction
             formData.left = new FormAttachment(0, 0);
             devicesLabel.setLayoutData(formData);
 
-            inputDeviceComposite = new Composite(newDesignUI, SWT.BORDER);
+            // On macOS, a bordered Composite can report a negative client-area
+            // origin, placing the first checkbox above its visible area.
+            int deviceCompositeStyle = OSUtils.MACOSX ? SWT.NONE : SWT.BORDER;
+            inputDeviceComposite = new Composite(newDesignUI, deviceCompositeStyle);
             inputDeviceComposite.setLayout(new GridLayout());
 
             formData = new FormData();
@@ -1500,7 +1503,7 @@ public class DefaultInteraction implements Interaction
             formData.left = new FormAttachment(0, 0);
             devicesLabel.setLayoutData(formData);
 
-            outputDeviceComposite = new Composite(newDesignUI, SWT.BORDER);
+            outputDeviceComposite = new Composite(newDesignUI, deviceCompositeStyle);
             outputDeviceComposite.setLayout(new GridLayout());
 
             formData = new FormData();
@@ -1592,78 +1595,17 @@ public class DefaultInteraction implements Interaction
 
             createUI();
 
-            // "Knobs and switches"
-           addDevice(DeviceType.Physical,
-            this.requestData.deviceTypes.contains(DeviceType.Physical),
-            new SelectionAdapter() {
-                public void widgetSelected(SelectionEvent evt)
-                {
-                    toggleDeviceType(DeviceType.Physical);
-                }
-            });
-            addDevice(DeviceType.Mouse,
-                      requestData.deviceTypes.contains(DeviceType.Mouse),
-                      new SelectionAdapter() {
-                          @Override
-                        public void widgetSelected(SelectionEvent evt)
-                          {
-                              toggleDeviceType(DeviceType.Mouse);
-                          }
-                      });
-            addDevice(DeviceType.Keyboard,
-                      requestData.deviceTypes.contains(DeviceType.Keyboard),
-                      new SelectionAdapter() {
-                          @Override
-                        public void widgetSelected(SelectionEvent arg0)
-                          {
-                              toggleDeviceType(DeviceType.Keyboard);
-                          }
-                      });
-            addDevice(DeviceType.Touchscreen,
-                      requestData.deviceTypes.contains(DeviceType.Touchscreen),
-                      new SelectionAdapter() {
-                          @Override
-                        public void widgetSelected(SelectionEvent evt)
-                          {
-                              toggleDeviceType(DeviceType.Touchscreen);
-                          }
-                      });
-            addDevice(DeviceType.Voice,
-                      requestData.deviceTypes.contains(DeviceType.Voice),
-                      new SelectionAdapter() {
-                          @Override
-                        public void widgetSelected(SelectionEvent evt)
-                          {
-                              toggleDeviceType(DeviceType.Voice);
-                          }
-                      });
-            addDevice(DeviceType.Display,
-                      requestData.deviceTypes.contains(DeviceType.Display),
-                      new SelectionAdapter() {
-                          @Override
-                        public void widgetSelected(SelectionEvent evt)
-                          {
-                              toggleDeviceType(DeviceType.Display);
-                          }
-                      });
-            addDevice(DeviceType.Display,
-                      requestData.deviceTypes.contains(DeviceType.Display),
-                      new SelectionAdapter() {
-                          @Override
-                        public void widgetSelected(SelectionEvent evt)
-                          {
-                              toggleDeviceType(DeviceType.Display);
-                          }
-                      });
-            addDevice(DeviceType.Speaker,
-                      requestData.deviceTypes.contains(DeviceType.Speaker),
-                      new SelectionAdapter() {
-                          @Override
-                        public void widgetSelected(SelectionEvent evt)
-                          {
-                              toggleDeviceType(DeviceType.Speaker);
-                          }
-                      });
+            for (final DeviceType device : DeviceType.DISPLAY_ORDER) {
+                addDevice(device,
+                          requestData.deviceTypes.contains(device),
+                          new SelectionAdapter() {
+                              @Override
+                              public void widgetSelected(SelectionEvent evt)
+                              {
+                                  toggleDeviceType(device);
+                              }
+                          });
+            }
         }
 
         @Override

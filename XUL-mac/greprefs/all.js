@@ -1157,10 +1157,10 @@ pref("font.name-list.fantasy.he", "Corsiva Hebrew");
 
 pref("font.name.serif.ja", "Hiragino Mincho Pro"); 
 pref("font.name.sans-serif.ja", "Hiragino Kaku Gothic Pro"); 
-pref("font.name.monospace.ja", "Osaka-Mono"); 
+pref("font.name.monospace.ja", "Menlo");
 pref("font.name-list.serif.ja", "Hiragino Mincho Pro"); 
 pref("font.name-list.sans-serif.ja", "Hiragino Kaku Gothic Pro"); 
-pref("font.name-list.monospace.ja", "Osaka-Mono"); 
+pref("font.name-list.monospace.ja", "Menlo");
 
 pref("font.name.serif.ko", "AppleMyungjo"); 
 pref("font.name.sans-serif.ko", "AppleGothic"); 
@@ -1494,7 +1494,7 @@ pref("font.mathfont-family", "STIXNonUnicode, STIXSize1, STIXGeneral, Symbol, De
 
 // individual font faces to be treated as independent families
 // names are Postscript names of each face
-pref("font.single-face-list", "Osaka-Mono");
+pref("font.single-face-list", "");
 
 // optimization hint for fonts with localized names to be read in at startup, otherwise read in at lookup miss
 // names are canonical family names (typically English names)

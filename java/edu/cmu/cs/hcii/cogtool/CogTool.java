@@ -254,6 +254,16 @@ public class CogTool
                 // we need to create the RootController, but will never
                 // actually need to interact with it programmatically
                 rootCtl = new RootController();
+                WindowUtil.GLOBAL_DISPLAY.addListener(SWT.OpenDocument,
+                    new Listener() {
+                        public void handleEvent(Event event)
+                        {
+                            if (event.text != null && ! event.text.isEmpty()) {
+                                rootCtl.performAction(CogToolLID.OpenProjectFile,
+                                                      event.text);
+                            }
+                        }
+                    });
             }
 
             // TODO temporary kludge until we update the preference dialog to supply
@@ -331,7 +341,14 @@ public class CogTool
                 }
             }
             
-            if (openedProject == null) {
+            if (OSUtils.MACOSX) {
+                // Dispatch any document-open events delivered at launch before
+                // deciding whether to show the startup dialog.
+                while (WindowUtil.GLOBAL_DISPLAY.readAndDispatch()) { }
+            }
+
+            if (openedProject == null &&
+                ControllerRegistry.ONLY.openControllerCount() == 0) {
                 // no project was opened successfully, or none were specified,
                 // so create a fresh project and use its Interaction to
                 // report load errors
@@ -528,12 +545,12 @@ public class CogTool
         StringBuilder result = new StringBuilder();
 
         // Build number
-        if (VERSION != null) {
-            result.append(VERSION);
-        }
+        result.append((VERSION == null || VERSION.length() == 0)
+                      ? ReleaseConfig.VERSION : VERSION);
 
         // revision number
-        if (revision != null) {
+        if (revision != null && revision.length() > 0 &&
+            ! "unspecified".equals(revision) && ! "${revision}".equals(revision)) {
             if (result.length() > 0) {
                 result.append(" ");
             }
@@ -543,7 +560,7 @@ public class CogTool
         }
 
         // build time
-        if (BUILD_TIME != null) {
+        if (BUILD_TIME != null && BUILD_TIME.length() > 0) {
             if (result.length() > 0) {
                 result.append(" ");
             }
