@@ -1,0 +1,68 @@
+;; Run from the repository root with the bundled ACT-R 6 image.
+(load "tests/act-touch-compat-adapter.lisp")
+(load "tests/fixtures/act-touch-r13.lisp")
+(defclass touch-probe-device () ((index-z :accessor index-z :initform 72)))
+(defmethod get-mouse-coordinates ((device touch-probe-device)) #(0 0))
+(defvar *touch-probe-events* nil)
+(defun device-handle-tap (device loc hand finger)
+  (declare (ignore device loc)) (push (list 'tap hand finger) *touch-probe-events*))
+(defun device-handle-tap-hold (device hand finger)
+  (declare (ignore device)) (push (list 'tap-hold hand finger) *touch-probe-events*))
+(defun device-handle-tap-release (device hand finger)
+  (declare (ignore device)) (push (list 'tap-release hand finger) *touch-probe-events*))
+(defun device-handle-swipe (device loc count)
+  (declare (ignore device loc)) (push (list 'swipe count) *touch-probe-events*))
+(defun device-handle-pinch (device start end)
+  (declare (ignore device)) (push (list 'pinch start end) *touch-probe-events*))
+(defun device-handle-rotate (device rotation)
+  (declare (ignore device)) (push (list 'rotate rotation) *touch-probe-events*))
+(clear-all)
+(define-model touch-probe
+ (sgp :v nil)
+ (chunk-type touch-probe-goal state)
+ (add-dm (touch-probe-start isa touch-probe-goal state start))
+ (goal-focus touch-probe-start)
+ (p p1 =goal> isa touch-probe-goal state start ?manual> state free ==> =goal> state hold +manual> isa tap hand right finger index)
+ (p p2 =goal> isa touch-probe-goal state hold ?manual> state free ==> =goal> state release +manual> isa tap-hold hand right finger index)
+ (p p3 =goal> isa touch-probe-goal state release ?manual> state free ==> =goal> state swipe +manual> isa tap-release hand right finger index)
+ (p p4 =goal> isa touch-probe-goal state swipe ?manual> state free ==> =goal> state pinch +manual> isa swipe hand right finger index r 50 theta 0 num-fngrs 2)
+ (p p5 =goal> isa touch-probe-goal state pinch ?manual> state free ==> =goal> state rotate +manual> isa pinch hand right finger index start-width 20 end-width 50)
+ (p p6 =goal> isa touch-probe-goal state rotate ?manual> state free ==> =goal> state done +manual> isa rotate hand right finger index rotation 1))
+(install-device (make-instance 'touch-probe-device))
+(run 20)
+(format t "RESULT: ~S~%" (reverse *touch-probe-events*))
+(unless (equal (reverse *touch-probe-events*)
+               '((tap right index) (tap-hold right index) (tap-release right index)
+                 (swipe 2) (pinch 20 50) (rotate 1)))
+  (error "Missing touch actions"))
+
+;; Check the revision 13 timing calculation itself with randomization disabled.
+;; These are motor execution times, not complete CogTool task predictions.
+(sgp :randomize-time nil)
+(let* ((motor (get-module :motor))
+       (swipe-short (make-instance 'swipe :hand 'right :finger 'index
+                                   :r 50 :theta 0 :num-fngrs 2))
+       (swipe-long (make-instance 'swipe :hand 'right :finger 'index
+                                  :r 200 :theta 0 :num-fngrs 2))
+       (pinch-small (make-instance 'pinch :hand 'right :finger 'index
+                                   :start-width 30 :end-width 40))
+       (pinch-large (make-instance 'pinch :hand 'right :finger 'index
+                                   :start-width 30 :end-width 100))
+       (rotate-small (make-instance 'rotate :hand 'right :finger 'index :rotation 0.785))
+       (rotate-large (make-instance 'rotate :hand 'right :finger 'index :rotation 1.57))
+       (swipe-short-time (compute-exec-time motor swipe-short))
+       (swipe-long-time (compute-exec-time motor swipe-long))
+       (pinch-small-time (compute-exec-time motor pinch-small))
+       (pinch-large-time (compute-exec-time motor pinch-large))
+       (rotate-small-time (compute-exec-time motor rotate-small))
+       (rotate-large-time (compute-exec-time motor rotate-large)))
+  (unless (> swipe-long-time swipe-short-time)
+    (error "Revision 13 swipe time did not increase with distance"))
+  (unless (> pinch-large-time pinch-small-time)
+    (error "Revision 13 pinch time did not increase with width change"))
+  ;; Revision 13 calculates rotation from finger spacing, ignoring the angle.
+  (unless (= rotate-small-time rotate-large-time)
+    (error "Unexpected change to revision 13 rotation timing"))
+  (format t "MOTOR EXECUTION TIMES: swipe ~,4F/~,4F, pinch ~,4F/~,4F, rotation ~,4F/~,4F seconds~%"
+          swipe-short-time swipe-long-time pinch-small-time pinch-large-time
+          rotate-small-time rotate-large-time))
