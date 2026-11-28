@@ -151,6 +151,17 @@
 		</copy>
 		
 	</target>
+
+	<target name="test-actr-traces" depends="compile" description="Test ACT-R eye-movement trace parsing.">
+		<mkdir dir="${builddir}/actr-trace-tests" />
+		<javac srcdir="${basedir}/tests" destdir="${builddir}/actr-trace-tests" includeantruntime="false" source="${jlevel}" target="${jlevel}">
+			<include name="ACTR7TraceSmoke.java" />
+			<classpath><pathelement location="${builddir}" /><path refid="classpath" /></classpath>
+		</javac>
+		<java classname="ACTR7TraceSmoke" fork="true" failonerror="true">
+			<classpath><pathelement location="${builddir}/actr-trace-tests" /><pathelement location="${builddir}" /><path refid="classpath" /></classpath>
+		</java>
+	</target>
 	
 	<condition property="os.mac">
 		<os family="mac" />

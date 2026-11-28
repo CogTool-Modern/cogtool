@@ -207,7 +207,8 @@ public class ACTRTraceParser implements TraceParser<ResultStep>
             processTraceLine("COGTOOL", "Finished");
         }
 
-        abandonPendingEyeMovementPreps(null);
+        abandonPendingEyeMovementPreps("VISION", null);
+        abandonPendingEyeMovementPreps("EMMA", null);
 
         for (String k : pendingSteps.keySet())
         {
@@ -225,16 +226,19 @@ public class ACTRTraceParser implements TraceParser<ResultStep>
         return resultSteps;
     }
 
-    protected static void abandonPendingEyeMovementPreps(StepParser.State leaveThisOne) {
- 		 List<StepParser.State> lst = pendingSteps.get("VISION");
-		 for (Iterator<StepParser.State> it = lst.iterator(); it.hasNext(); ) {
-			 StepParser.State other = it.next();
-			 if (other != leaveThisOne && other.data == null) {
-				 it.remove();
-			 }
-		 }
+    protected static void abandonPendingEyeMovementPreps(String module,
+                                                         StepParser.State leaveThisOne)
+    {
+        List<StepParser.State> lst = pendingSteps.get(module);
+        if (lst == null) return;
+        for (Iterator<StepParser.State> it = lst.iterator(); it.hasNext(); ) {
+            StepParser.State other = it.next();
+            if (other != leaveThisOne && other.data == null) {
+                it.remove();
+            }
+        }
     }
-    
+
     // This gets fired when there is an attempt to move the cursor to exactly
     // where it is already. In KLM CogTool this should never happen, but in CT-E
     // if you click the back button two or more times in succession it does.
@@ -725,49 +729,53 @@ public class ACTRTraceParser implements TraceParser<ResultStep>
             }
         });
 
-        declareStep(new StepParser("VISION",
-                                   "PREPARE-EYE-MOVEMENT",
-                                   "Preparation-complete (.*)",
-                                   "Complete-eye-movement (.*) #\\((\\d+) (\\d+)\\)")
-        {
-        	 @Override
-            void startAction(ACTRTraceParser parser,
-                              Matcher match,
-                              State state)
-        	 {
-        		 // If there's a pending vision prep, abandon it
-        		 abandonPendingEyeMovementPreps(state);
-        	 }
-
-            @Override
-            ResultStep intermediateAction(ACTRTraceParser p, Matcher m, State s)
+        for (final String eyeModule : new String[] { "VISION", "EMMA" }) {
+            declareStep(new StepParser(eyeModule,
+                                       "PREPARE-EYE-MOVEMENT",
+                                       "Preparation-complete (.*)",
+                                       "Complete-eye-movement (.*) #\\(([-+\\d.]+) ([-+\\d.]+)(?: [-+\\d.]+)?\\)")
             {
-                s.data = m.group(1);
-                ResultStep result =
-                    new ResultStep(ResultStep.VISION_PREP_RESOURCE,
-                                   "Eye Movement Preparation");
-                s.dependency =
-                    new ResultStep.ResultStepDependency(result);
-                return result;
-            }
-
-            @Override
-            ResultStep endAction(ACTRTraceParser p, Matcher m, State s)
-            {
-                if (! m.group(1).equals(s.data)) {
-                    return null;
+                @Override
+                void startAction(ACTRTraceParser parser,
+                                  Matcher match,
+                                  State state)
+                {
+                    // Discard an interrupted eye preparation.
+                    abandonPendingEyeMovementPreps(eyeModule, state);
                 }
-                ResultStep result =
-                    new ResultStep(ResultStep.VISION_EXEC_RESOURCE,
-                                   ("Eye Movement to ("
-                                           + m.group(2)
-                                           + ", "
-                                           + m.group(3)
-                                           +")"));
-                result.dependencies.add(s.dependency);
-                return result;
-            }
-        });
+
+                @Override
+                ResultStep intermediateAction(ACTRTraceParser p, Matcher m, State s)
+                {
+                    s.data = m.group(1);
+                    ResultStep result =
+                        new ResultStep(ResultStep.VISION_PREP_RESOURCE,
+                                       "Eye Movement Preparation");
+                    s.dependency =
+                        new ResultStep.ResultStepDependency(result);
+                    return result;
+                }
+
+                @Override
+                ResultStep endAction(ACTRTraceParser p, Matcher m, State s)
+                {
+                    if (! m.group(1).equals(s.data)) {
+                        return null;
+                   }
+                    ResultStep result =
+                        new ResultStep(ResultStep.VISION_EXEC_RESOURCE,
+                                       ("Eye Movement to ("
+                                               + m.group(2)
+                                               + ", "
+                                               + m.group(3)
+                                               +")"));
+                    result.dependencies.add(s.dependency);
+                    return result;
+                }
+            });
+        }
+
+
 
         declareStep(new StepParser("AUDIO",
                                    "LOUDSPEAKER \"(.*)\"",
