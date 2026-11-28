@@ -1142,6 +1142,18 @@ public class FrameEditorMouseState extends Draw2DMouseState
                         }
                     }
 
+                    else if (ui.resizeHandlesUIFig.isBottomLeftAnchored()) {
+                        if (currentResizeHandleType == FrameEditorUI.TOP_LEFT) {
+                            currentScaledX = initialResizeArea.x;
+                        }
+                        else if (currentResizeHandleType == FrameEditorUI.BOTTOM_RIGHT) {
+                            currentScaledY = initialResizeArea.y + initialResizeArea.height;
+                        }
+                        currentScaledX = Math.max(currentScaledX, initialResizeArea.x);
+                        currentScaledY = Math.min(currentScaledY,
+                                                  initialResizeArea.y + initialResizeArea.height);
+                    }
+
                     double width =
                         Math.abs(currentScaledX - mouseFixedResizeX);
                     double height =
@@ -1678,11 +1690,17 @@ public class FrameEditorMouseState extends Draw2DMouseState
             int childrenLoc = parent.getChildrenLocation();
 
             switch (childrenLoc) {
+                case AParentWidget.CHILDREN_ABOVE:
                 case AParentWidget.CHILDREN_BELOW:
                 case AParentWidget.CHILDREN_CENTER: {
                     if (childrenLoc == AParentWidget.CHILDREN_CENTER) {
                         newX += newW / 2.0;
                         newY += newH / 2.0;
+                    }
+                    else if (childrenLoc == AParentWidget.CHILDREN_ABOVE) {
+                        if (parent.hasChildren()) {
+                            newY = parent.getItem(0).getEltBounds().y;
+                        }
                     }
                     else {
                         newY += newH;
@@ -2015,6 +2033,18 @@ public class FrameEditorMouseState extends Draw2DMouseState
             if (currentScaledY < initialResizeArea.y) {
                 currentScaledY = initialResizeArea.y;
             }
+        }
+
+        else if (ui.resizeHandlesUIFig.isBottomLeftAnchored()) {
+            if (currentResizeHandleType == FrameEditorUI.TOP_LEFT) {
+                currentScaledX = initialResizeArea.x;
+            }
+            else if (currentResizeHandleType == FrameEditorUI.BOTTOM_RIGHT) {
+                currentScaledY = initialResizeArea.y + initialResizeArea.height;
+            }
+            currentScaledX = Math.max(currentScaledX, initialResizeArea.x);
+            currentScaledY = Math.min(currentScaledY,
+                                      initialResizeArea.y + initialResizeArea.height);
         }
 
         double newWidth = Math.abs(currentScaledX - mouseFixedResizeX);
@@ -2546,7 +2576,16 @@ public class FrameEditorMouseState extends Draw2DMouseState
                         ui.performAction(CogToolLID.NudgeUp);
                     }
                     else {
-                        changeSelection(figure, figure.selectUp());
+                        IFigure toSelect = figure.selectUp();
+                        if (toSelect == null &&
+                            figure == ui.potentialUIFig.getFigureOwner() &&
+                            figure.getModel() instanceof MenuItem &&
+                            ((MenuItem) figure.getModel()).getParent().getChildrenLocation() == AParentWidget.CHILDREN_ABOVE &&
+                            ui.potentialUIFig.getBottomFigure().isVisible())
+                        {
+                            toSelect = ui.potentialUIFig.getBottomFigure();
+                        }
+                        changeSelection(figure, toSelect);
                     }
                 }
                 break;

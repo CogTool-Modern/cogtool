@@ -364,6 +364,9 @@ public abstract class AParentWidget extends Widget
         }
 
         super.setWidgetSize(newWidth, newHeight);
+        if (this instanceof MenuHeader && getChildrenLocation() == CHILDREN_ABOVE) {
+            ((MenuHeader) this).positionMenuItems();
+        }
     }
 
 

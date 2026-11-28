@@ -453,6 +453,12 @@ public class WidgetPropertiesPane extends Composite
     // for menu items, pull-down items, list box items
     protected Button isSeparator;
 
+    protected Button menuOpensUp;
+    protected Label menuOffsetXLabel;
+    protected Spinner menuOffsetX;
+    protected Label menuOffsetYLabel;
+    protected Spinner menuOffsetY;
+
     // for menus and context menus
     protected Label submenuActionLabel;
     protected Combo submenuAction;
@@ -660,6 +666,45 @@ public class WidgetPropertiesPane extends Composite
         };
         isSeparator.addSelectionListener(listener);
         isSeparator.moveAbove(widgetTypeLabel);
+
+        menuOpensUp = new Button(this, SWT.CHECK);
+        menuOpensUp.setText(L10N.get("FE.MenuOpensUp", "Open menu upward"));
+        menuOpensUp.addSelectionListener(
+            new WidgetAttributeListener(WidgetAttributes.MENU_OPENS_UP_ATTR) {
+                @Override
+                public Object getValue()
+                {
+                    return Boolean.valueOf(menuOpensUp.getSelection());
+                }
+            });
+
+        menuOffsetXLabel = new DisplayLabel(this, SWT.NONE);
+        menuOffsetXLabel.setText(L10N.get("FE.MenuOffsetX", "Menu horizontal offset") + ":");
+        menuOffsetX = new Spinner(this, SWT.BORDER);
+        menuOffsetX.setMinimum(-100000);
+        menuOffsetX.setMaximum(100000);
+        menuOffsetX.addSelectionListener(
+            new WidgetAttributeListener(WidgetAttributes.MENU_OFFSET_X_ATTR) {
+                @Override
+                public Object getValue()
+                {
+                    return Integer.valueOf(menuOffsetX.getSelection());
+                }
+            });
+
+        menuOffsetYLabel = new DisplayLabel(this, SWT.NONE);
+        menuOffsetYLabel.setText(L10N.get("FE.MenuOffsetY", "Menu vertical offset") + ":");
+        menuOffsetY = new Spinner(this, SWT.BORDER);
+        menuOffsetY.setMinimum(-100000);
+        menuOffsetY.setMaximum(100000);
+        menuOffsetY.addSelectionListener(
+            new WidgetAttributeListener(WidgetAttributes.MENU_OFFSET_Y_ATTR) {
+                @Override
+                public Object getValue()
+                {
+                    return Integer.valueOf(menuOffsetY.getSelection());
+                }
+            });
 
         submenuActionLabel = new DisplayLabel(this, SWT.NONE);
         submenuActionLabel.setText(L10N.get("FE.SubmenuActionLabel",
@@ -1006,6 +1051,34 @@ public class WidgetPropertiesPane extends Composite
         contextMenuActionLabel.setLayoutData(data);
 
         data = new FormData();
+        data.top = new FormAttachment(submenuDelay, 5);
+        data.left = new FormAttachment(widgetName, 0, SWT.LEFT);
+        data.right = new FormAttachment(widgetNameText.getOuter(), 0, SWT.RIGHT);
+        menuOpensUp.setLayoutData(data);
+
+        data = new FormData();
+        data.top = new FormAttachment(menuOpensUp, 5);
+        data.left = new FormAttachment(widgetName, 0, SWT.LEFT);
+        menuOffsetXLabel.setLayoutData(data);
+
+        data = new FormData();
+        data.top = new FormAttachment(menuOffsetXLabel, 5);
+        data.left = new FormAttachment(widgetName, 0, SWT.LEFT);
+        data.right = new FormAttachment(widgetNameText.getOuter(), 0, SWT.RIGHT);
+        menuOffsetX.setLayoutData(data);
+
+        data = new FormData();
+        data.top = new FormAttachment(menuOffsetX, 5);
+        data.left = new FormAttachment(widgetName, 0, SWT.LEFT);
+        menuOffsetYLabel.setLayoutData(data);
+
+        data = new FormData();
+        data.top = new FormAttachment(menuOffsetYLabel, 5);
+        data.left = new FormAttachment(widgetName, 0, SWT.LEFT);
+        data.right = new FormAttachment(widgetNameText.getOuter(), 0, SWT.RIGHT);
+        menuOffsetY.setLayoutData(data);
+
+        data = new FormData();
         data.top = new FormAttachment(contextMenuActionLabel, 5);
         data.left = new FormAttachment(widgetName, 0, SWT.LEFT);
         data.right =
@@ -1208,6 +1281,11 @@ public class WidgetPropertiesPane extends Composite
         selectLabel.setVisible(false);
         initiallySelected.setVisible(false);
         isSeparator.setVisible(false);
+        menuOpensUp.setVisible(false);
+        menuOffsetXLabel.setVisible(false);
+        menuOffsetX.setVisible(false);
+        menuOffsetYLabel.setVisible(false);
+        menuOffsetY.setVisible(false);
         submenuActionLabel.setVisible(false);
         submenuAction.setVisible(false);
         submenuDelayLabel.setVisible(false);
@@ -1344,6 +1422,18 @@ public class WidgetPropertiesPane extends Composite
         if (! widget.isStandard()) {
             layout();
             return;
+        }
+
+        if (type == WidgetType.Menu) {
+            menuOpensUp.setVisible(true);
+            menuOpensUp.setSelection(Boolean.TRUE.equals(
+                widget.getAttribute(WidgetAttributes.MENU_OPENS_UP_ATTR)));
+            menuOffsetXLabel.setVisible(true);
+            menuOffsetX.setVisible(true);
+            menuOffsetX.setSelection(((Integer) widget.getAttribute(WidgetAttributes.MENU_OFFSET_X_ATTR)).intValue());
+            menuOffsetYLabel.setVisible(true);
+            menuOffsetY.setVisible(true);
+            menuOffsetY.setSelection(((Integer) widget.getAttribute(WidgetAttributes.MENU_OFFSET_Y_ATTR)).intValue());
         }
 
         if ((type == WidgetType.Menu) || (type == WidgetType.ContextMenu)) {

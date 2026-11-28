@@ -310,6 +310,35 @@ public class ExportCogToolXML
                 return ImportCogToolXML.FALSE_VALUE;
             }
         });
+        registerAttr(new IntegerExportAttribute(WidgetAttributes.MENU_OFFSET_X_ATTR)
+        {
+            @Override
+            protected String getXMLAttribute() { return ImportCogToolXML.MENU_OFFSET_X_ATTR; }
+            @Override
+            protected String toStringValue(Integer value) { return value.toString(); }
+        });
+        registerAttr(new IntegerExportAttribute(WidgetAttributes.MENU_OFFSET_Y_ATTR)
+        {
+            @Override
+            protected String getXMLAttribute() { return ImportCogToolXML.MENU_OFFSET_Y_ATTR; }
+            @Override
+            protected String toStringValue(Integer value) { return value.toString(); }
+        });
+        registerAttr(new BooleanExportAttribute(WidgetAttributes.MENU_OPENS_UP_ATTR)
+        {
+            @Override
+            protected String getXMLAttribute()
+            {
+                return ImportCogToolXML.MENU_OPENS_UP_ATTR;
+            }
+
+            @Override
+            protected String toStringValue(Boolean value)
+            {
+                return value.booleanValue() ? ImportCogToolXML.TRUE_VALUE
+                                            : ImportCogToolXML.FALSE_VALUE;
+            }
+        });
         registerAttr(new BooleanExportAttribute(WidgetAttributes.IS_SEPARATOR_ATTR)
         {
             @Override

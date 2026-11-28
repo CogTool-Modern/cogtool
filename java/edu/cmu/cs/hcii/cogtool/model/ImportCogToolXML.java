@@ -226,6 +226,9 @@ public class ImportCogToolXML
     public static final String SELECTION_ATTR = "w-selected-name";
     public static final String IS_RENDERED_ATTR = "w-is-rendered";
     public static final String IS_SEPARATOR_ATTR = "w-is-separator";
+    public static final String MENU_OPENS_UP_ATTR = "w-menu-opens-up";
+    public static final String MENU_OFFSET_X_ATTR = "w-menu-offset-x";
+    public static final String MENU_OFFSET_Y_ATTR = "w-menu-offset-y";
     public static final String APPENDED_TEXT_ATTR = "w-appended-text";
     public static final String SUBMENU_ACTION_ATTR = "w-submenu-action";
     public static final String TAP_VALUE = "tap";
@@ -333,6 +336,12 @@ public class ImportCogToolXML
                                getAttrDefn(WidgetAttributes.IS_RENDERED_ATTR));
         ATTRIBUTE_REGISTRY.put(IS_SEPARATOR_ATTR,
                                getAttrDefn(WidgetAttributes.IS_SEPARATOR_ATTR));
+        ATTRIBUTE_REGISTRY.put(MENU_OPENS_UP_ATTR,
+                               getAttrDefn(WidgetAttributes.MENU_OPENS_UP_ATTR));
+        ATTRIBUTE_REGISTRY.put(MENU_OFFSET_X_ATTR,
+                               getAttrDefn(WidgetAttributes.MENU_OFFSET_X_ATTR));
+        ATTRIBUTE_REGISTRY.put(MENU_OFFSET_Y_ATTR,
+                               getAttrDefn(WidgetAttributes.MENU_OFFSET_Y_ATTR));
         ATTRIBUTE_REGISTRY.put(APPENDED_TEXT_ATTR,
                                getAttrDefn(WidgetAttributes.APPENDED_TEXT_ATTR));
         ATTRIBUTE_REGISTRY.put(SUBMENU_ACTION_ATTR,
@@ -399,6 +408,11 @@ public class ImportCogToolXML
                                 // attrNodeValue is name of the selected widget,
                                 // but the widget may not exist yet.
                                 pendingAttrSets.put(attributed, attrNodeValue);
+                            }
+                            else if (WidgetAttributes.MENU_OFFSET_X_ATTR.equals(attrName) ||
+                                     WidgetAttributes.MENU_OFFSET_Y_ATTR.equals(attrName))
+                            {
+                                attributed.setAttribute(attrName, Integer.valueOf(attrNodeValue));
                             }
                             else if (VALUE_REGISTRY.containsKey(attrNodeValue))
                             {

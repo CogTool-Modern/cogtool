@@ -111,6 +111,7 @@ import edu.cmu.cs.hcii.cogtool.model.Frame;
 import edu.cmu.cs.hcii.cogtool.model.FrameElement;
 import edu.cmu.cs.hcii.cogtool.model.FrameElementGroup;
 import edu.cmu.cs.hcii.cogtool.model.ChildWidget;
+import edu.cmu.cs.hcii.cogtool.model.MenuHeader;
 import edu.cmu.cs.hcii.cogtool.model.GridButtonGroup;
 import edu.cmu.cs.hcii.cogtool.model.MenuItem;
 import edu.cmu.cs.hcii.cogtool.model.Transition;
@@ -258,16 +259,16 @@ public class DesignEditorCmd
 
     public static void repositionChildren(AParentWidget parent)
     {
-        if (parent.hasChildren()) {
+        if (parent instanceof MenuHeader) {
+            ((MenuHeader) parent).positionMenuItems();
+        }
+        else if (parent.hasChildren()) {
             DoublePoint startPos = getFirstChildPosition(parent);
             repositionChildren(parent.getChildren(), startPos.x, startPos.y);
         }
     }
 
-    /**
-     * TODO: If we ever allow children above or left of a parent,
-     * we need to pass in childrenLocation here in addition to the group.
-     */
+    /** Lay out a group from its supplied top-left position. */
     public static void repositionChildren(SimpleWidgetGroup group,
                                           double x,
                                           double y)
@@ -300,7 +301,11 @@ public class DesignEditorCmd
 
     public static void repositionChildren(SimpleWidgetGroup group)
     {
-        if (group.size() > 0) {
+        if (group.size() > 0 && group.get(0) instanceof ChildWidget &&
+            ((ChildWidget) group.get(0)).getParent() instanceof MenuHeader) {
+            repositionChildren(((ChildWidget) group.get(0)).getParent());
+        }
+        else if (group.size() > 0) {
             DoublePoint startPos = group.get(0).getShape().getOrigin();
             repositionChildren(group, startPos.x, startPos.y);
         }
@@ -365,12 +370,18 @@ public class DesignEditorCmd
                 protected void redoHelper()
                 {
                     itemParent.addItem(atIndex, (ChildWidget) widget);
+                    if (itemParent.getChildrenLocation() == AParentWidget.CHILDREN_ABOVE) {
+                        repositionChildren(itemParent);
+                    }
                 }
 
                 @Override
                 protected void undoHelper()
                 {
                     itemParent.removeItem((ChildWidget) widget);
+                    if (itemParent.getChildrenLocation() == AParentWidget.CHILDREN_ABOVE) {
+                        repositionChildren(itemParent);
+                    }
                 }
             };
         }

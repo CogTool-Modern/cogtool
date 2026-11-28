@@ -190,6 +190,35 @@ public class MenuHeader extends AMenuWidget
     }
 
     @Override
+    public int getChildrenLocation()
+    {
+        return Boolean.TRUE.equals(getAttribute(WidgetAttributes.MENU_OPENS_UP_ATTR))
+                   ? CHILDREN_ABOVE : CHILDREN_BELOW;
+    }
+
+    /** Keep items in reading order at their offset relative to the header. */
+    public void positionMenuItems()
+    {
+        double y = getShape().getOrigin().y +
+                   ((Integer) getAttribute(WidgetAttributes.MENU_OFFSET_Y_ATTR)).intValue();
+        if (getChildrenLocation() == CHILDREN_BELOW) {
+            y += getShape().getSize().height;
+        }
+        else {
+            for (int i = 0; i < itemCount(); i++) {
+                y -= getItem(i).getEltBounds().height;
+            }
+        }
+        double x = getShape().getOrigin().x +
+                   ((Integer) getAttribute(WidgetAttributes.MENU_OFFSET_X_ATTR)).intValue();
+        for (int i = 0; i < itemCount(); i++) {
+            ChildWidget item = getItem(i);
+            item.setWidgetOrigin(x, y);
+            y += item.getEltBounds().height;
+        }
+    }
+
+    @Override
     public void setAttribute(String attr, Object value)
     {
         if (WidgetAttributes.SUBMENU_ACTION_ATTR.equals(attr) ||
@@ -199,6 +228,11 @@ public class MenuHeader extends AMenuWidget
         }
 
         super.setAttribute(attr, value);
+        if ((WidgetAttributes.MENU_OPENS_UP_ATTR.equals(attr) ||
+             WidgetAttributes.MENU_OFFSET_X_ATTR.equals(attr) ||
+             WidgetAttributes.MENU_OFFSET_Y_ATTR.equals(attr)) && hasChildren()) {
+            positionMenuItems();
+        }
     }
 
     /**
