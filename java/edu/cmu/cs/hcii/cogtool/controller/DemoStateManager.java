@@ -97,6 +97,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 import edu.cmu.cs.hcii.cogtool.model.AUndertaking;
 import edu.cmu.cs.hcii.cogtool.model.CognitiveModelGenerator;
@@ -119,6 +120,21 @@ import edu.cmu.cs.hcii.cogtool.util.ListenerIdentifier;
 
 public class DemoStateManager
 {
+    // A computation prepared before a design edit must never publish after it.
+    private static final Map<Demonstration, Long> designEditVersions =
+        new WeakHashMap<Demonstration, Long>();
+
+    static long getDesignEditVersion(Demonstration demo)
+    {
+        Long version = designEditVersions.get(demo);
+        return (version == null) ? 0 : version.longValue();
+    }
+
+    private static void recordDesignEdit(Demonstration demo)
+    {
+        designEditVersions.put(demo, getDesignEditVersion(demo) + 1);
+    }
+
     public static final Boolean INVALIDATING = Boolean.TRUE;
     public static final Boolean OBSOLETING = Boolean.FALSE;
     public static final Boolean BENIGN = null;
@@ -554,6 +570,7 @@ public class DemoStateManager
 
                 if (demoState != null) {
                     demo.revertEdit(demoState, invalidating);
+                    recordDesignEdit(demo);
                 }
                 else {
                     demoState = noteEditDemo(demo, invalidating);
@@ -561,6 +578,7 @@ public class DemoStateManager
                     // If the edit object is used (and noted), record in the map
                     if (demoState != null) {
                         editToState.put(edit, demoState);
+                        recordDesignEdit(demo);
                     }
                 }
             }

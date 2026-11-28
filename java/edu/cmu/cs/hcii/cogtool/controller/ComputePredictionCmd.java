@@ -122,10 +122,82 @@ import edu.cmu.cs.hcii.cogtool.util.RcvrParsingException;
 import edu.cmu.cs.hcii.cogtool.util.RcvrUnimplementedFnException;
 import edu.cmu.cs.hcii.cogtool.util.ThreadManager;
 import edu.cmu.cs.hcii.cogtool.util.UndoManager;
+import edu.cmu.cs.hcii.cogtool.util.WindowUtil;
 
 public class ComputePredictionCmd
 {
     private ComputePredictionCmd() { }
+
+    private static class AutomaticPrediction
+    {
+        Project project;
+        Script script;
+        IPredictionAlgo algorithm;
+        Interaction interaction;
+
+        AutomaticPrediction(Project p, Script s, IPredictionAlgo a, Interaction i)
+        {
+            project = p;
+            script = s;
+            algorithm = a;
+            interaction = i;
+        }
+    }
+
+    // Coalesce edits from a single gesture (and fast subsequent gestures).
+    private static final Map<Script, AutomaticPrediction> automaticPredictions =
+        new HashMap<Script, AutomaticPrediction>();
+    private static final Runnable runAutomaticPredictions = new Runnable() {
+        public void run()
+        {
+            List<AutomaticPrediction> pending =
+                new ArrayList<AutomaticPrediction>(automaticPredictions.values());
+            automaticPredictions.clear();
+            for (AutomaticPrediction prediction : pending) {
+                Script script = prediction.script;
+                TaskApplication ta = script.getDemonstration().getTaskApplication();
+                if (prediction.project.getTaskApplication(ta.getTask(), ta.getDesign()) != ta ||
+                    ta.getScript(script.getModelGenerator()) != script ||
+                    ta.determineActiveAlgorithm(prediction.project) != prediction.algorithm ||
+                    ta.getDemonstration().isInvalid() || ta.getDemonstration().isObsolete() ||
+                    ! ta.getDemonstration().isStartFrameChosen() ||
+                    ta.getResult(script.getModelGenerator(), prediction.algorithm) != null)
+                {
+                    continue;
+                }
+                DefaultAnalysisWorkThread worker = null;
+                try {
+                    worker =
+                        new DefaultAnalysisWorkThread(prediction.algorithm, script, null,
+                                                      prediction.interaction, true);
+                    ta.setResult(script.getModelGenerator(), prediction.algorithm,
+                                 worker.getResultProxy());
+                    ThreadManager.startNewThread(worker);
+                }
+                catch (RuntimeException ex) {
+                    // The edit itself must remain usable if preparation fails.
+                    if (worker != null &&
+                        ta.getResult(script.getModelGenerator(), prediction.algorithm) ==
+                            worker.getResultProxy())
+                    {
+                        ta.setResult(script.getModelGenerator(), prediction.algorithm, null);
+                    }
+                    ex.printStackTrace();
+                }
+            }
+        }
+    };
+
+    static void scheduleAutomaticPrediction(Project project, Script script,
+                                            IPredictionAlgo algorithm,
+                                            Interaction interaction)
+    {
+        automaticPredictions.put(script,
+                                 new AutomaticPrediction(project, script, algorithm,
+                                                         interaction));
+        WindowUtil.GLOBAL_DISPLAY.timerExec(-1, runAutomaticPredictions);
+        WindowUtil.GLOBAL_DISPLAY.timerExec(250, runAutomaticPredictions);
+    }
 
     /**
      * Adds the edit for each of the scripts in the demonstration.
@@ -377,16 +449,29 @@ public class ComputePredictionCmd
         protected Script script;
 
         protected PredictionResultProxy resultProxy;
+        protected final boolean automatic;
+        protected final long designEditVersion;
 
         public DefaultAnalysisWorkThread(IPredictionAlgo predictionAlg,
                                          Script s,
                                          ITraceWindow traceWindow,
                                          Interaction uiInteraction)
         {
+            this(predictionAlg, s, traceWindow, uiInteraction, false);
+        }
+
+        public DefaultAnalysisWorkThread(IPredictionAlgo predictionAlg,
+                                         Script s,
+                                         ITraceWindow traceWindow,
+                                         Interaction uiInteraction,
+                                         boolean isAutomatic)
+        {
             // This initializes this.progressCallback to traceWindow
             super(predictionAlg, traceWindow, uiInteraction);
 
             script = s;
+            automatic = isAutomatic;
+            designEditVersion = DemoStateManager.getDesignEditVersion(s.getDemonstration());
 
             threadInput = computeAlg.prepareComputation(script);
 
@@ -415,7 +500,15 @@ public class ComputePredictionCmd
 
             // Note that threadOutput will be null if an exception is thrown
             // by the child work thread!
-            if ((! isCanceled()) && (threadOutput != null)) {
+            boolean stale = automatic &&
+                (designEditVersion != DemoStateManager.getDesignEditVersion(script.getDemonstration()) ||
+                 script.getDemonstration().isInvalid() || script.getDemonstration().isObsolete());
+            if (stale) {
+                if (taResult == resultProxy) {
+                    taskApp.setResult(modelGen, computeAlg, null);
+                }
+            }
+            else if ((! isCanceled()) && (threadOutput != null)) {
                 APredictionResult result = threadOutput.completeWork();
 
                 resultProxy.setActualResult(result);
